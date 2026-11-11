@@ -43,12 +43,13 @@ Read the file and inline its single line as an `<img src>`. Never reference exte
 
 ## Tasks
 
-- T1 (S1–S9) artboard 01 drafting-sheet — gentle-ai-worker
-- T2 (S1–S9) artboard 02 lab-notebook — gentle-ai-worker
-- T3 (S1–S9) artboard 03 two-legs — gentle-ai-worker
+- T1 (S1–S9) artboard 01 drafting-sheet — gentle-ai-worker — b1c02f1
+- T2 (S1–S9) artboard 02 lab-notebook — gentle-ai-worker — b1c02f1
+- T3 (S1–S9) artboard 03 two-legs — gentle-ai-worker — b1c02f1
 - T4 (S1) design.json, open the canvas, stop at gate — inline
 
 ## Log
 
 - L1: "Understood, about the remaining gaps - We are not mentioning the congress, leave it - Socra speaks english first because the voice is less robotic and whisper transcribes better this languajes. - Socra is public, link that one first. The rest I'll decide later what to do. Start with P2"
 - L2: No design sources exist in the repo (gentle_design list): directions are designed freely.
+- L3: Three artboards written by parallel workers (01 drafting sheet, 02 lab notebook, 03 two legs), committed b1c02f1. Links to projects/posts are placeholders in the mockups; real URLs come from content in P3. Badge is dark with a neon-pink glow: keep it small (~160 px).
