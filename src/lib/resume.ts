@@ -17,7 +17,9 @@ export const resumeSchema = z
       email: z.email(),
       url: z.url(),
       summary: z.string().optional(),
-      location: z.object({ city: z.string().optional(), countryCode: z.string().optional() }).optional(),
+      location: z
+        .object({ city: z.string().optional(), region: z.string().optional(), countryCode: z.string().optional() })
+        .optional(),
       profiles: z.array(z.object({ network: z.string(), username: z.string(), url: z.url() })).default([]),
     }).strict(),
     work: z
@@ -30,6 +32,22 @@ export const resumeSchema = z
           endDate: date.optional(),
           summary: z.string().optional(),
           highlights: z.array(z.string()).default([]),
+        }),
+      )
+      .default([]),
+    projects: z
+      .array(
+        z.object({
+          name: z.string(),
+          description: z.string().optional(),
+          roles: z.array(z.string()).default([]),
+          url: z.url().optional(),
+          startDate: date.optional(),
+          endDate: date.optional(),
+          highlights: z.array(z.string()).default([]),
+          keywords: z.array(z.string()).default([]),
+          /** Slug of the matching content/projects/<slug>.md, if any. */
+          slug: z.string().optional(),
         }),
       )
       .default([]),

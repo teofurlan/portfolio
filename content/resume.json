@@ -4,10 +4,86 @@
     "name": "Teo Furlan",
     "email": "teofurlan03@gmail.com",
     "url": "https://teofurlan.com",
+    "location": { "region": "Entre Ríos", "countryCode": "AR" },
     "profiles": [
       { "network": "GitHub", "username": "teofurlan", "url": "https://github.com/teofurlan" },
       { "network": "LinkedIn", "username": "teo-furlan", "url": "https://www.linkedin.com/in/teo-furlan" },
       { "network": "DEV", "username": "teo_furlan", "url": "https://dev.to/teo_furlan" }
+    ]
+  },
+  "work": [
+    {
+      "name": "Universidad Adventista del Plata, Systems Development Department",
+      "position": "Software Developer (Part-time)",
+      "startDate": "2026-05",
+      "summary": "Entre Ríos, Argentina.",
+      "highlights": [
+        "SIED platform: institutional training platform (enrollment, payments, coupons, Moodle sync) in PHP 8.2 on an in-house micro-framework (DI container, attribute routing, middleware pipeline), layered Controllers, Services, Repositories and Entities, on PostgreSQL and Docker.",
+        "Secure file handling: built the plan-driven document requirement flow: content-based MIME validation through finfo instead of file extensions, uploads stored outside the document root, and a single owner-or-admin download endpoint.",
+        "Database migration testing: own regression and SQL-compatibility testing of 3 legacy systems for the PostgreSQL 9.5.3 to 18.4 migration. Built a 65-item functional inventory verified against the codebase, surfacing implicit integer casts, collation-sensitive ORDER BY and UNION type mismatches."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "EmprendER: Entrepreneurship platform",
+      "slug": "emprender",
+      "roles": ["Largest of four contributors (353 of 766 commits); sole developer since Mar. 2026"],
+      "startDate": "2024-07",
+      "keywords": ["Next.js", "React", "TypeScript", "Prisma", "MariaDB"],
+      "highlights": [
+        "Features owned: built the four-step entrepreneur registration wizard, including a generic server-action validator parameterized by schema and redirect per step; the entrepreneurship module (upload limits, deactivation, admin profile viewer and its endpoints); the posts CMS (Prisma model, rich-text editor, markdown modal); and authentication and session handling. Reviewed and merged teammates' pull requests.",
+        "Production readiness: sole developer since the codebase moved to the university's self-hosted GitLab: unified Zod validation, isolated JWT handling, and a systematic React correctness sweep over roughly a dozen screens (hook-rule violations, setState inside effects, unstable dependency arrays, server-side session hydration), plus toolchain modernization (Prisma v6, pnpm, ESLint flat config, the Next.js 16 middleware-to-proxy move).",
+        "Security and testing: closed a broken access control gap by adding server-side administrator verification to every /api/admin/* route, until then enforced only on the client. Built the test suite from scratch (Playwright coverage for all three roles plus an 8-test smoke tier on every push), which immediately surfaced a login endpoint returning 500 instead of 401 on bad credentials."
+      ]
+    },
+    {
+      "name": "MTDS: Laparoscopic surgery training robot",
+      "slug": "mtds",
+      "url": "https://github.com/teofurlan/robot-arm",
+      "roles": ["Control software and simulation, university research project"],
+      "startDate": "2026",
+      "keywords": ["C++", "Python", "Fusion 360"],
+      "highlights": [
+        "Kinematics and firmware: wrote the arm's C++ motion layer: closed-form analytic inverse kinematics validated against the CAD model to 3 micrometres at 0.1% of the 50 Hz control loop, plus tool-space resolved-rate control, unit tested and warning-clean.",
+        "Feasibility analysis: proved the planned software Remote Center of Motion was unreachable on the built hardware (two degrees of freedom short) across five independent numerical checks, and found the structural fix that yields all four laparoscopic degrees of freedom with no extra motors. Reported the negative result rather than shipping a fake constraint.",
+        "Simulation and tooling: built a browser 3D simulator so the team and the client can operate the arm without hardware, and automated the Fusion 360 assembly and measurement work through its Python API."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Universidad Adventista del Plata",
+      "area": "Information Systems Engineering",
+      "studyType": "B.S.",
+      "startDate": "2022-03",
+      "endDate": "2027-07"
+    },
+    {
+      "institution": "Technical Education School N.º 619",
+      "area": "Electromechanical Equipment and Installations",
+      "studyType": "Technician",
+      "startDate": "2016",
+      "endDate": "2021"
+    }
+  ],
+  "certificates": [],
+  "skills": [
+    { "name": "Languages", "keywords": ["TypeScript", "JavaScript", "PHP", "SQL", "C++", "Python"] },
+    { "name": "Frameworks & Data", "keywords": ["React", "Next.js", "Node.js", "Tailwind CSS", "PostgreSQL", "MariaDB", "Prisma"] },
+    { "name": "Testing & Tooling", "keywords": ["Vitest", "Docker", "Git", "GitLab CI/CD", "Linux"] }
+  ],
+  "languages": [
+    { "language": "Spanish", "fluency": "Native" },
+    { "language": "English", "fluency": "B2 (Cambridge FCE, score 171)" }
+  ],
+  "meta": {
+    "timeline": [
+      { "year": 2004, "title": "2004. Where it started.", "photo": "2004_first-computer_01.jpg" },
+      { "year": 2016, "title": "Technical secondary school: electromechanical equipment and installations" },
+      { "year": 2022, "title": "Starts Information Systems Engineering at Universidad Adventista del Plata" },
+      { "year": 2024, "title": "First real client: EmprendER, an entrepreneurship platform" },
+      { "year": 2026, "title": "Software developer at the university; robot arm for laparoscopic surgery training" }
     ]
   }
 }
