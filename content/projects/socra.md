@@ -12,6 +12,7 @@ ownership: >-
 stack: [Python, asyncio, MCP, WebSocket, faster-whisper, Piper, React, Vite, TypeScript, Vitest, uv]
 tags: [ai]
 links:
+  repo: https://github.com/teofurlan/socra
   post: https://dev.to/teo_furlan/i-wanted-my-coding-agent-to-examine-me-out-loud-so-i-built-a-local-voice-layer-for-it-2ni4
 media: []
 year: 2026
@@ -42,7 +43,7 @@ A developer who works with Claude Code all day sometimes wants to be examined ou
 - **Switching mode is a handoff, not a resume.** Resuming would keep the old system prompt and an ever-growing context.
 - **Whisper large-v3-turbo as the default.** The aim is the highest recognition accuracy and robustness against accents and slang.
 - **Speak each reply sentence by sentence while it is still being written**, so the answer starts before it is finished.
-- **English first, one voice.** TODO(owner): confirm the reason (the Spanish voice mispronounced English terms; this is only in a draft note, not in the repo). A test keeps language to a single source.
+- **English first, one voice.** In English the voice sounds less robotic and Whisper transcribes better. A test keeps the language to a single source.
 - **80 ms of lead-in before speech.** Lead-ins of 30 to 75 ms cut the first phoneme; a test requires at least 60 ms.
 
 ## What I owned

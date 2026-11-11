@@ -55,8 +55,6 @@ We built the arm as a team of three, without a fixed split of tasks. My focus wa
 - Showed that the planned software RCM was unreachable on the built hardware, two degrees of freedom short, and found a structural fix that yields all four laparoscopic degrees of freedom with no extra motors.
 - A browser simulator so the team and the client can operate the arm without hardware.
 
-TODO(owner): surgery congress (name, date, what was shown).
-
 ## What I'd change
 
 > DRAFT — Teo rewrites this in his own words.
