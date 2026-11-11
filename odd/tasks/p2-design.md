@@ -92,3 +92,5 @@ Read the file and inline its single line as an `<img src>`. Never reference exte
 - L5: Round 2 keeps 01–03 for reference and adds 04 drawing set, 05 exploded view, 06 signal path. Badge stays small (~160 px), as agreed.
 - L6: "Let's resume the work. Make sure to update the server where you shared the first three designs or give me a new one. I opened the mockups' HTML files directly, and while they look better, none of them fully convince me yet. One issue is that they all feel too bright and washed out—should we add a dark/light mode toggle?"
 - L7: Teo chose to combine 04 Drawing set + 05 Exploded view, and themes "Follow system + toggle" (dark blueprint + light paper; OS preference by default; header toggle overrides and is remembered).
+- L8: "Keep only the 'Cover and sheets' and 'Exploded index' versions, but polish them a bit and fix the scroll effect, as it currently isn't showing up in either of them. Also, I'd like an interactive background effect where it reacts when the mouse hovers over it"
+- L9: Checked Teo's machine: Windows animation effects on, default browser Chrome. Removed 01–06 (git history keeps them).
