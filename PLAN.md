@@ -72,6 +72,8 @@ layout with the chosen direction. No deploy yet.
 | Gate answers: Socra repo public and linked, English-first reason, congress dropped | done | `c31c199` |
 | Self-hosted gentle-ai badge (`src/assets/badges/`), P2 spec `odd/tasks/p2-design.md` | done | `42f7655` |
 | 3 artboards: 01 drafting sheet, 02 lab notebook, 03 two legs (`design/portfolio-directions/`) | done | `b1c02f1` |
+| Round 2 (Teo: 01 gave the arm too much weight; 02/03 too simple; wants scroll interaction): 04 drawing set, 05 exploded view, 06 signal path | done | `99ee9fe` |
+| Round 3 (Teo: too bright/washed out; combine 04 + 05; themes follow system + toggle): 07 cover-and-sheets, 08 exploded-index | done | `d7faec6` |
 | Teo picks a direction | blocked: Teo | |
 
 ### P3 — Layout + all sections

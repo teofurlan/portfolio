@@ -79,8 +79,8 @@ Read the file and inline its single line as an `<img src>`. Never reference exte
 - T6 (S10–S12) artboard 05 exploded-view — gentle-ai-worker
 - T7 (S10–S12) artboard 06 signal-path — gentle-ai-worker
 - T8 manifest, canvas, stop at gate — inline — 99ee9fe
-- T9 (S10–S14) artboard 07 cover-and-sheets — gentle-ai-worker
-- T10 (S10–S14) artboard 08 exploded-index — gentle-ai-worker
+- T9 (S10–S14) artboard 07 cover-and-sheets — gentle-ai-worker — d7faec6
+- T10 (S10–S14) artboard 08 exploded-index — gentle-ai-worker — d7faec6
 - T11 manifest, canvas, stop at gate — inline
 
 ## Log
