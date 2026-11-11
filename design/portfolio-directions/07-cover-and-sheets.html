@@ -268,9 +268,36 @@ footer.foot .page{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
 }
+
+/* ===== fx engine: interactive drafting grid + script-driven scroll effects (round 3 fix) ===== */
+.cover,.hero{background-image:none}
+.bgfx{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:40px 40px;background-position:-1px -1px}
+.bgfx .glow{position:absolute;inset:0;opacity:0;transition:opacity .25s ease;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:40px 40px;background-position:-1px -1px;
+  -webkit-mask-image:radial-gradient(circle 220px at var(--mx,-999px) var(--my,-999px),#000 0,rgba(0,0,0,.45) 45%,transparent 100%);
+  mask-image:radial-gradient(circle 220px at var(--mx,-999px) var(--my,-999px),#000 0,rgba(0,0,0,.45) 45%,transparent 100%)}
+.bgfx .chx,.bgfx .chy{position:absolute;opacity:0;transition:opacity .2s ease;background:var(--line)}
+.bgfx .chx{left:0;right:0;top:0;height:1px;transform:translateY(var(--my,-10px))}
+.bgfx .chy{top:0;bottom:0;left:0;width:1px;transform:translateX(var(--mx,-10px))}
+.bgfx .xy{position:absolute;left:0;top:0;opacity:0;transition:opacity .2s ease;transform:translate(calc(var(--mx,-200px) + 12px),calc(var(--my,-200px) + 12px));
+  font:600 11px/1 var(--mono,ui-monospace,Consolas,monospace);letter-spacing:.04em;color:var(--ink2);background:var(--bg);border:1px solid var(--hair);padding:4px 6px;border-radius:2px;white-space:nowrap}
+.bg-on .bgfx .glow{opacity:.55}
+.bg-on.bg-ch .bgfx .chx,.bg-on.bg-ch .bgfx .chy{opacity:.35}
+.bg-on.bg-ch .bgfx .xy{opacity:1}
+:where(body > *:not(.bgfx)){position:relative;z-index:1}
+/* scroll effects are written by script as custom properties; without script or with reduced motion the finished state shows */
+.js-fx svg .d{animation:none!important;transition:none!important;stroke-dashoffset:calc((1 - clamp(0, var(--p,1) * (var(--n,8) + 1) - var(--i,0), 1)) * 1px)}
+
+.js-fx .plate{animation:none!important;transform:translateY(calc((2 - var(--i,2)) * 86px * (1 - var(--e,1))))}
+.js-fx .ann{animation:none!important;opacity:clamp(0, var(--e,1) * 2.2 - 1.1, 1)}
+.js-fx .asm .hint{display:block;animation:none!important;opacity:clamp(0, 1 - var(--e,1) * 4, 1)}
 </style>
 </head>
 <body>
+<div class="bgfx" aria-hidden="true"><div class="glow"></div><div class="chx"></div><div class="chy"></div><div class="xy"></div></div>
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="top">
@@ -668,6 +695,46 @@ footer.foot .page{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px
       document.querySelectorAll('figure.fig').forEach(function(f){io2.observe(f)});
     }
   }
+})();
+</script>
+
+<script id="fx-engine">
+(function(){
+  var root=document.documentElement;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine=matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var bg=document.querySelector('.bgfx');
+  /* interactive drafting grid */
+  if(bg&&fine&&!reduce){
+    var mx=-999,my=-999,queued=false,xy=bg.querySelector('.xy');
+    function paint(){queued=false;bg.style.setProperty('--mx',mx+'px');bg.style.setProperty('--my',my+'px');
+      if(xy)xy.textContent='X '+String(Math.round(mx+scrollX)).padStart(4,'0')+'  Y '+String(Math.round(my+scrollY)).padStart(4,'0');}
+    addEventListener('pointermove',function(e){if(e.pointerType!=='mouse')return;mx=e.clientX;my=e.clientY;
+      root.classList.add('bg-on');
+      var t=e.target.closest&&e.target.closest('a,button,input,textarea,select,summary,[role=button],section,article,figure,table,header,footer,.sheet,.cover');
+      root.classList.toggle('bg-ch',!t);
+      if(!queued){queued=true;requestAnimationFrame(paint)}},{passive:true});
+    document.addEventListener('pointerleave',function(){root.classList.remove('bg-on','bg-ch')});
+    addEventListener('blur',function(){root.classList.remove('bg-on','bg-ch')});
+    addEventListener('keydown',function(){root.classList.remove('bg-ch')});
+    addEventListener('scroll',function(){if(!queued&&root.classList.contains('bg-on')){queued=true;requestAnimationFrame(paint)}},{passive:true});
+  }
+  if(reduce)return;
+  root.classList.add('js-fx');
+  var figs=[].slice.call(document.querySelectorAll('figure.fig'));
+  figs.forEach(function(f){f.style.setProperty('--n',f.querySelectorAll('svg .d').length)});
+  var cover=document.querySelector('.cover'), rail=document.querySelector('.rail');
+  var ticking=false;
+  function clamp(v){return v<0?0:v>1?1:v}
+  function update(){ticking=false;var vh=innerHeight;
+    figs.forEach(function(f){var r=f.getBoundingClientRect();
+      /* draws while the figure rises from 92% to 45% of the viewport height */
+      f.style.setProperty('--p',clamp((vh*0.92-r.top)/(vh*0.47)).toFixed(3))});
+    if(cover){cover.style.setProperty('--e',clamp(scrollY/(vh*0.45)).toFixed(3))}
+    if(rail){var max=document.documentElement.scrollHeight-vh;rail.style.setProperty('--prog',max>0?clamp(scrollY/max).toFixed(3):'1')}
+  }
+  function req(){if(!ticking){ticking=true;requestAnimationFrame(update)}}
+  addEventListener('scroll',req,{passive:true});addEventListener('resize',req);update();
 })();
 </script>
 </body>
