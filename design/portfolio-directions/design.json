@@ -44,6 +44,20 @@
       "tradeoff": "Round 2. One circuit trace runs from the 2004 photo through every section and lights up as you scroll. Strongest story thread; the trace competes with content on narrow screens",
       "width": 1440,
       "height": 900
+    },
+    {
+      "file": "07-cover-and-sheets.html",
+      "title": "Cover and sheets (04 + 05)",
+      "tradeoff": "Round 3. The exploded view is the cover; the body is the numbered sheet set with schematics and a title block. Dark blueprint and light paper themes with a toggle. Clear and complete; the cover effect only plays once, at the top",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "file": "08-exploded-index.html",
+      "title": "Exploded index (04 + 05)",
+      "tradeoff": "Round 3. The exploded stack is a sticky side map; the plate for the current section lifts out as you read. Dark blueprint and light paper themes with a toggle. The scroll interaction explains the page all the way down; costs 280 px of width on desktop and a strip on phones",
+      "width": 1440,
+      "height": 900
     }
   ]
 }

@@ -19,6 +19,15 @@ direction is one self-contained HTML artboard under `design/portfolio-directions
 - S11 (L4): "Lab notebook is too simple, so is "Two legs" is as well. Propose more and different options."
 - S12 (L4): "I would like it to have some kind of interaction with the scroll if it's appropriate"
 
+- S13 (L6): "they all feel too bright and washed out"; themes per L7: "Follow system + toggle".
+- S14 (L7): combine 04 Drawing set + 05 Exploded view.
+
+## Theme rules (S13)
+
+- Two themes from one set of CSS custom properties: dark "blueprint" (deep blue-ink ground, light line work; not pure black, not neon) and light "paper" (warmer and deeper than round 1, near-black ink; meaningful lines and hairlines at least 3:1, no pale grey hairlines).
+- Default follows `prefers-color-scheme`. A header toggle (a real `<button>` with `aria-pressed` and a visible label) overrides it and stores the choice in `localStorage`; a tiny inline script in `<head>` applies the stored choice before first paint (no flash). Without JS the page follows the OS setting and the toggle is hidden.
+- Both themes pass WCAG AA (text at least 4.5:1; meaningful lines and controls at least 3:1). The badge sits on a dark surface in both themes.
+
 ## Scroll interaction rules (S12)
 
 - The scroll effect must explain something (story progress, how a system works), never decorate for its own sake, and never block reading or hijack scrolling (no scroll-jacking, no pinned sections taller than one viewport, no snap).
@@ -69,7 +78,10 @@ Read the file and inline its single line as an `<img src>`. Never reference exte
 - T5 (S10–S12) artboard 04 drawing-set — gentle-ai-worker
 - T6 (S10–S12) artboard 05 exploded-view — gentle-ai-worker
 - T7 (S10–S12) artboard 06 signal-path — gentle-ai-worker
-- T8 manifest, canvas, stop at gate — inline
+- T8 manifest, canvas, stop at gate — inline — 99ee9fe
+- T9 (S10–S14) artboard 07 cover-and-sheets — gentle-ai-worker
+- T10 (S10–S14) artboard 08 exploded-index — gentle-ai-worker
+- T11 manifest, canvas, stop at gate — inline
 
 ## Log
 
@@ -78,3 +90,5 @@ Read the file and inline its single line as an `<img src>`. Never reference exte
 - L3: Three artboards written by parallel workers (01 drafting sheet, 02 lab notebook, 03 two legs), committed b1c02f1. Links to projects/posts are placeholders in the mockups; real URLs come from content in P3. Badge is dark with a neon-pink glow: keep it small (~160 px).
 - L4: "- I like the "Drafting sheet" style, but it gives the arm too much importance for my taste and the size of the project. Let's consider a similar approach but more general. - Lab notebook is too simple, so is "Two legs" is as well. Propose more and different options. - I would like it to have some kind of interaction with the scroll if it's appropriate - I agree with you about the gentle-ai badge"
 - L5: Round 2 keeps 01–03 for reference and adds 04 drawing set, 05 exploded view, 06 signal path. Badge stays small (~160 px), as agreed.
+- L6: "Let's resume the work. Make sure to update the server where you shared the first three designs or give me a new one. I opened the mockups' HTML files directly, and while they look better, none of them fully convince me yet. One issue is that they all feel too bright and washed out—should we add a dark/light mode toggle?"
+- L7: Teo chose to combine 04 Drawing set + 05 Exploded view, and themes "Follow system + toggle" (dark blueprint + light paper; OS preference by default; header toggle overrides and is remembered).
