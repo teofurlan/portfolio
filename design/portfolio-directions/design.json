@@ -3,8 +3,47 @@
   "brief": "Personal portfolio home for Teo Furlan: two legs (software with AI agents, hardware), personal-story thread from a kid at a computer to agents and robot arms; recruiter 10-second test.",
   "feature": "odd/tasks/p2-design.md",
   "artboards": [
-    { "file": "01-drafting-sheet.html", "title": "Drafting sheet", "tradeoff": "Most original and tied to his hardware work; the drawing metaphor can feel technical and cool for the AI and story parts", "width": 1440, "height": 900 },
-    { "file": "02-lab-notebook.html", "title": "Lab notebook", "tradeoff": "Warmest and strongest personal story; slower to scan, the two legs and contact sit lower than in the split layout", "width": 1440, "height": 900 },
-    { "file": "03-two-legs.html", "title": "Two legs", "tradeoff": "Fastest recruiter scan, both legs above the fold; least personal, closest to a conventional dark portfolio", "width": 1440, "height": 900 }
+    {
+      "file": "01-drafting-sheet.html",
+      "title": "Drafting sheet",
+      "tradeoff": "Most original and tied to his hardware work; the drawing metaphor can feel technical and cool for the AI and story parts",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "file": "02-lab-notebook.html",
+      "title": "Lab notebook",
+      "tradeoff": "Warmest and strongest personal story; slower to scan, the two legs and contact sit lower than in the split layout",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "file": "03-two-legs.html",
+      "title": "Two legs",
+      "tradeoff": "Fastest recruiter scan, both legs above the fold; least personal, closest to a conventional dark portfolio",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "file": "04-drawing-set.html",
+      "title": "Drawing set",
+      "tradeoff": "Round 2. Every section is a numbered sheet with its own small schematic; a title block tracks where you are. Coherent and general; risks feeling like a document more than a person",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "file": "05-exploded-view.html",
+      "title": "Exploded view",
+      "tradeoff": "Round 2. The hero explodes into five labelled layers of Teo as you scroll, with a parts list that links to each section. Most memorable opening; the metaphor needs the scroll to land",
+      "width": 1440,
+      "height": 900
+    },
+    {
+      "file": "06-signal-path.html",
+      "title": "Signal path",
+      "tradeoff": "Round 2. One circuit trace runs from the 2004 photo through every section and lights up as you scroll. Strongest story thread; the trace competes with content on narrow screens",
+      "width": 1440,
+      "height": 900
+    }
   ]
 }

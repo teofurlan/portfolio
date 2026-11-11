@@ -4,8 +4,9 @@ Resume point for any agent. Read `BRIEF.md` first, then this file. Update it
 after every task (status + commit). Phases stop at their **Gate** until Teo
 decides. Per-phase ODD specs live in `odd/tasks/`.
 
-**Current state:** P1 done, waiting at the **P1 gate**: Teo reviews facts and
-statuses (see open questions). After the gate: P2 design directions. No deploy yet.
+**Current state:** P1 gate passed. P2 done, waiting at the **P2 gate**: Teo
+picks one of the three directions in `design/portfolio-directions/`. Next: P3
+layout with the chosen direction. No deploy yet.
 
 ## Environment notes
 
@@ -68,7 +69,10 @@ statuses (see open questions). After the gate: P2 design directions. No deploy y
 
 | Task | Status | Commit |
 |---|---|---|
-| 2–3 static artboards (personal story; engineering drawings / kinematic diagrams) | todo | |
+| Gate answers: Socra repo public and linked, English-first reason, congress dropped | done | `c31c199` |
+| Self-hosted gentle-ai badge (`src/assets/badges/`), P2 spec `odd/tasks/p2-design.md` | done | `42f7655` |
+| 3 artboards: 01 drafting sheet, 02 lab notebook, 03 two legs (`design/portfolio-directions/`) | done | `b1c02f1` |
+| Teo picks a direction | blocked: Teo | |
 
 ### P3 — Layout + all sections
 
@@ -110,8 +114,7 @@ order Socra, MTDS, bloobert; Alethea/UAP left out.
 
 Still open:
 
-- **MTDS:** surgery congress name and date.
-- **Socra:** the English-first reason; blind A/B voice test result.
+- **Socra:** blind A/B voice test result (optional).
 - **Private repos:** recruiters check repo/README; consider publishing one
   repo or a public README later (BRIEF §2).
 - **Timeline** (`meta.timeline`) and every CV entry in `resume.json`: confirm.
