@@ -22,6 +22,25 @@ direction is one self-contained HTML artboard under `design/portfolio-directions
 - S13 (L6): "they all feel too bright and washed out"; themes per L7: "Follow system + toggle".
 - S14 (L7): combine 04 Drawing set + 05 Exploded view.
 
+- S15 (L8): "Keep only the 'Cover and sheets' and 'Exploded index' versions, but polish them a bit"
+- S16 (L8): "fix the scroll effect, as it currently isn't showing up in either of them"
+- S17 (L8): "I'd like an interactive background effect where it reacts when the mouse hovers over it"
+
+## Interactive background rules (S17)
+
+- Same effect in both artboards: the page background is a faint drafting grid; under the mouse pointer the grid lines near the cursor brighten in a soft circle (radial mask, about 220 px), and a thin drafting crosshair with a small X/Y coordinate readout in monospace follows the pointer. It is the drawing language reacting to the reader, not decoration for its own sake.
+- Behind all content (`pointer-events: none`, `z-index` below content); never lowers text contrast; never moves layout.
+- Only for `(hover: hover) and (pointer: fine)`. Touch devices, `prefers-reduced-motion: reduce` and no-JS get the static faint grid only. The crosshair hides when the pointer leaves the window or is over a link/button, and while the user types.
+- Implementation: one `pointermove` listener (passive) that writes `--mx`/`--my` CSS custom properties in a `requestAnimationFrame`; the glow is a `mask-image: radial-gradient(...)` on a grid layer. No canvas, no per-frame layout reads.
+- Works in both themes (grid colour from the theme tokens).
+
+## Scroll fix rules (S16)
+
+- Teo's machine: Windows animations are ON (`ClientAreaAnimation=True`) and the default browser is Chrome, so reduced motion and missing support are NOT the cause; the effects are broken.
+- Diagnose by actually scrolling: launch the installed Chrome headless with remote debugging from a script in the OS temp dir (Node 22 has a global `WebSocket` for CDP), scroll to several positions (`window.scrollTo`), and read computed values (`getComputedStyle(el).transform`, `strokeDashoffset`, the title block text, `aria-current`) plus screenshots at each position. Record before/after values in the report.
+- The page must also work inside the design canvas, where each artboard is shown in an iframe: test the file directly and inside a plain iframe (1440×900).
+- Keep the S12 rules (progressive enhancement, reduced motion shows the final state). If CSS scroll-driven animation is unreliable for an element, drive it from the IntersectionObserver/scroll script instead.
+
 ## Theme rules (S13)
 
 - Two themes from one set of CSS custom properties: dark "blueprint" (deep blue-ink ground, light line work; not pure black, not neon) and light "paper" (warmer and deeper than round 1, near-black ink; meaningful lines and hairlines at least 3:1, no pale grey hairlines).
@@ -81,7 +100,10 @@ Read the file and inline its single line as an `<img src>`. Never reference exte
 - T8 manifest, canvas, stop at gate — inline — 99ee9fe
 - T9 (S10–S14) artboard 07 cover-and-sheets — gentle-ai-worker — d7faec6
 - T10 (S10–S14) artboard 08 exploded-index — gentle-ai-worker — d7faec6
-- T11 manifest, canvas, stop at gate — inline
+- T11 manifest, canvas, stop at gate — inline — d7faec6
+- T12 (S15–S17) polish 07, fix its scroll, add the interactive background — gentle-ai-worker
+- T13 (S15–S17) polish 08, fix its scroll, add the interactive background — gentle-ai-worker
+- T14 remove 01–06, manifest, canvas, stop at gate — inline
 
 ## Log
 
@@ -92,5 +114,4 @@ Read the file and inline its single line as an `<img src>`. Never reference exte
 - L5: Round 2 keeps 01–03 for reference and adds 04 drawing set, 05 exploded view, 06 signal path. Badge stays small (~160 px), as agreed.
 - L6: "Let's resume the work. Make sure to update the server where you shared the first three designs or give me a new one. I opened the mockups' HTML files directly, and while they look better, none of them fully convince me yet. One issue is that they all feel too bright and washed out—should we add a dark/light mode toggle?"
 - L7: Teo chose to combine 04 Drawing set + 05 Exploded view, and themes "Follow system + toggle" (dark blueprint + light paper; OS preference by default; header toggle overrides and is remembered).
-- L8: "Keep only the 'Cover and sheets' and 'Exploded index' versions, but polish them a bit and fix the scroll effect, as it currently isn't showing up in either of them. Also, I'd like an interactive background effect where it reacts when the mouse hovers over it"
-- L9: Checked Teo's machine: Windows animation effects on, default browser Chrome. Removed 01–06 (git history keeps them).
+- L10: Workers for T12/T13 failed (stall; runtime quarantine). Parent diagnosed with a CDP probe: effects ran but completed off-screen or were too small. Fixed inline with a shared script (fe76a11). Polish limited to the effects.

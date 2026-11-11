@@ -74,6 +74,8 @@ layout with the chosen direction. No deploy yet.
 | 3 artboards: 01 drafting sheet, 02 lab notebook, 03 two legs (`design/portfolio-directions/`) | done | `b1c02f1` |
 | Round 2 (Teo: 01 gave the arm too much weight; 02/03 too simple; wants scroll interaction): 04 drawing set, 05 exploded view, 06 signal path | done | `99ee9fe` |
 | Round 3 (Teo: too bright/washed out; combine 04 + 05; themes follow system + toggle): 07 cover-and-sheets, 08 exploded-index | done | `d7faec6` |
+| Teo kept only 07 and 08; removed 01–06 | done | `6c717b2` |
+| Scroll effects fixed (they ran but finished off-screen; now script-driven, measured with CDP) and interactive drafting grid added to 07 and 08 | done | `fe76a11` |
 | Teo picks a direction | blocked: Teo | |
 
 ### P3 — Layout + all sections
