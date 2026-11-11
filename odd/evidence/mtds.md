@@ -25,3 +25,7 @@ Paths relative to ../mtds-brazo-robot/; doc sections in 01_Documentacion/Investi
 - Media candidates: 04_Produccion/Imagenes/modelo_3d_mtds.png (render), Fotos_Hardware/Control Remoto - frente.jpg (not checked for people).
 - Limitations (repo words, Spanish): designs must be redone once one is chosen; "No hay ningún diseño mecánico propio todavía"; joint limits and link lengths are assumed; IK checks no joint limits or collisions; possible CAD error to confirm before fabricating.
 - Never publish: teammates'/supervisor's full names without consent, university dome photos/measurements, course folder names, git emails, local paths.
+
+## Owner decision (2026-11-11)
+
+Teo: "The repo is out of date." The CV wording is authoritative; the CV-vs-repo table above is historical. Team: "We built the robot arm as a team, didn't divide the tasks." Repos are not public.

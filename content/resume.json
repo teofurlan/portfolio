@@ -40,7 +40,6 @@
     {
       "name": "MTDS: Laparoscopic surgery training robot",
       "slug": "mtds",
-      "url": "https://github.com/teofurlan/robot-arm",
       "roles": ["Control software and simulation, university research project"],
       "startDate": "2026",
       "keywords": ["C++", "Python", "Fusion 360"],

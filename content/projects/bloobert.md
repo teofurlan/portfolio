@@ -11,8 +11,7 @@ ownership: >-
   coding agents.
 stack: [Tauri 2, Rust, TypeScript, Vite, SVG, WebAudio, Vitest]
 tags: [desktop]
-links:
-  repo: https://github.com/teofurlan/bloobert
+links: {}
 media: []
 year: 2026
 ---
@@ -21,8 +20,7 @@ year: 2026
 docs/mvp.md, app/src-tauri/src/{idle,presence}.rs, app/src/{bloobert,main}.ts,
 odd/tasks/m0-spike.md, m1-local-save.md, m1-break-restore.md, m2-routines.md).
 Order 3 is a draft choice (MTDS first, then Socra).
-TODO(owner): confirm team: 1 and the ownership wording (every commit is by Teo; built with coding agents).
-TODO(owner): is the GitHub repo public? Confirm before linking.
+Solo confirmed by Teo (2026-11-11). Repo is private: no repo link.
 Media candidates, not copied yet: design/main-window/.screenshots/{dark,light}-1200-{sitting,break}.png.
 The short videos in design/ are marketing reels with AI-generated footage: do not use unless Teo checks. -->
 
@@ -47,7 +45,7 @@ People sit at the computer for hours without breaks. Bloobert is a translucent j
 
 ## What I owned
 
-Everything, working with coding agents: the product definition, the architecture, the Rust and TypeScript code, the design and the tests. TODO(owner): confirm the ownership wording.
+Everything, working with coding agents: the product definition, the architecture, the Rust and TypeScript code, the design and the tests.
 
 ## Result
 

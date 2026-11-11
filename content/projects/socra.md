@@ -2,7 +2,7 @@
 title: Socra
 summary: A local voice layer for Claude Code. The model speaks, you answer out loud.
 status: featured
-order: 2
+order: 1
 role: Designer and developer
 team: 1
 ownership: >-
@@ -12,7 +12,6 @@ ownership: >-
 stack: [Python, asyncio, MCP, WebSocket, faster-whisper, Piper, React, Vite, TypeScript, Vitest, uv]
 tags: [ai]
 links:
-  repo: https://github.com/teofurlan/socra
   post: https://dev.to/teo_furlan/i-wanted-my-coding-agent-to-examine-me-out-loud-so-i-built-a-local-voice-layer-for-it-2ni4
 media: []
 year: 2026
@@ -20,7 +19,7 @@ year: 2026
 
 <!-- Sources: odd/evidence/socra.md (explorer report of the socra repo: README.md,
 PRODUCT.md, server/README.md, server tests, piper_tts.py; DEV post verified via DEV API).
-TODO(owner): confirm team: 1 (solo is inferred from "used daily by its author" and commit authorship).
+Solo confirmed by Teo (2026-11-11). Repo is private: no repo link. Order 1 chosen by Teo.
 Order 2 is a draft choice (hardware leg MTDS goes first).
 Media candidates, not copied yet: socra-demo-muted.mp4 and cover.png (from the
 2026-11-socra draft folder; copy into media/projects/socra/).
@@ -48,7 +47,7 @@ A developer who works with Claude Code all day sometimes wants to be examined ou
 
 ## What I owned
 
-TODO(owner): confirm solo. If so: the whole project, from the server and the audio pipeline to the React page and the tests.
+Solo project, built with coding agents: the whole thing, from the server and the audio pipeline to the React page and the tests.
 
 ## Result
 
