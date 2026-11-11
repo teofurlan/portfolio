@@ -1,0 +1,20 @@
+# Footer / colophon credits: tooling used to build this site.
+
+- name: gentle-ai
+  role: Agent harness used to build the site
+  url: https://github.com/Gentleman-Programming/gentle-ai
+  badge:
+    # Official badge. Download it into the project at build/scaffold time
+    # (e.g. src/assets/badges/built-with-gentle-ai.png) instead of hotlinking.
+    src: https://raw.githubusercontent.com/Gentleman-Programming/gentle-ai/main/docs/assets/brand/built-with-gentle-ai.png
+    alt: Built with Gentle-AI
+    width: 220
+  html: |
+    <a href="https://github.com/Gentleman-Programming/gentle-ai">
+      <img width="220" src="https://raw.githubusercontent.com/Gentleman-Programming/gentle-ai/main/docs/assets/brand/built-with-gentle-ai.png" alt="Built with Gentle-AI" />
+    </a>
+
+- name: AI Hero skills
+  role: Agent skills used during the build
+  url: https://www.aihero.dev
+  badge: null # No official badge; credit as a plain text link.

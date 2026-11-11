@@ -1,0 +1,21 @@
+# One entry per photo in this folder.
+# caption: one line tied to a timeline milestone (shown on the page).
+# alt: what the image shows, for screen readers.
+# treatment: how to present it (decided in the direction session).
+
+- file: 2004_first-computer_01.jpg
+  year: 2004
+  caption: "" # TODO(owner): Teo writes it, in Spanish or English
+  alt: "A toddler kneeling on a wooden chair, both hands on a white computer keyboard on a desk."
+  source: WhatsApp copy of an early-2000s digital camera photo, 1280x960
+  treatment: >
+    Authentic, no generative AI enhancement or upscaling. Show it small
+    (roughly 280-360 px wide on desktop), optionally cropped toward the child and
+    keyboard. Allowed: mild non-generative cleanup (light denoise, white
+    balance, exposure) and a print-like frame or a subtle palette-matched
+    treatment chosen in P2. Avoid feathered/blurred edges.
+
+# Optional, later: a current photo as the "now" bookend of the timeline.
+# - file: YEAR_robot-arm_01.jpg
+#   caption: ""
+#   alt: ""
