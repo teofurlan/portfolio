@@ -60,7 +60,8 @@ statuses (see open questions). After the gate: P2 design directions. No deploy y
 | Hidden stubs from verified sources: emprender (CV), pricor and dogear (DEV posts) | done | `6e35c8b` |
 | Research evidence for socra, mtds, bloobert (`odd/evidence/`) | done | `a467b07` |
 | Featured case studies: mtds (1), socra (2), bloobert (3), `TODO(owner)` gaps, DRAFT "What I'd change" | done | `e32d8dc` |
-| Alethea and UAP analyzer stubs | not started: no verified source (Teo chose featured-only research) | |
+| Gate answers applied: CV wording for MTDS (repo out of date), team-wide ownership, Socra/bloobert solo, repo links removed (repos private), order Socra 1, MTDS 2, bloobert 3 | done | see git log |
+| Alethea and UAP analyzer | dropped for now (Teo, 2026-11-11) | |
 | Certificates (3–5) in `resume.json` | blocked: Teo | |
 
 ### P2 — Design directions · **Gate:** Teo picks one
@@ -103,17 +104,16 @@ statuses (see open questions). After the gate: P2 design directions. No deploy y
 
 ## Open questions for Teo (P1 gate)
 
-- **MTDS, CV vs repo:** the case study uses the repo wording. Decide each item
-  in the `TODO(owner)` comment of `content/projects/mtds.md` (3 µm vs CAD, 0.1%
-  of the 50 Hz loop, the unbuilt structural fix, missing check scripts, Fusion
-  automation), and update the CV if the repo is right.
-- **MTDS:** surgery congress name and date; what the two teammates built (no
-  names); is `teofurlan/mtds-brazo-robot` public? Firmware repo `robot-arm` not
-  inspected.
-- **Socra:** confirm solo; confirm the English-first reason; blind A/B voice
-  test result (only in browser storage).
-- **bloobert:** confirm solo and ownership wording; is `teofurlan/bloobert` public?
-- **Order** of featured projects (draft: hardware first).
+Answered 2026-11-11: MTDS repo is out of date (CV wins); MTDS built as a team
+with no task split; Socra and bloobert solo; repos private (no repo links);
+order Socra, MTDS, bloobert; Alethea/UAP left out.
+
+Still open:
+
+- **MTDS:** surgery congress name and date.
+- **Socra:** the English-first reason; blind A/B voice test result.
+- **Private repos:** recruiters check repo/README; consider publishing one
+  repo or a public README later (BRIEF §2).
 - **Timeline** (`meta.timeline`) and every CV entry in `resume.json`: confirm.
 - **Certificates:** which 3–5, with verification links (CV has none).
 - **Media:** copy chosen files into `media/projects/<slug>/` (candidates in
