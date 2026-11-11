@@ -16,3 +16,8 @@ transcripts/raw/
 node_modules/
 dist/
 .astro/
+
+# Logs and OS noise
+*.log
+.DS_Store
+Thumbs.db
