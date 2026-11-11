@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { featuredProjects } from '../lib/projects';
+
+const featured = featuredProjects(await getCollection('projects'));
+---
+
+<Base title="Teo Furlan">
+  <section id="hero" aria-labelledby="hero-title">
+    <h1 id="hero-title">Teo Furlan</h1>
+    <p>Positioning line: software with AI agents, and hardware. Teo writes it (P3).</p>
+  </section>
+
+  <section id="work" aria-labelledby="work-title">
+    <h2 id="work-title">Featured work</h2>
+    {
+      featured.length === 0 ? (
+        <p>Case studies arrive in P1.</p>
+      ) : (
+        <ul>
+          {featured.map((p) => (
+            <li>
+              <a href={`/work/${p.id}/`}>{p.data.title}</a>: {p.data.summary}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+
+  <section id="build" aria-labelledby="build-title">
+    <h2 id="build-title">How this site was built</h2>
+    <p><a href="/build-session/">Watch the build session</a></p>
+  </section>
+
+  <section id="ai" aria-labelledby="ai-title">
+    <h2 id="ai-title">How I work with AI</h2>
+    <p><a href="/how-i-work/">Read about the harness</a></p>
+  </section>
+
+  <section id="writing" aria-labelledby="writing-title">
+    <h2 id="writing-title">Writing</h2>
+    <p><a href="/writing/">All articles</a></p>
+  </section>
+
+  <section id="about" aria-labelledby="about-title">
+    <h2 id="about-title">About</h2>
+    <p><a href="/about/">More about me</a></p>
+  </section>
+
+  <section id="contact" aria-labelledby="contact-title">
+    <h2 id="contact-title">Contact</h2>
+    <p>Contact links arrive in P3.</p>
+  </section>
+</Base>

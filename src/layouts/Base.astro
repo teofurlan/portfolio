@@ -1,0 +1,50 @@
+---
+/**
+ * Bare structural layout. Visual design is decided in P2; keep this semantic
+ * and unstyled until then.
+ */
+import { nav, site } from '../data/site';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'Teo Furlan: software with AI agents, and hardware.' } = Astro.props;
+const pageTitle = title === site.name ? title : `${title} · ${site.name}`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+  </head>
+  <body>
+    <a href="#main">Skip to content</a>
+    <header>
+      <a href="/">{site.name}</a>
+      <nav aria-label="Main">
+        <ul>
+          {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        </ul>
+      </nav>
+    </header>
+    <main id="main">
+      <slot />
+    </main>
+    <footer>
+      <ul>
+        <li><a href={site.links.github}>GitHub</a></li>
+        <li><a href={site.links.linkedin}>LinkedIn</a></li>
+        <li><a href={site.links.dev}>DEV</a></li>
+        <li><a href={site.links.cv}>CV (PDF)</a></li>
+      </ul>
+      <p><a href="/colophon/">Colophon</a></p>
+    </footer>
+  </body>
+</html>
