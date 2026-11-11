@@ -1,0 +1,13 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "Teo Furlan",
+    "email": "teofurlan03@gmail.com",
+    "url": "https://teofurlan.com",
+    "profiles": [
+      { "network": "GitHub", "username": "teofurlan", "url": "https://github.com/teofurlan" },
+      { "network": "LinkedIn", "username": "teo-furlan", "url": "https://www.linkedin.com/in/teo-furlan" },
+      { "network": "DEV", "username": "teo_furlan", "url": "https://dev.to/teo_furlan" }
+    ]
+  }
+}
