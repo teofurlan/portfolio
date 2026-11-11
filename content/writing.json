@@ -1,1 +1,28 @@
-[]
+[
+  {
+    "id": "learning-system",
+    "title": "How I Built a Learning System Inside My AI Coding Workflow (Using Obsidian)",
+    "url": "https://dev.to/teo_furlan/how-i-built-a-learning-system-inside-my-ai-coding-workflow-using-obsidian-fbp",
+    "date": "2026-10-30"
+  },
+  {
+    "id": "dogear",
+    "title": "I highlight paper books. A small open model types my quotes while I sleep",
+    "url": "https://dev.to/teo_furlan/i-highlight-paper-books-a-small-open-model-types-my-quotes-while-i-sleep-4197",
+    "date": "2026-10-25",
+    "project": "dogear"
+  },
+  {
+    "id": "pricor",
+    "title": "Pricor: local AI reads the supplier spreadsheet, an exact engine does the math",
+    "url": "https://dev.to/teo_furlan/pricor-local-ai-reads-the-supplier-spreadsheet-an-exact-engine-does-the-math-3915",
+    "date": "2026-10-19",
+    "project": "pricor"
+  },
+  {
+    "id": "loci",
+    "title": "Loci: A Walk You Have to Remember",
+    "url": "https://dev.to/teo_furlan/loci-a-walk-you-have-to-remember-14lf",
+    "date": "2026-10-12"
+  }
+]
