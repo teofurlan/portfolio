@@ -1,0 +1,16 @@
+# Socra evidence (explorer mwcgvb1y, 2026-11-11, read-only)
+
+Paths relative to ../ideaslab/. Never publish local paths in site copy.
+
+- Problem: "A local, private voice layer for Claude Code": model speaks, user answers out loud, page shows only code, permission prompts or the reply (socra/README.md intro). Audience: "One developer who works with Claude Code all day… to be examined on a project they built, or to drive a coding session by voice" (socra/PRODUCT.md, Users).
+- Constraints: server binds 127.0.0.1 only; "nothing leaves it except what Claude Code itself sends" (socra/README.md). Windows-first; Python 3.12+, Node 22+, mic, Edge/Chrome; NVIDIA GPU optional, CPU works (README Requirements). "<= 3.0 s transcription budget" (socra/server/README.md ~205). Piper voice ~79 MB (server/README.md:42).
+- Decisions: mode switch = handoff, not resume: "that would keep the old system prompt and an ever-growing context" (server/README.md:132-134). Whisper default large-v3-turbo for "the highest recognition accuracy and robustness against accents/slang" (server/README.md:204). Speaks each reply sentence by sentence while it is written (README). English first, one voice (README Quick start); why (Spanish voice mispronounced English terms) is only in share/drafts/2026-11-socra/notes.md — TODO(owner) confirm; single-language test: server/tests/test_language_single_source.py. LEAD_IN_MS = 80 because 30-75 ms cut the first phoneme (server/src/socra_server/adapters/piper_tts.py:22-24; test >=60 ms tests/test_piper_tts.py:179).
+- Results (literal): Whisper benchmark on RTX 4060 8 GB, Spanish synthesized audio, measured BEFORE the English switch: large-v3-turbo CUDA fp16 A1 0.55 s, A2 0.43 s, load 4.35 s; small A1 0.30 s; base A1 0.60 s (server/README.md ~192-204). Must carry that caveat if used.
+- NOT usable as results: blind voice A/B winner (only in drafts notes; ratings live in browser localStorage) — TODO(owner); voice/playback-results.json says "audible_quality_verified": false; Qwen3-TTS RTF figures are upstream docs, not Socra's. PRODUCT.md: "No testimonials, users, metrics, or press exist; do not invent them." End-to-end speed not measured.
+- Team: likely solo ("used daily by its author", README:18; reflog authors teofurlan) — TODO(owner) confirm.
+- Stack: Python 3.12 asyncio, MCP over stdio, WebSocket server, Piper TTS (LibriTTS-R speaker 0), faster-whisper, Claude Code + Pi backends, React + Vite + TypeScript, Vitest, uv.
+- Year: 2026 (started 2026-10-20). Repo: https://github.com/teofurlan/socra. socra-voice-lab: no public repo.
+- Demo: share/drafts/2026-11-socra/socra-demo-muted.mp4, cover.png (outside the repo; Teo copies into media/projects/socra/).
+- DEV post: https://dev.to/teo_furlan/i-wanted-my-coding-agent-to-examine-me-out-loud-so-i-built-a-local-voice-layer-for-it-2ni4 (2026-11-08, verified via DEV API).
+- Limitations (repo words): "early and Windows-first… expect rough edges, breaking changes, and setup steps that are not yet automated" (README:18). Pi questions needing a choice or free text are cancelled, "since they cannot be answered by voice yet" (server/README.md ~162). README omits Mentor mode that server README describes.
+- Never publish: author email from reflog, .git/gentle-ai/*, engram identity, logs, Agensi listing/price.
