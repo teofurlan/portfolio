@@ -14,14 +14,16 @@ file is the ODD spec for P0 only.
 
 ## Tasks
 
-- T1 (S1, S5) git init, merge `.gitignore`, commit existing brief/inputs — inline — commit: see PLAN.md
-- T2 (S2, S3) Astro 7 + `@astrojs/cloudflare` 14 + Wrangler dev dep, `wrangler.jsonc` — inline
-- T3 (S4) content model: projects/writing collections, resume schema, `isPublished` rule + test — inline
-- T4 (S1) empty pages for every IA section + base layout — inline
-- T5 (S6) `PLAN.md` — inline
+- T1 (S1, S5) git init, merge `.gitignore`, commit existing brief/inputs — inline — 0fa356c
+- T2 (S2, S3) Astro 7 + `@astrojs/cloudflare` 14 + Wrangler dev dep, `wrangler.jsonc` — inline — dc568a7
+- T3 (S4) content model: projects/writing collections, resume schema, `isPublished` rule + test — inline — feebd33
+- T4 (S1) empty pages for every IA section + base layout — inline — 76e2f40
+- T5 (S6) `PLAN.md` — inline — PLAN commit
 
 ## Log
 
 - L1: "I want you to read @BRIEF.md and start implementing P0"
 - L2: Learning mode set to `log` (vault folder `Projects/Portfolio`).
 - L3: `media/photos/2004_first-computer_01.jpg` has no APP1/Exif segment (checked 2026-11-11), safe to commit.
+- L4: System Node 22.17 precedes nvm Node 26 on PATH; Astro 7 needs >=22.23.4. Worked around per session by prefixing PATH; documented in PLAN.md.
+- L5: Verified: 6 unit tests pass, astro check 0 errors, build OK, listed probe project built and hidden probe not built, wrangler deploy --dry-run OK (no bindings).
