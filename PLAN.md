@@ -4,14 +4,15 @@ Resume point for any agent. Read `BRIEF.md` first, then this file. Update it
 after every task (status + commit). Phases stop at their **Gate** until Teo
 decides. Per-phase ODD specs live in `odd/tasks/`.
 
-**Current state:** P0 done. Next: P1 (content import). No deploy yet.
+**Current state:** P1 done, waiting at the **P1 gate**: Teo reviews facts and
+statuses (see open questions). After the gate: P2 design directions. No deploy yet.
 
 ## Environment notes
 
-- Astro 7 needs Node `>=22.23.4`. On Teo's machine `C:\Program Files\nodejs`
-  (Node 22.17) comes first on PATH; the nvm-managed Node 26 lives in
-  `%LOCALAPPDATA%\Author Software\nvm\.nodejs`. Put that directory first on
-  PATH (or fix the system PATH) before running `pnpm`.
+- Astro 7 needs Node `>=22.23.4`. The global Node was upgraded to 22.23.4 on
+  2026-11-11; plain `pnpm` works.
+- Research of sibling repos (read-only) lives in `odd/evidence/<slug>.md`;
+  case studies cite it. Sibling repos are never modified.
 - pnpm 11 enforces a minimum release age: do not add `minimumReleaseAgeExclude`
   entries to bypass it. Build scripts allowed: `esbuild`, `workerd`, `sharp`
   (`pnpm-workspace.yaml`).
@@ -54,11 +55,13 @@ decides. Per-phase ODD specs live in `odd/tasks/`.
 
 | Task | Status | Commit |
 |---|---|---|
-| `content/resume.json` from `inputs/cv/resume.tex` (no phone; CV is authoritative) | todo | |
-| Project files: socra, mtds, bloobert (featured); others `hidden`, each fact verified against its repo, sources in a hidden comment, gaps as `TODO(owner)` | todo | |
-| `content/writing.json`: the 4 DEV posts with verified titles and dates | todo | |
-| Timeline milestones (4–6) in `resume.json` `meta.timeline` | todo | |
-| Photo caption (`media/photos/photos.yaml`, still `TODO(owner)`) | blocked: Teo | |
+| `content/resume.json` from `resume.tex` (no phone, GitHub added) + 5-item timeline + photo caption "2004. Where it started." | done | `4581853` |
+| `content/writing.json`: 4 DEV posts, checked against the DEV API | done | `5f3dd6f` |
+| Hidden stubs from verified sources: emprender (CV), pricor and dogear (DEV posts) | done | `6e35c8b` |
+| Research evidence for socra, mtds, bloobert (`odd/evidence/`) | done | `a467b07` |
+| Featured case studies: mtds (1), socra (2), bloobert (3), `TODO(owner)` gaps, DRAFT "What I'd change" | done | `e32d8dc` |
+| Alethea and UAP analyzer stubs | not started: no verified source (Teo chose featured-only research) | |
+| Certificates (3–5) in `resume.json` | blocked: Teo | |
 
 ### P2 — Design directions · **Gate:** Teo picks one
 
@@ -98,7 +101,21 @@ decides. Per-phase ODD specs live in `odd/tasks/`.
 | Public CV PDF (no phone, GitHub added), OG images | todo | |
 | Deploy to workers.dev, then connect teofurlan.com | todo | |
 
-## Open questions for Teo
+## Open questions for Teo (P1 gate)
 
-- Photo caption for `2004_first-computer_01.jpg` (P1).
+- **MTDS, CV vs repo:** the case study uses the repo wording. Decide each item
+  in the `TODO(owner)` comment of `content/projects/mtds.md` (3 µm vs CAD, 0.1%
+  of the 50 Hz loop, the unbuilt structural fix, missing check scripts, Fusion
+  automation), and update the CV if the repo is right.
+- **MTDS:** surgery congress name and date; what the two teammates built (no
+  names); is `teofurlan/mtds-brazo-robot` public? Firmware repo `robot-arm` not
+  inspected.
+- **Socra:** confirm solo; confirm the English-first reason; blind A/B voice
+  test result (only in browser storage).
+- **bloobert:** confirm solo and ownership wording; is `teofurlan/bloobert` public?
+- **Order** of featured projects (draft: hardware first).
+- **Timeline** (`meta.timeline`) and every CV entry in `resume.json`: confirm.
+- **Certificates:** which 3–5, with verification links (CV has none).
+- **Media:** copy chosen files into `media/projects/<slug>/` (candidates in
+  each case study's source comment).
 - Hero positioning line (drafts come in P3; his text wins).
