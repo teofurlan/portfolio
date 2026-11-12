@@ -1,4 +1,4 @@
-/** Theme toggle and email reveal. Without JS: OS theme, toggle hidden, email shown as "user [at] domain". */
+/** Theme toggle, email reveal and language cookie. Without JS: OS theme, toggle hidden, email shown as "user [at] domain". */
 const root = document.documentElement;
 
 const btn = document.getElementById('theme') as HTMLButtonElement | null;
@@ -36,9 +36,16 @@ document.querySelectorAll<HTMLElement>('[data-email]').forEach((src) => {
   b.hidden = false;
   b.addEventListener('click', () => {
     navigator.clipboard.writeText(addr).then(() => {
-      b.textContent = 'Copied';
+      b.textContent = b.dataset.copied ?? 'Copied';
       setTimeout(() => (b.textContent = label), 1600);
     }, () => {});
+  });
+});
+
+// Language switch: remember the choice (T3 reads this cookie to skip auto-detection).
+document.querySelectorAll<HTMLAnchorElement>('a[data-lang]').forEach((a) => {
+  a.addEventListener('click', () => {
+    document.cookie = `lang=${a.dataset.lang}; Max-Age=31536000; Path=/; SameSite=Lax`;
   });
 });
 

@@ -13,4 +13,13 @@ export default defineConfig({
   }),
   // No sessions: avoids provisioning a SESSION KV namespace.
   session: false,
+  // English is unprefixed, Spanish lives under /es/. Browser-language redirect is
+  // not Astro's job (see odd/tasks/p3b-i18n.md T3).
+  i18n: {
+    locales: ['en', 'es'],
+    defaultLocale: 'en',
+    routing: { prefixDefaultLocale: false },
+  },
+  // The CV page is called Resume in English (S1); keep the old URL alive.
+  redirects: { '/cv/': '/resume/' },
 });

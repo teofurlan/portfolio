@@ -2,8 +2,11 @@
 /** DEV posts list (artboard .posts), oldest first like the artboard unless `newestFirst`. */
 import { getCollection } from 'astro:content';
 
+import type { Lang } from '../i18n/ui';
+
 interface Props {
   newestFirst?: boolean;
+  lang?: Lang;
 }
 const { newestFirst = false } = Astro.props;
 const posts = (await getCollection('writing')).sort((a, b) => a.data.date.getTime() - b.data.date.getTime());

@@ -89,6 +89,8 @@ header.top .in{display:flex;align-items:center;flex-wrap:wrap;gap:8px 28px;min-h
 .em{font-family:var(--mono);font-size:13px;color:var(--ink)}
 .tgl{display:inline-flex;align-items:center;gap:8px;font:inherit;font-size:14px;font-weight:700;color:var(--ink);background:transparent;border:2px solid var(--line);padding:5px 12px;cursor:pointer}
 .tgl[hidden]{display:none}
+.langsw{font-size:14px;font-weight:700;letter-spacing:.04em;color:var(--ink);text-decoration:none;border:2px solid var(--line);padding:5px 12px}
+.langsw:hover{background:var(--sheet)}
 .tgl .sw{width:30px;height:16px;border:2px solid var(--line);border-radius:10px;position:relative;flex:none}
 .tgl .sw::after{content:"";position:absolute;top:1px;left:1px;width:10px;height:10px;border-radius:50%;background:var(--ink2)}
 .tgl[aria-pressed="true"] .sw{border-color:var(--accent)}

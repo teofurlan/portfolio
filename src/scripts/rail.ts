@@ -3,14 +3,15 @@ const links = [...document.querySelectorAll<HTMLAnchorElement>('.rail a[data-sec
 const secs = links.map((a) => document.getElementById(a.dataset.sec ?? ''));
 const nl = document.getElementById('now-l');
 const ns = document.getElementById('now-s');
+const rail = document.querySelector<HTMLElement>('.rail');
 
 if ('IntersectionObserver' in window && nl && ns && secs.every(Boolean)) {
   const total = links.length;
   const set = (i: number | null) => {
     links.forEach((a, k) => (k === i ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current')));
     if (i === null) {
-      nl.textContent = `${total} sections, top to bottom`;
-      ns.textContent = 'Page map';
+      nl.textContent = rail?.dataset.now ?? `${total} sections, top to bottom`;
+      ns.textContent = rail?.dataset.nowShort ?? 'Page map';
       return;
     }
     const a = links[i];

@@ -1,6 +1,6 @@
 ---
 /**
- * CV rendered from content/resume.json (validated by src/lib/resume.ts, which
+ * Resume (CV in Spanish) rendered from content/resume.json (validated by src/lib/resume.ts, which
  * refuses a phone number). The email is never printed here: contact goes
  * through ContactList, which assembles it at runtime.
  */
@@ -8,17 +8,21 @@ import ContactList from '../components/ContactList.astro';
 import Base from '../layouts/Base.astro';
 import { site } from '../data/site';
 import { resume } from '../lib/resume';
+import { t, type Lang } from '../i18n/ui';
+
+const lang: Lang = 'en';
+const tr = t(lang);
 
 const { work, projects, education, certificates, skills, languages } = resume;
-const span = (start?: string, end?: string) => [start, end ?? (start ? 'present' : undefined)].filter(Boolean).join(' – ');
+const span = (start?: string, end?: string) => [start, end ?? (start ? tr('resume.present') : undefined)].filter(Boolean).join(' – ');
 ---
 
-<Base title="CV" description="Teo Furlan's CV: work, projects, education and skills.">
-  <h1>CV</h1>
-  <div class="links"><a class="btn solid" href={site.links.cv}>Download PDF</a></div>
+<Base title={tr('resume.title')} description="Teo Furlan's resume: work, projects, education and skills." lang={lang}>
+  <h1>{tr('resume.title')}</h1>
+  <div class="links"><a class="btn solid" href={site.links.cv}>{tr('resume.download')}</a></div>
 
   <section class="sheet" aria-labelledby="h-cv-work">
-    <div class="sh"><h2 id="h-cv-work">Work</h2></div>
+    <div class="sh"><h2 id="h-cv-work">{tr('resume.work')}</h2></div>
     {work.map((w) => (
       <article class="cv-item">
         <h3>{w.position} · {w.name}</h3>
@@ -29,7 +33,7 @@ const span = (start?: string, end?: string) => [start, end ?? (start ? 'present'
   </section>
 
   <section class="sheet" aria-labelledby="h-cv-projects">
-    <div class="sh"><h2 id="h-cv-projects">Projects</h2></div>
+    <div class="sh"><h2 id="h-cv-projects">{tr('resume.projects')}</h2></div>
     {projects.map((p) => (
       <article class="cv-item">
         <h3>{p.name}</h3>
@@ -42,7 +46,7 @@ const span = (start?: string, end?: string) => [start, end ?? (start ? 'present'
   </section>
 
   <section class="sheet" aria-labelledby="h-cv-edu">
-    <div class="sh"><h2 id="h-cv-edu">Education</h2></div>
+    <div class="sh"><h2 id="h-cv-edu">{tr('resume.education')}</h2></div>
     {education.map((e) => (
       <article class="cv-item">
         <h3>{[e.studyType, e.area].filter(Boolean).join(', ')} · {e.institution}</h3>
@@ -53,7 +57,7 @@ const span = (start?: string, end?: string) => [start, end ?? (start ? 'present'
 
   {certificates.length > 0 && (
     <section class="sheet" aria-labelledby="h-cv-cert">
-      <div class="sh"><h2 id="h-cv-cert">Certificates</h2></div>
+      <div class="sh"><h2 id="h-cv-cert">{tr('resume.certificates')}</h2></div>
       <ul>
         {certificates.map((c) => (
           <li>{c.url ? <a href={c.url}>{c.name}</a> : c.name} · {c.issuer}{c.date ? ` · ${c.date}` : ''}</li>
@@ -63,16 +67,16 @@ const span = (start?: string, end?: string) => [start, end ?? (start ? 'present'
   )}
 
   <section class="sheet" aria-labelledby="h-cv-skills">
-    <div class="sh"><h2 id="h-cv-skills">Skills and languages</h2></div>
+    <div class="sh"><h2 id="h-cv-skills">{tr('resume.skills')}</h2></div>
     <dl class="meta">
       {skills.map((s) => <><dt>{s.name}</dt><dd>{s.keywords.join(', ')}</dd></>)}
-      <dt>Languages</dt><dd>{languages.map((l) => (l.fluency ? `${l.language} (${l.fluency})` : l.language)).join(', ')}</dd>
+      <dt>{tr('resume.languages')}</dt><dd>{languages.map((l) => (l.fluency ? `${l.language} (${l.fluency})` : l.language)).join(', ')}</dd>
     </dl>
   </section>
 
   <section class="sheet" id="contact" aria-labelledby="h-contact">
-    <div class="sh"><h2 id="h-contact">Contact</h2></div>
-    <p>Entre Ríos, Argentina (UTC−3) · open to remote.</p>
-    <ContactList label="Contact (CV)" />
+    <div class="sh"><h2 id="h-contact">{tr('resume.contact')}</h2></div>
+    <p>{tr('resume.location')}</p>
+    <ContactList label="contact.labelResume" lang={lang} />
   </section>
 </Base>

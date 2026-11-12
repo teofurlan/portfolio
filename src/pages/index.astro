@@ -8,22 +8,25 @@ import { figures, proofs } from '../components/home/figures';
 import Base from '../layouts/Base.astro';
 import { hardwareProjects, showHardwareFilter } from '../lib/hardware';
 import { featuredProjects } from '../lib/projects';
+import { t, type Lang } from '../i18n/ui';
 
 const all = await getCollection('projects');
 const featured = featuredProjects(all);
 const showHw = showHardwareFilter(all);
 const hw = hardwareProjects(all);
 const posts = await getCollection('writing');
+const lang: Lang = 'en';
+const tr = t(lang);
 const workNames = featured.map((p) => p.data.title).join(', ');
 ---
 
-<Base title="Teo Furlan" description="Teo Furlan builds software with AI agents and robotics hardware. Entre Ríos, Argentina, open to remote.">
+<Base title="Teo Furlan" description="Teo Furlan builds software with AI agents and robotics hardware. Entre Ríos, Argentina, open to remote." lang={lang}>
   <div class="shell" slot="shell">
-    <Rail />
+    <Rail lang={lang} />
     <main id="main">
       <section class="hero" id="top" aria-labelledby="h-name">
         <h1 id="h-name">Teo Furlan</h1>
-        <span class="draft">DRAFT — Teo rewrites</span>
+        <span class="draft">{tr('draft')}</span>
         <p class="heroline">From a kid at a keyboard to agents and robot arms.</p>
         <p class="where">Entre Ríos, Argentina (UTC−3) · open to remote</p>
         <div class="legs">
@@ -59,9 +62,9 @@ const workNames = featured.map((p) => p.data.title).join(', ');
               <div class="two">
                 <div>
                   <p class="lead">{p.data.summary}</p>
-                  {proofs[p.id] && <div class="proof"><span class="mono">Proof</span>{proofs[p.id]}</div>}
-                  <ProjectMeta project={p} />
-                  <p><a href={`/work/${p.id}/`}>Read the case study<span class="sr">: {p.data.title}</span></a></p>
+                  {proofs[p.id] && <div class="proof"><span class="mono">{tr('meta.proof')}</span>{proofs[p.id]}</div>}
+                  <ProjectMeta project={p} lang={lang} />
+                  <p><a href={`/work/${p.id}/`}>{tr('link.readCase')}<span class="sr">: {p.data.title}</span></a></p>
                 </div>
                 {Fig && <Fig />}
               </div>
@@ -90,13 +93,13 @@ const workNames = featured.map((p) => p.data.title).join(', ');
 
       <section class="sheet" id="writing" aria-labelledby="h-writing">
         <div class="sh"><span class="bal lg fill" aria-hidden="true">4</span><h2 id="h-writing">Writing</h2><span class="mono sub-ink">on DEV</span></div>
-        <PostList />
+        <PostList lang={lang} />
         <p><a href="/writing/">All writing</a> · <a href="/rss.xml">RSS</a></p>
       </section>
 
       <section class="sheet" id="about" aria-labelledby="h-about">
         <div class="sh"><span class="bal lg fill" aria-hidden="true">5</span><h2 id="h-about">About</h2></div>
-        <AboutBlock />
+        <AboutBlock lang={lang} />
       </section>
 
       <section class="piece" aria-labelledby="h-piece">

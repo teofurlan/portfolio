@@ -6,15 +6,17 @@
  */
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
+import { t, type Lang } from '../i18n/ui';
 
 interface Props {
   media: CollectionEntry<'projects'>['data']['media'];
+  lang?: Lang;
 }
-const { media } = Astro.props;
+const { media, lang = 'en' } = Astro.props;
 ---
 
 {media.length > 0 && (
-  <ul class="gallery" aria-label="Media">
+  <ul class="gallery" aria-label={t(lang)('gallery.label')}>
     {media.map((m) => (
       <li>
         <figure>

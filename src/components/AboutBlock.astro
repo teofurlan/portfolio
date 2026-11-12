@@ -7,11 +7,18 @@
 import { Image } from 'astro:assets';
 import photo2004 from '../../media/photos/2004_first-computer_01.jpg';
 import { resume } from '../lib/resume';
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const tr = t(lang);
 
 const photos: Record<string, { src: ImageMetadata; alt: string }> = {
   '2004_first-computer_01.jpg': {
     src: photo2004,
-    alt: 'A toddler kneeling on a wooden chair, both hands on a white computer keyboard on a desk.',
+    alt: tr('about.photoAlt'),
   },
 };
 const timeline = resume.meta.timeline;
@@ -19,11 +26,11 @@ const timeline = resume.meta.timeline;
 
 <div class="about">
   <div>
-    <span class="draft">DRAFT — Teo rewrites</span>
+    <span class="draft">{tr('draft')}</span>
     <p>I'm a software developer at Universidad Adventista del Plata, where I started Information Systems Engineering in 2022. I build software with AI agents: Socra, a local voice layer for Claude Code, and a harness that tracks every task I give the agent. I'm based in Entre Ríos, Argentina, and open to remote work.</p>
     <p>The hardware side started at a technical secondary school, in electromechanical equipment and installations. In 2024 I had my first real client, EmprendER, an entrepreneurship platform. In 2026, in a team of 3, I'm building a low-cost robot arm for laparoscopic surgery training.</p>
   </div>
-  <ol class="tl" aria-label="Timeline">
+  <ol class="tl" aria-label={tr('about.timeline')}>
     {timeline.map((m) => {
       const ph = m.photo ? photos[m.photo] : undefined;
       return (
