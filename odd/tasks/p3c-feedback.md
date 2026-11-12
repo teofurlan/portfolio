@@ -13,6 +13,8 @@ copy stays flagged BORRADOR, English drafts stay DRAFT.
 - S5 (L1.5): "Hardware: I would loke to say something like Although I primarily develop software, I am very interested in robotics and IoT, and I believe they are the future." Hero hardware leg: EN "I mainly build software, but I'm very interested in robotics and IoT; I believe they are the future." / ES "Aunque me dedico principalmente al software, me interesan mucho la robótica y el IoT, y creo que son el futuro."
 - S6 (L1.6): "Sections 2, 3 and 4 have all different link buttons, is this intentional?" Answer: no. The closing link of sections 2 (build), 3 (AI) and 4 (writing) uses the same secondary button style (`.btn`, not solid); RSS stays a small text link.
 - S8 (L3): "Socra is thought for any agent or harness, don't say \"Claude Code\"". No "Claude Code" anywhere in rendered pages (Socra summary, ownership, case study, About text, both languages); say "any coding agent or harness" / "cualquier agente o arnés de programación".
+- S9 (L5): "the footer goes to the middle of the page" on short pages: the footer sits at the bottom of the viewport when content is shorter than the screen.
+- S10 (L5): "There is not pdf for the resume/cv yet". Both supplied PDFs print the phone number, which BRIEF forbids publishing; PDF links stay hidden until phone-free files exist (EN /resume.pdf, ES /es/cv.pdf).
 - S7: P3/P3.5 rules keep holding in both languages (no full email/phone in HTML, works without JS, one h1, no 390 px overflow, hreflang/switch point to the renamed routes, hidden projects never rendered, tests/check/build green).
 
 ## Tasks
@@ -22,6 +24,9 @@ copy stays flagged BORRADOR, English drafts stay DRAFT.
 | T1 | Copy and naming: hero line + photo in hero, Projects rename + URL moves with redirects, MTDS title, EmprendER wording, hardware leg, consistent buttons | S1, S2, S4, S5, S6, S7, S8 (site.json) | worker | `f73dc13` |
 | T2 | Pricor research (read-only) → `odd/evidence/pricor.md` | S3 | explore (parallel with T1) | |
 | T3 | Pricor case study EN+ES + FIG 1.3, featured order 3; bloobert `listed` + "More projects" list | S3, S7 | worker (after T1, T2) | `0d78f5e` |
+| T6 | Footer pinned to the bottom on short pages (body flex column) | S9 | inline | `8100e09` |
+| T7 | PDF link per language, hidden until a phone-free file exists (`site.links.pdf`) | S10 | inline | `8100e09` |
+| T8 | Phone-free Resume (EN) / CV (ES) PDFs in public/ | S10 | blocked: Teo exports them | |
 | T4 | Verify | S1–S7 | verify | |
 | T5 | PLAN.md | — | inline | |
 
@@ -31,3 +36,5 @@ copy stays flagged BORRADOR, English drafts stay DRAFT.
 - L2 (Teo, 2026-11-12): hero "\"...a futuro Ingeniero en Sistemas\" (Recommended)"; Pricor source "Yes, read it" (C:/Users/teofu/Code/ideaslab/pricor, read-only); bloobert "Keep its page, off the home (Recommended)".
 - L3 (Teo, 2026-11-12): "Something else, Socra is thought for any agent or harness, don't say \"Claude Code\"". Parent edited content/projects{,-es}/socra.md; T1 worker steered to fix site.json.
 - L4 (Teo, 2026-11-12): "I don't like this line in Hardware: Hoy: el brazo robótico MTDS, remove it or replace it" → removed in both languages (S5 updated; T1 worker steered).
+- L5 (Teo, 2026-11-12): screenshot of /cv.pdf 404 with the footer mid-screen: \"There is not pdf for the resume/cv yet and the footer goes to the middle of the page. You can check the .pdfs here C:\Users\teofu\OneDrive\Documentos\CV\cv_teo-furlan.pdf C:\Users\teofu\OneDrive\Documentos\CV\resume_teo-furlan.pdf\". Both PDFs print the phone in the header; no LaTeX on the machine.
+- L6 (Teo, 2026-11-12): PDFs: "I export phone-free PDFs (Recommended)". Teo removes the phone, adds GitHub, exports both; then the parent puts them at /resume.pdf and /es/cv.pdf and sets site.links.pdf.
