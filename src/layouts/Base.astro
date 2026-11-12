@@ -1,8 +1,20 @@
 ---
 /**
- * Bare structural layout. Visual design is decided in P2; keep this semantic
- * and unstyled until then.
+ * Site shell from artboard 08 (P2): theme tokens, drafting-grid background,
+ * top bar with contact, footer with credits. Pages fill <main>.
  */
+import '@fontsource/ibm-plex-sans/400.css';
+import '@fontsource/ibm-plex-sans/400-italic.css';
+import '@fontsource/ibm-plex-sans/600.css';
+import '@fontsource/ibm-plex-sans/700.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/600.css';
+import '@fontsource/ibm-plex-mono/700.css';
+import plexLatin400 from '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2?url';
+import '../styles/global.css';
+import { Image } from 'astro:assets';
+import badge from '../assets/badges/built-with-gentle-ai.png';
+import ContactList from '../components/ContactList.astro';
 import { nav, site } from '../data/site';
 
 interface Props {
@@ -13,6 +25,7 @@ interface Props {
 const { title, description = 'Teo Furlan: software with AI agents, and hardware.' } = Astro.props;
 const pageTitle = title === site.name ? title : `${title} · ${site.name}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const path = Astro.url.pathname;
 ---
 
 <!doctype html>
@@ -22,29 +35,57 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    <meta name="color-scheme" content="dark light" />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" type="application/rss+xml" title={`${site.name}: writing`} href="/rss.xml" />
+    <link rel="preload" href={plexLatin400} as="font" type="font/woff2" crossorigin />
+    <script is:inline>
+      /* Apply the stored theme before first paint (no flash). Without JS the OS setting rules. */
+      (function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}})();
+    </script>
   </head>
   <body>
-    <a href="#main">Skip to content</a>
-    <header>
-      <a href="/">{site.name}</a>
-      <nav aria-label="Main">
-        <ul>
-          {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
-        </ul>
-      </nav>
+    <div class="bgfx" aria-hidden="true"><div class="glow"></div><div class="chx"></div><div class="chy"></div><div class="xy"></div></div>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="top">
+      <div class="in">
+        <a class="brand" href="/">{site.name}</a>
+        <ContactList label="Contact" />
+        <button type="button" class="tgl" id="theme" aria-pressed="false" hidden><span class="sw" aria-hidden="true"></span>Dark theme</button>
+        <nav aria-label="Main" class="mainnav-wrap">
+          <ul class="mainnav">
+            {nav.map((item) => (
+              <li><a href={item.href} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      </div>
     </header>
-    <main id="main">
-      <slot />
-    </main>
-    <footer>
-      <ul>
-        <li><a href={site.links.github}>GitHub</a></li>
-        <li><a href={site.links.linkedin}>LinkedIn</a></li>
-        <li><a href={site.links.dev}>DEV</a></li>
-        <li><a href={site.links.cv}>CV (PDF)</a></li>
-      </ul>
-      <p><a href="/colophon/">Colophon</a></p>
+
+    <slot name="shell">
+      <main id="main" class="page">
+        <slot />
+      </main>
+    </slot>
+
+    <footer class="foot">
+      <div class="in">
+        <a class="badgechip" href="https://github.com/Gentleman-Programming/gentle-ai" aria-label="Built with Gentle-AI — gentle-ai repository">
+          <Image src={badge} alt="Built with Gentle-AI" width={160} densities={[1, 2]} />
+        </a>
+        <div>
+          <p>Built with the <a href="https://github.com/Gentleman-Programming/gentle-ai">gentle-ai</a> harness and <a href="https://www.aihero.dev">AI Hero</a> skills</p>
+          <p>Copy edited with an LLM. The raw build conversation is <a href="/build-session/">here</a>, in Spanish.</p>
+          <p><a href="/colophon/">Colophon</a> · <a href="/rss.xml">RSS</a></p>
+          <ContactList label="Contact (footer)" />
+        </div>
+      </div>
     </footer>
+
+    <script>
+      import '../scripts/ui';
+      import '../scripts/fx';
+    </script>
   </body>
 </html>

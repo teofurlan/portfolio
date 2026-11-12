@@ -1,0 +1,55 @@
+/** Interactive drafting grid + scroll-driven figures/rail progress (P2 rules). Reduced motion: static finished state. */
+const root = document.documentElement;
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+const bg = document.querySelector<HTMLElement>('.bgfx');
+
+if (bg && fine && !reduce) {
+  let mx = -999, my = -999, queued = false;
+  const xy = bg.querySelector('.xy');
+  const pad = (n: number) => String(Math.round(n)).padStart(4, '0');
+  const paint = () => {
+    queued = false;
+    bg.style.setProperty('--mx', `${mx}px`);
+    bg.style.setProperty('--my', `${my}px`);
+    if (xy) xy.textContent = `X ${pad(mx + scrollX)}  Y ${pad(my + scrollY)}`;
+  };
+  const queue = () => { if (!queued) { queued = true; requestAnimationFrame(paint); } };
+  addEventListener('pointermove', (e) => {
+    if (e.pointerType !== 'mouse') return;
+    mx = e.clientX; my = e.clientY;
+    root.classList.add('bg-on');
+    const t = (e.target as Element).closest?.('a,button,input,textarea,select,summary,[role=button],section,article,figure,table,header,footer,.sheet,.cover');
+    root.classList.toggle('bg-ch', !t);
+    queue();
+  }, { passive: true });
+  document.addEventListener('pointerleave', () => root.classList.remove('bg-on', 'bg-ch'));
+  addEventListener('blur', () => root.classList.remove('bg-on', 'bg-ch'));
+  addEventListener('keydown', () => root.classList.remove('bg-ch'));
+  addEventListener('scroll', () => { if (root.classList.contains('bg-on')) queue(); }, { passive: true });
+}
+
+if (!reduce) {
+  root.classList.add('js-fx');
+  const figs = [...document.querySelectorAll<HTMLElement>('figure.fig')];
+  figs.forEach((f) => f.style.setProperty('--n', String(f.querySelectorAll('svg .d').length)));
+  const rail = document.querySelector<HTMLElement>('.rail');
+  const clamp = (v: number) => (v < 0 ? 0 : v > 1 ? 1 : v);
+  let ticking = false;
+  const update = () => {
+    ticking = false;
+    const vh = innerHeight;
+    // A figure draws while it rises from 92% to 45% of the viewport height.
+    figs.forEach((f) => f.style.setProperty('--p', clamp((vh * 0.92 - f.getBoundingClientRect().top) / (vh * 0.47)).toFixed(3)));
+    if (rail) {
+      const max = root.scrollHeight - vh;
+      rail.style.setProperty('--prog', max > 0 ? clamp(scrollY / max).toFixed(3) : '1');
+    }
+  };
+  const req = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+  addEventListener('scroll', req, { passive: true });
+  addEventListener('resize', req);
+  update();
+}
+
+export {};

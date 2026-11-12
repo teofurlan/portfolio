@@ -1,0 +1,21 @@
+---
+/** Contact links (S7). Email is never in the HTML as a whole address: ui.ts builds the mailto. */
+import { site } from '../data/site';
+
+interface Props {
+  label: string;
+}
+const { label } = Astro.props;
+const { github, linkedin, dev, cv, email } = site.links;
+---
+
+<ul class="contact" aria-label={label}>
+  <li><a href={github}>GitHub</a></li>
+  <li><a href={linkedin}>LinkedIn</a></li>
+  <li><a href={dev}>DEV</a></li>
+  <li><a href={cv}>CV (PDF)</a></li>
+  <li>
+    <span class="em" data-email data-u={email.user} data-d={email.domain}>{email.user} [at] {email.domain}</span>
+    <button type="button" class="btn sm" data-copy hidden>Copy email</button>
+  </li>
+</ul>
