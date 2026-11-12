@@ -20,9 +20,11 @@ import { nav, site } from '../data/site';
 interface Props {
   title: string;
   description?: string;
+  /** Error pages: no canonical URL. */
+  noCanonical?: boolean;
 }
 
-const { title, description = 'Teo Furlan: software with AI agents, and hardware.' } = Astro.props;
+const { title, description = 'Teo Furlan: software with AI agents, and hardware.', noCanonical = false } = Astro.props;
 const pageTitle = title === site.name ? title : `${title} · ${site.name}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const path = Astro.url.pathname;
@@ -36,7 +38,7 @@ const path = Astro.url.pathname;
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <meta name="color-scheme" content="dark light" />
-    <link rel="canonical" href={canonical} />
+    {!noCanonical && <link rel="canonical" href={canonical} />}
     <link rel="alternate" type="application/rss+xml" title={`${site.name}: writing`} href="/rss.xml" />
     <link rel="preload" href={plexLatin400} as="font" type="font/woff2" crossorigin />
     <script is:inline>

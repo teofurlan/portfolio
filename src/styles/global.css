@@ -322,7 +322,8 @@ a:hover{text-decoration-thickness:2px}
 table.parts td,table.parts th,.now{font-variant-numeric:tabular-nums}
 @media (max-width:640px){
   header.top .in{gap:6px 14px;min-height:0}
-  html:has(button[data-copy]:not([hidden])) header.top .em{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  /* phones: header keeps only the Copy email button; display:none also removes the link from the tab order */
+  html:has(button[data-copy]:not([hidden])) header.top .em{display:none}
   .tgl{padding:4px 10px;font-size:13px}
   .hero h1{font-size:44px}
 }
@@ -347,3 +348,4 @@ table.parts td,table.parts th,.now{font-variant-numeric:tabular-nums}
 .prose{max-width:70ch}
 .prose h2{font-size:28px;margin:36px 0 10px}
 .prose ul,.prose ol{padding-left:1.2em}
+.contact .em + .btn{margin-left:8px}
