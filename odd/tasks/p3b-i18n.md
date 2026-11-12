@@ -19,7 +19,7 @@ Adds a Spanish version of the whole site before P4. Branch `p3-layout`
 |---|---|---|---|---|
 | T1 | i18n foundation: Astro i18n config, `src/i18n/` dictionaries + key-parity test, route map EN↔ES, Base with `lang`, hreflang, EN/ES switch; Resume/CV rename (`/resume/`, `/cv/` → `/resume/` redirect) | S1, S5, S6, S7 | worker | `5de6005` |
 | T2 | Spanish pages and content: `/es/` routes for every page reusing components with a `lang` prop; Spanish content files (case studies, about, hero, essay, timeline, resume) translated with DRAFT flags | S2, S3, S6, S7 | worker (after T1) | |
-| T3 | Auto redirect on `/`: pure `pickLanguage` function + tests, server-rendered `/` (or middleware) on Cloudflare Workers, cookie from the switch, `Vary` header | S4 | worker (after T1, parallel with T2) | |
+| T3 | Auto redirect on `/`: pure `pickLanguage` function + tests, server-rendered `/` (or middleware) on Cloudflare Workers, cookie from the switch, `Vary` header | S4 | worker (after T1, parallel with T2) | `6ff0b92` |
 | T4 | Verify both languages | S1–S7 | verify | |
 | T5 | PLAN.md + BRIEF §3 (BRIEF done in this doc's first commit) | — | inline | |
 
@@ -29,3 +29,4 @@ Adds a Spanish version of the whole site before P4. Branch `p3-layout`
 - L2 (Teo, 2026-11-12): Spanish copy "LLM translates, I review (Recommended)"; language pick "Automatic redirect"; URLs "English at /, Spanish at /es/ (Recommended)"; timing "Now, before P4 (Recommended)".
 - L3: Rename done first in `396b914` (`/how-i-build/`). Redirect scope chosen by the agent and told to Teo: home page only, cookie override; Teo may widen it.
 - L4: T1 worker also edited src/scripts/rail.ts (outside its surfaces) to read rail labels from data- attributes; accepted.
+- L5: T3 design: adapter emits an assets-only deploy config for static output, so an `astro:build:done` integration (astro.config.mjs) adds `main: src/worker/entry.ts` + ASSETS binding to dist/client/wrangler.json; `run_worker_first: ["/"]`. Deploy only after `pnpm build`. Local wrangler dev curl evidence: 200 EN, 302 for es header, cookie override both ways, deep links untouched. `// @ts-check` removed from astro.config.mjs (no @types/node).
