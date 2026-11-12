@@ -1,13 +1,5 @@
 ---
-import PostList from '../components/PostList.astro';
-import Base from '../layouts/Base.astro';
+import Writing from '../components/pages/Writing.astro';
 ---
 
-<Base title="Writing" description="Posts by Teo Furlan on DEV.">
-  <h1>Writing</h1>
-  <section class="sheet" aria-labelledby="h-posts">
-    <div class="sh"><h2 id="h-posts">On DEV</h2><span class="mono sub-ink">newest first</span></div>
-    <PostList newestFirst />
-    <p><a href="/rss.xml">RSS feed</a> · <a href="https://dev.to/teo_furlan">All posts on DEV</a></p>
-  </section>
-</Base>
+<Writing lang="en" />

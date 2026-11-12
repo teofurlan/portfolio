@@ -1,0 +1,23 @@
+---
+import AboutBlock from '../AboutBlock.astro';
+import Base from '../../layouts/Base.astro';
+import { alternate } from '../../i18n/routes';
+import { t, type Lang } from '../../i18n/ui';
+import { getContent } from '../../lib/i18n-content';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const tr = t(lang);
+const c = getContent(lang).about;
+const resumeHref = alternate('/resume/', lang);
+---
+
+<Base title={c.title} description={c.description} lang={lang}>
+  <h1>{c.title}</h1>
+  <section class="sheet" aria-label={c.sectionLabel}>
+    <AboutBlock lang={lang} draft />
+  </section>
+  <p><a href={resumeHref}>{tr('nav.resume')}</a> · <a href={`${resumeHref}#contact`}>{tr('resume.contact')}</a></p>
+</Base>

@@ -1,8 +1,16 @@
 ---
 /** FIG for socra, ported from artboard 08. Strokes .d are drawn by src/scripts/fx.ts; fully drawn without JS. */
+import { getContent } from '../../lib/i18n-content';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const f = getContent(lang).figures.socra;
 ---
 <figure class="fig">
-  <svg viewBox="0 0 280 170" role="img" aria-label="Signal-flow block diagram: mic to Whisper to agent to Piper voice to speaker.">
+  <svg viewBox="0 0 280 170" role="img" aria-label={f.aria}>
     <rect class="d" pathLength="1" style="--i:0" x="10" y="26" width="70" height="34"/>
     <path class="d b" pathLength="1" style="--i:1" d="M80 43H105M99 38l6 5-6 5"/>
     <rect class="d" pathLength="1" style="--i:2" x="105" y="26" width="70" height="34"/>
@@ -12,11 +20,11 @@
     <rect class="d" pathLength="1" style="--i:6" x="200" y="106" width="70" height="34"/>
     <path class="d b" pathLength="1" style="--i:7" d="M200 123H175M181 118l-6 5 6 5"/>
     <rect class="d" pathLength="1" style="--i:8" x="105" y="106" width="70" height="34"/>
-    <text class="fig-t" x="45" y="47" text-anchor="middle">mic</text>
-    <text class="fig-t" x="140" y="47" text-anchor="middle">Whisper</text>
-    <text class="fig-t" x="235" y="47" text-anchor="middle">agent</text>
-    <text class="fig-t" x="235" y="127" text-anchor="middle">Piper TTS</text>
-    <text class="fig-t" x="140" y="127" text-anchor="middle">speaker</text>
+    <text class="fig-t" x="45" y="47" text-anchor="middle">{f.mic}</text>
+    <text class="fig-t" x="140" y="47" text-anchor="middle">{f.whisper}</text>
+    <text class="fig-t" x="235" y="47" text-anchor="middle">{f.agent}</text>
+    <text class="fig-t" x="235" y="127" text-anchor="middle">{f.piper}</text>
+    <text class="fig-t" x="140" y="127" text-anchor="middle">{f.speaker}</text>
   </svg>
-  <figcaption>FIG. 1.1 · Signal flow. Schematic, not to scale.</figcaption>
+  <figcaption>{f.caption}</figcaption>
 </figure>

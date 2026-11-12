@@ -6,13 +6,16 @@
  */
 import { Image } from 'astro:assets';
 import photo2004 from '../../media/photos/2004_first-computer_01.jpg';
-import { resume } from '../lib/resume';
+import { getContent } from '../lib/i18n-content';
+import { getResume } from '../lib/resume';
 import { t, type Lang } from '../i18n/ui';
 
 interface Props {
   lang?: Lang;
+  /** Show the DRAFT flag. English: always (default). Spanish pages carry one flag near the top instead (S3). */
+  draft?: boolean;
 }
-const { lang = 'en' } = Astro.props;
+const { lang = 'en', draft = lang === 'en' } = Astro.props;
 const tr = t(lang);
 
 const photos: Record<string, { src: ImageMetadata; alt: string }> = {
@@ -21,14 +24,14 @@ const photos: Record<string, { src: ImageMetadata; alt: string }> = {
     alt: tr('about.photoAlt'),
   },
 };
-const timeline = resume.meta.timeline;
+const timeline = getResume(lang).meta.timeline;
+const paragraphs = getContent(lang).about.paragraphs;
 ---
 
 <div class="about">
   <div>
-    <span class="draft">{tr('draft')}</span>
-    <p>I'm a software developer at Universidad Adventista del Plata, where I started Information Systems Engineering in 2022. I build software with AI agents: Socra, a local voice layer for Claude Code, and a harness that tracks every task I give the agent. I'm based in Entre Ríos, Argentina, and open to remote work.</p>
-    <p>The hardware side started at a technical secondary school, in electromechanical equipment and installations. In 2024 I had my first real client, EmprendER, an entrepreneurship platform. In 2026, in a team of 3, I'm building a low-cost robot arm for laparoscopic surgery training.</p>
+    {draft && <span class="draft">{tr('draft')}</span>}
+    {paragraphs.map((p) => <p>{p}</p>)}
   </div>
   <ol class="tl" aria-label={tr('about.timeline')}>
     {timeline.map((m) => {

@@ -1,0 +1,137 @@
+---
+/** Home page, both languages. EN and ES routes are thin wrappers around this. */
+import { getCollection } from 'astro:content';
+import AboutBlock from '../AboutBlock.astro';
+import PostList from '../PostList.astro';
+import ProjectMeta from '../ProjectMeta.astro';
+import Rail from '../home/Rail.astro';
+import { figures, proofFor } from '../home/figures';
+import Base from '../../layouts/Base.astro';
+import { alternate } from '../../i18n/routes';
+import { t, type Lang } from '../../i18n/ui';
+import { fill, getContent } from '../../lib/i18n-content';
+import { hardwareProjects, showHardwareFilter } from '../../lib/hardware';
+import { featuredProjects } from '../../lib/projects';
+import { getProjects } from './data';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const tr = t(lang);
+const c = getContent(lang).home;
+
+const all = await getProjects(lang);
+const featured = featuredProjects(all);
+const showHw = showHardwareFilter(all);
+const hw = hardwareProjects(all);
+const posts = await getCollection('writing');
+const workNames = featured.map((p) => p.data.title).join(', ');
+const work = (slug: string) => alternate(`/work/${slug}/`, lang);
+const rows = [
+  { n: 1, href: '#work', ...c.parts.work, desc: fill(c.parts.work.desc, { names: workNames }) },
+  { n: 2, href: '#build', ...c.parts.build },
+  { n: 3, href: '#ai', ...c.parts.ai },
+  { n: 4, href: '#writing', ...c.parts.writing, desc: fill(c.parts.writing.desc, { count: posts.length }) },
+  { n: 5, href: '#about', ...c.parts.about },
+];
+const buildHref = alternate('/build-session/', lang);
+const aiHref = alternate('/how-i-build/', lang);
+const writingHref = alternate('/writing/', lang);
+---
+
+<Base title={c.title} description={c.description} lang={lang}>
+  <div class="shell" slot="shell">
+    <Rail lang={lang} />
+    <main id="main">
+      <section class="hero" id="top" aria-labelledby="h-name">
+        <h1 id="h-name">Teo Furlan</h1>
+        <span class="draft">{tr('draft')}</span>
+        <p class="heroline">{c.heroLine}</p>
+        <p class="where">{c.where}</p>
+        <div class="legs">
+          {c.legs.map((leg) => <div><b>{leg.title}</b><span class="sub">{leg.sub}</span></div>)}
+        </div>
+        <table class="parts">
+          <caption class="mono">{c.partsCaption}</caption>
+          <thead><tr><th scope="col">{c.partsHead[0]}</th><th scope="col">{c.partsHead[1]}</th><th scope="col">{c.partsHead[2]}</th></tr></thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr><td class="n"><span class="bal" aria-hidden="true">{r.n}</span><span class="sr">{r.n}</span></td><th scope="row"><a href={r.href}>{r.label}</a></th><td class="d">{r.desc}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </section>
+
+      <section id="work" aria-labelledby="h-work">
+        <div class="grp"><span class="bal lg fill" aria-hidden="true">1</span><h2 id="h-work">{c.workHeading}</h2><span class="mono">{fill(c.sheets, { n: featured.length })}</span></div>
+        {showHw && (
+          <nav class="hwf" aria-label={c.hardwareNav}>
+            <span class="mono">{c.hardwareLabel}</span>
+            <ul>{hw.map((p) => <li><a href={work(p.id)}>{p.data.title}</a></li>)}</ul>
+          </nav>
+        )}
+        {featured.map((p) => {
+          const Fig = figures[p.id];
+          const proof = proofFor(p.id, lang);
+          return (
+            <article class="sheet" aria-labelledby={`h-${p.id}`}>
+              <div class="sh"><h3 id={`h-${p.id}`}><a class="sheet-link" href={work(p.id)}>{p.data.title}</a></h3></div>
+              <div class="two">
+                <div>
+                  <p class="lead">{p.data.summary}</p>
+                  {proof && <div class="proof"><span class="mono">{tr('meta.proof')}</span>{proof}</div>}
+                  <ProjectMeta project={p} lang={lang} />
+                  <p><a href={work(p.id)}>{tr('link.readCase')}<span class="sr">: {p.data.title}</span></a></p>
+                </div>
+                {Fig && <Fig lang={lang} />}
+              </div>
+            </article>
+          );
+        })}
+      </section>
+
+      <section class="sheet" id="build" aria-labelledby="h-built">
+        <div class="sh"><span class="bal lg fill" aria-hidden="true">2</span><h2 id="h-built">{c.buildHeading}</h2></div>
+        <p class="lead">{c.buildLead}</p>
+        <div class="links"><a class="btn solid" href={buildHref}>{c.buildButton}</a></div>
+      </section>
+
+      <section class="sheet" id="ai" aria-labelledby="h-ai">
+        <div class="sh"><span class="bal lg fill" aria-hidden="true">3</span><h2 id="h-ai">{c.aiHeading}</h2></div>
+        <p class="lead">{c.aiLead}</p>
+        <ol class="parts-l" aria-label={getContent(lang).ai.partsLabel}>
+          {getContent(lang).ai.parts.map((part, i) => <li><span class="bal" aria-hidden="true">{'abcd'[i]}</span>{part}</li>)}
+        </ol>
+        <div class="links"><a class="btn" href={aiHref}>{c.aiButton}</a></div>
+      </section>
+
+      <section class="sheet" id="writing" aria-labelledby="h-writing">
+        <div class="sh"><span class="bal lg fill" aria-hidden="true">4</span><h2 id="h-writing">{c.writingHeading}</h2><span class="mono sub-ink">{c.writingSub}</span></div>
+        <PostList lang={lang} />
+        <p><a href={writingHref}>{c.writingAll}</a> · <a href="/rss.xml">{c.writingRss}</a></p>
+      </section>
+
+      <section class="sheet" id="about" aria-labelledby="h-about">
+        <div class="sh"><span class="bal lg fill" aria-hidden="true">5</span><h2 id="h-about">{c.aboutHeading}</h2></div>
+        <AboutBlock lang={lang} draft={lang === 'en'} />
+      </section>
+
+      <section class="piece" aria-labelledby="h-piece">
+        <svg viewBox="0 0 200 120" role="img" aria-label={c.pieceAria}>
+          <path d="M20 100H70M30 100l-8 8M45 100l-8 8M60 100l-8 8" />
+          <path d="M45 100L80 55L130 45L165 20" />
+          <circle cx="45" cy="100" r="4" /><circle cx="80" cy="55" r="4" /><circle cx="130" cy="45" r="4" /><circle cx="165" cy="20" r="4" />
+        </svg>
+        <div>
+          <h2 id="h-piece">{c.pieceHeading}</h2>
+          <p>{c.pieceText}<a href={alternate('/decoration/', lang)}>{c.pieceArchive}</a></p>
+        </div>
+      </section>
+    </main>
+  </div>
+</Base>
+
+<script>
+  import '../../scripts/rail';
+</script>

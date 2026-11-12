@@ -1,31 +1,5 @@
 ---
-import Base from '../layouts/Base.astro';
+import Colophon from '../components/pages/Colophon.astro';
 ---
 
-<Base title="Colophon" description="How teofurlan.com is built, and the tooling credits.">
-  <h1>Colophon</h1>
-  <div class="prose">
-    <h2>Stack</h2>
-    <ul>
-      <li>Astro 7, built to static pages and served from Cloudflare Workers static assets.</li>
-      <li>Type: IBM Plex Sans and IBM Plex Mono, self-hosted.</li>
-      <li>Images are resized and stripped of metadata at build time with Sharp.</li>
-      <li>Two themes, dark blueprint and light paper. They follow your system setting until you pick one.</li>
-      <li>Works without JavaScript. Scripts only add the theme toggle, the drafting-grid pointer, the scroll drawings and the email link.</li>
-    </ul>
-
-    <h2>Tooling</h2>
-    <p>
-      Built with the <a href="https://github.com/Gentleman-Programming/gentle-ai">gentle-ai</a> harness and
-      <a href="https://www.aihero.dev">AI Hero</a> skills. The whole build conversation with the coding agent is on
-      <a href="/build-session/">How this site was built</a>.
-    </p>
-    <p>Copy edited with an LLM. The raw build conversation is on that page, in Spanish.</p>
-
-    <h2>Daily decoration</h2>
-    <p>The small drawing on the home page is static for now. A daily generated piece, with the model and prompt shown next to it, comes later; its archive will live at <a href="/decoration/">/decoration/</a>.</p>
-
-    <h2>Feeds</h2>
-    <p><a href="/rss.xml">RSS feed for the writing section</a>.</p>
-  </div>
-</Base>
+<Colophon lang="en" />

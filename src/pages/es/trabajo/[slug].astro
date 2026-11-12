@@ -1,0 +1,13 @@
+---
+import Work from '../../../components/pages/Work.astro';
+import { getVisibleSlugs } from '../../../components/pages/data';
+
+/** One Spanish page per visible project; hidden projects get none (S2). */
+export async function getStaticPaths() {
+  return (await getVisibleSlugs('es')).map((slug) => ({ params: { slug }, props: { slug } }));
+}
+
+const { slug } = Astro.props;
+---
+
+<Work lang="es" slug={slug} />

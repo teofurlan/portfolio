@@ -1,43 +1,12 @@
 ---
-import { getCollection, render } from 'astro:content';
-import Gallery from '../../components/Gallery.astro';
-import ProjectMeta from '../../components/ProjectMeta.astro';
-import { figures, proofs } from '../../components/home/figures';
-import Base from '../../layouts/Base.astro';
-import { visibleProjects } from '../../lib/projects';
-import { t, type Lang } from '../../i18n/ui';
+import Work from '../../components/pages/Work.astro';
+import { getVisibleSlugs } from '../../components/pages/data';
 
 export async function getStaticPaths() {
-  return visibleProjects(await getCollection('projects')).map((project) => ({
-    params: { slug: project.id },
-    props: { project },
-  }));
+  return (await getVisibleSlugs('en')).map((slug) => ({ params: { slug }, props: { slug } }));
 }
 
-const { project } = Astro.props;
-const { Content } = await render(project);
-const Fig = figures[project.id];
-const lang: Lang = 'en';
-const tr = t(lang);
-const proof = proofs[project.id];
+const { slug } = Astro.props;
 ---
 
-<Base title={project.data.title} description={project.data.summary} lang={lang}>
-  <p class="mono"><a href="/#work">{tr('nav.work')}</a> / {project.data.title}</p>
-  <h1>{project.data.title}</h1>
-  <article class="sheet" aria-labelledby="h-case">
-    <h2 id="h-case" class="sr">{tr('work.overview')}</h2>
-    <div class="two">
-      <div>
-        <p class="lead">{project.data.summary}</p>
-        {proof && <div class="proof"><span class="mono">{tr('meta.proof')}</span>{proof}</div>}
-        <ProjectMeta project={project} full lang={lang} />
-      </div>
-      {Fig && <Fig />}
-    </div>
-    <Gallery media={project.data.media} lang={lang} />
-  </article>
-  <div class="prose">
-    <Content />
-  </div>
-</Base>
+<Work lang="en" slug={slug} />

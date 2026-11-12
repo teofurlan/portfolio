@@ -59,6 +59,7 @@ const en = {
   'about.photoAlt': 'A toddler kneeling on a wooden chair, both hands on a white computer keyboard on a desk.',
   'work.overview': 'Overview',
   'posts.devEnglish': 'English',
+  'posts.inEnglish': '(in English)',
 
   'rail.label': 'Page map',
   'rail.title': 'Exploded index',
@@ -145,6 +146,7 @@ const es: Record<UiKey, string> = {
   'about.photoAlt': 'Un niño pequeño arrodillado sobre una silla de madera, con ambas manos sobre un teclado blanco de computadora en un escritorio.',
   'work.overview': 'Resumen',
   'posts.devEnglish': 'Inglés',
+  'posts.inEnglish': '(en inglés)',
 
   'rail.label': 'Mapa de la página',
   'rail.title': 'Índice desplegado',
