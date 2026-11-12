@@ -10,14 +10,15 @@ interface Props {
 }
 const { label = 'contact.label', lang = 'en' } = Astro.props;
 const tr = t(lang);
-const { github, linkedin, dev, cv, email } = site.links;
+const { github, linkedin, dev, pdf, email } = site.links;
+const pdfHref = pdf[lang];
 ---
 
 <ul class="contact" aria-label={tr(label)}>
   <li><a href={github}>GitHub</a></li>
   <li><a href={linkedin}>LinkedIn</a></li>
   <li><a href={dev}>DEV</a></li>
-  <li><a href={cv}>{tr('contact.resumePdf')}</a></li>
+  {pdfHref && <li><a href={pdfHref}>{tr('contact.resumePdf')}</a></li>}
   <li>
     <span class="em" data-email data-u={email.user} data-d={email.domain}>{email.user} [at] {email.domain}</span>
     <button type="button" class="btn sm" data-copy hidden data-copied={tr('contact.copied')}>{tr('contact.copyEmail')}</button>

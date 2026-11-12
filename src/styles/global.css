@@ -53,7 +53,7 @@
 *{box-sizing:border-box}
 html{scroll-padding-top:16px}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55}
+body{margin:0;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55}
 a{color:var(--link);text-underline-offset:3px;text-decoration-thickness:1px}
 a:hover{text-decoration-thickness:2px}
 :focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:2px}
@@ -221,7 +221,7 @@ svg .fig-t.bl{fill:var(--accent);font-weight:700}
 .piece svg{display:block;width:200px;height:auto;border:1px solid var(--hair);background:var(--sheet)}
 .piece svg path,.piece svg circle{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linecap:round}
 .piece svg circle{fill:var(--sheet)}
-footer.foot{background:var(--bg2);border-top:2px solid var(--line)}
+footer.foot{margin-top:auto;background:var(--bg2);border-top:2px solid var(--line)}
 footer.foot .in{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px 32px;align-items:center;padding-top:28px;padding-bottom:40px}
 .badgechip{display:inline-block;background:#0c0d12;padding:12px;line-height:0;border:1px solid var(--line)}
 .badgechip img{width:160px;height:auto;display:block}
@@ -364,3 +364,5 @@ table.parts td,table.parts th,.now{font-variant-numeric:tabular-nums}
 .prose h2{font-size:28px;margin:36px 0 10px}
 .prose ul,.prose ol{padding-left:1.2em}
 .contact .em + .btn{margin-left:8px}
+/* body is a flex column (footer pinned to the bottom); keep the centred containers full width */
+body>main,body>.shell{width:100%}

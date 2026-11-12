@@ -26,7 +26,7 @@ const span = (start?: string, end?: string) => [start, end ?? (start ? tr('resum
 <Base title={tr('resume.title')} description={getContent(lang).resume.description} lang={lang}>
   <h1>{tr('resume.title')}</h1>
   <DraftFlag lang={lang} />
-  <div class="links"><a class="btn solid" href={site.links.cv}>{tr('resume.download')}</a></div>
+  {site.links.pdf[lang] && <div class="links"><a class="btn solid" href={site.links.pdf[lang]}>{tr('resume.download')}</a></div>}
 
   <section class="sheet" aria-labelledby="h-cv-work">
     <div class="sh"><h2 id="h-cv-work">{tr('resume.work')}</h2></div>

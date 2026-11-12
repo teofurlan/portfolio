@@ -8,7 +8,11 @@ export const site = {
     dev: 'https://dev.to/teo_furlan',
     // Email is rendered lightly obfuscated (P3); never hardcode a mailto: in markup.
     email: { user: 'teofurlan03', domain: 'gmail.com' },
-    cv: '/cv.pdf',
+    /**
+     * Public resume/CV PDFs per language. null = not published yet: every link to it is
+     * hidden. The files must never print the phone number (BRIEF); put them in public/.
+     */
+    pdf: { en: null as string | null, es: null as string | null },
   },
 } as const;
 
