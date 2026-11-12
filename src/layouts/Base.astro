@@ -12,8 +12,6 @@ import '@fontsource/ibm-plex-mono/600.css';
 import '@fontsource/ibm-plex-mono/700.css';
 import plexLatin400 from '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2?url';
 import '../styles/global.css';
-import { Image } from 'astro:assets';
-import badge from '../assets/badges/built-with-gentle-ai.png';
 import ContactList from '../components/ContactList.astro';
 import { nav, site } from '../data/site';
 import { alternate } from '../i18n/routes';
@@ -90,9 +88,6 @@ const links = nav.map((n) => ({ path: alternate(n.href, lang), href: alternate(n
 
     <footer class="foot">
       <div class="in">
-        <a class="badgechip" href="https://github.com/Gentleman-Programming/gentle-ai" aria-label={tr('footer.badgeLabel')}>
-          <Image src={badge} alt={tr('footer.badgeAlt')} width={160} densities={[1, 2]} />
-        </a>
         <div>
           <p>{slots(tr('footer.builtWith')).map((s) => 'text' in s ? s.text : s.slot === 'gentle' ? <a href="https://github.com/Gentleman-Programming/gentle-ai">gentle-ai</a> : <a href="https://www.aihero.dev">AI Hero</a>)}</p>
           <p>{slots(tr('footer.llm')).map((s) => 'text' in s ? s.text : <a href={alternate('/build-session/', lang)}>{tr('footer.llmLink')}</a>)}</p>

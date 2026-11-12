@@ -16,8 +16,8 @@ const team = d.team === 1 ? `${tr('meta.solo')}, ${d.year}` : `${tr('meta.teamOf
 
 <dl class="meta">
   {full && <><dt>{tr('meta.role')}</dt><dd>{d.role}</dd></>}
-  <dt>{tr('meta.tags')}</dt><dd>{d.tags.join(', ')}</dd>
-  <dt>{tr('meta.stack')}</dt><dd>{(full ? d.stack : d.stack.slice(0, 5)).join(', ')}</dd>
+  <dt>{tr('meta.tags')}</dt><dd><ul class="kw">{d.tags.map((x) => <li>{x}</li>)}</ul></dd>
+  <dt>{tr('meta.stack')}</dt><dd><ul class="kw">{(full ? d.stack : d.stack.slice(0, 5)).map((x) => <li>{x}</li>)}</ul></dd>
   <dt>{tr('meta.team')}</dt><dd>{team}</dd>
   {full && <><dt>{tr('meta.owned')}</dt><dd>{d.ownership}</dd></>}
   {!d.links.repo && <><dt>{tr('meta.repo')}</dt><dd class="private">{tr('meta.private')}</dd></>}
