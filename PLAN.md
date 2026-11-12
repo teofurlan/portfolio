@@ -4,9 +4,9 @@ Resume point for any agent. Read `BRIEF.md` first, then this file. Update it
 after every task (status + commit). Phases stop at their **Gate** until Teo
 decides. Per-phase ODD specs live in `odd/tasks/`.
 
-**Current state:** P1 gate passed. P2 done, waiting at the **P2 gate**: Teo
-picks one of the three directions in `design/portfolio-directions/`. Next: P3
-layout with the chosen direction. No deploy yet.
+**Current state:** P2 gate passed: Teo chose `design/portfolio-directions/08-exploded-index.html`
+(polished with impeccable). Next: P3, build the real Astro layout and sections from it
+(self-host a display font then; artboards use system fonts only). No deploy yet.
 
 ## Environment notes
 
@@ -76,7 +76,8 @@ layout with the chosen direction. No deploy yet.
 | Round 3 (Teo: too bright/washed out; combine 04 + 05; themes follow system + toggle): 07 cover-and-sheets, 08 exploded-index | done | `d7faec6` |
 | Teo kept only 07 and 08; removed 01–06 | done | `6c717b2` |
 | Scroll effects fixed (they ran but finished off-screen; now script-driven, measured with CDP) and interactive drafting grid added to 07 and 08 | done | `fe76a11` |
-| Teo picks a direction | blocked: Teo | |
+| Teo picks a direction: **08 Exploded index** | done (gate passed) | |
+| impeccable polish of 08 | done | see git log |
 
 ### P3 — Layout + all sections
 
