@@ -4,9 +4,10 @@ Resume point for any agent. Read `BRIEF.md` first, then this file. Update it
 after every task (status + commit). Phases stop at their **Gate** until Teo
 decides. Per-phase ODD specs live in `odd/tasks/`.
 
-**Current state:** P3 done on branch `p3-layout` (not merged, no deploy): the real site
-follows artboard 08 with IBM Plex self-hosted. Waiting on Teo: hero line, About paragraphs,
-How I work essay (all flagged DRAFT), certificates, project media. Next: P4 session replay.
+**Current state:** P3 and P3.5 (Spanish version) done on branch `p3-layout` (not merged,
+no deploy). The site is bilingual: English at `/`, Spanish at `/es/` (LLM translation, flagged
+BORRADOR until Teo approves). Waiting on Teo: Spanish review, hero line, About, essay (DRAFT),
+certificates, project media. Next: P4 session replay.
 
 ## Environment notes
 
@@ -36,6 +37,21 @@ How I work essay (all flagged DRAFT), certificates, project media. Next: P4 sess
   - Resume: `content/resume.json` validated by `src/lib/resume.ts` (JSON
     Resume subset; `basics` is strict so a `phone` key fails the build, tested).
 - Site links: `src/data/site.ts` (single source for hero + footer).
+- **i18n** (P3.5, `odd/tasks/p3b-i18n.md`): Astro i18n, English unprefixed, Spanish under
+  `/es/` with Spanish slugs (`src/i18n/routes.ts`). UI strings in `src/i18n/ui.ts`, page copy in
+  `content/i18n/{en,es}/site.json`, Spanish case studies in `content/projects-es/` (translated
+  fields only), Spanish resume overlay `content/resume.es.json` (re-validated, no phone). Shared
+  page markup in `src/components/pages/`. "Resume" at `/resume/` (EN; `/cv/` 301s there), "CV" at
+  `/es/cv/`.
+- **Language redirect:** all pages are prerendered; only `/` runs code (`assets.run_worker_first:
+  ["/"]`, `src/worker/entry.ts`, pure rule in `src/lib/lang.ts`, tested). A `lang` cookie (set by
+  the EN/ES switch) wins; otherwise Spanish wins only if Accept-Language prefers it → 302 to
+  `/es/`. Both responses send `Vary: Accept-Language, Cookie`. Deep links never redirect.
+  The adapter emits an assets-only config for static output, so the `workerEntry` integration in
+  `astro.config.mjs` adds `main` + the `ASSETS` binding to `dist/client/wrangler.json` after each
+  build. **Deploy only right after `pnpm build`** (and delete `dist/client/.wrangler/` if
+  `wrangler dev` ran). Unknown URLs serve the root `404.html` (`not_found_handling`), which has
+  an English and a Spanish line.
 - Pages: `/`, `/work/[slug]/`, `/build-session/`, `/how-i-work/`, `/writing/`,
   `/about/`, `/cv/`, `/colophon/`, `/decoration/`, `404`. All are unstyled
   stubs until P2/P3.
@@ -88,6 +104,16 @@ How I work essay (all flagged DRAFT), certificates, project media. Next: P4 sess
 | How I work with AI essay (DRAFT) + FIG 3.1; Writing + `/rss.xml`; About + timeline + 2004 photo; CV from `resume.json` + `#contact`; colophon | done | `1b34b63` |
 | Verify (all pages × 390/1280 px × themes × JS on/off/reduced motion) + a11y fixes | done | `147272b` |
 | Lighthouse | moved to P6 | |
+
+### P3.5 — Spanish version ✅ (spec `odd/tasks/p3b-i18n.md`)
+
+| Task | Status | Commit |
+|---|---|---|
+| Rename AI section to "How I build with AI" (`/how-i-build/`); BRIEF §3 made bilingual | done | `396b914`, `adcd290` |
+| i18n foundation, dictionaries, route map, EN/ES switch, Resume (EN) / CV (ES) | done | `5de6005` |
+| Automatic redirect on `/` with cookie override (Workers) | done | `6ff0b92` |
+| Spanish pages and translated content (BORRADOR) | done | `ef7d2b6` |
+| Verify both languages + fixes (404 page served, rail label) | done | `ee46e71` |
 
 ### P4 — Session replay · **Gate:** Teo reviews redacted transcript
 
