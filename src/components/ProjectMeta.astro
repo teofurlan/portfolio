@@ -1,0 +1,28 @@
+---
+/** Sheet metadata + links for a project (home sheet and case-study page). */
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  full?: boolean;
+}
+const { project, full = false } = Astro.props;
+const d = project.data;
+const team = d.team === 1 ? `Solo, ${d.year}` : `Team of ${d.team}, ${d.year}`;
+---
+
+<dl class="meta">
+  {full && <><dt>Role</dt><dd>{d.role}</dd></>}
+  <dt>Tags</dt><dd>{d.tags.join(', ')}</dd>
+  <dt>Stack</dt><dd>{(full ? d.stack : d.stack.slice(0, 5)).join(', ')}</dd>
+  <dt>Team</dt><dd>{team}</dd>
+  {full && <><dt>What I owned</dt><dd>{d.ownership}</dd></>}
+  {!d.links.repo && <><dt>Repo</dt><dd class="private">Private, no link.</dd></>}
+</dl>
+{(d.links.repo || d.links.post || d.links.demo) && (
+  <div class="links">
+    {d.links.repo && <a class="btn solid" href={d.links.repo}>GitHub repo</a>}
+    {d.links.demo && <a class="btn" href={d.links.demo}>Live demo</a>}
+    {d.links.post && <a class="btn" href={d.links.post}>DEV post</a>}
+  </div>
+)}

@@ -1,0 +1,31 @@
+---
+/**
+ * Project media gallery (BRIEF: photo, video, render, diagram, with captions).
+ * Images go through the image pipeline; videos load nothing until played.
+ * Renders nothing when a project has no media.
+ */
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  media: CollectionEntry<'projects'>['data']['media'];
+}
+const { media } = Astro.props;
+---
+
+{media.length > 0 && (
+  <ul class="gallery" aria-label="Media">
+    {media.map((m) => (
+      <li>
+        <figure>
+          {m.kind === 'video' ? (
+            <video controls preload="none" src={m.src} poster={m.poster?.src} aria-label={m.alt} />
+          ) : (
+            <Image src={m.src} alt={m.alt} widths={[400, 800]} sizes="(max-width: 640px) 100vw, 400px" />
+          )}
+          {m.caption && <figcaption>{m.caption}</figcaption>}
+        </figure>
+      </li>
+    ))}
+  </ul>
+)}

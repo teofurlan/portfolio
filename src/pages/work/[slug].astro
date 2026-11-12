@@ -1,5 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
+import Gallery from '../../components/Gallery.astro';
+import ProjectMeta from '../../components/ProjectMeta.astro';
+import { figures, proofs } from '../../components/home/figures';
 import Base from '../../layouts/Base.astro';
 import { visibleProjects } from '../../lib/projects';
 
@@ -12,18 +15,26 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await render(project);
+const Fig = figures[project.id];
+const proof = proofs[project.id];
 ---
 
 <Base title={project.data.title} description={project.data.summary}>
-  <article>
-    <h1>{project.data.title}</h1>
-    <p>{project.data.summary}</p>
-    <dl>
-      <dt>Role</dt><dd>{project.data.role}</dd>
-      <dt>Team</dt><dd>{project.data.team === 1 ? 'Solo' : `Team of ${project.data.team}`}</dd>
-      <dt>What I owned</dt><dd>{project.data.ownership}</dd>
-      <dt>Year</dt><dd>{project.data.year}</dd>
-    </dl>
-    <Content />
+  <p class="mono"><a href="/#work">Work</a> / {project.data.title}</p>
+  <h1>{project.data.title}</h1>
+  <article class="sheet" aria-labelledby="h-case">
+    <h2 id="h-case" class="sr">Overview</h2>
+    <div class="two">
+      <div>
+        <p class="lead">{project.data.summary}</p>
+        {proof && <div class="proof"><span class="mono">Proof</span>{proof}</div>}
+        <ProjectMeta project={project} full />
+      </div>
+      {Fig && <Fig />}
+    </div>
+    <Gallery media={project.data.media} />
   </article>
+  <div class="prose">
+    <Content />
+  </div>
 </Base>
