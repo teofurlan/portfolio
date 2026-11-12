@@ -6,7 +6,7 @@ decides. Per-phase ODD specs live in `odd/tasks/`.
 
 **Current state:** P3, P3.5 (Spanish version) and P3.6 (Teo's review round 1) on branch
 `p3-layout` (not merged, no deploy). Featured: Socra, MTDS, Pricor; bloobert listed. Waiting on
-Teo: phone-free Resume/CV PDFs (links hidden until then), Spanish review, DRAFT texts,
+Teo: Spanish review, DRAFT texts,
 certificates, media. P3.6 still needs a browser check (verifier was unavailable). Next: P4.
 
 ## Environment notes
@@ -123,7 +123,8 @@ certificates, media. P3.6 still needs a browser check (verifier was unavailable)
 | Pricor research (read-only, `odd/evidence/pricor.md`) | done | `2a9e422` |
 | Pricor featured case study EN+ES + FIG 1.3; bloobert `listed` under "More projects" | done | `0d78f5e` |
 | Footer pinned to the bottom; PDF links hidden until phone-free files exist (`site.links.pdf`) | done | `8100e09` |
-| Phone-free Resume (EN, `/resume.pdf`) and CV (ES, `/es/cv.pdf`) PDFs | blocked: Teo exports them | |
+| Phone-free Resume (EN, `/resume.pdf`) and CV (ES, `/es/cv.pdf`) PDFs | done | `0b350a1` |
+| Rail progress line follows sections; Pricor "What I'd change" moved to `odd/notes/` | done | `6166296` |
 | Browser verification of P3.6 | pending: verifier unavailable | |
 
 ### P4 — Session replay · **Gate:** Teo reviews redacted transcript

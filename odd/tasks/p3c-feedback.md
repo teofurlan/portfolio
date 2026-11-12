@@ -26,7 +26,7 @@ copy stays flagged BORRADOR, English drafts stay DRAFT.
 | T3 | Pricor case study EN+ES + FIG 1.3, featured order 3; bloobert `listed` + "More projects" list | S3, S7 | worker (after T1, T2) | `0d78f5e` |
 | T6 | Footer pinned to the bottom on short pages (body flex column) | S9 | inline | `8100e09` |
 | T7 | PDF link per language, hidden until a phone-free file exists (`site.links.pdf`) | S10 | inline | `8100e09` |
-| T8 | Phone-free Resume (EN) / CV (ES) PDFs in public/ | S10 | blocked: Teo exports them | |
+| T8 | Phone-free Resume (EN) / CV (ES) PDFs in public/ | S10 | inline | `0b350a1` |
 | T4 | Verify | S1–S7 | verify | |
 | T5 | PLAN.md | — | inline | |
 
@@ -40,3 +40,4 @@ copy stays flagged BORRADOR, English drafts stay DRAFT.
 - L6 (Teo, 2026-11-12): PDFs: "I export phone-free PDFs (Recommended)". Teo removes the phone, adds GitHub, exports both; then the parent puts them at /resume.pdf and /es/cv.pdf and sets site.links.pdf.
 - L7: T4 independent verifier failed to start ("child exit unconfirmed; capacity quarantined"): unavailable, not retried. Inline checks instead: test 68, check 0 errors, build green; dist has /projects/* and /es/proyectos/* (4 each), 12 old-path 301 lines in _redirects, no .pdf link, no "Claude Code"/"first real client"/"primer cliente", ES hero and hardware text exact; every number in pricor.md (EN/ES) matches odd/evidence/pricor.md; no distributor names, paths or emails. NOT verified: browser rendering (hero photo layout, FIG 1.3 at 390 px, footer at viewport bottom, overflow, contrast), redirects against wrangler dev.
 - L8 (Teo, 2026-11-12): "1. It looks good on the screen, I would fix how the scroll is working: [screenshot: rail line past plate 3 while '1 / 5 · Proyectos'] Check that the line is almost on the middle and it's not even in the second section 2. This are the .pdf files without my number: - - 3. I would like to change your recommendation in the pricor, leave them noted inside a .md file in the project". Fixed in `6166296`: rail line now maps to section positions (pure `src/lib/rail-progress.ts`, 5 tests RED→GREEN; line hidden in the mobile strip); Pricor "What I'd change" removed from both languages and kept in `odd/notes/pricor-what-id-change.md`. PDF paths arrived empty: asked Teo again. Not browser-verified (Teo checks on screen).
+- L9 (Teo, 2026-11-12): paths resent (resume_teo-furlan.pdf, cv_teo-furlan.pdf), re-exported 17:16/17:21. Checked: no phone in text, links or metadata (author/title empty); links only LinkedIn, mailto and github.com/teofurlan/robot-arm. Published as /resume.pdf and /es/cv.pdf in `0b350a1`.
