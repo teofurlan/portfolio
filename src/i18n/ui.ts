@@ -156,7 +156,7 @@ const es: Record<UiKey, string> = {
   'rail.writing': 'Escritos',
   'rail.about': 'Sobre mí · 2004',
   'rail.shortWork': 'Trabajo',
-  'rail.shortBuild': 'Build',
+  'rail.shortBuild': 'Construcción',
   'rail.shortAi': 'IA',
   'rail.shortWriting': 'Escritos',
   'rail.shortAbout': 'Sobre mí',

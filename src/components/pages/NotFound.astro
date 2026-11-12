@@ -15,4 +15,5 @@ const tr = t(lang);
   <h1>{tr('notfound.title')}</h1>
   <DraftFlag lang={lang} />
   <p>{slots(tr('notfound.body')).map((s) => ('text' in s ? s.text : <a href={alternate('/', lang)}>{tr('notfound.home')}</a>))}</p>
+  <slot />
 </Base>

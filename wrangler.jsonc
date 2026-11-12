@@ -5,7 +5,8 @@
   // Only "/" runs the Worker (language redirect, see src/worker/entry.ts); all else is static.
   // `main` is not set here: for static output the Astro adapter writes an assets-only deploy
   // config, so astro.config.mjs (workerEntry integration) adds it to dist/client/wrangler.json.
-  "assets": { "binding": "ASSETS", "run_worker_first": ["/"] },
+  // not_found_handling: serve the built 404.html (bilingual: Workers assets serve one root 404 page).
+  "assets": { "binding": "ASSETS", "run_worker_first": ["/"], "not_found_handling": "404-page" },
   "observability": { "enabled": true }
   // P5 adds: Cron Trigger, Workers AI binding and the decoration KV namespace.
 }
