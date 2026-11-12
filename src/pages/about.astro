@@ -1,8 +1,12 @@
 ---
+import AboutBlock from '../components/AboutBlock.astro';
 import Base from '../layouts/Base.astro';
 ---
 
-<Base title="About">
+<Base title="About" description="About Teo Furlan: from a computer in 2004 to agents and a robot arm in 2026.">
   <h1>About</h1>
-  <p>Two paragraphs and a short timeline. Arrives in P3.</p>
+  <section class="sheet" aria-label="About and timeline">
+    <AboutBlock />
+  </section>
+  <p><a href="/cv/">CV</a> · <a href="/cv/#contact">Contact</a></p>
 </Base>

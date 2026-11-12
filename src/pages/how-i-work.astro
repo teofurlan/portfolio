@@ -1,8 +1,66 @@
 ---
 import Base from '../layouts/Base.astro';
+
+const devUrl = 'https://dev.to/teo_furlan/how-i-built-a-learning-system-inside-my-ai-coding-workflow-using-obsidian-fbp';
 ---
 
-<Base title="How I work with AI">
+<Base title="How I work with AI" description="The harness around the agent: a workflow that tracks every task, a learning vault, project exams and memory.">
   <h1>How I work with AI</h1>
-  <p>The harness: ODD workflow, learning vault, project exams, memory. Arrives in P3.</p>
+  <section class="sheet" aria-labelledby="h-harness">
+    <div class="sh"><span class="bal lg fill" aria-hidden="true">3</span><h2 id="h-harness">The harness around the agent</h2></div>
+    <span class="draft">DRAFT — Teo rewrites</span>
+    <p class="lead">I do not just prompt an agent. I run it inside a harness: a workflow that tracks every task, a learning vault, project exams and memory.</p>
+
+    <figure class="fig">
+      <svg viewBox="0 0 320 190" role="img" aria-label="Diagram of the harness. A loop runs from request to feature doc to agent to checks to commit and back to request. The learning vault, exams and memory are side blocks attached to the agent.">
+        <rect class="d" pathLength="1" style="--i:0" x="8" y="6" width="94" height="34"/>
+        <rect class="d" pathLength="1" style="--i:1" x="113" y="6" width="94" height="34"/>
+        <rect class="d" pathLength="1" style="--i:2" x="218" y="6" width="94" height="34"/>
+        <path class="d b" pathLength="1" style="--i:3" d="M55 40V50H265V62M260 56l5 6 5-6"/>
+        <path class="d b" pathLength="1" style="--i:3" d="M160 40V50"/>
+        <rect class="d" pathLength="1" style="--i:4" x="8" y="62" width="94" height="34"/>
+        <path class="d b" pathLength="1" style="--i:5" d="M102 79H113M107 74l6 5-6 5"/>
+        <rect class="d" pathLength="1" style="--i:6" x="113" y="62" width="94" height="34"/>
+        <path class="d b" pathLength="1" style="--i:7" d="M207 79H218M213 74l5 5-5 5"/>
+        <rect class="d" pathLength="1" style="--i:8" x="218" y="62" width="94" height="34"/>
+        <path class="d b" pathLength="1" style="--i:9" d="M265 96V134M260 128l5 6 5-6"/>
+        <rect class="d" pathLength="1" style="--i:10" x="218" y="134" width="94" height="34"/>
+        <path class="d b" pathLength="1" style="--i:11" d="M218 151H207M213 146l-6 5 6 5"/>
+        <rect class="d" pathLength="1" style="--i:12" x="113" y="134" width="94" height="34"/>
+        <path class="d b" pathLength="1" style="--i:13" d="M113 151H55V96M50 102l5-6 5 6"/>
+        <text class="fig-t s" x="55" y="27" text-anchor="middle">vault</text>
+        <text class="fig-t s" x="160" y="27" text-anchor="middle">exams</text>
+        <text class="fig-t s" x="265" y="27" text-anchor="middle">memory</text>
+        <text class="fig-t" x="55" y="83" text-anchor="middle">request</text>
+        <text class="fig-t" x="160" y="83" text-anchor="middle">feature doc</text>
+        <text class="fig-t bl" x="265" y="83" text-anchor="middle">agent</text>
+        <text class="fig-t" x="265" y="155" text-anchor="middle">checks</text>
+        <text class="fig-t" x="160" y="155" text-anchor="middle">commit</text>
+      </svg>
+      <figcaption>FIG. 3.1 · The harness around the agent. Schematic.</figcaption>
+    </figure>
+
+    <ol class="parts-l" aria-label="Parts of the harness">
+      <li><span class="bal" aria-hidden="true">a</span>A workflow that tracks every task</li>
+      <li><span class="bal" aria-hidden="true">b</span>A learning vault</li>
+      <li><span class="bal" aria-hidden="true">c</span>Project exams</li>
+      <li><span class="bal" aria-hidden="true">d</span>Memory</li>
+    </ol>
+
+    <div class="prose">
+      <h3><span class="bal" aria-hidden="true">a</span> A workflow that tracks every task</h3>
+      <p>I call it Organic Driven Development (ODD). Every request is authorized, explored and sized before any code changes. Larger work gets a feature document in the repo, <code>odd/tasks/&lt;feature&gt;.md</code>, with numbered specs that quote my request verbatim, a task table and a log. The agent then works task by task, test-first where it applies, commits reviewable work units, and reports what was verified and what was not. Push, pull requests and publishing stay my decision. The <a href="/build-session/">build session</a> for this site shows it in practice.</p>
+
+      <h3><span class="bal" aria-hidden="true">b</span> A learning vault</h3>
+      <p>An Obsidian vault holds learning notes, kept per project. Each project runs in one of three modes: learn, log or off. Conceptual questions become concept notes. The vault never copies repo docs, so it stays a record of what I learned, not a second copy of the code.</p>
+
+      <h3><span class="bal" aria-hidden="true">c</span> Project exams</h3>
+      <p>At milestones the agent writes an open-answer exam about the project and grades my answers. The point is simple: I should be able to explain the code the agent helped write.</p>
+
+      <h3><span class="bal" aria-hidden="true">d</span> Memory</h3>
+      <p>Engram, a persistent memory, saves decisions, bug fixes and discoveries across sessions. After a break or a context compaction, the work can resume where it stopped.</p>
+
+      <p>I wrote about the learning part in more detail: <a href={devUrl} rel="noopener">How I Built a Learning System Inside My AI Coding Workflow (Using Obsidian)</a> on DEV.</p>
+    </div>
+  </section>
 </Base>

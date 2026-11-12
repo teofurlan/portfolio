@@ -1,8 +1,78 @@
 ---
+/**
+ * CV rendered from content/resume.json (validated by src/lib/resume.ts, which
+ * refuses a phone number). The email is never printed here: contact goes
+ * through ContactList, which assembles it at runtime.
+ */
+import ContactList from '../components/ContactList.astro';
 import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+import { resume } from '../lib/resume';
+
+const { work, projects, education, certificates, skills, languages } = resume;
+const span = (start?: string, end?: string) => [start, end ?? (start ? 'present' : undefined)].filter(Boolean).join(' – ');
 ---
 
-<Base title="CV">
+<Base title="CV" description="Teo Furlan's CV: work, projects, education and skills.">
   <h1>CV</h1>
-  <p>Rendered from content/resume.json, with a downloadable PDF. Arrives in P3 and P6.</p>
+  <div class="links"><a class="btn solid" href={site.links.cv}>Download PDF</a></div>
+
+  <section class="sheet" aria-labelledby="h-cv-work">
+    <div class="sh"><h2 id="h-cv-work">Work</h2></div>
+    {work.map((w) => (
+      <article class="cv-item">
+        <h3>{w.position} · {w.name}</h3>
+        <p class="mono sub-ink">{span(w.startDate, w.endDate)}{w.summary ? ` · ${w.summary}` : ''}</p>
+        {w.highlights.length > 0 && <ul>{w.highlights.map((h) => <li>{h}</li>)}</ul>}
+      </article>
+    ))}
+  </section>
+
+  <section class="sheet" aria-labelledby="h-cv-projects">
+    <div class="sh"><h2 id="h-cv-projects">Projects</h2></div>
+    {projects.map((p) => (
+      <article class="cv-item">
+        <h3>{p.name}</h3>
+        <p class="mono sub-ink">{span(p.startDate, p.endDate)}{p.keywords.length ? ` · ${p.keywords.join(', ')}` : ''}</p>
+        {p.description && <p>{p.description}</p>}
+        {p.roles.length > 0 && <p>{p.roles.join('; ')}</p>}
+        {p.highlights.length > 0 && <ul>{p.highlights.map((h) => <li>{h}</li>)}</ul>}
+      </article>
+    ))}
+  </section>
+
+  <section class="sheet" aria-labelledby="h-cv-edu">
+    <div class="sh"><h2 id="h-cv-edu">Education</h2></div>
+    {education.map((e) => (
+      <article class="cv-item">
+        <h3>{[e.studyType, e.area].filter(Boolean).join(', ')} · {e.institution}</h3>
+        <p class="mono sub-ink">{span(e.startDate, e.endDate)}</p>
+      </article>
+    ))}
+  </section>
+
+  {certificates.length > 0 && (
+    <section class="sheet" aria-labelledby="h-cv-cert">
+      <div class="sh"><h2 id="h-cv-cert">Certificates</h2></div>
+      <ul>
+        {certificates.map((c) => (
+          <li>{c.url ? <a href={c.url}>{c.name}</a> : c.name} · {c.issuer}{c.date ? ` · ${c.date}` : ''}</li>
+        ))}
+      </ul>
+    </section>
+  )}
+
+  <section class="sheet" aria-labelledby="h-cv-skills">
+    <div class="sh"><h2 id="h-cv-skills">Skills and languages</h2></div>
+    <dl class="meta">
+      {skills.map((s) => <><dt>{s.name}</dt><dd>{s.keywords.join(', ')}</dd></>)}
+      <dt>Languages</dt><dd>{languages.map((l) => (l.fluency ? `${l.language} (${l.fluency})` : l.language)).join(', ')}</dd>
+    </dl>
+  </section>
+
+  <section class="sheet" id="contact" aria-labelledby="h-contact">
+    <div class="sh"><h2 id="h-contact">Contact</h2></div>
+    <p>Entre Ríos, Argentina (UTC−3) · open to remote.</p>
+    <ContactList label="Contact (CV)" />
+  </section>
 </Base>
