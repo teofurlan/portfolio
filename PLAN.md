@@ -4,9 +4,9 @@ Resume point for any agent. Read `BRIEF.md` first, then this file. Update it
 after every task (status + commit). Phases stop at their **Gate** until Teo
 decides. Per-phase ODD specs live in `odd/tasks/`.
 
-**Current state:** P2 gate passed: Teo chose `design/portfolio-directions/08-exploded-index.html`
-(polished with impeccable). Next: P3, build the real Astro layout and sections from it
-(self-host a display font then; artboards use system fonts only). No deploy yet.
+**Current state:** P3 done on branch `p3-layout` (not merged, no deploy): the real site
+follows artboard 08 with IBM Plex self-hosted. Waiting on Teo: hero line, About paragraphs,
+How I work essay (all flagged DRAFT), certificates, project media. Next: P4 session replay.
 
 ## Environment notes
 
@@ -79,13 +79,15 @@ decides. Per-phase ODD specs live in `odd/tasks/`.
 | Teo picks a direction: **08 Exploded index** | done (gate passed) | |
 | impeccable polish of 08 | done | see git log |
 
-### P3 — Layout + all sections
+### P3 — Layout + all sections ✅ (branch `p3-layout`, spec `odd/tasks/p3-layout.md`)
 
 | Task | Status | Commit |
 |---|---|---|
-| Hero (Teo's line), featured cards, case-study pages, media gallery, Hardware filter (≥ 2 hardware projects) | todo | |
-| How I work with AI essay + diagram; Writing + RSS; About + timeline; CV page; Contact | todo | |
-| Footer/colophon: obfuscated email, self-hosted gentle-ai badge, AI Hero text credit, LLM copy-edit note | todo | |
+| Shell from artboard 08: tokens, themes, drafting grid, header/footer, IBM Plex Sans/Mono self-hosted, `@astrojs/rss` | done | `203d69f` |
+| Hero (DRAFT line until Teo rewrites), featured sheets with FIG 1.1–1.3, case-study pages, media gallery, Hardware filter rule (hidden until ≥ 2 hardware projects; tested) | done | `c88e4d3` |
+| How I work with AI essay (DRAFT) + FIG 3.1; Writing + `/rss.xml`; About + timeline + 2004 photo; CV from `resume.json` + `#contact`; colophon | done | `1b34b63` |
+| Verify (all pages × 390/1280 px × themes × JS on/off/reduced motion) + a11y fixes | done | `147272b` |
+| Lighthouse | moved to P6 | |
 
 ### P4 — Session replay · **Gate:** Teo reviews redacted transcript
 

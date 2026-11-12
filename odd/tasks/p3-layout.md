@@ -26,14 +26,16 @@ No deploy. Branch `p3-layout`.
 
 | ID | Task | Specs | Route | Commit |
 |---|---|---|---|---|
-| T1 | Foundation: Plex fonts self-hosted, global tokens/CSS from 08, Base layout (head theme script, top bar, rail-capable shell, footer, drafting-grid fx, theme toggle, email obfuscation), `@astrojs/rss` added | S3–S7, S13, S14 | inline (single dependency unit) | |
-| T2 | Home + work: hero (draft line), two legs, parts list, featured sheets with figures, build/ai/writing/about teasers, rail; `/work/[slug]/` case-study page with media gallery component; hardware-filter function + test | S1, S4, S8, S9, S15 | worker (after T1) | |
-| T3 | Sections: `/how-i-work/` essay + diagram, `/writing/` + `/rss.xml`, `/about/` + timeline + photo, `/cv/` from resume.json, contact, `/colophon/` | S2, S6, S10–S13, S15 | worker (after T1, parallel with T2) | |
-| T4 | Verify: build, tests, no-JS, reduced motion, contrast, keyboard, hidden projects absent, phone absent | S1–S15 | verify | |
-| T5 | PLAN.md P3 rows updated | — | inline | |
+| T1 | Foundation: Plex fonts self-hosted, global tokens/CSS from 08, Base layout (head theme script, top bar, rail-capable shell, footer, drafting-grid fx, theme toggle, email obfuscation), `@astrojs/rss` added | S3–S7, S13, S14 | inline (single dependency unit) | `203d69f` |
+| T2 | Home + work: hero (draft line), two legs, parts list, featured sheets with figures, build/ai/writing/about teasers, rail; `/work/[slug]/` case-study page with media gallery component; hardware-filter function + test | S1, S4, S8, S9, S15 | inline (writer launch refused) | `c88e4d3` |
+| T3 | Sections: `/how-i-work/` essay + diagram, `/writing/` + `/rss.xml`, `/about/` + timeline + photo, `/cv/` from resume.json, contact, `/colophon/` | S2, S6, S10–S13, S15 | inline + worker (how-i-work) | `1b34b63` |
+| T4 | Verify: build, tests, no-JS, reduced motion, contrast, keyboard, hidden projects absent, phone absent | S1–S15 | verify | fixes `147272b` |
+| T5 | PLAN.md P3 rows updated | — | inline | this commit |
 
 ## Log
 
 - L1 (Teo, 2026-11-12): "I want to continue with P3"
 - L2 (Teo, 2026-11-12): display font "IBM Plex Sans + Plex Mono (Recommended)"; RSS "@astrojs/rss package (Recommended)".
 - L3: Exploration (subagent) confirmed: only `mtds` is tagged hardware; certificates `[]`; all project `media: []`; neither `@astrojs/rss` nor font packages installed; 8 vitest tests pass via `pnpm test`.
+- L4: Writer launches for T2/T3 were refused by the runtime (absolute Spec path); T1–T3 done inline, how-i-work by one worker after the context backstop.
+- L5 (T4 verify): S1–S13, S15 pass; S14 partial (Lighthouse not installed). Fixed in `147272b`: header email clipped but focusable on phones, email/button spacing, 404 canonical, "Bloobert" casing. Left as is: without JS, Chrome draws the figures with CSS scroll-driven animation (artboard behaviour; Firefox/Safari show them fully drawn); footer says "is here, in Spanish" with a link instead of "below" (the footer has nothing below it); EmprendER appears as CV text (it is in resume.json).
