@@ -3,11 +3,13 @@ import type { Lang } from '../../i18n/ui';
 import { getContent } from '../../lib/i18n-content';
 import FigBloobert from './Fig-bloobert.astro';
 import FigMtds from './Fig-mtds.astro';
+import FigPricor from './Fig-pricor.astro';
 import FigSocra from './Fig-socra.astro';
 
 export const figures: Record<string, typeof FigSocra> = {
   socra: FigSocra,
   mtds: FigMtds,
+  pricor: FigPricor,
   bloobert: FigBloobert,
 };
 

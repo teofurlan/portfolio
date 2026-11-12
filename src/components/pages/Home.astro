@@ -13,7 +13,7 @@ import { alternate } from '../../i18n/routes';
 import { t, type Lang } from '../../i18n/ui';
 import { fill, getContent } from '../../lib/i18n-content';
 import { hardwareProjects, showHardwareFilter } from '../../lib/hardware';
-import { featuredProjects } from '../../lib/projects';
+import { featuredProjects, listedProjects } from '../../lib/projects';
 import { getResume } from '../../lib/resume';
 import { getProjects } from './data';
 
@@ -26,6 +26,7 @@ const c = getContent(lang).home;
 
 const all = await getProjects(lang);
 const featured = featuredProjects(all);
+const listed = listedProjects(all);
 const showHw = showHardwareFilter(all);
 const hw = hardwareProjects(all);
 const posts = await getCollection('writing');
@@ -99,6 +100,14 @@ const writingHref = alternate('/writing/', lang);
             </article>
           );
         })}
+        {listed.length > 0 && (
+          <div class="more" aria-labelledby="h-more">
+            <h3 id="h-more" class="mono">{c.moreHeading}</h3>
+            <ul>
+              {listed.map((p) => <li><a href={work(p.id)}>{p.data.title}</a><span>{p.data.summary}</span></li>)}
+            </ul>
+          </div>
+        )}
       </section>
 
       <section class="sheet" id="build" aria-labelledby="h-built">

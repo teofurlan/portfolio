@@ -179,6 +179,12 @@ dl.meta dd{margin:0}
 .private{color:var(--ink2)}
 
 /* schematic (plain drawing, no extra box) */
+.more{margin:8px 0 0;padding-top:14px;border-top:1px solid var(--hair)}
+.more h3{margin:0 0 8px}
+.more ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.more li{display:flex;flex-wrap:wrap;gap:2px 14px;align-items:baseline}
+.more li a{font-weight:700}
+.more li span{color:var(--ink2);font-size:15px;max-width:62ch}
 figure.fig{margin:0}
 figure.fig svg{display:block;width:100%;max-width:340px;height:auto;overflow:visible}
 figure.fig figcaption{font-family:var(--mono);font-size:11px;letter-spacing:.04em;line-height:1.45;color:var(--ink2);border-top:1px solid var(--hair);margin-top:10px;padding-top:7px;max-width:340px}

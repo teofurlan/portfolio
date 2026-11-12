@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { featuredProjects, visibleProjects } from './projects';
+import { featuredProjects, listedProjects, visibleProjects } from './projects';
 
 type Entry = { id: string; data: { status: 'featured' | 'listed' | 'hidden'; order: number } };
 
@@ -22,6 +22,11 @@ describe('project visibility is decided by status alone', () => {
 
   it('features only featured projects, ordered by order', () => {
     expect(featuredProjects(entries).map((e) => e.id)).toEqual(['mtds', 'socra']);
+  });
+
+  it('lists only listed projects, ordered by order', () => {
+    expect(listedProjects(entries).map((e) => e.id)).toEqual(['emprender']);
+    expect(listedProjects([entry('a', 'featured', 1)])).toEqual([]);
   });
 
   it('publishes a hidden project when only its status changes', () => {

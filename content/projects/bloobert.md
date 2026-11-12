@@ -1,8 +1,8 @@
 ---
 title: Bloobert
 summary: A translucent jelly desktop pet that melts while you sit and regains its shape when you take an active break.
-status: featured
-order: 3
+status: listed
+order: 10
 role: Designer and developer
 team: 1
 ownership: >-
@@ -19,7 +19,7 @@ year: 2026
 <!-- Sources: odd/evidence/bloobert.md (explorer report of the bloobert repo: README.md,
 docs/mvp.md, app/src-tauri/src/{idle,presence}.rs, app/src/{bloobert,main}.ts,
 odd/tasks/m0-spike.md, m1-local-save.md, m1-break-restore.md, m2-routines.md).
-Order 3 is a draft choice (MTDS first, then Socra).
+Status listed (2026-11-12): Pricor is featured instead. Order 10.
 Solo confirmed by Teo (2026-11-11). Repo is private: no repo link.
 Media candidates, not copied yet: design/main-window/.screenshots/{dark,light}-1200-{sitting,break}.png.
 The short videos in design/ are marketing reels with AI-generated footage: do not use unless Teo checks. -->
