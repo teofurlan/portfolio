@@ -21,7 +21,7 @@ copy stays flagged BORRADOR, English drafts stay DRAFT.
 |---|---|---|---|---|
 | T1 | Copy and naming: hero line + photo in hero, Projects rename + URL moves with redirects, MTDS title, EmprendER wording, hardware leg, consistent buttons | S1, S2, S4, S5, S6, S7, S8 (site.json) | worker | `f73dc13` |
 | T2 | Pricor research (read-only) → `odd/evidence/pricor.md` | S3 | explore (parallel with T1) | |
-| T3 | Pricor case study EN+ES + FIG 1.3, featured order 3; bloobert `listed` + "More projects" list | S3, S7 | worker (after T1, T2) | |
+| T3 | Pricor case study EN+ES + FIG 1.3, featured order 3; bloobert `listed` + "More projects" list | S3, S7 | worker (after T1, T2) | `0d78f5e` |
 | T4 | Verify | S1–S7 | verify | |
 | T5 | PLAN.md | — | inline | |
 
