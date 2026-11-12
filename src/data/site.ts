@@ -12,7 +12,7 @@ export const site = {
      * Public resume/CV PDFs per language. null = not published yet: every link to it is
      * hidden. The files must never print the phone number (BRIEF); put them in public/.
      */
-    pdf: { en: null as string | null, es: null as string | null },
+    pdf: { en: '/resume.pdf' as string | null, es: '/es/cv.pdf' as string | null },
   },
 } as const;
 
