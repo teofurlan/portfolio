@@ -80,7 +80,7 @@ as hosting). Until connected, use the `*.workers.dev` URL.
    section. Do not add other networks unless Teo is active there.
 2. **Featured work**: case-study cards → detail pages (section 6).
 3. **How this site was built**: the agent-session replay (5.3).
-4. **How I work with AI**: his harness (ODD workflow, learning vault, project
+4. **How I build with AI**: his harness (ODD workflow, learning vault, project
    exams, memory) as a short essay + diagram, linking the DEV post.
 5. **Writing**: DEV articles (list in section 6).
 6. **About**: two paragraphs + a short timeline of 4–6 milestones (from
@@ -186,7 +186,7 @@ Everything else starts `hidden` and Teo may promote it later by changing
 | socra / socra-voice-lab | `../ideaslab/socra`, `../ideaslab/socra-voice-lab` | **featured** | AI/agents leg. Voice AI, benchmarks, blind A/B tests, demo video in `../share/drafts/2026-11-socra/` |
 | MTDS robot arm (+ `robot-arm` firmware) | `../mtds-brazo-robot` | **featured** | Hardware leg. IK engine checked against CAD, software RCM controller, demo video, surgery congress. Team of 3: state Teo's ownership. Media slots ready for real photos later |
 | bloobert | `../ideaslab/bloobert` | **featured** | Solo. Tauri 2 + Rust desktop app, procedural sound; bridges software craft and playful product |
-| Agent harness (ODD, learning vault) | `../odd`, DEV post | section "How I work with AI" | Pairs with the replay; not a project card |
+| Agent harness (ODD, learning vault) | `../odd`, DEV post | section "How I build with AI" | Pairs with the replay; not a project card |
 | Dogear | `../ideaslab/dogear` | hidden (appears via its DEV post) | Not published as a project until Teo improves it; a paid domain is not a reason to feature it |
 | Pricor | `../ideaslab/pricor` | hidden (appears via its DEV post) | Strong AI case. Teo will polish it first, then promote it to featured |
 | Alethea | `../Alethea` | hidden | Production team system (Elixir/OTP). Candidate to promote; if shown, state exactly what Teo owned |
