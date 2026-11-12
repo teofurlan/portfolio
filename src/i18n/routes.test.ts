@@ -17,8 +17,8 @@ describe('alternate', () => {
   });
 
   it('maps project pages by slug', () => {
-    expect(alternate('/work/socra/', 'es')).toBe('/es/trabajo/socra/');
-    expect(alternate('/es/trabajo/mtds/', 'en')).toBe('/work/mtds/');
+    expect(alternate('/projects/socra/', 'es')).toBe('/es/proyectos/socra/');
+    expect(alternate('/es/proyectos/mtds/', 'en')).toBe('/projects/mtds/');
   });
 
   it('returns the same path when already in the target language', () => {
@@ -29,7 +29,7 @@ describe('alternate', () => {
   it('falls back to the language home for unknown paths', () => {
     expect(alternate('/nope/', 'es')).toBe('/es/');
     expect(alternate('/es/nope/', 'en')).toBe('/');
-    expect(alternate('/work/', 'es')).toBe('/es/');
+    expect(alternate('/projects/', 'es')).toBe('/es/');
   });
 
   it('tolerates missing trailing slash and hash/query', () => {

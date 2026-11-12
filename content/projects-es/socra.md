@@ -1,20 +1,20 @@
 ---
 title: Socra
-summary: Una capa de voz local para Claude Code. El modelo habla y tú respondes en voz alta.
+summary: Una capa de voz local para cualquier agente o arnés de programación. El modelo habla y tú respondes en voz alta.
 role: Diseño y desarrollo
 ownership: >-
   Todo: el servidor en Python (voz a texto, texto a voz, MCP sobre stdio,
-  WebSocket), los backends de Claude Code y Pi, y la página en React que muestra
+  WebSocket), los backends de agentes, y la página en React que muestra
   solo código, solicitudes de permiso o la respuesta.
 ---
 
 ## Problema
 
-Quien trabaja con Claude Code todo el día a veces quiere que lo examinen en voz alta sobre un proyecto que construyó, o dirigir una sesión de programación por voz. Socra es una capa de voz local y privada para eso: el modelo habla, tú respondes en voz alta, y la página muestra solo código, solicitudes de permiso o la respuesta.
+Quien trabaja con un agente de programación todo el día a veces quiere que lo examinen en voz alta sobre un proyecto que construyó, o dirigir una sesión de programación por voz. Socra es una capa de voz local y privada para eso: el modelo habla, tú respondes en voz alta, y la página muestra solo código, solicitudes de permiso o la respuesta.
 
 ## Restricciones
 
-- Privado: el servidor escucha solo en 127.0.0.1, y nada sale de la máquina salvo lo que envía el propio Claude Code.
+- Privado: el servidor escucha solo en 127.0.0.1, y nada sale de la máquina salvo lo que envía el propio agente.
 - Primero Windows. Python 3.12+, Node 22+, un micrófono y Edge o Chrome. Una GPU NVIDIA es opcional; funciona con CPU.
 - Un presupuesto de transcripción de 3,0 s o menos.
 - El modelo de voz de Piper pesa unos 79 MB.

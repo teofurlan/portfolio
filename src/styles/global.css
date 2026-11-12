@@ -133,6 +133,11 @@ header.top .in{display:flex;align-items:center;flex-wrap:wrap;gap:8px 28px;min-h
 .hero h1{font-size:68px;font-weight:700;letter-spacing:-.03em;margin:8px 0 18px}
 .draft{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border:1px dashed var(--accent);background:var(--sheet);padding:3px 9px;margin:0 0 10px}
 .heroline{font-size:34px;line-height:1.22;font-weight:600;letter-spacing:-.015em;margin:0 0 14px;max-width:26ch}
+.herotop{display:flex;align-items:flex-start;justify-content:space-between;gap:28px;margin:0 0 14px}
+.herotop .heroline{margin:0}
+.herophoto{margin:0;flex:0 0 auto}
+.herophoto img{width:240px}
+.links .rss{font-size:14px;margin-left:6px;align-self:center}
 .where{margin:0 0 24px;color:var(--ink2);font-size:15px}
 .legs{display:grid;grid-template-columns:1fr 1fr;border-top:2px solid var(--line);border-bottom:1px solid var(--line);margin:0 0 28px;background:var(--bg)}
 .legs>div{padding:14px 18px 14px 0}
@@ -262,6 +267,8 @@ footer.foot .in{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px 3
   .contact{margin-left:0;width:100%;gap:2px 16px}
   .hero h1{font-size:42px}
   .heroline{font-size:23px}
+  .herotop{flex-direction:column;gap:16px}
+  .herophoto img{width:200px}
   .legs{grid-template-columns:1fr}
   .legs>div,.legs>div+div{padding:12px 0;border-left:0}
   .legs>div+div{border-top:1px solid var(--line)}

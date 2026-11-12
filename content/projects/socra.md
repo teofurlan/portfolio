@@ -1,13 +1,13 @@
 ---
 title: Socra
-summary: A local voice layer for Claude Code. The model speaks, you answer out loud.
+summary: A local voice layer for any coding agent or harness. The model speaks, you answer out loud.
 status: featured
 order: 1
 role: Designer and developer
 team: 1
 ownership: >-
   Everything: the Python server (speech-to-text, text-to-speech, MCP over stdio,
-  WebSocket), the Claude Code and Pi backends, and the React page that shows only
+  WebSocket), the agent backends, and the React page that shows only
   code, permission prompts or the reply.
 stack: [Python, asyncio, MCP, WebSocket, faster-whisper, Piper, React, Vite, TypeScript, Vitest, uv]
 tags: [ai]
@@ -29,11 +29,11 @@ Not usable as results: blind voice A/B winner, voice/playback-results.json
 
 ## Problem
 
-A developer who works with Claude Code all day sometimes wants to be examined out loud on a project they built, or to drive a coding session by voice. Socra is a local, private voice layer for that: the model speaks, you answer out loud, and the page shows only code, permission prompts or the reply.
+A developer who works with a coding agent all day sometimes wants to be examined out loud on a project they built, or to drive a coding session by voice. Socra is a local, private voice layer for that: the model speaks, you answer out loud, and the page shows only code, permission prompts or the reply.
 
 ## Constraints
 
-- Private: the server binds to 127.0.0.1 only, and nothing leaves the machine except what Claude Code itself sends.
+- Private: the server binds to 127.0.0.1 only, and nothing leaves the machine except what the agent itself sends.
 - Windows first. Python 3.12+, Node 22+, a microphone and Edge or Chrome. An NVIDIA GPU is optional; CPU works.
 - A transcription budget of 3.0 s or less.
 - The Piper voice model is about 79 MB.

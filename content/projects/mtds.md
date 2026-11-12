@@ -1,5 +1,5 @@
 ---
-title: MTDS surgical robot arm
+title: MTDS robot arm
 summary: A low-cost robot arm for laparoscopic surgery training by teleoperation, built around a remote center of motion.
 status: featured
 order: 2

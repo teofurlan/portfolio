@@ -14,7 +14,7 @@ export const site = {
 
 /** English paths; Base maps them to the page language with alternate(). Labels come from src/i18n/ui.ts. */
 export const nav = [
-  { href: '/', hash: '#work', key: 'nav.work' },
+  { href: '/', hash: '#projects', key: 'nav.work' },
   { href: '/build-session/', hash: '', key: 'nav.build' },
   { href: '/how-i-build/', hash: '', key: 'nav.ai' },
   { href: '/writing/', hash: '', key: 'nav.writing' },

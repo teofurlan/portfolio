@@ -13,7 +13,7 @@ export const staticRoutes: Record<string, string> = {
   '/decoration/': '/es/decoracion/',
 };
 
-const WORK = { en: '/work/', es: '/es/trabajo/' } as const;
+const WORK = { en: '/projects/', es: '/es/proyectos/' } as const;
 const home = { en: '/', es: '/es/' } as const;
 
 const esToEn = Object.fromEntries(Object.entries(staticRoutes).map(([en, es]) => [es, en]));

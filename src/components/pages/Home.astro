@@ -1,6 +1,8 @@
 ---
 /** Home page, both languages. EN and ES routes are thin wrappers around this. */
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import photo2004 from '../../../media/photos/2004_first-computer_01.jpg';
 import AboutBlock from '../AboutBlock.astro';
 import PostList from '../PostList.astro';
 import ProjectMeta from '../ProjectMeta.astro';
@@ -12,6 +14,7 @@ import { t, type Lang } from '../../i18n/ui';
 import { fill, getContent } from '../../lib/i18n-content';
 import { hardwareProjects, showHardwareFilter } from '../../lib/hardware';
 import { featuredProjects } from '../../lib/projects';
+import { getResume } from '../../lib/resume';
 import { getProjects } from './data';
 
 interface Props {
@@ -27,9 +30,10 @@ const showHw = showHardwareFilter(all);
 const hw = hardwareProjects(all);
 const posts = await getCollection('writing');
 const workNames = featured.map((p) => p.data.title).join(', ');
-const work = (slug: string) => alternate(`/work/${slug}/`, lang);
+const work = (slug: string) => alternate(`/projects/${slug}/`, lang);
+const photoCaption = getResume(lang).meta.timeline.find((m) => m.photo)?.title ?? '';
 const rows = [
-  { n: 1, href: '#work', ...c.parts.work, desc: fill(c.parts.work.desc, { names: workNames }) },
+  { n: 1, href: '#projects', ...c.parts.work, desc: fill(c.parts.work.desc, { names: workNames }) },
   { n: 2, href: '#build', ...c.parts.build },
   { n: 3, href: '#ai', ...c.parts.ai },
   { n: 4, href: '#writing', ...c.parts.writing, desc: fill(c.parts.writing.desc, { count: posts.length }) },
@@ -47,7 +51,13 @@ const writingHref = alternate('/writing/', lang);
       <section class="hero" id="top" aria-labelledby="h-name">
         <h1 id="h-name">Teo Furlan</h1>
         <span class="draft">{tr('draft')}</span>
-        <p class="heroline">{c.heroLine}</p>
+        <div class="herotop">
+          <p class="heroline">{c.heroLine}</p>
+          <figure class="print herophoto">
+            <Image src={photo2004} alt={tr('about.photoAlt')} width={280} densities={[1, 2]} loading="eager" />
+            <figcaption>{photoCaption}</figcaption>
+          </figure>
+        </div>
         <p class="where">{c.where}</p>
         <div class="legs">
           {c.legs.map((leg) => <div><b>{leg.title}</b><span class="sub">{leg.sub}</span></div>)}
@@ -63,8 +73,8 @@ const writingHref = alternate('/writing/', lang);
         </table>
       </section>
 
-      <section id="work" aria-labelledby="h-work">
-        <div class="grp"><span class="bal lg fill" aria-hidden="true">1</span><h2 id="h-work">{c.workHeading}</h2><span class="mono">{fill(c.sheets, { n: featured.length })}</span></div>
+      <section id="projects" aria-labelledby="h-projects">
+        <div class="grp"><span class="bal lg fill" aria-hidden="true">1</span><h2 id="h-projects">{c.workHeading}</h2><span class="mono">{fill(c.sheets, { n: featured.length })}</span></div>
         {showHw && (
           <nav class="hwf" aria-label={c.hardwareNav}>
             <span class="mono">{c.hardwareLabel}</span>
@@ -94,7 +104,7 @@ const writingHref = alternate('/writing/', lang);
       <section class="sheet" id="build" aria-labelledby="h-built">
         <div class="sh"><span class="bal lg fill" aria-hidden="true">2</span><h2 id="h-built">{c.buildHeading}</h2></div>
         <p class="lead">{c.buildLead}</p>
-        <div class="links"><a class="btn solid" href={buildHref}>{c.buildButton}</a></div>
+        <div class="links"><a class="btn" href={buildHref}>{c.buildButton}</a></div>
       </section>
 
       <section class="sheet" id="ai" aria-labelledby="h-ai">
@@ -109,12 +119,12 @@ const writingHref = alternate('/writing/', lang);
       <section class="sheet" id="writing" aria-labelledby="h-writing">
         <div class="sh"><span class="bal lg fill" aria-hidden="true">4</span><h2 id="h-writing">{c.writingHeading}</h2><span class="mono sub-ink">{c.writingSub}</span></div>
         <PostList lang={lang} />
-        <p><a href={writingHref}>{c.writingAll}</a> · <a href="/rss.xml">{c.writingRss}</a></p>
+        <div class="links"><a class="btn" href={writingHref}>{c.writingAll}</a><a class="rss" href="/rss.xml">{c.writingRss}</a></div>
       </section>
 
       <section class="sheet" id="about" aria-labelledby="h-about">
         <div class="sh"><span class="bal lg fill" aria-hidden="true">5</span><h2 id="h-about">{c.aboutHeading}</h2></div>
-        <AboutBlock lang={lang} draft={lang === 'en'} />
+        <AboutBlock lang={lang} draft={lang === 'en'} textOnly />
       </section>
 
       <section class="piece" aria-labelledby="h-piece">

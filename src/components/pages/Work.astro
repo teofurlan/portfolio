@@ -24,7 +24,7 @@ const proof = proofFor(project.id, lang);
 ---
 
 <Base title={project.data.title} description={project.data.summary} lang={lang}>
-  <p class="mono"><a href={`${alternate('/', lang)}#work`}>{tr('nav.work')}</a> / {project.data.title}</p>
+  <p class="mono"><a href={`${alternate('/', lang)}#projects`}>{tr('nav.work')}</a> / {project.data.title}</p>
   <h1>{project.data.title}</h1>
   <DraftFlag lang={lang} />
   <article class="sheet" aria-labelledby="h-case">

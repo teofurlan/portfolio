@@ -14,8 +14,10 @@ interface Props {
   lang?: Lang;
   /** Show the DRAFT flag. English: always (default). Spanish pages carry one flag near the top instead (S3). */
   draft?: boolean;
+  /** Render the photo timeline entry as text only (home: the photo already sits in the hero). */
+  textOnly?: boolean;
 }
-const { lang = 'en', draft = lang === 'en' } = Astro.props;
+const { lang = 'en', draft = lang === 'en', textOnly = false } = Astro.props;
 const tr = t(lang);
 
 const photos: Record<string, { src: ImageMetadata; alt: string }> = {
@@ -35,7 +37,7 @@ const paragraphs = getContent(lang).about.paragraphs;
   </div>
   <ol class="tl" aria-label={tr('about.timeline')}>
     {timeline.map((m) => {
-      const ph = m.photo ? photos[m.photo] : undefined;
+      const ph = m.photo && !textOnly ? photos[m.photo] : undefined;
       return (
         <li>
           <span class="y">{m.year}</span>

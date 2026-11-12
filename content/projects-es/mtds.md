@@ -1,5 +1,5 @@
 ---
-title: Brazo robótico quirúrgico MTDS
+title: Brazo robótico MTDS
 summary: Un brazo robótico de bajo costo para entrenamiento en cirugía laparoscópica por teleoperación, construido en torno a un centro remoto de movimiento.
 role: Software de control y simulación (proyecto de investigación universitario)
 ownership: >-

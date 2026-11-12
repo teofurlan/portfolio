@@ -43,5 +43,14 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false },
   },
   // The CV page is called Resume in English (S1); keep the old URL alive.
-  redirects: { '/cv/': '/resume/' },
+  redirects: {
+    '/cv/': '/resume/',
+    // S2: case studies moved from /work/ and /es/trabajo/ (one entry per visible project).
+    '/work/socra/': '/projects/socra/',
+    '/work/mtds/': '/projects/mtds/',
+    '/work/bloobert/': '/projects/bloobert/',
+    '/es/trabajo/socra/': '/es/proyectos/socra/',
+    '/es/trabajo/mtds/': '/es/proyectos/mtds/',
+    '/es/trabajo/bloobert/': '/es/proyectos/bloobert/',
+  },
 });

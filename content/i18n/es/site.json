@@ -2,22 +2,22 @@
   "home": {
     "title": "Teo Furlan",
     "description": "Teo Furlan construye software con agentes de IA y hardware de robótica. Entre Ríos, Argentina, disponible para trabajo remoto.",
-    "heroLine": "Desde la infancia frente a un teclado hasta agentes y brazos robóticos.",
+    "heroLine": "De nene con teclado a futuro Ingeniero en Sistemas.",
     "where": "Entre Ríos, Argentina (UTC−3) · disponible para trabajo remoto",
     "legs": [
       { "title": "Software con IA / agentes", "sub": "Socra, Bloobert y el arnés con el que trabajo." },
-      { "title": "Hardware", "sub": "Robótica y sistemas embebidos: el brazo robótico quirúrgico MTDS. Cinemática inversa validada contra el modelo CAD hasta 3 micrómetros." }
+      { "title": "Hardware", "sub": "Aunque me dedico principalmente al software, me interesan mucho la robótica y el IoT, y creo que son el futuro." }
     ],
     "partsCaption": "Lista de piezas · la página en cinco puntos",
     "partsHead": ["Ítem", "Pieza", "Descripción"],
     "parts": {
-      "work": { "label": "Trabajo", "desc": "{names}." },
+      "work": { "label": "Proyectos", "desc": "{names}." },
       "build": { "label": "Cómo se construyó este sitio", "desc": "Toda la conversación de construcción con el agente de programación, reproducida." },
       "ai": { "label": "Cómo construyo con IA", "desc": "Un arnés alrededor del agente: tareas, una bóveda de aprendizaje, exámenes de proyecto y memoria." },
       "writing": { "label": "Escritos", "desc": "{count} artículos en DEV." },
       "about": { "label": "Sobre mí / origen 2004", "desc": "De 2004 a un brazo robótico en 2026." }
     },
-    "workHeading": "Trabajo",
+    "workHeading": "Proyectos",
     "sheets": "Hojas 1.1 – 1.{n}",
     "hardwareNav": "Proyectos de hardware",
     "hardwareLabel": "Hardware",
@@ -42,8 +42,8 @@
     "description": "Sobre Teo Furlan: de una computadora en 2004 a agentes y un brazo robótico en 2026.",
     "sectionLabel": "Sobre mí y línea de tiempo",
     "paragraphs": [
-      "Me dedico al desarrollo de software en la Universidad Adventista del Plata, donde empecé Ingeniería en Sistemas de Información en 2022. Construyo software con agentes de IA: Socra, una capa de voz local para Claude Code, y un arnés que registra cada tarea que le doy al agente. Vivo en Entre Ríos, Argentina, y estoy disponible para trabajo remoto.",
-      "El lado del hardware empezó en una escuela secundaria técnica, en equipos e instalaciones electromecánicas. En 2024 tuve mi primer cliente real, EmprendER, una plataforma de emprendimiento. En 2026, en un equipo de 3, estoy construyendo un brazo robótico de bajo costo para entrenamiento en cirugía laparoscópica."
+      "Me dedico al desarrollo de software en la Universidad Adventista del Plata, donde empecé Ingeniería en Sistemas de Información en 2022. Construyo software con agentes de IA: Socra, una capa de voz local para cualquier agente o arnés de programación, y un arnés que registra cada tarea que le doy al agente. Vivo en Entre Ríos, Argentina, y estoy disponible para trabajo remoto.",
+      "El lado del hardware empezó en una escuela secundaria técnica, en equipos e instalaciones electromecánicas. Durante la facultad construí varios proyectos; uno de ellos es EmprendER, una plataforma para emprendedores. En 2026, en un equipo de 3, estoy construyendo un brazo robótico de bajo costo para entrenamiento en cirugía laparoscópica."
     ]
   },
   "ai": {

@@ -2,22 +2,22 @@
   "home": {
     "title": "Teo Furlan",
     "description": "Teo Furlan builds software with AI agents and robotics hardware. Entre Ríos, Argentina, open to remote.",
-    "heroLine": "From a kid at a keyboard to agents and robot arms.",
+    "heroLine": "From a kid at a keyboard to a Systems Engineer in the making.",
     "where": "Entre Ríos, Argentina (UTC−3) · open to remote",
     "legs": [
       { "title": "Software with AI / agents", "sub": "Socra, Bloobert, and the harness I work in." },
-      { "title": "Hardware", "sub": "Robotics, embedded: the MTDS surgical robot arm. Inverse kinematics validated against the CAD model to 3 micrometres." }
+      { "title": "Hardware", "sub": "I mainly build software, but I'm very interested in robotics and IoT; I believe they are the future." }
     ],
     "partsCaption": "Parts list · the page in five items",
     "partsHead": ["Item", "Part", "Description"],
     "parts": {
-      "work": { "label": "Work", "desc": "{names}." },
+      "work": { "label": "Projects", "desc": "{names}." },
       "build": { "label": "How this site was built", "desc": "The whole build conversation with the coding agent, replayed." },
       "ai": { "label": "How I build with AI", "desc": "A harness around the agent: tasks, a learning vault, project exams and memory." },
       "writing": { "label": "Writing", "desc": "{count} posts on DEV." },
       "about": { "label": "About / origin 2004", "desc": "From 2004 to a robot arm in 2026." }
     },
-    "workHeading": "Work",
+    "workHeading": "Projects",
     "sheets": "Sheets 1.1 – 1.{n}",
     "hardwareNav": "Hardware projects",
     "hardwareLabel": "Hardware",
@@ -42,8 +42,8 @@
     "description": "About Teo Furlan: from a computer in 2004 to agents and a robot arm in 2026.",
     "sectionLabel": "About and timeline",
     "paragraphs": [
-      "I'm a software developer at Universidad Adventista del Plata, where I started Information Systems Engineering in 2022. I build software with AI agents: Socra, a local voice layer for Claude Code, and a harness that tracks every task I give the agent. I'm based in Entre Ríos, Argentina, and open to remote work.",
-      "The hardware side started at a technical secondary school, in electromechanical equipment and installations. In 2024 I had my first real client, EmprendER, an entrepreneurship platform. In 2026, in a team of 3, I'm building a low-cost robot arm for laparoscopic surgery training."
+      "I'm a software developer at Universidad Adventista del Plata, where I started Information Systems Engineering in 2022. I build software with AI agents: Socra, a local voice layer for any coding agent or harness, and a harness that tracks every task I give the agent. I'm based in Entre Ríos, Argentina, and open to remote work.",
+      "The hardware side started at a technical secondary school, in electromechanical equipment and installations. During college I built several projects; one of them is EmprendER, an entrepreneurship platform. In 2026, in a team of 3, I'm building a low-cost robot arm for laparoscopic surgery training."
     ]
   },
   "ai": {
