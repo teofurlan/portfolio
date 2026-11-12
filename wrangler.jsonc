@@ -1,8 +1,11 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "teofurlan",
-  "main": "@astrojs/cloudflare/entrypoints/server",
   "compatibility_date": "2026-11-01",
+  // Only "/" runs the Worker (language redirect, see src/worker/entry.ts); all else is static.
+  // `main` is not set here: for static output the Astro adapter writes an assets-only deploy
+  // config, so astro.config.mjs (workerEntry integration) adds it to dist/client/wrangler.json.
+  "assets": { "binding": "ASSETS", "run_worker_first": ["/"] },
   "observability": { "enabled": true }
   // P5 adds: Cron Trigger, Workers AI binding and the decoration KV namespace.
 }
