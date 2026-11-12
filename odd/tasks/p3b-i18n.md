@@ -17,7 +17,7 @@ Adds a Spanish version of the whole site before P4. Branch `p3-layout`
 
 | ID | Task | Specs | Route | Commit |
 |---|---|---|---|---|
-| T1 | i18n foundation: Astro i18n config, `src/i18n/` dictionaries + key-parity test, route map EN↔ES, Base with `lang`, hreflang, EN/ES switch; Resume/CV rename (`/resume/`, `/cv/` → `/resume/` redirect) | S1, S5, S6, S7 | worker | |
+| T1 | i18n foundation: Astro i18n config, `src/i18n/` dictionaries + key-parity test, route map EN↔ES, Base with `lang`, hreflang, EN/ES switch; Resume/CV rename (`/resume/`, `/cv/` → `/resume/` redirect) | S1, S5, S6, S7 | worker | `5de6005` |
 | T2 | Spanish pages and content: `/es/` routes for every page reusing components with a `lang` prop; Spanish content files (case studies, about, hero, essay, timeline, resume) translated with DRAFT flags | S2, S3, S6, S7 | worker (after T1) | |
 | T3 | Auto redirect on `/`: pure `pickLanguage` function + tests, server-rendered `/` (or middleware) on Cloudflare Workers, cookie from the switch, `Vary` header | S4 | worker (after T1, parallel with T2) | |
 | T4 | Verify both languages | S1–S7 | verify | |
@@ -28,3 +28,4 @@ Adds a Spanish version of the whole site before P4. Branch `p3-layout`
 - L1 (Teo, 2026-11-12): "- I like "How I build with AI" - I'm targeting both markets, that is why I want it to say Resume when the page languaje is English and CV when it's spanish - I would like to change the policy set in BRIEF.md. I believe we should add a Spanish version of the page"
 - L2 (Teo, 2026-11-12): Spanish copy "LLM translates, I review (Recommended)"; language pick "Automatic redirect"; URLs "English at /, Spanish at /es/ (Recommended)"; timing "Now, before P4 (Recommended)".
 - L3: Rename done first in `396b914` (`/how-i-build/`). Redirect scope chosen by the agent and told to Teo: home page only, cookie override; Teo may widen it.
+- L4: T1 worker also edited src/scripts/rail.ts (outside its surfaces) to read rail labels from data- attributes; accepted.
