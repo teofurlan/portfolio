@@ -1,0 +1,30 @@
+# P3.5 — Spanish version (i18n)
+
+Adds a Spanish version of the whole site before P4. Branch `p3-layout`
+(continues P3, not merged). Language policy: `BRIEF.md` §3 (revised 2026-11-12).
+
+## Specs
+
+- S1 (L1): "I'm targeting both markets, that is why I want it to say Resume when the page languaje is English and CV when it's spanish". English UI says "Resume" (nav, page title, h1, "Resume (PDF)" link, URL `/resume/`); Spanish says "CV" (URL `/es/cv/`). `/cv/` must not 404 in English: redirect it to `/resume/`.
+- S2 (L1): "I would like to change the policy set in BRIEF.md. I believe we should add a Spanish version of the page". Every English page has a Spanish counterpart under `/es/` (home, project pages, how I build with AI, writing, about, CV, colophon, build-session stub, decoration stub, 404). Hidden projects stay hidden in both languages.
+- S3 (L2, "LLM translates, I review"): Spanish text is an LLM translation of the English copy in neutral Spanish (tú forms, no voseo, no regional slang). Every Spanish page shows a visible DRAFT flag ("BORRADOR — traducción a revisar por Teo") until Teo approves; facts and numbers unchanged from English; never invent content.
+- S4 (L2, "Automatic redirect"): a visitor requesting `/` whose `Accept-Language` prefers Spanish over English (by q-value/order; `es`, `es-AR`, etc.) is redirected (302) to `/es/`, unless a `lang` cookie exists. The EN/ES switch on every page links to the counterpart page and sets the `lang` cookie (1 year, path `/`, SameSite=Lax) so the choice wins over detection. Only `/` redirects; deep links open as sent. The response carries `Vary: Accept-Language, Cookie`. Without a cookie and with an English or absent `Accept-Language`, `/` serves English (200). The decision is a pure function with tests.
+- S5 (L2, URLs "English at /, Spanish at /es/"): English stays unprefixed; Spanish under `/es/` with Spanish slugs where natural (`/es/cv/`, `/es/como-construyo-con-ia/`, `/es/escritos/`, `/es/sobre-mi/`, `/es/colofon/`, `/es/como-se-construyo/`, `/es/decoracion/`, `/es/trabajo/<slug>/`). Each page has `<html lang>` set correctly, `<link rel="alternate" hreflang="en|es|x-default">` pairs, and canonical to itself.
+- S6: UI strings live in one dictionary per language with identical keys (tested: no missing key in either language). Spanish project case studies, About, hero, essay, timeline and resume texts live in content files, not hard-coded in pages.
+- S7: Everything from P3 still holds in both languages: no full email or phone in HTML, works without JS (the switch is a plain link; the cookie is set by JS when available and by the redirect endpoint otherwise is not required), reduced motion, WCAG AA, one h1, no horizontal overflow at 390 px. RSS stays English only.
+
+## Tasks
+
+| ID | Task | Specs | Route | Commit |
+|---|---|---|---|---|
+| T1 | i18n foundation: Astro i18n config, `src/i18n/` dictionaries + key-parity test, route map EN↔ES, Base with `lang`, hreflang, EN/ES switch; Resume/CV rename (`/resume/`, `/cv/` → `/resume/` redirect) | S1, S5, S6, S7 | worker | |
+| T2 | Spanish pages and content: `/es/` routes for every page reusing components with a `lang` prop; Spanish content files (case studies, about, hero, essay, timeline, resume) translated with DRAFT flags | S2, S3, S6, S7 | worker (after T1) | |
+| T3 | Auto redirect on `/`: pure `pickLanguage` function + tests, server-rendered `/` (or middleware) on Cloudflare Workers, cookie from the switch, `Vary` header | S4 | worker (after T1, parallel with T2) | |
+| T4 | Verify both languages | S1–S7 | verify | |
+| T5 | PLAN.md + BRIEF §3 (BRIEF done in this doc's first commit) | — | inline | |
+
+## Log
+
+- L1 (Teo, 2026-11-12): "- I like "How I build with AI" - I'm targeting both markets, that is why I want it to say Resume when the page languaje is English and CV when it's spanish - I would like to change the policy set in BRIEF.md. I believe we should add a Spanish version of the page"
+- L2 (Teo, 2026-11-12): Spanish copy "LLM translates, I review (Recommended)"; language pick "Automatic redirect"; URLs "English at /, Spanish at /es/ (Recommended)"; timing "Now, before P4 (Recommended)".
+- L3: Rename done first in `396b914` (`/how-i-build/`). Redirect scope chosen by the agent and told to Teo: home page only, cookie override; Teo may widen it.

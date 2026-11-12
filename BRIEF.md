@@ -39,15 +39,24 @@ as hosting). Until connected, use the `*.workers.dev` URL.
   (YC S26 applications ask for "a coding agent session you're particularly
   proud of"). This site does that natively (section 5.3).
 
-## 3. Language policy (decided)
+## 3. Language policy (decided; revised 2026-11-12)
 
-- Site copy in **English**. Teo writes drafts; an LLM may fix grammar only,
-  keeping his voice. Add a short honest note in the footer or colophon:
-  "Copy edited with an LLM. The raw build conversation is below, in Spanish."
+- The site is **bilingual**: English at `/` (default) and Spanish at `/es/`
+  (changed by Teo on 2026-11-12; v1 was English-only).
+- English copy: Teo writes drafts; an LLM may fix grammar only, keeping his
+  voice. Spanish copy: an LLM translates the English into neutral Spanish
+  (tú, no voseo) and every Spanish text stays flagged DRAFT until Teo approves
+  it. The colophon says so in each language: "Copy edited with an LLM. The raw
+  build conversation is below, in Spanish." / Spanish equivalent noting the
+  translation.
+- Visitors whose browser prefers Spanish are redirected automatically from the
+  home page to `/es/`; an EN/ES switch on every page overrides it and is
+  remembered.
+- The CV page is called **Resume** in English and **CV** in Spanish.
+- DEV posts stay in English (link out, labelled as English on Spanish pages).
 - The build transcript is shown **in its original Spanish**, with an optional
   precomputed English translation side by side (toggle). Never rewrite his
   messages; translation is clearly labelled as machine translation.
-- Do not build a full bilingual site (out of scope for v1).
 
 ## 4. Stack (decided)
 
