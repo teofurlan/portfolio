@@ -20,8 +20,8 @@ year: 2026
 
 <!-- Sources: odd/evidence/pricor.md (explorer report of the pricor repo, README,
 PRODUCT.md, docs/benchmark.md; repo public, 200 on 2026-11-12; DEV post title).
-Only VERIFIED items are stated as fact. "What I'd change" is EXTRAPOLATED from the
-repo TODOs: Teo confirms. Solo: 68 commits, all by the author, 2026-10-13 to 2026-10-26.
+Only VERIFIED items are stated as fact. "What I'd change" was removed at Teo's request (2026-11-12);
+the agent's proposals live in odd/notes/pricor-what-id-change.md. Solo: 68 commits, all by the author, 2026-10-13 to 2026-10-26.
 No supplier names, local paths or emails. Not usable: any customer, interview,
 time-savings or testimonial claim (none exists). -->
 
@@ -70,12 +70,3 @@ The cascade, which only settles answers it is confident about:
 That means most columns still reach a person. Laya settles only about 10 % because its confidence separates poorly below its threshold.
 
 Speed: Laya takes 35.4 ms per column on GPU and 516.5 ms on CPU (means); Gemma takes 11.4 s per sheet. The Laya fine-tune took 290 s and peaked at 6.2 GB of VRAM.
-
-## What I'd change
-
-> DRAFT — Teo rewrites this in his own words.
-
-- TODO(owner): confirm. Calibrate Laya on more real distributor data, so it settles more than about 10 % of columns on its own.
-- TODO(owner): confirm. Support PDF price lists.
-- TODO(owner): confirm. Consolidate several suppliers into one catalog.
-- TODO(owner): confirm. Validate on CPU-only hardware, where the numbers above were not measured.

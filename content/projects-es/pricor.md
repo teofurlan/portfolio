@@ -53,12 +53,3 @@ La cascada, que solo acepta las respuestas de las que está segura:
 Es decir, la mayoría de las columnas todavía llega a una persona. Laya resuelve solo cerca del 10 % porque su confianza separa mal por debajo de su umbral.
 
 Velocidad: Laya tarda 35,4 ms por columna en GPU y 516,5 ms en CPU (promedios); Gemma tarda 11,4 s por hoja. El ajuste fino de Laya tomó 290 s y llegó a 6,2 GB de VRAM.
-
-## Lo que cambiaría
-
-> BORRADOR — Teo lo reescribe con sus propias palabras.
-
-- TODO(owner): confirmar. Calibrar Laya con más datos reales de distribuidoras, para que resuelva por sí sola más del 10 % de las columnas.
-- TODO(owner): confirmar. Soportar listas de precios en PDF.
-- TODO(owner): confirmar. Consolidar varios proveedores en un solo catálogo.
-- TODO(owner): confirmar. Validar en hardware solo con CPU, donde no se midieron los números anteriores.

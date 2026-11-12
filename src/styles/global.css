@@ -249,7 +249,7 @@ footer.foot .in{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px 3
   .rail{position:sticky;top:0;z-index:20;background:var(--bg);margin:0 -20px 28px;padding:4px 14px;border-bottom:2px solid var(--line);display:flex;align-items:center;gap:10px;min-height:52px}
   .rail-h{display:none}
   .rail ol{display:flex;gap:0;flex:none}
-  .rail ol::before{display:none}
+  .rail ol::before,.rail ol::after{display:none}
   .rail li{height:auto}
   .rail a{display:block;height:auto;padding:4px}
   .plate{display:none}
