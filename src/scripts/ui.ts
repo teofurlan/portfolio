@@ -50,3 +50,11 @@ document.querySelectorAll<HTMLAnchorElement>('a[data-lang]').forEach((a) => {
 });
 
 export {};
+
+// Phones: the main nav is one swipeable line; bring the current page's link into view.
+const navCur = document.querySelector<HTMLElement>('.mainnav a[aria-current="page"]');
+const navUl = navCur?.closest<HTMLElement>('.mainnav');
+if (navCur && navUl && navUl.scrollWidth > navUl.clientWidth) {
+  const over = navCur.offsetLeft + navCur.offsetWidth + 40 - navUl.clientWidth;
+  if (over > 0) navUl.scrollLeft = over;
+}

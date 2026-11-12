@@ -179,7 +179,7 @@ dl.meta dd{margin:0}
 .private{color:var(--ink2)}
 
 /* schematic (plain drawing, no extra box) */
-.more{margin:8px 0 0;padding-top:14px;border-top:1px solid var(--hair)}
+.more{margin:8px 0 36px;padding-top:14px;border-top:1px solid var(--hair)}
 .more h3{margin:0 0 8px}
 .more ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 .more li{display:flex;flex-wrap:wrap;gap:2px 14px;align-items:baseline}
@@ -223,7 +223,7 @@ svg .fig-t.bl{fill:var(--accent);font-weight:700}
 .piece svg circle{fill:var(--sheet)}
 footer.foot{margin-top:auto;background:var(--bg2);border-top:2px solid var(--line)}
 footer.foot .in{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px 32px;align-items:center;padding-top:28px;padding-bottom:40px}
-.badgechip{display:inline-block;background:#0c0d12;padding:12px;line-height:0;border:1px solid var(--line)}
+.badgechip{display:inline-block;justify-self:start;background:#0c0d12;padding:12px;line-height:0;border:1px solid var(--line)}
 .badgechip img{width:160px;height:auto;display:block}
 .foot p{margin:0 0 6px;font-size:15px;max-width:62ch}
 .foot a{color:var(--link)}
@@ -340,6 +340,22 @@ table.parts td,table.parts th,.now{font-variant-numeric:tabular-nums}
   /* phones: header keeps only the Copy email button; display:none also removes the link from the tab order */
   html:has(button[data-copy]:not([hidden])) header.top .em{display:none}
   .tgl{padding:4px 10px;font-size:13px}
+  /* Rows: brand + language | links | Copy email + theme | nav. The list's items join the header's
+     flex rows (display:contents) so the Copy email button never sits alone on a row. */
+  header.top .contact{display:contents}
+  header.top .in::before,header.top .in::after{content:"";flex-basis:100%;height:0}
+  header.top .in::before{order:2}
+  header.top .contact li{order:3}
+  header.top .in::after{order:4}
+  header.top .contact li:has([data-copy]),header.top .tgl{order:5}
+  header.top .langsw{order:1;margin-left:auto}
+  header.top .mainnav-wrap{order:6}
+  html:has(button[data-copy]:not([hidden])) header.top .em + .btn{margin-left:0}
+  /* nav: one swipeable line instead of a ragged wrap */
+  .mainnav-wrap .mainnav{position:relative;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 16px;gap:0 20px;-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 32px),transparent);mask-image:linear-gradient(to right,#000 calc(100% - 32px),transparent)}
+  .mainnav-wrap{min-width:0}
+  .mainnav-wrap .mainnav::-webkit-scrollbar{display:none}
+  .mainnav-wrap .mainnav a{white-space:nowrap;padding:12px 0}
   .hero h1{font-size:44px}
 }
 
@@ -360,9 +376,16 @@ table.parts td,table.parts th,.now{font-variant-numeric:tabular-nums}
 .gallery figure{margin:0;border:2px solid var(--line);background:var(--sheet);padding:8px}
 .gallery img,.gallery video{display:block;width:100%;height:auto}
 .gallery figcaption{font-size:14px;color:var(--ink2);padding:8px 2px 0}
-.prose{max-width:70ch}
+.prose{max-width:70ch;overflow-wrap:break-word}
+.prose pre,.prose table{display:block;max-width:100%;overflow-x:auto}
 .prose h2{font-size:28px;margin:36px 0 10px}
 .prose ul,.prose ol{padding-left:1.2em}
 .contact .em + .btn{margin-left:8px}
+@media (min-width:641px) and (max-width:999px){
+  /* tablets: theme + language join the brand row; links and email take the second row */
+  header.top .brand{margin-right:auto}
+  header.top .tgl,header.top .langsw{order:1}
+  header.top .contact{order:2;margin-left:0;flex-basis:100%}
+}
 /* body is a flex column (footer pinned to the bottom); keep the centred containers full width */
 body>main,body>.shell{width:100%}
