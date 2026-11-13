@@ -131,7 +131,6 @@ header.top .in{display:flex;align-items:center;flex-wrap:wrap;gap:8px 28px;min-h
 /* ---------- hero ---------- */
 .hero{padding:0 0 56px;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:40px 40px;background-position:-1px -1px;margin-bottom:56px;border-bottom:2px solid var(--line)}
 .hero h1{font-size:68px;font-weight:700;letter-spacing:-.03em;margin:8px 0 18px}
-.draft{display:inline-block;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);border:1px dashed var(--accent);background:var(--sheet);padding:3px 9px;margin:0 0 10px}
 .heroline{font-size:34px;line-height:1.22;font-weight:600;letter-spacing:-.015em;margin:0 0 14px;max-width:26ch}
 .herotop{display:flex;align-items:flex-start;justify-content:space-between;gap:28px;margin:0 0 14px}
 .herotop .heroline{margin:0}

@@ -40,7 +40,6 @@ Todo, trabajando con agentes de programación: la definición del producto, la a
 
 ## Lo que cambiaría
 
-> BORRADOR — Teo lo reescribe con sus propias palabras.
 
 - Mediría una compilación de lanzamiento (tamaño, CPU) y comprobaría el borde de la ventana transparente en Windows y el comportamiento de click-through, que la documentación indica como pendientes de verificar.
 - Sin la cámara, la detección de descansos se basa en la confianza. Todavía tengo que decidir si eso es aceptable o si hace falta otra señal.

@@ -40,6 +40,5 @@ Construimos el brazo en un equipo de tres, sin un reparto fijo de tareas. Mi foc
 
 ## Lo que cambiaría
 
-> BORRADOR — Teo lo reescribe con sus propias palabras.
 
 - Ejecutaría la verificación de factibilidad antes de comprar el hardware, no después.

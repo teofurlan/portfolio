@@ -57,6 +57,5 @@ We built the arm as a team of three, without a fixed split of tasks. My focus wa
 
 ## What I'd change
 
-> DRAFT — Teo rewrites this in his own words.
 
 - I'd run the feasibility check before the hardware is bought, not after.

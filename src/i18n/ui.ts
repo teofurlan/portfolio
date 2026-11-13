@@ -2,7 +2,7 @@
  * UI strings, one dictionary per language with identical keys (tested in
  * ui.test.ts). Page copy (case studies, essay, About...) lives in content
  * files, not here. Spanish uses Rioplatense voseo (vos tenés, mirá, escribime),
- * never tuteo or usted, and is an LLM draft until Teo approves it.
+ * never tuteo or usted.
  */
 export const langs = ['en', 'es'] as const;
 export type Lang = (typeof langs)[number];
@@ -10,7 +10,6 @@ export const defaultLang: Lang = 'en';
 
 const en = {
   'skip': 'Skip to content',
-  'draft': 'DRAFT — Teo rewrites',
 
   'nav.main': 'Main',
   'nav.work': 'Projects',
@@ -95,7 +94,6 @@ export type UiKey = keyof typeof en;
 
 const es: Record<UiKey, string> = {
   'skip': 'Saltar al contenido',
-  'draft': 'BORRADOR — traducción a revisar por Teo',
 
   'nav.main': 'Principal',
   'nav.work': 'Proyectos',

@@ -51,7 +51,6 @@ const writingHref = alternate('/writing/', lang);
     <main id="main">
       <section class="hero" id="top" aria-labelledby="h-name">
         <h1 id="h-name">Teo Furlan</h1>
-        <span class="draft">{tr('draft')}</span>
         <div class="herotop">
           <p class="heroline">{c.heroLine}</p>
           <figure class="print herophoto">
@@ -133,7 +132,7 @@ const writingHref = alternate('/writing/', lang);
 
       <section class="sheet" id="about" aria-labelledby="h-about">
         <div class="sh"><span class="bal lg fill" aria-hidden="true">5</span><h2 id="h-about">{c.aboutHeading}</h2></div>
-        <AboutBlock lang={lang} draft={lang === 'en'} textOnly />
+        <AboutBlock lang={lang} textOnly />
       </section>
 
       <section class="piece" aria-labelledby="h-piece">

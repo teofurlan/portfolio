@@ -6,7 +6,6 @@
  * assembles it at runtime.
  */
 import ContactList from '../ContactList.astro';
-import DraftFlag from '../DraftFlag.astro';
 import Base from '../../layouts/Base.astro';
 import { site } from '../../data/site';
 import { t, type Lang } from '../../i18n/ui';
@@ -25,7 +24,6 @@ const span = (start?: string, end?: string) => [start, end ?? (start ? tr('resum
 
 <Base title={tr('resume.title')} description={getContent(lang).resume.description} lang={lang}>
   <h1>{tr('resume.title')}</h1>
-  <DraftFlag lang={lang} />
   {site.links.pdf[lang] && <div class="links"><a class="btn solid" href={site.links.pdf[lang]}>{tr('resume.download')}</a></div>}
 
   <section class="sheet" aria-labelledby="h-cv-work">

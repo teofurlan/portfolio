@@ -12,6 +12,7 @@ Branch `p3-layout` (not merged). Both languages change together; Spanish stays f
 - S5 (L5.4): "Check the table inside the \"Result\" in /projects/socra/, it isn't rendered correctly". Markdown tables in case studies render as styled tables (header row, rules, padding) and scroll sideways inside the text column on phones instead of overflowing.
 - S6 (L5.5): "Remove the built with Gentle-AI badge, leave only the mention in the line \"Built with the gentle-ai harness and AI Hero skills\"". The footer no longer shows the badge image or its link; the credits line stays, in both languages.
 - S8 (L11): "If the switch to first person could make those sentences sound like new claims, you can change them, but validate with another agent first". Each L9 sentence is checked by a separate read-only agent against repository evidence (resume, `odd/evidence/`, git history, case-study frontmatter); unsupported first-person claims are reworded in EN and ES so they claim no more than the evidence, keeping the first-person tone where it is supported.
+- S9 (L14): "remove all the \"Draft\" text so I can deploy". No rendered page shows DRAFT, BORRADOR or TODO text; the DraftFlag component and the draft strings are gone.
 - S7: P3 rules keep holding (no full email/phone in HTML, works without JS, one h1, tests, check and build pass).
 
 ## Tasks
@@ -24,7 +25,8 @@ Branch `p3-layout` (not merged). Both languages change together; Spanish stays f
 | T4 | Styled, scrollable case-study tables | S5 | inline | `ae7ff17` |
 | T5 | Personal semi-formal tone, EN + ES, and voseo across every Spanish surface | S2, S4, S7 | worker | `8d94979` |
 | T6 | Verify both languages (build, tests, screenshots, tuteo scan) | S1–S7 | inline | verified (no commit) |
-| T7 | Reword the L9 sentences that the first person turned into claims, after an independent agent checks each one against the evidence | S4, S8 | verify, then inline | pending |
+| T8 | Remove every DRAFT/BORRADOR flag and visible TODO(owner) text before deploy | S9 | inline | |
+| T7 | Reword the L9 sentences that the first person turned into claims, after an independent agent checks each one against the evidence | S4, S8 | verify, then inline | `9bb9b7a` |
 
 ## Log
 
@@ -45,3 +47,5 @@ Branch `p3-layout` (not merged). Both languages change together; Spanish stays f
 - L11: "If the switch to first person could make those sentences sound like new claims, you can change them, but validate with another agent first"
 - L12: "Change the spanish hero line to \"De mis primeras teclas a Ingeniería en Sistemas\"" — ES heroLine set verbatim (no final period, as written).
 - L13: T7 verifier (gentle-ai-verify) verdicts: Pricor, MTDS, Bloobert, daily piece and Socra "I'd…" SUPPORTED by odd/evidence and resume.json; OVERCLAIM fixed: LLM line back to "Copy edited with an LLM." (EN) / "Texto editado y traducido con un LLM, pendiente de revisión." (ES), resume 2026 timeline now says "in a team of three"; ES Socra Result realigned with Teo's EN ("bases de código o conceptos"); "El arnés que armé" -> "El arnés que uso" (gentle-ai is not Teo's harness). Left for Teo: "it works well on CPU" (his own edit; evidence says only "CPU works").
+- L14: "remove all the \"Draft\" text so I can deploy"
+- L15: T8 removed the Socra case-study line "TODO(owner): blind voice A/B result. The ratings sit in browser localStorage and the winner is only in a draft note, so it is not stated here." (and its Spanish twin) from the page; it stays open here for Teo. Unpublished dogear/emprender keep their TODO(owner) markers (never rendered).
