@@ -7,7 +7,7 @@ decides. Per-phase ODD specs live in `odd/tasks/`.
 **Current state:** P3, P3.5 (Spanish version) and P3.6 (Teo's review round 1) on branch
 `p3-layout` (not merged, no deploy). Featured: Socra, MTDS, Pricor; bloobert listed. Waiting on
 Teo: Spanish review, DRAFT texts,
-certificates, media. P3.6 still needs a browser check (verifier was unavailable). Next: P4.
+certificates, media. P3.7 (review round 2) done; Teo to check the tone sentences in `odd/tasks/p3d-review2.md` L9. Next: P4.
 
 ## Environment notes
 
@@ -126,6 +126,15 @@ certificates, media. P3.6 still needs a browser check (verifier was unavailable)
 | Phone-free Resume (EN, `/resume.pdf`) and CV (ES, `/es/cv.pdf`) PDFs | done | `0b350a1` |
 | Rail progress line follows sections; Pricor "What I'd change" moved to `odd/notes/` | done | `6166296` |
 | Browser verification of P3.6 | pending: verifier unavailable | |
+
+### P3.7 — Review round 2 (spec `odd/tasks/p3d-review2.md`)
+
+| Task | Status | Commit |
+|---|---|---|
+| Mobile/tablet header rows (no single-button rows), swipeable phone nav | done | `7a27f26` |
+| Footer badge removed; tags/stack as keyword labels; styled case-study tables | done | `ae7ff17` |
+| Personal first-person tone EN+ES; Spanish in voseo | done | `8d94979` |
+| Teo checks the tone sentences listed in the spec log (L9) | waiting on Teo | |
 
 ### P4 — Session replay · **Gate:** Teo reviews redacted transcript
 

@@ -17,12 +17,12 @@ Branch `p3-layout` (not merged). Both languages change together; Spanish stays f
 
 | ID | Task | Specs | Route | Commit |
 |---|---|---|---|---|
-| T1 | Mobile/tablet header row order, swipeable phone nav, spacing fixes | S1, S7 | inline | |
-| T2 | Footer badge removed | S6 | inline | |
-| T3 | Distinct meta labels | S3 | inline | |
-| T4 | Styled, scrollable case-study tables | S5 | inline | |
-| T5 | Personal semi-formal tone, EN + ES, and voseo across every Spanish surface | S2, S4, S7 | worker | |
-| T6 | Verify both languages (build, tests, screenshots, tuteo scan) | S1–S7 | inline | |
+| T1 | Mobile/tablet header row order, swipeable phone nav, spacing fixes | S1, S7 | inline | `7a27f26` |
+| T2 | Footer badge removed | S6 | inline | `ae7ff17` |
+| T3 | Distinct meta labels | S3 | inline | `ae7ff17` |
+| T4 | Styled, scrollable case-study tables | S5 | inline | `ae7ff17` |
+| T5 | Personal semi-formal tone, EN + ES, and voseo across every Spanish surface | S2, S4, S7 | worker | `8d94979` |
+| T6 | Verify both languages (build, tests, screenshots, tuteo scan) | S1–S7 | inline | verified (no commit) |
 
 ## Log
 
@@ -38,3 +38,6 @@ Branch `p3-layout` (not merged). Both languages change together; Spanish stays f
 - L6: T1 was done and verified before L5 (screenshots at 360/390/768/800/1280, tests 73/73, check 0 errors); Teo moved on without objecting, so it is committed as this feature's first unit.
 - L7: `wrangler.jsonc` and `.github/` have uncommitted changes that are not part of this work; they are left untouched and out of every commit.
 - L8: S3 reading: "slightly different from the rest" names only TAGS and STACK, so the distinction applies to those two rows' keyword values, not to every label.
+- L9: T5 worker notes for Teo (tone could imply facts): Pricor "I built… / I've tried it on public price lists from six distributors" (was impersonal); MTDS "I validated… / I showed… / I found a structural fix / I built a browser simulator" (from CV bullets, team of 3, Problem says "Our plan"); Bloobert "I defined success as using it myself every working day"; colophon/footer "I had an LLM copy edit the text"; decoration/home "I'll add a daily generated piece later" (mild commitment); Spanish Socra Result reading of "make sure I get it right"; Socra "What I'd change" bullets became "I'd measure… / I'd make…".
+- L10: T6: tests 73/73, astro check 0 errors, build OK; rendered /es/ pages and 404 scanned for tuteo: only third-person "Elige" (the model picks) and "lee" (reads) remain; no sideways scroll at 360/1280 on /, /es/, /es/proyectos/pricor/, /es/sobre-mi/.
+
