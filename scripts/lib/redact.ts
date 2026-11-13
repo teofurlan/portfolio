@@ -22,6 +22,18 @@ const RULES: Rule[] = [
   { name: 'github-token', pattern: /\b(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{40,})\b/g, replace: '[REDACTED]' },
   { name: 'sk-key', pattern: /\bsk-(?:proj-|ant-)?[A-Za-z0-9_-]{20,}/g, replace: '[REDACTED]' },
   { name: 'aws-key', pattern: /\bAKIA[0-9A-Z]{16}\b/g, replace: '[REDACTED]' },
+  { name: 'gitlab-token', pattern: /\bglpat-[A-Za-z0-9_-]{20,}/g, replace: '[REDACTED]' },
+  { name: 'npm-token', pattern: /\bnpm_[A-Za-z0-9]{36}\b/g, replace: '[REDACTED]' },
+  { name: 'hf-token', pattern: /\bhf_[A-Za-z0-9]{30,}\b/g, replace: '[REDACTED]' },
+  { name: 'stripe-key', pattern: /\b[rs]k_(?:live|test)_[A-Za-z0-9]{16,}/g, replace: '[REDACTED]' },
+  { name: 'google-oauth', pattern: /\bya29\.[A-Za-z0-9_-]{20,}/g, replace: '[REDACTED]' },
+  { name: 'url-credentials', pattern: /(\b[a-z][a-z0-9+.-]*:\/\/)(?!\[REDACTED\])[^\s/:@"'`]+:[^\s/@"'`]+@/gi, replace: '$1[REDACTED]@' },
+  // Local dev servers (design canvas, previews) put an access token in the first path segment.
+  {
+    name: 'loopback-token',
+    pattern: /(https?:\/\/(?:127\.0\.0\.1|localhost):\d+\/)(?!\[REDACTED\])[A-Za-z0-9_-]{24,}(?=[/?#\s"'`)]|$)/g,
+    replace: '$1[REDACTED]',
+  },
   { name: 'google-key', pattern: /\bAIza[0-9A-Za-z_-]{35}\b/g, replace: '[REDACTED]' },
   { name: 'slack-token', pattern: /\bxox[abprs]-[A-Za-z0-9-]{10,}/g, replace: '[REDACTED]' },
   { name: 'jwt', pattern: /\beyJ[A-Za-z0-9_-]{8,}\.eyJ[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}/g, replace: '[REDACTED]' },
@@ -31,7 +43,14 @@ const RULES: Rule[] = [
     pattern: /\b([A-Z][A-Z0-9_]*(?:TOKEN|SECRET|PASSWORD|PASSWD|API_KEY|APIKEY|PRIVATE_KEY|ACCESS_KEY)[A-Z0-9_]*)(\s*[=:]\s*["']?)(?![$[<{])([^\s"'`]{8,})/g,
     replace: '$1$2[REDACTED]',
   },
+  {
+    name: 'quoted-secret',
+    pattern: /(["']?\b(?:token|secret|password|passwd|api[_-]?key|access[_-]?token|auth[_-]?token|client[_-]?secret)["']?\s*[:=]\s*["'])(?!\[REDACTED\])([^"'\s]{8,})(["'])/gi,
+    replace: '$1[REDACTED]$3',
+  },
   { name: 'account-id', pattern: /(account[ _-]?id\W{0,5})[0-9a-f]{32}\b/gi, replace: '$1[REDACTED]' },
+  { name: 'account-id', pattern: /(\/accounts\/)[0-9a-f]{32}\b/g, replace: '$1[REDACTED]' },
+  { name: 'local-hostname', pattern: /(?<![.\w-])[A-Za-z0-9-]+\.(?:local|lan|internal|home\.arpa)\b/g, replace: '[host]' },
   // Also catches regex-escaped dots (`a@b\\.com`), truncated domains (`a@gmail.`) and bare webmail
   // domains (`a@gmail`) that show up in grep commands; the domain must start with a letter (not `astro@7.0.0`).
   {

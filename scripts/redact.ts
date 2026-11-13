@@ -39,8 +39,9 @@ function check(ctx: RedactContext): number {
 }
 
 if (args.includes('--check')) {
-  // CI has no local hostname/username to look for; generic rules and literals still apply.
-  process.exit(check({ literals }));
+  // On CI the hostname and username belong to the runner (e.g. "runner"), so only generic rules and
+  // literals apply there; locally the check also looks for this machine's hostname and username.
+  process.exit(check(process.env.CI ? { literals } : { hostname: hostname(), username: userInfo().username, literals }));
 }
 
 const ctx: RedactContext = { hostname: hostname(), username: userInfo().username, literals };

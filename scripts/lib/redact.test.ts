@@ -32,6 +32,30 @@ describe('redactText', () => {
     expect(findLeaks(out, ctx)).toEqual([]);
   });
 
+  it.each([
+    ['GitLab token', 'glpat-' + 'abcdefghijklmnopqrst', '[REDACTED]'],
+    ['npm token', 'npm_' + 'abcdefghijklmnopqrstuvwxyz0123456789', '[REDACTED]'],
+    ['Hugging Face token', 'hf_' + 'abcdefghijklmnopqrstuvwxyz0123', '[REDACTED]'],
+    ['Stripe-style key', 'sk_live_' + 'abcdefghijklmnop1234', '[REDACTED]'],
+    ['Google OAuth token', 'ya29.' + 'a0AfH6SMBabcdefghijklmnop', '[REDACTED]'],
+    ['lowercase JSON secret', '"token": "abc123def456ghi789"', '"token": "[REDACTED]"'],
+    ['lowercase assignment', "password='hunter2hunter2x'", "password='[REDACTED]'"],
+    ['account id in a URL', '/client/v4/accounts/0123456789abcdef0123456789abcdef/workers', '/client/v4/accounts/[REDACTED]/workers'],
+    ['URL credentials', 'https://alice:s3cretpass@example.org/x', 'https://[REDACTED]@example.org/x'],
+    ['loopback URL token', 'open http://127.0.0.1:2401/RsSIabcdefghijklmnopqrstuvwxyz12/d/x/', 'open http://127.0.0.1:2401/[REDACTED]/d/x/'],
+    ['local hostname', 'ssh pi@robot.local', 'ssh pi@[host]'],
+  ])('removes a %s', (_name, input, expected) => {
+    const out = redactText(input, ctx);
+    expect(out).toBe(expected);
+    expect(findLeaks(out, ctx)).toEqual([]);
+    expect(findLeaks(input, ctx).length).toBeGreaterThan(0);
+  });
+
+  it('does not treat ordinary short or code values as secrets', () => {
+    const text = '"token": "string", password: process.env.PASSWORD, http://localhost:4321/build-session/';
+    expect(redactText(text, ctx)).toBe(text);
+  });
+
   it('keeps the variable name of an env-style secret', () => {
     expect(redactText('CLOUDFLARE_API_TOKEN=abcDEF123456ghiJKL789', ctx)).toBe('CLOUDFLARE_API_TOKEN=[REDACTED]');
   });
