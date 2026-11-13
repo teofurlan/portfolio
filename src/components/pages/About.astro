@@ -17,7 +17,7 @@ const resumeHref = alternate('/resume/', lang);
 <Base title={c.title} description={c.description} lang={lang}>
   <h1>{c.title}</h1>
   <section class="sheet" aria-label={c.sectionLabel}>
-    <AboutBlock lang={lang} draft />
+    <AboutBlock lang={lang} />
   </section>
   <p><a href={resumeHref}>{tr('nav.resume')}</a> · <a href={`${resumeHref}#contact`}>{tr('resume.contact')}</a></p>
 </Base>

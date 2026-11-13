@@ -1,5 +1,4 @@
 ---
-import DraftFlag from '../DraftFlag.astro';
 import Base from '../../layouts/Base.astro';
 import type { Lang } from '../../i18n/ui';
 import { getContent } from '../../lib/i18n-content';
@@ -13,7 +12,6 @@ const c = getContent(lang).colophon;
 
 <Base title={c.title} description={c.description} lang={lang}>
   <h1>{c.title}</h1>
-  <DraftFlag lang={lang} />
   <div class="prose">
     <h2>{c.stackHeading}</h2>
     <ul>

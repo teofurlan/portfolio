@@ -1,6 +1,5 @@
 ---
 import PostList from '../PostList.astro';
-import DraftFlag from '../DraftFlag.astro';
 import Base from '../../layouts/Base.astro';
 import type { Lang } from '../../i18n/ui';
 import { getContent } from '../../lib/i18n-content';
@@ -14,7 +13,6 @@ const c = getContent(lang).writing;
 
 <Base title={c.title} description={c.description} lang={lang}>
   <h1>{c.title}</h1>
-  <DraftFlag lang={lang} />
   <section class="sheet" aria-labelledby="h-posts">
     <div class="sh"><h2 id="h-posts">{c.heading}</h2><span class="mono sub-ink">{c.sub}</span></div>
     <PostList newestFirst lang={lang} />

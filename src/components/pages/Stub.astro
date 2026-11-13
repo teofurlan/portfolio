@@ -1,6 +1,5 @@
 ---
 /** Placeholder pages (build session P4, decoration archive P5), both languages. */
-import DraftFlag from '../DraftFlag.astro';
 import Base from '../../layouts/Base.astro';
 import type { Lang } from '../../i18n/ui';
 import { getContent } from '../../lib/i18n-content';
@@ -15,6 +14,5 @@ const c = getContent(lang)[page];
 
 <Base title={c.title} lang={lang}>
   <h1>{c.title}</h1>
-  <DraftFlag lang={lang} />
   <p>{c.text}</p>
 </Base>

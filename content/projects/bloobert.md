@@ -56,7 +56,6 @@ Everything, working with coding agents: the product definition, the architecture
 
 ## What I'd change
 
-> DRAFT — Teo rewrites this in his own words.
 
 - I'd measure a release build (size, CPU), and check the Windows transparent-window border and click-through behavior, which the docs list as still to be checked.
 - Without the camera, break detection is trust-based. I still need to decide whether that is acceptable or needs another signal.

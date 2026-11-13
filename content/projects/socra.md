@@ -64,11 +64,9 @@ One measurement exists, with a caveat. On an RTX 4060 8 GB, with synthesized **S
 
 End-to-end speed has not been measured.
 
-TODO(owner): blind voice A/B result. The ratings sit in browser localStorage and the winner is only in a draft note, so it is not stated here.
 
 ## What I'd change
 
-> DRAFT — Teo rewrites this in his own words.
 
 - I'd measure end-to-end latency, and re-run the Whisper benchmark on English audio, since the current numbers are Spanish.
 - I'd make Pi questions that need a choice or free text answerable by voice. Today they are cancelled.

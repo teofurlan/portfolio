@@ -1,6 +1,6 @@
 ---
 /**
- * About: two paragraphs (DRAFT until Teo rewrites them, S15) and the timeline
+ * About: two paragraphs and the timeline
  * from content/resume.json meta.timeline. One photo only (2004), through the
  * image pipeline so metadata is stripped.
  */
@@ -12,12 +12,10 @@ import { t, type Lang } from '../i18n/ui';
 
 interface Props {
   lang?: Lang;
-  /** Show the DRAFT flag. English: always (default). Spanish pages carry one flag near the top instead (S3). */
-  draft?: boolean;
   /** Render the photo timeline entry as text only (home: the photo already sits in the hero). */
   textOnly?: boolean;
 }
-const { lang = 'en', draft = lang === 'en', textOnly = false } = Astro.props;
+const { lang = 'en', textOnly = false } = Astro.props;
 const tr = t(lang);
 
 const photos: Record<string, { src: ImageMetadata; alt: string }> = {
@@ -32,7 +30,6 @@ const paragraphs = getContent(lang).about.paragraphs;
 
 <div class="about">
   <div>
-    {draft && <span class="draft">{tr('draft')}</span>}
     {paragraphs.map((p) => <p>{p}</p>)}
   </div>
   <ol class="tl" aria-label={tr('about.timeline')}>

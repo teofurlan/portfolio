@@ -33,7 +33,7 @@ Como es un proyecto individual, construí todo con agentes de programación, des
 
 ## Resultado
 
-Socra me funciona bien y me ayuda a entender código y conceptos generados con IA, y a asegurarme de haberlos entendido bien. ¡Cualquier usuario o colaborador es bienvenido!
+Socra me funciona bien y me ayuda a entender bases de código o conceptos generados con IA, y a asegurarme de entenderlos bien. ¡Cualquier usuario o colaborador es bienvenido!
 
 Existe una medición, con una salvedad. En una RTX 4060 de 8 GB, con audio sintetizado en **español**, medido **antes del cambio a inglés**:
 
@@ -45,11 +45,9 @@ Existe una medición, con una salvedad. En una RTX 4060 de 8 GB, con audio sinte
 
 La velocidad de extremo a extremo no se ha medido.
 
-TODO(owner): resultado del A/B ciego de voces. Las calificaciones están en el localStorage del navegador y el ganador solo aparece en una nota borrador, así que no se indica aquí.
 
 ## Lo que cambiaría
 
-> BORRADOR — Teo lo reescribe con sus propias palabras.
 
 - Mediría la latencia de extremo a extremo y repetiría la prueba de Whisper con audio en inglés, ya que los números actuales son en español.
 - Haría que las preguntas de Pi que requieren una elección o texto libre se puedan responder por voz. Hoy se cancelan.

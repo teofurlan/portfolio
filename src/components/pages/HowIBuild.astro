@@ -1,14 +1,13 @@
 ---
 /** "How I build with AI" essay, both languages. Text lives in content/i18n/<lang>/site.json. */
 import Base from '../../layouts/Base.astro';
-import { t, type Lang } from '../../i18n/ui';
+import type { Lang } from '../../i18n/ui';
 import { getContent } from '../../lib/i18n-content';
 
 interface Props {
   lang: Lang;
 }
 const { lang } = Astro.props;
-const tr = t(lang);
 const c = getContent(lang).ai;
 const l = c.figureLabels;
 const letters = ['a', 'b', 'c', 'd'];
@@ -18,7 +17,6 @@ const letters = ['a', 'b', 'c', 'd'];
   <h1>{c.title}</h1>
   <section class="sheet" aria-labelledby="h-harness">
     <div class="sh"><span class="bal lg fill" aria-hidden="true">3</span><h2 id="h-harness">{c.heading}</h2></div>
-    <span class="draft">{tr('draft')}</span>
     <p class="lead">{c.lead}</p>
 
     <figure class="fig">
