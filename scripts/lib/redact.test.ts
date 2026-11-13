@@ -152,6 +152,28 @@ describe('redact CLI --check', () => {
     expect(r.stderr).toBe('');
   });
 
+  it('fails when a literal from the committed config (private repo) remains, and passes once it is hidden', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'redact-lit-'));
+    const config = join(dir, 'config.json');
+    writeFileSync(config, JSON.stringify({ literals: ['teofurlan/private-thing'] }));
+    const pub = join(dir, 'public');
+    mkdirSync(pub);
+    writeFileSync(join(pub, 'c.json'), JSON.stringify({ events: [{ text: 'see github.com/teofurlan/private-thing' }] }));
+    const bad = spawnSync(process.execPath, ['scripts/redact.ts', '--check', '--public', pub, '--config', config], { encoding: 'utf8' });
+    expect(bad.status).toBe(1);
+    expect(bad.stderr).toContain('literal');
+    writeFileSync(join(pub, 'c.json'), JSON.stringify({ events: [{ text: 'see github.com/[private]' }] }));
+    const ok = spawnSync(process.execPath, ['scripts/redact.ts', '--check', '--public', pub, '--config', config], { encoding: 'utf8' });
+    expect(ok.status).toBe(0);
+  });
+
+  it('the committed config hides the private repos Teo named', () => {
+    const literals: string[] = JSON.parse(readFileSync('transcripts/redact.config.json', 'utf8')).literals;
+    expect(literals).toEqual(expect.arrayContaining(['teofurlan/bloobert', 'teofurlan/mtds-brazo-robot']));
+    expect(redactText('git@github.com:teofurlan/bloobert.git and https://github.com/teofurlan/mtds-brazo-robot', { literals }))
+      .toBe('[email]:[private].git and https://github.com/[private]');
+  });
+
   it('exits 1 and names the file and rule, never the value, when a secret remains', () => {
     const dir = mkdtempSync(join(tmpdir(), 'redact-bad-'));
     mkdirSync(dir, { recursive: true });

@@ -1,0 +1,4 @@
+{
+  "$comment": "Literals hidden from the public transcripts (replaced by [private]). Committed, so the CI check enforces them too. Private repos (Teo, 2026-11-13).",
+  "literals": ["teofurlan/bloobert", "teofurlan/mtds-brazo-robot"]
+}

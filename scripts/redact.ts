@@ -1,12 +1,13 @@
 // Usage:
 //   node scripts/redact.ts            redact transcripts/raw/*.jsonl -> transcripts/public/*.json, then check
 //   node scripts/redact.ts --check    only check transcripts/public (runs before every build)
-// Options: --raw <dir>, --public <dir>. Extra literals to hide: transcripts/redact.local.json
-// ({ "literals": ["..."] }, git-ignored). Exit 1 if any secret pattern remains; values are never printed.
+// Options: --raw <dir>, --public <dir>, --config <file>. Literals to hide ({ "literals": ["..."] }):
+// transcripts/redact.config.json (committed, e.g. private repo names) plus the optional
+// transcripts/redact.local.json (git-ignored). Exit 1 if any secret pattern remains; values are never printed.
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { hostname, userInfo } from 'node:os';
 import { basename, join } from 'node:path';
-import { findLeaks, toPublic, type RedactContext } from './lib/redact.ts';
+import { findLeaks, redactText, toPublic, type RedactContext } from './lib/redact.ts';
 
 const args = process.argv.slice(2);
 const opt = (name: string, fallback: string) => {
@@ -15,8 +16,8 @@ const opt = (name: string, fallback: string) => {
 };
 const rawDir = opt('--raw', 'transcripts/raw');
 const publicDir = opt('--public', 'transcripts/public');
-const localConfig = 'transcripts/redact.local.json';
-const literals: string[] = existsSync(localConfig) ? (JSON.parse(readFileSync(localConfig, 'utf8')).literals ?? []) : [];
+const readLiterals = (file: string): string[] => (existsSync(file) ? (JSON.parse(readFileSync(file, 'utf8')).literals ?? []) : []);
+const literals = [...readLiterals(opt('--config', 'transcripts/redact.config.json')), ...readLiterals('transcripts/redact.local.json')];
 
 function check(ctx: RedactContext): number {
   if (!existsSync(publicDir)) {
@@ -53,5 +54,12 @@ for (const f of readdirSync(rawDir).filter((n) => n.endsWith('.jsonl')).sort()) 
   const out = join(publicDir, `${pub.startedAt.slice(0, 10)}-${pub.id.slice(0, 8)}.json`);
   writeFileSync(out, `${JSON.stringify(pub, null, 1)}\n`);
   console.log(`redact: ${basename(f)} -> ${out} (${pub.events.length} events)`);
+}
+// Translations are written from already-redacted text, but new rules (or literals) must reach them too.
+const translations = join(publicDir, '_translations.json');
+if (existsSync(translations)) {
+  const data: Record<string, { text: string }> = JSON.parse(readFileSync(translations, 'utf8'));
+  for (const entry of Object.values(data)) entry.text = redactText(entry.text, ctx);
+  writeFileSync(translations, `${JSON.stringify(data, null, 1)}\n`);
 }
 process.exit(check(ctx));
