@@ -8,12 +8,14 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/redact.ts --check && astro build",
     "preview": "astro preview",
     "check": "astro check",
     "test": "vitest run",
     "cf-typegen": "wrangler types",
-    "wrangler": "wrangler"
+    "wrangler": "wrangler",
+    "transcripts:collect": "node scripts/collect-sessions.ts",
+    "transcripts:redact": "node scripts/redact.ts"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.0.0",
@@ -24,6 +26,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.0",
+    "@types/node": "^22.20.5",
     "typescript": "^6.0.0",
     "vitest": "^5.0.0",
     "wrangler": "^4.125.0"

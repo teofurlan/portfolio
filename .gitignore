@@ -4,6 +4,7 @@ inputs/cv/*
 
 # Raw agent transcripts: only redacted output in transcripts/public/ is committed
 transcripts/raw/
+transcripts/redact.local.json
 
 # Secrets and local tooling state
 .env
