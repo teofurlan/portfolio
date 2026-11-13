@@ -24,9 +24,9 @@ redacted transcript before it is public.
 | T2 | `scripts/redact.ts` + tests: redact to `transcripts/public/*.json`; `--check` fails on any remaining secret pattern; wired before build | S2, S8 | inline, test-first | `04102b0` |
 | T3 | Favicon: three artboards in `design/favicon/` (after design system sync), then five T. variations (L8) | S7 | inline | `cad09d4`, see L10 |
 | T4 | **Gate:** Teo reviews the redacted output and picks the favicon | S2, S7 | Teo | |
-| T5 | Curation: active branch only, harness notices, chapters, highlights, collapsed steps, metadata (`src/lib/replay.ts`, `transcripts/curation.json`) | S3, S5 | inline, test-first | |
+| T5 | Curation: active branch only, harness notices, chapters, highlights, collapsed steps, metadata (`src/lib/replay.ts`, `transcripts/curation.json`) | S3, S5 | inline, test-first | `586df59` |
 | T6 | Two-way translation precompute into `transcripts/public/_translations.json` (L12) | S6 | worker (background) | |
-| T7 | Player island (autoplay, pause → browsable transcript, reduced motion, no-JS static) | S4, S8 | inline | |
+| T7 | Player island (autoplay, pause → browsable transcript, reduced motion, no-JS static) | S4, S5, S6, S8 | worker (background, context backstop) | |
 | T8 | Ship the chosen favicon | S7, S8 | inline | |
 
 ## Log
