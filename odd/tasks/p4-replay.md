@@ -25,7 +25,7 @@ redacted transcript before it is public.
 | T3 | Favicon: three artboards in `design/favicon/` (after design system sync), then five T. variations (L8) | S7 | inline | `cad09d4`, see L10 |
 | T4 | **Gate:** Teo reviews the redacted output and picks the favicon | S2, S7 | Teo | |
 | T5 | Curation: active branch only, harness notices, chapters, highlights, collapsed steps, metadata (`src/lib/replay.ts`, `transcripts/curation.json`) | S3, S5 | inline, test-first | `586df59` |
-| T6 | Two-way translation precompute into `transcripts/public/_translations.json` (L12) | S6 | worker (background) | |
+| T6 | Two-way translation precompute into `transcripts/public/_translations.json` (L12) | S6 | worker (background) | uncommitted (T4 gate), see L16 |
 | T7 | Player island (autoplay, pause → browsable transcript, reduced motion, no-JS static) | S4, S5, S6, S8 | worker (background, context backstop) | |
 | T8 | Ship the chosen favicon (07, T_ prompt) | S7, S8 | inline | see L15 |
 
@@ -46,3 +46,4 @@ redacted transcript before it is public.
 - L13: "1. I like the T_ prompt one"
 - L14: "2. Hace socra y pricor públicos si no lo están"
 - L15: T8: favicon 07 (T_ prompt) shipped: `public/favicon.svg` (palette follows `prefers-color-scheme`), `public/favicon-32.png` and `public/apple-touch-icon.png` (paper palette, rendered with Sharp), linked from `src/layouts/Base.astro` on every page. L14: `gh repo view` shows socra and pricor are already PUBLIC (robot-arm and portfolio too; bloobert and mtds-brazo-robot are PRIVATE), so nothing was changed on GitHub.
+- L16: T6 worker done: `transcripts/public/_translations.json`, 210/210 user+text events (27 es→en, 183 en→es), redact check clean (6 files). Parent spot check: 0 tuteo forms in the 183 Spanish entries; f40ecbb7 and fcebf426 read faithfully. Uncommitted with the rest of `transcripts/public/` until T4.
