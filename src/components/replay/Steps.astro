@@ -1,0 +1,23 @@
+---
+/** A run of collapsed steps (thinking, tool calls, results, notices): native <details>, closed by default. */
+import { fill } from '../../lib/i18n-content';
+import type { SiteContent } from '../../lib/i18n-content';
+import type { BlockView } from '../../lib/replay-data';
+
+type Group = Extract<BlockView, { kind: 'steps' }>;
+interface Props {
+  g: Group;
+  c: SiteContent['buildSession'];
+}
+const { g, c } = Astro.props;
+const label = g.count === 1 ? c.stepsCollapsedOne : fill(c.stepsCollapsed, { n: g.count });
+---
+
+<details class="steps" data-seq>
+  <summary>{label}</summary>
+  <ol>
+    {g.steps.map((s) => (
+      <li class:list={[s.kind, { err: s.error }]}><span class="k">{s.label}</span><code>{s.snippet}</code></li>
+    ))}
+  </ol>
+</details>

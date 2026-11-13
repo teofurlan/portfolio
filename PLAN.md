@@ -7,7 +7,7 @@ decides. Per-phase ODD specs live in `odd/tasks/`.
 **Current state:** P3, P3.5 (Spanish version) and P3.6 (Teo's review round 1) on branch
 `p3-layout` (not merged, no deploy). Featured: Socra, MTDS, Pricor; bloobert listed. Waiting on
 Teo: Spanish review, DRAFT texts,
-certificates, media. P3.7 (review round 2) done, draft flags removed for deploy (`08483e2`). Next: P4.
+certificates, media. P3.7 (review round 2) done, draft flags removed for deploy (`08483e2`). P4 built on branch `p4-replay` (`odd/tasks/p4-replay.md`); waiting for Teo to approve committing `transcripts/public/`. Next: P5.
 
 ## Environment notes
 
@@ -140,10 +140,12 @@ certificates, media. P3.7 (review round 2) done, draft flags removed for deploy 
 
 | Task | Status | Commit |
 |---|---|---|
-| Copy build-session JSONL into `transcripts/raw/` (git-ignored) | todo | |
-| `scripts/redact.ts` + tests (must catch secrets; fails build) | todo | |
-| Chapters/highlights curation, EN translation precompute | todo | |
-| Player island (autoplay, pause → browsable transcript, reduced-motion) | todo | |
+| Copy build-session JSONL into `transcripts/raw/` (git-ignored) | done | `04102b0` |
+| `scripts/redact.ts` + tests (must catch secrets; fails build) | done | `04102b0` |
+| Chapters/highlights curation, two-way translation precompute | done (translations uncommitted until gate) | `586df59` |
+| Player island (autoplay, pause → browsable transcript, reduced-motion) | done | see `odd/tasks/p4-replay.md` |
+| Favicon (T_ prompt) | done | `77beac6` |
+| **Gate:** Teo approves publishing `transcripts/public/` | waiting | |
 
 ### P5 — Daily decoration
 

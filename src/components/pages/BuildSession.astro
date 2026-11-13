@@ -1,0 +1,89 @@
+---
+/** "How this site was built": session replay, both languages. Without transcripts (CI) it shows the placeholder copy. */
+import Base from '../../layouts/Base.astro';
+import Message from '../replay/Message.astro';
+import Steps from '../replay/Steps.astro';
+import type { Lang } from '../../i18n/ui';
+import { getContent } from '../../lib/i18n-content';
+import { formatDate, formatRange, getReplay } from '../../lib/replay-data';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = getContent(lang).buildSession;
+const replay = getReplay();
+const m = replay?.totals;
+const dates = m ? (m.startedAt.slice(0, 10) === m.endedAt.slice(0, 10) ? formatDate(m.startedAt, lang, true) : `${formatDate(m.startedAt, lang)} – ${formatDate(m.endedAt, lang, true)}`) : '';
+const meta = m
+  ? [
+      [c.meta.models, m.models.join(', ')],
+      [c.meta.dates, dates],
+      [c.meta.sessions, String(m.sessions)],
+      [c.meta.turns, String(m.turns)],
+      [c.meta.toolCalls, String(m.toolCalls)],
+      [c.meta.filesChanged, String(m.filesChanged)],
+    ]
+  : [];
+---
+
+<Base title={c.title} description={replay ? c.description : c.text} lang={lang}>
+  <h1>{c.title}</h1>
+  {!replay && <p>{c.text}</p>}
+  {replay && (
+    <>
+      <section class="sheet intro" aria-labelledby="bs-meta">
+        <p class="lead">{c.intro}</p>
+        <p>{c.languages}</p>
+        <h2 id="bs-meta" class="sr">{c.metaLabel}</h2>
+        <dl class="bs-meta">
+          {meta.map(([k, v]) => <div><dt>{k}</dt><dd class="num">{v}</dd></div>)}
+        </dl>
+      </section>
+
+      <nav class="bs-toc" aria-label={c.chaptersLabel}>
+        <h2 class="mono">{c.chaptersLabel}</h2>
+        <ol>
+          {replay.chapters.map((ch) => (
+            <li><a href={`#ch-${ch.n}`}><span class="bal">{ch.n}</span>{ch.title[lang]}</a></li>
+          ))}
+        </ol>
+      </nav>
+
+      <section class="replay" data-replay data-mode="static" aria-label={c.transcriptLabel}
+        data-l-play={c.player.play} data-l-pause={c.player.pause} data-l-restart={c.player.restart}
+        data-l-paused={c.player.paused} data-l-chapter={c.player.chapter} data-l-stage={c.player.stage}>
+        <div class="rp-bar" data-bar hidden>
+          <button type="button" class="btn sm" data-play>{c.player.play}</button>
+          <div class="rp-speed" role="group" aria-label={c.player.speed}>
+            {[1, 2, 4].map((s) => <button type="button" class="btn sm" data-speed={s} aria-pressed={s === 1 ? 'true' : 'false'}>{s}×</button>)}
+          </div>
+          <label class="rp-tr" data-tr-switch hidden><input type="checkbox" data-tr-all /> {c.showTranslation}</label>
+          <div class="rp-track" data-track role="slider" tabindex="0" aria-label={c.player.progress} aria-valuemin="0" aria-valuemax="1" aria-valuenow="0">
+            <div class="rp-fill" data-fill></div>
+            <div class="rp-marks" data-marks></div>
+          </div>
+          <p class="rp-now mono" data-now></p>
+        </div>
+        <h2 class="sr">{c.transcriptLabel}</h2>
+        <p class="sr" aria-live="polite" data-live></p>
+
+        <div class="rp-stage sheet" data-stage>
+          {replay.chapters.map((ch) => (
+            <section class="ch" id={`ch-${ch.n}`} aria-labelledby={`ch-${ch.n}-h`}>
+              <header class="ch-h" data-seq data-chapter={ch.n} data-title={ch.title[lang]}>
+                <span class="bal fill" aria-hidden="true">{ch.n}</span>
+                <h3 id={`ch-${ch.n}-h`}>{ch.title[lang]}</h3>
+                <p class="mono">{formatRange(ch.from, ch.to, lang)} UTC</p>
+              </header>
+              {ch.blocks.map((b) => (b.kind === 'message' ? <Message m={b} lang={lang} c={c} /> : <Steps g={b} c={c} />))}
+            </section>
+          ))}
+        </div>
+      </section>
+      <script>
+        import '../../scripts/replay';
+      </script>
+    </>
+  )}
+</Base>

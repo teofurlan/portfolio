@@ -1,0 +1,33 @@
+---
+/** One transcript message. Text is interpolated (escaped) and shown pre-wrapped: never HTML. */
+import type { Lang } from '../../i18n/ui';
+import { formatTime, type BlockView } from '../../lib/replay-data';
+import type { SiteContent } from '../../lib/i18n-content';
+
+type Msg = Extract<BlockView, { kind: 'message' }>;
+interface Props {
+  m: Msg;
+  lang: Lang;
+  c: SiteContent['buildSession'];
+}
+const { m, lang, c } = Astro.props;
+const tr = m.translation;
+const origLang = tr ? (tr.to === 'en' ? 'es' : 'en') : undefined;
+---
+
+<article class:list={['msg', m.role, { hl: m.highlight }]} id={`m-${m.id}`} data-seq data-role={m.role} data-who={c.who[m.role]}>
+  <header class="mh">
+    <span class="who">{c.who[m.role]}</span>
+    <time datetime={m.at}>{formatTime(m.at, lang)} UTC</time>
+    {m.highlight && <span class="hlmark">{c.highlight}</span>}
+  </header>
+  <div class="cols">
+    <pre class="orig" lang={origLang}>{m.text}</pre>
+    {tr && (
+      <details class="trd">
+        <summary>{c.machineTranslation} · {tr.to.toUpperCase()}</summary>
+        <pre class="tr" lang={tr.to}>{tr.text}</pre>
+      </details>
+    )}
+  </div>
+</article>
