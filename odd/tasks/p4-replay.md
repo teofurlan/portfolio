@@ -19,9 +19,9 @@ redacted transcript before it is public.
 
 | ID | Task | Specs | Route | Commit |
 |---|---|---|---|---|
-| T1 | `scripts/collect-sessions.ts`: copy this repo's Pi session JSONL into `transcripts/raw/` (git-ignored, never deletes) | S1 | inline | |
-| T2 | `scripts/redact.ts` + tests: redact to `transcripts/public/*.json`; `--check` fails on any remaining secret pattern; wired before build | S2, S8 | inline, test-first | |
-| T3 | Favicon: three artboards in `design/favicon/` (after design system sync) | S7 | inline | |
+| T1 | `scripts/collect-sessions.ts`: copy this repo's Pi session JSONL into `transcripts/raw/` (git-ignored, never deletes) | S1 | inline | `04102b0` |
+| T2 | `scripts/redact.ts` + tests: redact to `transcripts/public/*.json`; `--check` fails on any remaining secret pattern; wired before build | S2, S8 | inline, test-first | `04102b0` |
+| T3 | Favicon: three artboards in `design/favicon/` (after design system sync) | S7 | inline | see Log L5 |
 | T4 | **Gate:** Teo reviews the redacted output and picks the favicon | S2, S7 | Teo | |
 | T5 | Curation: chapters, highlights, collapsed steps, metadata | S3, S5 | inline | |
 | T6 | EN translation precompute (labelled machine translation) | S6 | inline | |
@@ -32,3 +32,6 @@ redacted transcript before it is public.
 
 - L1: "Let's start with the P4 phase and also add the favicon (give me three options)"
 - L2: Pi session files for this repo live in `~/.pi/agent/sessions/--C--Users-teofu-Code-portfolio--/` (5 files, ~18 MB, format v3: `session`, `model_change`, `thinking_level_change`, `custom`, `message` with roles system/user/assistant/toolResult; entries form a tree via `id`/`parentId`). Sensitive categories seen: local paths, email/name/phone, deploy-key and Cloudflare token context, private repo links.
+- L3: T1/T2 done: `pnpm transcripts:collect` copied 5 files; `pnpm transcripts:redact` wrote 5 files (2.1 MB, 2042 events) to `transcripts/public/`; `pnpm build` now runs `redact.ts --check` first. RED observed for the module and for regex-escaped/truncated emails (`a@gmail\.com`, `a@gmail.`) found in the real output. Tests 102/102, check 0 errors. Added dev dependency `@types/node` (scripts use `node:` modules). The public JSON is **not committed** until Teo reviews it (gate T4).
+- L4: Left in the redacted output for Teo to judge: the obfuscated "teofurlan03 [at] gmail.com" (already on the site), "Entre Ríos" (CV location), the Windows PATH dump with `[user]`, names of private sibling folders in `ls` output (e.g. `gitlab_deploy_key` file name, no key content), web-search results. Extra literals to hide go in `transcripts/redact.local.json` (git-ignored).
+- L5: Design system synced to `design/system.md` + `design/system.html` from `src/styles/global.css`. Favicon directions in `design/favicon/`: `01-monogram.html`, `02-kinematic-link.html`, `03-exploded-plates.html`.
