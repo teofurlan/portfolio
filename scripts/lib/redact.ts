@@ -111,6 +111,8 @@ export interface PublicSession {
   id: string;
   startedAt: string;
   models: string[];
+  /** Entries left out because they sit on an abandoned branch (a retried prompt). */
+  abandoned: number;
   events: PublicEvent[];
 }
 
@@ -129,6 +131,20 @@ function textOf(content: unknown): string {
 
 // Custom messages worth showing: subagent results are part of the story; the rest is harness bookkeeping.
 const SHOWN_NOTICES = new Set(['gentle-agents.result']);
+// The harness also sends some notifications with the user role; they are not Teo's words.
+const HARNESS_PREFIX = /^\[(?:System-generated|Harness note)[^\]]*\]/;
+
+/** Ids on the path from the last entry back to the root: the conversation as it finally went. */
+function activePath(entries: any[]): Set<string> {
+  const byId = new Map(entries.filter((e) => e.id && e.type !== 'session').map((e) => [e.id, e]));
+  const path = new Set<string>();
+  let cur = [...byId.values()].at(-1);
+  while (cur && !path.has(cur.id)) {
+    path.add(cur.id);
+    cur = cur.parentId ? byId.get(cur.parentId) : undefined;
+  }
+  return path;
+}
 
 /** Convert raw Pi session entries (JSONL v3) into a redacted public session. */
 export function toPublic(entries: any[], ctx: RedactContext, opts: { maxChars?: number } = {}): PublicSession {
@@ -136,9 +152,16 @@ export function toPublic(entries: any[], ctx: RedactContext, opts: { maxChars?: 
   const session = entries.find((e) => e.type === 'session');
   const models = new Set<string>();
   const events: PublicEvent[] = [];
+  const path = activePath(entries);
+  let abandoned = 0;
 
   for (const e of entries) {
     if (e.type === 'model_change' && e.modelId) models.add(e.modelId);
+    if (e.type === 'session') continue;
+    if (e.id && !path.has(e.id)) {
+      abandoned++;
+      continue;
+    }
     const base = { parentId: e.parentId ?? null, at: e.timestamp };
 
     if (e.type === 'custom_message' && SHOWN_NOTICES.has(e.customType)) {
@@ -149,7 +172,8 @@ export function toPublic(entries: any[], ctx: RedactContext, opts: { maxChars?: 
     const m = e.message ?? {};
 
     if (m.role === 'user') {
-      events.push({ ...base, id: e.id, kind: 'user', text: redactText(textOf(m.content), ctx) });
+      const text = redactText(textOf(m.content), ctx);
+      events.push({ ...base, id: e.id, kind: HARNESS_PREFIX.test(text) ? 'notice' : 'user', text });
     } else if (m.role === 'assistant') {
       if (m.model) models.add(m.model);
       (Array.isArray(m.content) ? m.content : []).forEach((c: any, i: number) => {
@@ -175,5 +199,5 @@ export function toPublic(entries: any[], ctx: RedactContext, opts: { maxChars?: 
     }
   }
 
-  return { id: session?.id ?? '', startedAt: session?.timestamp ?? '', models: [...models], events };
+  return { id: session?.id ?? '', startedAt: session?.timestamp ?? '', models: [...models], abandoned, events };
 }

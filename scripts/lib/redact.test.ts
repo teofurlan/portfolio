@@ -165,3 +165,33 @@ describe('redact CLI --check', () => {
     expect(readFileSync(join(dir, 'b.json'), 'utf8')).toBe(before);
   });
 });
+
+describe('toPublic: branches and harness notices', () => {
+  const msg = (id: string, parentId: string | null, role: string, text: string) => ({
+    type: 'message', id, parentId, timestamp: `2026-11-11T10:00:0${id.length}.000Z`,
+    message: { role, content: [{ type: 'text', text }] },
+  });
+  const entries = [
+    { type: 'session', version: 3, id: 's2', timestamp: '2026-11-11T10:00:00.000Z', cwd: '/tmp' },
+    msg('u1', null, 'user', 'first try'),
+    msg('a1', 'u1', 'assistant', 'abandoned answer'),
+    msg('u2', null, 'user', 'second try'),
+    msg('n1', 'u2', 'user', '[System-generated Gentle Agents notification, not written by the user] Subagent output was delivered.'),
+    msg('a2', 'n1', 'assistant', 'kept answer'),
+  ];
+  const pub = toPublic(entries, ctx);
+
+  it('keeps only the active branch (root to the last entry) and counts what it dropped', () => {
+    expect(pub.events.map((e) => e.text)).not.toContain('first try');
+    expect(pub.events.map((e) => e.text)).not.toContain('abandoned answer');
+    expect(pub.abandoned).toBe(2);
+  });
+
+  it('shows system-generated messages sent with the user role as notices, not as the user', () => {
+    expect(pub.events.map((e) => [e.kind, e.text])).toEqual([
+      ['user', 'second try'],
+      ['notice', '[System-generated Gentle Agents notification, not written by the user] Subagent output was delivered.'],
+      ['text', 'kept answer'],
+    ]);
+  });
+});

@@ -24,8 +24,8 @@ redacted transcript before it is public.
 | T2 | `scripts/redact.ts` + tests: redact to `transcripts/public/*.json`; `--check` fails on any remaining secret pattern; wired before build | S2, S8 | inline, test-first | `04102b0` |
 | T3 | Favicon: three artboards in `design/favicon/` (after design system sync), then five T. variations (L8) | S7 | inline | `cad09d4`, see L10 |
 | T4 | **Gate:** Teo reviews the redacted output and picks the favicon | S2, S7 | Teo | |
-| T5 | Curation: chapters, highlights, collapsed steps, metadata | S3, S5 | inline | |
-| T6 | EN translation precompute (labelled machine translation) | S6 | inline | |
+| T5 | Curation: active branch only, harness notices, chapters, highlights, collapsed steps, metadata (`src/lib/replay.ts`, `transcripts/curation.json`) | S3, S5 | inline, test-first | |
+| T6 | Two-way translation precompute into `transcripts/public/_translations.json` (L12) | S6 | worker (background) | |
 | T7 | Player island (autoplay, pause → browsable transcript, reduced motion, no-JS static) | S4, S8 | inline | |
 | T8 | Ship the chosen favicon | S7, S8 | inline | |
 
@@ -41,3 +41,5 @@ redacted transcript before it is public.
 - L8: "2. I don't really like one, the first one (T.) is the one I like the most of them. Suggest more options"
 - L9: "3. The translation should go both ways"
 - L10: Five more favicon artboards, all variations of 01 (T.): `04-solid-monogram`, `05-drafting-sheet`, `06-joint-stop`, `07-prompt-cursor`, `08-dimensioned`. 01-03 kept. Reading of L7: Teo finds the redacted output acceptable and will finish reviewing; the public JSON stays uncommitted until he says it can be published, and the private repo URLs question is still open.
+- L11: Raw sessions are trees: 3 sessions hold one abandoned branch each (a retried prompt). `toPublic` now keeps only the active branch (root to the last entry) and records `abandoned` (count). Harness notifications sent with the user role ("[System-generated …]") become `notice` events, so only Teo's own words are `user`. Volume to translate: 40 user messages (11k chars) and 170 assistant texts (107k chars).
+- L12: Translation format (T6): `transcripts/public/_translations.json`, an object keyed by event id (`user` and `text` events only): `{ "<eventId>": { "from": "es"|"en", "to": "en"|"es", "text": "<translation>" } }`. Each event is translated into the other language (Spanish → English, English → Spanish; Spanish in voseo, matching the site). Code blocks, inline code, paths, commands, URLs, file names, identifiers and redaction markers (`[email]`, `[REDACTED]`, `~`) stay verbatim; markdown structure is kept; nothing is added, summarized or corrected. A message mixing both languages is translated by its main language. Files starting with `_` in `transcripts/public/` are not sessions, but the redact check still scans them. The page labels it "Machine translation" / "Traducción automática".
