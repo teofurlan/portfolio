@@ -2,7 +2,7 @@
   "home": {
     "title": "Teo Furlan",
     "description": "Teo Furlan construye software con agentes de IA y hardware de robótica. Entre Ríos, Argentina, disponible para trabajo remoto.",
-    "heroLine": "De nene con teclado a futuro Ingeniero en Sistemas.",
+    "heroLine": "De mis primeras teclas a Ingeniería en Sistemas",
     "where": "Entre Ríos, Argentina (UTC−3) · disponible para trabajo remoto",
     "legs": [
       { "title": "Software con IA / agentes", "sub": "Socra, Pricor y el arnés con el que trabajo." },
@@ -13,7 +13,7 @@
     "parts": {
       "work": { "label": "Proyectos", "desc": "{names}." },
       "build": { "label": "Cómo se construyó este sitio", "desc": "Toda la conversación que tuve con el agente de programación mientras construía este sitio, reproducida." },
-      "ai": { "label": "Cómo construyo con IA", "desc": "El arnés que armé alrededor del agente: tareas, una bóveda de aprendizaje, exámenes de proyecto y memoria." },
+      "ai": { "label": "Cómo construyo con IA", "desc": "El arnés que uso alrededor del agente: tareas, una bóveda de aprendizaje, exámenes de proyecto y memoria." },
       "writing": { "label": "Escritos", "desc": "{count} artículos en DEV." },
       "about": { "label": "Sobre mí / origen 2004", "desc": "De 2004 a un brazo robótico en 2026." }
     },
@@ -26,7 +26,7 @@
     "buildLead": "Toda la conversación que tuve con el agente de programación mientras construía este sitio, reproducida. Original en español, con traducción al inglés.",
     "buildButton": "Ver la sesión de construcción",
     "aiHeading": "Cómo construyo con IA",
-    "aiLead": "El arnés que armé alrededor del agente: un flujo de trabajo que registra cada tarea, una bóveda de aprendizaje, exámenes de proyecto y memoria.",
+    "aiLead": "El arnés que uso alrededor del agente: un flujo de trabajo que registra cada tarea, una bóveda de aprendizaje, exámenes de proyecto y memoria.",
     "aiButton": "Leer cómo construyo con IA",
     "writingHeading": "Escritos",
     "writingSub": "en DEV",
@@ -100,7 +100,7 @@
     ],
     "toolingHeading": "Herramientas",
     "toolingHtml": "Hecho con el arnés <a href=\"https://github.com/Gentleman-Programming/gentle-ai\">gentle-ai</a> y las skills de <a href=\"https://www.aihero.dev\">AI Hero</a>. Toda la conversación de construcción con el agente de programación está en <a href=\"/es/como-se-construyo/\">Cómo se construyó este sitio</a>.",
-    "llm": "Le pedí a un LLM que editara el texto. La conversación completa de la construcción está en esa página, en español.",
+    "llm": "Texto editado y traducido con un LLM, pendiente de revisión. La conversación completa de la construcción está en esa página, en español.",
     "decorationHeading": "Decoración diaria",
     "decorationHtml": "El dibujo pequeño de la página de inicio es estático por ahora. Más adelante voy a sumar una pieza generada a diario, con el modelo y el prompt a su lado; su archivo estará en <a href=\"/es/decoracion/\">/es/decoracion/</a>.",
     "feedsHeading": "Feeds",

@@ -32,7 +32,7 @@ const en = {
   'contact.copied': 'Copied',
 
   'footer.builtWith': 'Built with the {gentle} harness and {aihero} skills',
-  'footer.llm': 'I had an LLM copy edit the text. The raw build conversation is {here}, in Spanish.',
+  'footer.llm': 'Copy edited with an LLM. The raw build conversation is {here}, in Spanish.',
   'footer.llmLink': 'here',
   'footer.colophon': 'Colophon',
   'footer.rss': 'RSS',

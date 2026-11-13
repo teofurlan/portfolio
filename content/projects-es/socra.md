@@ -33,7 +33,7 @@ Como es un proyecto individual, construí todo con agentes de programación, des
 
 ## Resultado
 
-Socra me funciona bien y me ayuda a entender código y conceptos generados con IA, y a asegurarme de haberlos entendido bien. ¡Cualquier usuario o colaborador es bienvenido!
+Socra me funciona bien y me ayuda a entender bases de código o conceptos generados con IA, y a asegurarme de entenderlos bien. ¡Cualquier usuario o colaborador es bienvenido!
 
 Existe una medición, con una salvedad. En una RTX 4060 de 8 GB, con audio sintetizado en **español**, medido **antes del cambio a inglés**:
 
