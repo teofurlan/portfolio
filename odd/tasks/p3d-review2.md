@@ -25,7 +25,7 @@ Branch `p3-layout` (not merged). Both languages change together; Spanish stays f
 | T4 | Styled, scrollable case-study tables | S5 | inline | `ae7ff17` |
 | T5 | Personal semi-formal tone, EN + ES, and voseo across every Spanish surface | S2, S4, S7 | worker | `8d94979` |
 | T6 | Verify both languages (build, tests, screenshots, tuteo scan) | S1–S7 | inline | verified (no commit) |
-| T8 | Remove every DRAFT/BORRADOR flag and visible TODO(owner) text before deploy | S9 | inline | |
+| T8 | Remove every DRAFT/BORRADOR flag and visible TODO(owner) text before deploy | S9 | inline | `08483e2` |
 | T7 | Reword the L9 sentences that the first person turned into claims, after an independent agent checks each one against the evidence | S4, S8 | verify, then inline | `9bb9b7a` |
 
 ## Log

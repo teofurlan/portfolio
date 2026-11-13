@@ -7,7 +7,7 @@ decides. Per-phase ODD specs live in `odd/tasks/`.
 **Current state:** P3, P3.5 (Spanish version) and P3.6 (Teo's review round 1) on branch
 `p3-layout` (not merged, no deploy). Featured: Socra, MTDS, Pricor; bloobert listed. Waiting on
 Teo: Spanish review, DRAFT texts,
-certificates, media. P3.7 (review round 2) done; Teo to check the tone sentences in `odd/tasks/p3d-review2.md` L9. Next: P4.
+certificates, media. P3.7 (review round 2) done, draft flags removed for deploy (`08483e2`). Next: P4.
 
 ## Environment notes
 
