@@ -27,7 +27,7 @@ redacted transcript before it is public.
 | T5 | Curation: active branch only, harness notices, chapters, highlights, collapsed steps, metadata (`src/lib/replay.ts`, `transcripts/curation.json`) | S3, S5 | inline, test-first | `586df59` |
 | T6 | Two-way translation precompute into `transcripts/public/_translations.json` (L12) | S6 | worker (background) | |
 | T7 | Player island (autoplay, pause → browsable transcript, reduced motion, no-JS static) | S4, S5, S6, S8 | worker (background, context backstop) | |
-| T8 | Ship the chosen favicon | S7, S8 | inline | |
+| T8 | Ship the chosen favicon (07, T_ prompt) | S7, S8 | inline | see L15 |
 
 ## Log
 
@@ -43,3 +43,6 @@ redacted transcript before it is public.
 - L10: Five more favicon artboards, all variations of 01 (T.): `04-solid-monogram`, `05-drafting-sheet`, `06-joint-stop`, `07-prompt-cursor`, `08-dimensioned`. 01-03 kept. Reading of L7: Teo finds the redacted output acceptable and will finish reviewing; the public JSON stays uncommitted until he says it can be published, and the private repo URLs question is still open.
 - L11: Raw sessions are trees: 3 sessions hold one abandoned branch each (a retried prompt). `toPublic` now keeps only the active branch (root to the last entry) and records `abandoned` (count). Harness notifications sent with the user role ("[System-generated …]") become `notice` events, so only Teo's own words are `user`. Volume to translate: 40 user messages (11k chars) and 170 assistant texts (107k chars).
 - L12: Translation format (T6): `transcripts/public/_translations.json`, an object keyed by event id (`user` and `text` events only): `{ "<eventId>": { "from": "es"|"en", "to": "en"|"es", "text": "<translation>" } }`. Each event is translated into the other language (Spanish → English, English → Spanish; Spanish in voseo, matching the site). Code blocks, inline code, paths, commands, URLs, file names, identifiers and redaction markers (`[email]`, `[REDACTED]`, `~`) stay verbatim; markdown structure is kept; nothing is added, summarized or corrected. A message mixing both languages is translated by its main language. Files starting with `_` in `transcripts/public/` are not sessions, but the redact check still scans them. The page labels it "Machine translation" / "Traducción automática".
+- L13: "1. I like the T_ prompt one"
+- L14: "2. Hace socra y pricor públicos si no lo están"
+- L15: T8: favicon 07 (T_ prompt) shipped: `public/favicon.svg` (palette follows `prefers-color-scheme`), `public/favicon-32.png` and `public/apple-touch-icon.png` (paper palette, rendered with Sharp), linked from `src/layouts/Base.astro` on every page. L14: `gh repo view` shows socra and pricor are already PUBLIC (robot-arm and portfolio too; bloobert and mtds-brazo-robot are PRIVATE), so nothing was changed on GitHub.
