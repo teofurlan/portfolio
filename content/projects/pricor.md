@@ -29,9 +29,9 @@ time-savings or testimonial claim (none exists). -->
 
 Small Argentine stores (hardware, stationery, distributors) get weekly supplier price lists in Excel or CSV. Every supplier names its columns differently and leaves out metadata: is VAT included or net, is the price per pack or per unit, is the discount a chain like `10+5`, which currency, which number format. Point-of-sale and ERP systems accept only rigid layouts, so loading by hand is slow, and a misread column silently corrupts costs.
 
-Pricor turns those lists into one normalized catalog that the store's own system can import.
+I built Pricor to turn those lists into one normalized catalog that the store's own system can import.
 
-It is a research prototype. It has no users yet, no customers and no measured time savings, and I'm not claiming any. It has been tried on public price lists from six distributors, not in weekly use at a store.
+It's a research prototype. It has no users yet, no customers and no measured time savings, and I'm not claiming any. I've tried it on public price lists from six distributors, not in weekly use at a store.
 
 ## Constraints
 
@@ -53,7 +53,7 @@ It is a research prototype. It has no users yet, no customers and no measured ti
 
 ## Result
 
-Measured on a held-out test set of **29 columns from two distributors the system had never seen**, on an RTX 4060 Laptop GPU. The set is small and is missing some roles (VAT rate, units per pack, barcode, discount, currency), so read these as a first signal, not a guarantee.
+Measured on a held-out test set of **29 columns from two distributors the system had never seen**, on an RTX 4060 Laptop GPU. The set is small and is missing some roles (VAT rate, units per pack, barcode, discount, currency), so please read these as a first signal, not a guarantee.
 
 | Approach | Correct columns |
 |---|---|

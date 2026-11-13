@@ -12,8 +12,8 @@
     "partsHead": ["Ítem", "Pieza", "Descripción"],
     "parts": {
       "work": { "label": "Proyectos", "desc": "{names}." },
-      "build": { "label": "Cómo se construyó este sitio", "desc": "Toda la conversación de construcción con el agente de programación, reproducida." },
-      "ai": { "label": "Cómo construyo con IA", "desc": "Un arnés alrededor del agente: tareas, una bóveda de aprendizaje, exámenes de proyecto y memoria." },
+      "build": { "label": "Cómo se construyó este sitio", "desc": "Toda la conversación que tuve con el agente de programación mientras construía este sitio, reproducida." },
+      "ai": { "label": "Cómo construyo con IA", "desc": "El arnés que armé alrededor del agente: tareas, una bóveda de aprendizaje, exámenes de proyecto y memoria." },
       "writing": { "label": "Escritos", "desc": "{count} artículos en DEV." },
       "about": { "label": "Sobre mí / origen 2004", "desc": "De 2004 a un brazo robótico en 2026." }
     },
@@ -23,10 +23,10 @@
     "hardwareNav": "Proyectos de hardware",
     "hardwareLabel": "Hardware",
     "buildHeading": "Cómo se construyó este sitio",
-    "buildLead": "Toda la conversación de construcción con el agente de programación, reproducida. Original en español, con traducción al inglés.",
+    "buildLead": "Toda la conversación que tuve con el agente de programación mientras construía este sitio, reproducida. Original en español, con traducción al inglés.",
     "buildButton": "Ver la sesión de construcción",
     "aiHeading": "Cómo construyo con IA",
-    "aiLead": "Un arnés alrededor del agente: un flujo de trabajo que registra cada tarea, una bóveda de aprendizaje, exámenes de proyecto y memoria.",
+    "aiLead": "El arnés que armé alrededor del agente: un flujo de trabajo que registra cada tarea, una bóveda de aprendizaje, exámenes de proyecto y memoria.",
     "aiButton": "Leer cómo construyo con IA",
     "writingHeading": "Escritos",
     "writingSub": "en DEV",
@@ -35,7 +35,7 @@
     "aboutHeading": "Sobre mí",
     "pieceAria": "Decoración: una cadena cinemática simple de tres eslabones.",
     "pieceHeading": "La pieza de hoy",
-    "pieceText": "Por ahora es un dibujo estático; más adelante habrá una pieza generada a diario · ",
+    "pieceText": "Por ahora es un dibujo estático; más adelante voy a sumar una pieza generada a diario · ",
     "pieceArchive": "archivo"
   },
   "about": {
@@ -72,16 +72,16 @@
       "Memoria"
     ],
     "sections": [
-      { "heading": "Un flujo de trabajo que registra cada tarea", "html": "Lo llamo Organic Driven Development (ODD). Cada solicitud se autoriza, se explora y se dimensiona antes de cambiar cualquier código. El trabajo más grande recibe un documento de funcionalidad en el repositorio, <code>odd/tasks/&lt;feature&gt;.md</code>, con especificaciones numeradas que citan mi solicitud textualmente, una tabla de tareas y un registro. Luego el agente trabaja tarea por tarea, con pruebas primero cuando corresponde, hace commits de unidades de trabajo revisables e informa qué se verificó y qué no. Hacer push, abrir pull requests y publicar siguen siendo decisión mía. La <a href=\"/es/como-se-construyo/\">sesión de construcción</a> de este sitio lo muestra en la práctica." },
-      { "heading": "Una bóveda de aprendizaje", "html": "Una bóveda de Obsidian guarda notas de aprendizaje, organizadas por proyecto. Cada proyecto funciona en uno de tres modos: aprender (learn), registrar (log) o apagado (off). Las preguntas conceptuales se convierten en notas de conceptos. La bóveda nunca copia la documentación del repositorio, así que sigue siendo un registro de lo que aprendí y no una segunda copia del código." },
-      { "heading": "Exámenes de proyecto", "html": "En los hitos, el agente escribe un examen de preguntas abiertas sobre el proyecto y califica mis respuestas. La idea es simple: debo poder explicar el código que el agente ayudó a escribir." },
-      { "heading": "Memoria", "html": "Engram, una memoria persistente, guarda decisiones, correcciones de errores y descubrimientos entre sesiones. Después de una pausa o de una compactación del contexto, el trabajo puede retomarse donde quedó." }
+      { "heading": "Un flujo de trabajo que registra cada tarea", "html": "Lo llamo Organic Driven Development (ODD). Cada solicitud se autoriza, se explora y se dimensiona antes de cambiar cualquier código. El trabajo más grande recibe un documento de funcionalidad en el repositorio, <code>odd/tasks/&lt;feature&gt;.md</code>, con especificaciones numeradas que citan mi solicitud textualmente, una tabla de tareas y un registro. Luego el agente trabaja tarea por tarea, con pruebas primero cuando corresponde, hace commits de unidades de trabajo revisables e informa qué se verificó y qué no. Hacer push, abrir pull requests y publicar siguen siendo decisión mía. Podés verlo en la práctica en la <a href=\"/es/como-se-construyo/\">sesión de construcción</a> de este sitio." },
+      { "heading": "Una bóveda de aprendizaje", "html": "Guardo mis notas de aprendizaje en una bóveda de Obsidian, organizadas por proyecto. Cada proyecto funciona en uno de tres modos: aprender (learn), registrar (log) o apagado (off). Las preguntas conceptuales se convierten en notas de conceptos. La bóveda nunca copia la documentación del repositorio, así que sigue siendo un registro de lo que aprendí y no una segunda copia del código." },
+      { "heading": "Exámenes de proyecto", "html": "En los hitos, el agente escribe un examen de preguntas abiertas sobre el proyecto y califica mis respuestas. La idea es simple: quiero poder explicar el código que el agente me ayudó a escribir." },
+      { "heading": "Memoria", "html": "Uso Engram, una memoria persistente, para guardar decisiones, correcciones de errores y descubrimientos entre sesiones. Después de una pausa o de una compactación del contexto, el trabajo puede retomarse donde quedó." }
     ],
     "closingHtml": "Escribí con más detalle sobre la parte de aprendizaje: <a href=\"https://dev.to/teo_furlan/how-i-built-a-learning-system-inside-my-ai-coding-workflow-using-obsidian-fbp\" rel=\"noopener\">How I Built a Learning System Inside My AI Coding Workflow (Using Obsidian)</a> en DEV (en inglés)."
   },
   "writing": {
     "title": "Escritos",
-    "description": "Artículos de Teo Furlan en DEV.",
+    "description": "Artículos que escribí en DEV.",
     "heading": "En DEV",
     "sub": "los más recientes primero",
     "rss": "Feed RSS (en inglés)",
@@ -92,27 +92,27 @@
     "description": "Cómo está construido teofurlan.com y los créditos de las herramientas.",
     "stackHeading": "Stack",
     "stack": [
-      "Astro 7, compilado a páginas estáticas y servido desde los activos estáticos de Cloudflare Workers.",
-      "Tipografía: IBM Plex Sans e IBM Plex Mono, alojadas en el propio sitio.",
+      "Construí el sitio con Astro 7, compilado a páginas estáticas y servido desde los activos estáticos de Cloudflare Workers.",
+      "Tipografía: uso IBM Plex Sans e IBM Plex Mono, alojadas en el propio sitio.",
       "Las imágenes se redimensionan y se les quitan los metadatos en tiempo de compilación con Sharp.",
-      "Dos temas, plano oscuro y papel claro. Siguen la configuración de tu sistema hasta que eliges uno.",
-      "Funciona sin JavaScript. Los scripts solo añaden el interruptor de tema, el puntero sobre la cuadrícula de dibujo, los dibujos al hacer scroll y el enlace del correo."
+      "Dos temas, plano oscuro y papel claro. Siguen la configuración de tu sistema hasta que elegís uno.",
+      "Funciona sin JavaScript. Los scripts solo agregan el interruptor de tema, el puntero sobre la cuadrícula de dibujo, los dibujos al hacer scroll y el enlace del correo."
     ],
     "toolingHeading": "Herramientas",
     "toolingHtml": "Hecho con el arnés <a href=\"https://github.com/Gentleman-Programming/gentle-ai\">gentle-ai</a> y las skills de <a href=\"https://www.aihero.dev\">AI Hero</a>. Toda la conversación de construcción con el agente de programación está en <a href=\"/es/como-se-construyo/\">Cómo se construyó este sitio</a>.",
-    "llm": "Texto editado con un LLM. La conversación completa de la construcción está en esa página, en español.",
+    "llm": "Le pedí a un LLM que editara el texto. La conversación completa de la construcción está en esa página, en español.",
     "decorationHeading": "Decoración diaria",
-    "decorationHtml": "El dibujo pequeño de la página de inicio es estático por ahora. Más adelante habrá una pieza generada a diario, con el modelo y el prompt a su lado; su archivo estará en <a href=\"/es/decoracion/\">/es/decoracion/</a>.",
+    "decorationHtml": "El dibujo pequeño de la página de inicio es estático por ahora. Más adelante voy a sumar una pieza generada a diario, con el modelo y el prompt a su lado; su archivo estará en <a href=\"/es/decoracion/\">/es/decoracion/</a>.",
     "feedsHeading": "Feeds",
     "feedsHtml": "<a href=\"/rss.xml\">Feed RSS de la sección de escritos</a> (en inglés)."
   },
   "buildSession": {
     "title": "Cómo se construyó este sitio",
-    "text": "Reproducción de la sesión de construcción con el agente. Llega en P4."
+    "text": "Una reproducción de mi conversación de construcción con el agente. Llega en P4."
   },
   "decoration": {
     "title": "Archivo de decoración",
-    "text": "Piezas diarias generadas con IA del pasado. Llega en P5."
+    "text": "El archivo de las piezas diarias generadas con IA del pasado. Llega en P5."
   },
   "resume": {
     "description": "CV de Teo Furlan: experiencia, proyectos, educación y habilidades."
@@ -122,13 +122,13 @@
   },
   "figures": {
     "socra": {
-      "aria": "Diagrama de bloques del flujo de señal: micrófono a Whisper, a agente, a voz de Piper y a altavoz.",
+      "aria": "Diagrama de bloques del flujo de señal: micrófono a Whisper, a agente, a voz de Piper y a parlante.",
       "caption": "FIG. 1.1 · Flujo de señal. Esquema, sin escala.",
       "mic": "micrófono",
       "whisper": "Whisper",
       "agent": "agente",
       "piper": "Piper TTS",
-      "speaker": "altavoz"
+      "speaker": "parlante"
     },
     "mtds": {
       "aria": "Esquema de un mecanismo plano con un punto de centro remoto de movimiento, RCM.",
@@ -136,14 +136,14 @@
       "rcm": "RCM"
     },
     "pricor": {
-      "aria": "Diagrama de flujo: lista de precios en xlsx o csv, luego modelo (Laya y después Gemma), luego tú confirmas, luego motor exacto y luego catálogo normalizado.",
-      "caption": "FIG. 1.3 · Los modelos proponen, el motor calcula, tú firmas. Esquema, sin escala.",
+      "aria": "Diagrama de flujo: lista de precios en xlsx o csv, luego modelo (Laya y después Gemma), luego vos confirmás, luego motor exacto y luego catálogo normalizado.",
+      "caption": "FIG. 1.3 · Los modelos proponen, el motor calcula, vos firmás. Esquema, sin escala.",
       "list": "lista",
       "listSub": "xlsx / csv",
       "model": "modelo",
       "modelSub": "Laya → Gemma",
-      "you": "tú",
-      "youSub": "confirmas",
+      "you": "vos",
+      "youSub": "confirmás",
       "engine": "motor",
       "engineSub": "cálculo exacto",
       "catalog": "catálogo",

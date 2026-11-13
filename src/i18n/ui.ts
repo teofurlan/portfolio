@@ -1,8 +1,8 @@
 /**
  * UI strings, one dictionary per language with identical keys (tested in
  * ui.test.ts). Page copy (case studies, essay, About...) lives in content
- * files, not here. Spanish is neutral (tú, no voseo) and an LLM draft until
- * Teo approves it.
+ * files, not here. Spanish uses Rioplatense voseo (vos tenés, mirá, escribime),
+ * never tuteo or usted, and is an LLM draft until Teo approves it.
  */
 export const langs = ['en', 'es'] as const;
 export type Lang = (typeof langs)[number];
@@ -31,10 +31,8 @@ const en = {
   'contact.copyEmail': 'Copy email',
   'contact.copied': 'Copied',
 
-  'footer.badgeLabel': 'Built with Gentle-AI — gentle-ai repository',
-  'footer.badgeAlt': 'Built with Gentle-AI',
   'footer.builtWith': 'Built with the {gentle} harness and {aihero} skills',
-  'footer.llm': 'Copy edited with an LLM. The raw build conversation is {here}, in Spanish.',
+  'footer.llm': 'I had an LLM copy edit the text. The raw build conversation is {here}, in Spanish.',
   'footer.llmLink': 'here',
   'footer.colophon': 'Colophon',
   'footer.rss': 'RSS',
@@ -89,7 +87,7 @@ const en = {
   'resume.location': 'Entre Ríos, Argentina (UTC−3) · open to remote.',
 
   'notfound.title': 'Page not found',
-  'notfound.body': 'That page does not exist. Go back to the {home}.',
+  'notfound.body': 'Sorry, that page does not exist. Go back to the {home}.',
   'notfound.home': 'home page',
 } as const;
 
@@ -118,8 +116,6 @@ const es: Record<UiKey, string> = {
   'contact.copyEmail': 'Copiar correo',
   'contact.copied': 'Copiado',
 
-  'footer.badgeLabel': 'Hecho con Gentle-AI — repositorio de gentle-ai',
-  'footer.badgeAlt': 'Hecho con Gentle-AI',
   'footer.builtWith': 'Hecho con el arnés {gentle} y las skills de {aihero}',
   'footer.llm': 'Traducido con un LLM y pendiente de revisión. La conversación completa de la construcción está {here}, en español.',
   'footer.llmLink': 'aquí',
@@ -176,7 +172,7 @@ const es: Record<UiKey, string> = {
   'resume.location': 'Entre Ríos, Argentina (UTC−3) · disponible para trabajo remoto.',
 
   'notfound.title': 'Página no encontrada',
-  'notfound.body': 'Esa página no existe. Vuelve a la {home}.',
+  'notfound.body': 'Perdón, esa página no existe. Volvé a la {home}.',
   'notfound.home': 'página de inicio',
 };
 

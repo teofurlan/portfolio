@@ -12,8 +12,8 @@
     "partsHead": ["Item", "Part", "Description"],
     "parts": {
       "work": { "label": "Projects", "desc": "{names}." },
-      "build": { "label": "How this site was built", "desc": "The whole build conversation with the coding agent, replayed." },
-      "ai": { "label": "How I build with AI", "desc": "A harness around the agent: tasks, a learning vault, project exams and memory." },
+      "build": { "label": "How this site was built", "desc": "The whole conversation I had with the coding agent while building this site, replayed." },
+      "ai": { "label": "How I build with AI", "desc": "The harness I put around the agent: tasks, a learning vault, project exams and memory." },
       "writing": { "label": "Writing", "desc": "{count} posts on DEV." },
       "about": { "label": "About / origin 2004", "desc": "From 2004 to a robot arm in 2026." }
     },
@@ -23,10 +23,10 @@
     "hardwareNav": "Hardware projects",
     "hardwareLabel": "Hardware",
     "buildHeading": "How this site was built",
-    "buildLead": "The whole build conversation with the coding agent, replayed. Original Spanish, with an English translation.",
+    "buildLead": "The whole conversation I had with the coding agent while building this site, replayed. Original Spanish, with an English translation.",
     "buildButton": "Watch the build session",
     "aiHeading": "How I build with AI",
-    "aiLead": "A harness around the agent: a workflow that tracks every task, a learning vault, project exams and memory.",
+    "aiLead": "The harness I put around the agent: a workflow that tracks every task, a learning vault, project exams and memory.",
     "aiButton": "Read how I build with AI",
     "writingHeading": "Writing",
     "writingSub": "on DEV",
@@ -35,7 +35,7 @@
     "aboutHeading": "About",
     "pieceAria": "Decoration: a simple three-link kinematic chain.",
     "pieceHeading": "Today's piece",
-    "pieceText": "A static drawing for now; a daily generated piece comes later · ",
+    "pieceText": "For now it is a static drawing; I'll add a daily generated piece later · ",
     "pieceArchive": "archive"
   },
   "about": {
@@ -51,7 +51,7 @@
     "title": "How I build with AI",
     "description": "The harness around the agent: a workflow that tracks every task, a learning vault, project exams and memory.",
     "heading": "The harness around the agent",
-    "lead": "I do not just prompt an agent. I run it inside a harness: a workflow that tracks every task, a learning vault, project exams and memory.",
+    "lead": "I don't just prompt an agent. I run it inside a harness: a workflow that tracks every task, a learning vault, project exams and memory.",
     "figureAria": "Diagram of the harness. A loop runs from request to feature doc to agent to checks to commit and back to request. The learning vault, exams and memory are side blocks attached to the agent.",
     "figureCaption": "FIG. 3.1 · The harness around the agent. Schematic.",
     "figureLabels": {
@@ -72,16 +72,16 @@
       "Memory"
     ],
     "sections": [
-      { "heading": "A workflow that tracks every task", "html": "I call it Organic Driven Development (ODD). Every request is authorized, explored and sized before any code changes. Larger work gets a feature document in the repo, <code>odd/tasks/&lt;feature&gt;.md</code>, with numbered specs that quote my request verbatim, a task table and a log. The agent then works task by task, test-first where it applies, commits reviewable work units, and reports what was verified and what was not. Push, pull requests and publishing stay my decision. The <a href=\"/build-session/\">build session</a> for this site shows it in practice." },
-      { "heading": "A learning vault", "html": "An Obsidian vault holds learning notes, kept per project. Each project runs in one of three modes: learn, log or off. Conceptual questions become concept notes. The vault never copies repo docs, so it stays a record of what I learned, not a second copy of the code." },
-      { "heading": "Project exams", "html": "At milestones the agent writes an open-answer exam about the project and grades my answers. The point is simple: I should be able to explain the code the agent helped write." },
-      { "heading": "Memory", "html": "Engram, a persistent memory, saves decisions, bug fixes and discoveries across sessions. After a break or a context compaction, the work can resume where it stopped." }
+      { "heading": "A workflow that tracks every task", "html": "I call it Organic Driven Development (ODD). Every request is authorized, explored and sized before any code changes. Larger work gets a feature document in the repo, <code>odd/tasks/&lt;feature&gt;.md</code>, with numbered specs that quote my request verbatim, a task table and a log. The agent then works task by task, test-first where it applies, commits reviewable work units, and reports what was verified and what was not. Push, pull requests and publishing stay my decision. You can see it in practice in the <a href=\"/build-session/\">build session</a> for this site." },
+      { "heading": "A learning vault", "html": "I keep my learning notes in an Obsidian vault, organized per project. Each project runs in one of three modes: learn, log or off. Conceptual questions become concept notes. The vault never copies repo docs, so it stays a record of what I learned, not a second copy of the code." },
+      { "heading": "Project exams", "html": "At milestones the agent writes an open-answer exam about the project and grades my answers. The point is simple: I want to be able to explain the code the agent helped me write." },
+      { "heading": "Memory", "html": "I use Engram, a persistent memory, to save decisions, bug fixes and discoveries across sessions. After a break or a context compaction, the work can resume where it stopped." }
     ],
     "closingHtml": "I wrote about the learning part in more detail: <a href=\"https://dev.to/teo_furlan/how-i-built-a-learning-system-inside-my-ai-coding-workflow-using-obsidian-fbp\" rel=\"noopener\">How I Built a Learning System Inside My AI Coding Workflow (Using Obsidian)</a> on DEV."
   },
   "writing": {
     "title": "Writing",
-    "description": "Posts by Teo Furlan on DEV.",
+    "description": "Posts I wrote on DEV.",
     "heading": "On DEV",
     "sub": "newest first",
     "rss": "RSS feed",
@@ -92,27 +92,27 @@
     "description": "How teofurlan.com is built, and the tooling credits.",
     "stackHeading": "Stack",
     "stack": [
-      "Astro 7, built to static pages and served from Cloudflare Workers static assets.",
-      "Type: IBM Plex Sans and IBM Plex Mono, self-hosted.",
+      "I built the site with Astro 7, compiled to static pages and served from Cloudflare Workers static assets.",
+      "Type: I use IBM Plex Sans and IBM Plex Mono, self-hosted.",
       "Images are resized and stripped of metadata at build time with Sharp.",
       "Two themes, dark blueprint and light paper. They follow your system setting until you pick one.",
       "Works without JavaScript. Scripts only add the theme toggle, the drafting-grid pointer, the scroll drawings and the email link."
     ],
     "toolingHeading": "Tooling",
     "toolingHtml": "Built with the <a href=\"https://github.com/Gentleman-Programming/gentle-ai\">gentle-ai</a> harness and <a href=\"https://www.aihero.dev\">AI Hero</a> skills. The whole build conversation with the coding agent is on <a href=\"/build-session/\">How this site was built</a>.",
-    "llm": "Copy edited with an LLM. The raw build conversation is on that page, in Spanish.",
+    "llm": "I had an LLM copy edit the text. The raw build conversation is on that page, in Spanish.",
     "decorationHeading": "Daily decoration",
-    "decorationHtml": "The small drawing on the home page is static for now. A daily generated piece, with the model and prompt shown next to it, comes later; its archive will live at <a href=\"/decoration/\">/decoration/</a>.",
+    "decorationHtml": "The small drawing on the home page is static for now. Later I'll add a daily generated piece, with the model and prompt shown next to it; its archive will live at <a href=\"/decoration/\">/decoration/</a>.",
     "feedsHeading": "Feeds",
     "feedsHtml": "<a href=\"/rss.xml\">RSS feed for the writing section</a>."
   },
   "buildSession": {
     "title": "How this site was built",
-    "text": "Session replay of the agent build conversation. Arrives in P4."
+    "text": "A replay of my build conversation with the agent. It arrives in P4."
   },
   "decoration": {
     "title": "Decoration archive",
-    "text": "Past daily AI-generated pieces. Arrives in P5."
+    "text": "The archive of past daily AI-generated pieces. It arrives in P5."
   },
   "resume": {
     "description": "Teo Furlan's resume: work, projects, education and skills."

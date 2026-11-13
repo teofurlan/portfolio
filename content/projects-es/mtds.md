@@ -12,7 +12,7 @@ ownership: >-
 
 ## Problema
 
-Los entornos universitarios necesitan un brazo robótico de bajo costo y reproducible para entrenar cirugía laparoscópica por teleoperación. Las herramientas laparoscópicas pivotan alrededor de un punto fijo en la incisión, el centro remoto de movimiento (RCM). El plan era mantener ese punto por software.
+Los entornos universitarios necesitan un brazo robótico de bajo costo y reproducible para entrenar cirugía laparoscópica por teleoperación. Las herramientas laparoscópicas pivotan alrededor de un punto fijo en la incisión, el centro remoto de movimiento (RCM). Nuestro plan era mantener ese punto por software.
 
 ## Restricciones
 
@@ -34,12 +34,12 @@ Construimos el brazo en un equipo de tres, sin un reparto fijo de tareas. Mi foc
 
 ## Resultado
 
-- Cinemática inversa validada contra el modelo CAD hasta 3 micrómetros, usando el 0,1% del lazo de control de 50 Hz, con pruebas unitarias y sin advertencias de compilación.
-- Se demostró que el RCM por software planificado era inalcanzable en el hardware construido, a dos grados de libertad de distancia, y se encontró una corrección estructural que logra los cuatro grados de libertad laparoscópicos sin motores adicionales.
-- Un simulador en el navegador para que el equipo y el cliente puedan operar el brazo sin hardware.
+- Validé la cinemática inversa contra el modelo CAD hasta 3 micrómetros, usando el 0,1% del lazo de control de 50 Hz, con pruebas unitarias y sin advertencias de compilación.
+- Demostré que el RCM por software planificado era inalcanzable en el hardware construido, a dos grados de libertad de distancia, y encontré una corrección estructural que logra los cuatro grados de libertad laparoscópicos sin motores adicionales.
+- Construí un simulador en el navegador para que el equipo y el cliente puedan operar el brazo sin hardware.
 
 ## Lo que cambiaría
 
 > BORRADOR — Teo lo reescribe con sus propias palabras.
 
-- Ejecutar la verificación de factibilidad antes de comprar el hardware, no después.
+- Ejecutaría la verificación de factibilidad antes de comprar el hardware, no después.
