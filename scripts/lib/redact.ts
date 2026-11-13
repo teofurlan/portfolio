@@ -8,12 +8,14 @@ export interface RedactContext {
   username?: string;
   /** Extra literal strings to hide, e.g. private repo names. */
   literals?: string[];
+  /** Literal strings replaced by a chosen text (e.g. a legal name by the public name). */
+  replacements?: Record<string, string>;
 }
 
 interface Rule {
   name: string;
   pattern: RegExp;
-  replace: string;
+  replace: string | ((match: string) => string);
 }
 
 // Order matters: secrets first, then contact data, then paths and hosts.
@@ -69,6 +71,11 @@ const escape = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 function contextRules(ctx: RedactContext): Rule[] {
   const rules: Rule[] = [];
+  // One pass over every replacement, longest first, so "Ana Pérez" wins over "Ana" and a
+  // replacement's own text is never replaced again.
+  const map = ctx.replacements ?? {};
+  const froms = Object.keys(map).filter(Boolean).sort((a, b) => b.length - a.length);
+  if (froms.length) rules.push({ name: 'literal', pattern: new RegExp(froms.map(escape).join('|'), 'g'), replace: (m) => map[m] });
   for (const literal of ctx.literals ?? []) {
     if (literal) rules.push({ name: 'literal', pattern: new RegExp(escape(literal), 'g'), replace: '[private]' });
   }
@@ -85,7 +92,7 @@ function allRules(ctx: RedactContext): Rule[] {
 
 export function redactText(text: string, ctx: RedactContext = {}): string {
   let out = text;
-  for (const rule of allRules(ctx)) out = out.replace(rule.pattern, rule.replace);
+  for (const rule of allRules(ctx)) out = out.replace(rule.pattern, rule.replace as string);
   return out;
 }
 
@@ -166,8 +173,9 @@ function activePath(entries: any[]): Set<string> {
 }
 
 /** Convert raw Pi session entries (JSONL v3) into a redacted public session. */
-export function toPublic(entries: any[], ctx: RedactContext, opts: { maxChars?: number } = {}): PublicSession {
+export function toPublic(entries: any[], ctx: RedactContext, opts: { maxChars?: number; hide?: string[] } = {}): PublicSession {
   const max = opts.maxChars ?? 6000;
+  const hidden = new Set(opts.hide ?? []);
   const session = entries.find((e) => e.type === 'session');
   const models = new Set<string>();
   const events: PublicEvent[] = [];
@@ -203,6 +211,9 @@ export function toPublic(entries: any[], ctx: RedactContext, opts: { maxChars?: 
           events.push({ ...base, id, kind: 'tool_call', tool: c.name, callId: c.id, text: JSON.stringify(redactValue(c.arguments ?? {}, ctx)) });
         }
       });
+    } else if (m.role === 'toolResult' && hidden.has(e.id)) {
+      // Private tool output (e.g. a folder listing): keep that the step happened, not what it showed.
+      events.push({ ...base, id: e.id, kind: 'tool_result', tool: m.toolName, callId: m.toolCallId, isError: Boolean(m.isError), text: '[private listing]' });
     } else if (m.role === 'toolResult') {
       const diff = typeof m.details?.diff === 'string' ? truncate(redactText(m.details.diff, ctx), max) : undefined;
       events.push({

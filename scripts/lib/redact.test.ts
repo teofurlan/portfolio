@@ -109,6 +109,16 @@ describe('redactText', () => {
   });
 });
 
+describe('replacements', () => {
+  const r: RedactContext = { replacements: { 'Ana Pérez': 'Teo F.', Ana: 'Teo' } };
+
+  it('replaces the longest form first and reports the original as a leak', () => {
+    expect(redactText("Ana Pérez wrote it; Ana's notes", r)).toBe("Teo F. wrote it; Teo's notes");
+    expect(findLeaks('by Ana Pérez', r)).toContain('literal');
+    expect(findLeaks(redactText('by Ana Pérez', r), r)).toEqual([]);
+  });
+});
+
 describe('findLeaks', () => {
   it('names the rules that match without returning the value', () => {
     const leaks = findLeaks(`x ${fake.github} y someone@example.com`, ctx);
@@ -209,6 +219,17 @@ describe('redact CLI --check', () => {
     expect(r.stderr).toContain('github-token');
     expect(r.stderr + r.stdout).not.toContain(fake.github);
     expect(readFileSync(join(dir, 'b.json'), 'utf8')).toBe(before);
+  });
+});
+
+describe('toPublic: hidden events', () => {
+  it('replaces the text of listed events with a marker and drops their diff', () => {
+    const entries = [
+      { type: 'message', id: 'r1', parentId: null, timestamp: '2026-11-11T10:00:00.000Z', message: { role: 'toolResult', toolCallId: 't', toolName: 'bash', content: [{ type: 'text', text: 'secret-folder/\nother/' }], details: { diff: '+x' } } },
+    ];
+    const pub = toPublic(entries, ctx, { hide: ['r1'] });
+    expect(pub.events[0].text).toBe('[private listing]');
+    expect(pub.events[0].diff).toBeUndefined();
   });
 });
 
