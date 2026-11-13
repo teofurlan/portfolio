@@ -1,5 +1,5 @@
 ---
-title: MTDS surgical robot arm
+title: MTDS robot arm
 summary: A low-cost robot arm for laparoscopic surgery training by teleoperation, built around a remote center of motion.
 status: featured
 order: 2
@@ -29,7 +29,7 @@ Demo video brazo_robot_demo.mp4 (552 MB). -->
 
 ## Problem
 
-University settings need a low-cost, reproducible robot arm to train laparoscopic surgery by teleoperation. Laparoscopic tools pivot about a fixed point at the incision, the remote center of motion (RCM). The plan was to hold that point in software.
+University settings need a low-cost, reproducible robot arm to train laparoscopic surgery by teleoperation. Laparoscopic tools pivot about a fixed point at the incision, the remote center of motion (RCM). Our plan was to hold that point in software.
 
 ## Constraints
 
@@ -51,12 +51,12 @@ We built the arm as a team of three, without a fixed split of tasks. My focus wa
 
 ## Result
 
-- Inverse kinematics validated against the CAD model to 3 micrometres, at 0.1% of the 50 Hz control loop, unit tested and warning-clean.
-- Showed that the planned software RCM was unreachable on the built hardware, two degrees of freedom short, and found a structural fix that yields all four laparoscopic degrees of freedom with no extra motors.
-- A browser simulator so the team and the client can operate the arm without hardware.
+- I validated the inverse kinematics against the CAD model to 3 micrometres, at 0.1% of the 50 Hz control loop, unit tested and warning-clean.
+- I showed that the planned software RCM was unreachable on the built hardware, two degrees of freedom short, and I found a structural fix that yields all four laparoscopic degrees of freedom with no extra motors.
+- I built a browser simulator so the team and the client can operate the arm without hardware.
 
 ## What I'd change
 
 > DRAFT — Teo rewrites this in his own words.
 
-- Run the feasibility check before the hardware is bought, not after.
+- I'd run the feasibility check before the hardware is bought, not after.

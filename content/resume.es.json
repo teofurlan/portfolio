@@ -1,0 +1,63 @@
+{
+  "work": [
+    {
+      "name": "Universidad Adventista del Plata, Departamento de Desarrollo de Sistemas",
+      "position": "Desarrollo de software (medio tiempo)",
+      "summary": "Entre Ríos, Argentina.",
+      "highlights": [
+        "Plataforma SIED: plataforma institucional de formación (inscripción, pagos, cupones, sincronización con Moodle) en PHP 8.2 sobre un micro-framework propio (contenedor de DI, enrutamiento por atributos, pipeline de middleware), con Controllers, Services, Repositories y Entities en capas, sobre PostgreSQL y Docker.",
+        "Manejo seguro de archivos: construí el flujo de requisitos documentales guiado por plan: validación de MIME basada en el contenido con finfo en lugar de extensiones de archivo, subidas almacenadas fuera de la raíz de documentos y un único endpoint de descarga para el propietario o el administrador.",
+        "Pruebas de migración de base de datos: pruebas propias de regresión y de compatibilidad SQL de 3 sistemas heredados para la migración de PostgreSQL 9.5.3 a 18.4. Construí un inventario funcional de 65 elementos verificado contra el código, que dejó al descubierto conversiones implícitas de enteros, ORDER BY sensibles a la collation y desajustes de tipos en UNION."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "EmprendER: Plataforma de emprendimiento",
+      "roles": ["Mayor contribución entre cuatro colaboradores (353 de 766 commits); responsable único del desarrollo desde marzo de 2026"],
+      "highlights": [
+        "Funcionalidades a mi cargo: construí el asistente de registro de emprendedores en cuatro pasos, incluido un validador genérico de server actions parametrizado por esquema y redirección por paso; el módulo de emprendimientos (límites de subida, desactivación, visor de perfil para administradores y sus endpoints); el CMS de publicaciones (modelo de Prisma, editor de texto enriquecido, modal de markdown); y la autenticación y el manejo de sesiones. Revisé e integré los pull requests del equipo.",
+        "Preparación para producción: responsable único del desarrollo desde que el código pasó al GitLab autoalojado de la universidad: validación unificada con Zod, manejo aislado de JWT y una revisión sistemática de la corrección de React en alrededor de una docena de pantallas (violaciones de las reglas de hooks, setState dentro de efectos, arrays de dependencias inestables, hidratación de sesión del lado del servidor), además de la modernización de la cadena de herramientas (Prisma v6, pnpm, configuración flat de ESLint, el paso de middleware a proxy en Next.js 16).",
+        "Seguridad y pruebas: cerré una brecha de control de acceso roto al agregar verificación de administrador del lado del servidor a cada ruta /api/admin/*, que hasta entonces solo se aplicaba en el cliente. Construí la suite de pruebas desde cero (cobertura con Playwright para los tres roles más un nivel de humo de 8 pruebas en cada push), que de inmediato dejó a la vista un endpoint de login que devolvía 500 en lugar de 401 ante credenciales incorrectas."
+      ]
+    },
+    {
+      "name": "MTDS: Robot para entrenamiento en cirugía laparoscópica",
+      "roles": ["Software de control y simulación, proyecto de investigación universitario"],
+      "highlights": [
+        "Cinemática y firmware: escribí la capa de movimiento del brazo en C++: cinemática inversa analítica de forma cerrada validada contra el modelo CAD hasta 3 micrómetros usando el 0,1% del lazo de control de 50 Hz, más control de velocidad resuelta en el espacio de la herramienta, con pruebas unitarias y sin advertencias de compilación.",
+        "Análisis de factibilidad: demostré que el centro remoto de movimiento por software planificado era inalcanzable en el hardware construido (le faltaban dos grados de libertad) mediante cinco verificaciones numéricas independientes, y encontré la corrección estructural que logra los cuatro grados de libertad laparoscópicos sin motores adicionales. Informé el resultado negativo en lugar de entregar una restricción falsa.",
+        "Simulación y herramientas: construí un simulador 3D en el navegador para que el equipo y el cliente puedan operar el brazo sin hardware, y automaticé el trabajo de ensamblaje y medición en Fusion 360 mediante su API de Python."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "area": "Ingeniería en Sistemas de Información",
+      "studyType": "Grado"
+    },
+    {
+      "institution": "Escuela de Educación Técnica N.º 619",
+      "area": "Equipos e Instalaciones Electromecánicas",
+      "studyType": "Técnico"
+    }
+  ],
+  "skills": [
+    { "name": "Lenguajes" },
+    { "name": "Frameworks y datos" },
+    { "name": "Pruebas y herramientas" }
+  ],
+  "languages": [
+    { "language": "Español", "fluency": "Nativo" },
+    { "language": "Inglés", "fluency": "B2 (Cambridge FCE, puntaje 171)" }
+  ],
+  "meta": {
+    "timeline": [
+      { "title": "2004. Donde empezó todo." },
+      { "title": "Escuela secundaria técnica: equipos e instalaciones electromecánicas" },
+      { "title": "Empiezo Ingeniería en Sistemas de Información en la Universidad Adventista del Plata" },
+      { "title": "Construyo varios proyectos en la facultad, entre ellos EmprendER" },
+      { "title": "Trabajo como desarrollador de software en la universidad y construyo un brazo robótico para entrenamiento en cirugía laparoscópica" }
+    ]
+  }
+}

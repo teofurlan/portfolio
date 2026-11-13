@@ -1,0 +1,164 @@
+{
+  "home": {
+    "title": "Teo Furlan",
+    "description": "Teo Furlan construye software con agentes de IA y hardware de robótica. Entre Ríos, Argentina, disponible para trabajo remoto.",
+    "heroLine": "De nene con teclado a futuro Ingeniero en Sistemas.",
+    "where": "Entre Ríos, Argentina (UTC−3) · disponible para trabajo remoto",
+    "legs": [
+      { "title": "Software con IA / agentes", "sub": "Socra, Pricor y el arnés con el que trabajo." },
+      { "title": "Hardware", "sub": "Aunque me dedico principalmente al software, me interesan mucho la robótica y el IoT, y creo que son el futuro." }
+    ],
+    "partsCaption": "Lista de piezas · la página en cinco puntos",
+    "partsHead": ["Ítem", "Pieza", "Descripción"],
+    "parts": {
+      "work": { "label": "Proyectos", "desc": "{names}." },
+      "build": { "label": "Cómo se construyó este sitio", "desc": "Toda la conversación que tuve con el agente de programación mientras construía este sitio, reproducida." },
+      "ai": { "label": "Cómo construyo con IA", "desc": "El arnés que armé alrededor del agente: tareas, una bóveda de aprendizaje, exámenes de proyecto y memoria." },
+      "writing": { "label": "Escritos", "desc": "{count} artículos en DEV." },
+      "about": { "label": "Sobre mí / origen 2004", "desc": "De 2004 a un brazo robótico en 2026." }
+    },
+    "workHeading": "Proyectos",
+    "sheets": "Hojas 1.1 – 1.{n}",
+    "moreHeading": "Más proyectos",
+    "hardwareNav": "Proyectos de hardware",
+    "hardwareLabel": "Hardware",
+    "buildHeading": "Cómo se construyó este sitio",
+    "buildLead": "Toda la conversación que tuve con el agente de programación mientras construía este sitio, reproducida. Original en español, con traducción al inglés.",
+    "buildButton": "Ver la sesión de construcción",
+    "aiHeading": "Cómo construyo con IA",
+    "aiLead": "El arnés que armé alrededor del agente: un flujo de trabajo que registra cada tarea, una bóveda de aprendizaje, exámenes de proyecto y memoria.",
+    "aiButton": "Leer cómo construyo con IA",
+    "writingHeading": "Escritos",
+    "writingSub": "en DEV",
+    "writingAll": "Todos los escritos",
+    "writingRss": "RSS",
+    "aboutHeading": "Sobre mí",
+    "pieceAria": "Decoración: una cadena cinemática simple de tres eslabones.",
+    "pieceHeading": "La pieza de hoy",
+    "pieceText": "Por ahora es un dibujo estático; más adelante voy a sumar una pieza generada a diario · ",
+    "pieceArchive": "archivo"
+  },
+  "about": {
+    "title": "Sobre mí",
+    "description": "Sobre Teo Furlan: de una computadora en 2004 a agentes y un brazo robótico en 2026.",
+    "sectionLabel": "Sobre mí y línea de tiempo",
+    "paragraphs": [
+      "Me dedico al desarrollo de software en la Universidad Adventista del Plata, donde empecé Ingeniería en Sistemas de Información en 2022. Construyo software con agentes de IA: Socra, una capa de voz local para cualquier agente o arnés de programación, y un arnés que registra cada tarea que le doy al agente. Vivo en Entre Ríos, Argentina, y estoy disponible para trabajo remoto.",
+      "El lado del hardware empezó en una escuela secundaria técnica, en equipos e instalaciones electromecánicas. Durante la facultad construí varios proyectos; uno de ellos es EmprendER, una plataforma para emprendedores. En 2026, en un equipo de 3, estoy construyendo un brazo robótico de bajo costo para entrenamiento en cirugía laparoscópica."
+    ]
+  },
+  "ai": {
+    "title": "Cómo construyo con IA",
+    "description": "El arnés alrededor del agente: un flujo de trabajo que registra cada tarea, una bóveda de aprendizaje, exámenes de proyecto y memoria.",
+    "heading": "El arnés alrededor del agente",
+    "lead": "No me limito a darle instrucciones a un agente. Lo ejecuto dentro de un arnés: un flujo de trabajo que registra cada tarea, una bóveda de aprendizaje, exámenes de proyecto y memoria.",
+    "figureAria": "Diagrama del arnés. Un ciclo va de la solicitud al documento de la funcionalidad, al agente, a los controles, al commit y de vuelta a la solicitud. La bóveda de aprendizaje, los exámenes y la memoria son bloques laterales unidos al agente.",
+    "figureCaption": "FIG. 3.1 · El arnés alrededor del agente. Esquema.",
+    "figureLabels": {
+      "vault": "bóveda",
+      "exams": "exámenes",
+      "memory": "memoria",
+      "request": "solicitud",
+      "featureDoc": "documento",
+      "agent": "agente",
+      "checks": "controles",
+      "commit": "commit"
+    },
+    "partsLabel": "Partes del arnés",
+    "parts": [
+      "Un flujo de trabajo que registra cada tarea",
+      "Una bóveda de aprendizaje",
+      "Exámenes de proyecto",
+      "Memoria"
+    ],
+    "sections": [
+      { "heading": "Un flujo de trabajo que registra cada tarea", "html": "Lo llamo Organic Driven Development (ODD). Cada solicitud se autoriza, se explora y se dimensiona antes de cambiar cualquier código. El trabajo más grande recibe un documento de funcionalidad en el repositorio, <code>odd/tasks/&lt;feature&gt;.md</code>, con especificaciones numeradas que citan mi solicitud textualmente, una tabla de tareas y un registro. Luego el agente trabaja tarea por tarea, con pruebas primero cuando corresponde, hace commits de unidades de trabajo revisables e informa qué se verificó y qué no. Hacer push, abrir pull requests y publicar siguen siendo decisión mía. Podés verlo en la práctica en la <a href=\"/es/como-se-construyo/\">sesión de construcción</a> de este sitio." },
+      { "heading": "Una bóveda de aprendizaje", "html": "Guardo mis notas de aprendizaje en una bóveda de Obsidian, organizadas por proyecto. Cada proyecto funciona en uno de tres modos: aprender (learn), registrar (log) o apagado (off). Las preguntas conceptuales se convierten en notas de conceptos. La bóveda nunca copia la documentación del repositorio, así que sigue siendo un registro de lo que aprendí y no una segunda copia del código." },
+      { "heading": "Exámenes de proyecto", "html": "En los hitos, el agente escribe un examen de preguntas abiertas sobre el proyecto y califica mis respuestas. La idea es simple: quiero poder explicar el código que el agente me ayudó a escribir." },
+      { "heading": "Memoria", "html": "Uso Engram, una memoria persistente, para guardar decisiones, correcciones de errores y descubrimientos entre sesiones. Después de una pausa o de una compactación del contexto, el trabajo puede retomarse donde quedó." }
+    ],
+    "closingHtml": "Escribí con más detalle sobre la parte de aprendizaje: <a href=\"https://dev.to/teo_furlan/how-i-built-a-learning-system-inside-my-ai-coding-workflow-using-obsidian-fbp\" rel=\"noopener\">How I Built a Learning System Inside My AI Coding Workflow (Using Obsidian)</a> en DEV (en inglés)."
+  },
+  "writing": {
+    "title": "Escritos",
+    "description": "Artículos que escribí en DEV.",
+    "heading": "En DEV",
+    "sub": "los más recientes primero",
+    "rss": "Feed RSS (en inglés)",
+    "all": "Todos los artículos en DEV"
+  },
+  "colophon": {
+    "title": "Colofón",
+    "description": "Cómo está construido teofurlan.com y los créditos de las herramientas.",
+    "stackHeading": "Stack",
+    "stack": [
+      "Construí el sitio con Astro 7, compilado a páginas estáticas y servido desde los activos estáticos de Cloudflare Workers.",
+      "Tipografía: uso IBM Plex Sans e IBM Plex Mono, alojadas en el propio sitio.",
+      "Las imágenes se redimensionan y se les quitan los metadatos en tiempo de compilación con Sharp.",
+      "Dos temas, plano oscuro y papel claro. Siguen la configuración de tu sistema hasta que elegís uno.",
+      "Funciona sin JavaScript. Los scripts solo agregan el interruptor de tema, el puntero sobre la cuadrícula de dibujo, los dibujos al hacer scroll y el enlace del correo."
+    ],
+    "toolingHeading": "Herramientas",
+    "toolingHtml": "Hecho con el arnés <a href=\"https://github.com/Gentleman-Programming/gentle-ai\">gentle-ai</a> y las skills de <a href=\"https://www.aihero.dev\">AI Hero</a>. Toda la conversación de construcción con el agente de programación está en <a href=\"/es/como-se-construyo/\">Cómo se construyó este sitio</a>.",
+    "llm": "Le pedí a un LLM que editara el texto. La conversación completa de la construcción está en esa página, en español.",
+    "decorationHeading": "Decoración diaria",
+    "decorationHtml": "El dibujo pequeño de la página de inicio es estático por ahora. Más adelante voy a sumar una pieza generada a diario, con el modelo y el prompt a su lado; su archivo estará en <a href=\"/es/decoracion/\">/es/decoracion/</a>.",
+    "feedsHeading": "Feeds",
+    "feedsHtml": "<a href=\"/rss.xml\">Feed RSS de la sección de escritos</a> (en inglés)."
+  },
+  "buildSession": {
+    "title": "Cómo se construyó este sitio",
+    "text": "Una reproducción de mi conversación de construcción con el agente. Llega en P4."
+  },
+  "decoration": {
+    "title": "Archivo de decoración",
+    "text": "El archivo de las piezas diarias generadas con IA del pasado. Llega en P5."
+  },
+  "resume": {
+    "description": "CV de Teo Furlan: experiencia, proyectos, educación y habilidades."
+  },
+  "proofs": {
+    "mtds": "Cinemática inversa validada contra el modelo CAD hasta 3 micrómetros."
+  },
+  "figures": {
+    "socra": {
+      "aria": "Diagrama de bloques del flujo de señal: micrófono a Whisper, a agente, a voz de Piper y a parlante.",
+      "caption": "FIG. 1.1 · Flujo de señal. Esquema, sin escala.",
+      "mic": "micrófono",
+      "whisper": "Whisper",
+      "agent": "agente",
+      "piper": "Piper TTS",
+      "speaker": "parlante"
+    },
+    "mtds": {
+      "aria": "Esquema de un mecanismo plano con un punto de centro remoto de movimiento, RCM.",
+      "caption": "FIG. 1.2 · Mecanismo plano alrededor de un centro remoto de movimiento (RCM). Esquema, no el diseño de MTDS.",
+      "rcm": "RCM"
+    },
+    "pricor": {
+      "aria": "Diagrama de flujo: lista de precios en xlsx o csv, luego modelo (Laya y después Gemma), luego vos confirmás, luego motor exacto y luego catálogo normalizado.",
+      "caption": "FIG. 1.3 · Los modelos proponen, el motor calcula, vos firmás. Esquema, sin escala.",
+      "list": "lista",
+      "listSub": "xlsx / csv",
+      "model": "modelo",
+      "modelSub": "Laya → Gemma",
+      "you": "vos",
+      "youSub": "confirmás",
+      "engine": "motor",
+      "engineSub": "cálculo exacto",
+      "catalog": "catálogo",
+      "catalogSub": "normalizado"
+    },
+    "bloobert": {
+      "aria": "Diagrama de estados: sentado, luego derritiéndose, luego descanso, luego recuperado y de vuelta a sentado.",
+      "caption": "FIG. 1.4 · Diagrama de estados. Esquema, sin escala.",
+      "sitting": "sentado",
+      "melting": "se derrite",
+      "break": "descanso",
+      "recovered": "recuperado",
+      "atComputer": "frente a la PC",
+      "activeBreak": "descanso activo",
+      "shapeRegained": "forma recuperada"
+    }
+  }
+}

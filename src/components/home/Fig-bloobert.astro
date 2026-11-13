@@ -1,0 +1,31 @@
+---
+/** FIG for bloobert, ported from artboard 08. Strokes .d are drawn by src/scripts/fx.ts; fully drawn without JS. */
+import { getContent } from '../../lib/i18n-content';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const f = getContent(lang).figures.bloobert;
+---
+<figure class="fig">
+  <svg viewBox="0 0 280 170" role="img" aria-label={f.aria}>
+    <rect class="d" pathLength="1" style="--i:0" x="10" y="22" width="80" height="32" rx="16"/>
+    <path class="d b" pathLength="1" style="--i:1" d="M90 38H190M184 33l6 5-6 5"/>
+    <rect class="d" pathLength="1" style="--i:2" x="190" y="22" width="80" height="32" rx="16"/>
+    <path class="d b" pathLength="1" style="--i:3" d="M230 54V116M225 110l5 6 5-6"/>
+    <rect class="d" pathLength="1" style="--i:4" x="190" y="116" width="80" height="32" rx="16"/>
+    <path class="d b" pathLength="1" style="--i:5" d="M190 132H90M96 127l-6 5 6 5"/>
+    <rect class="d" pathLength="1" style="--i:6" x="10" y="116" width="80" height="32" rx="16"/>
+    <path class="d b" pathLength="1" style="--i:7" d="M50 116V54M45 60l5-6 5 6"/>
+    <text class="fig-t" x="50" y="42" text-anchor="middle">{f.sitting}</text>
+    <text class="fig-t" x="230" y="42" text-anchor="middle">{f.melting}</text>
+    <text class="fig-t" x="230" y="136" text-anchor="middle">{f.break}</text>
+    <text class="fig-t" x="50" y="136" text-anchor="middle">{f.recovered}</text>
+    <text class="fig-t s" x="140" y="30" text-anchor="middle">{f.atComputer}</text>
+    <text class="fig-t s" x="222" y="88" text-anchor="end">{f.activeBreak}</text>
+    <text class="fig-t s" x="140" y="124" text-anchor="middle">{f.shapeRegained}</text>
+  </svg>
+  <figcaption>{f.caption}</figcaption>
+</figure>

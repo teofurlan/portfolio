@@ -1,0 +1,33 @@
+---
+import DraftFlag from '../DraftFlag.astro';
+import Base from '../../layouts/Base.astro';
+import type { Lang } from '../../i18n/ui';
+import { getContent } from '../../lib/i18n-content';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = getContent(lang).colophon;
+---
+
+<Base title={c.title} description={c.description} lang={lang}>
+  <h1>{c.title}</h1>
+  <DraftFlag lang={lang} />
+  <div class="prose">
+    <h2>{c.stackHeading}</h2>
+    <ul>
+      {c.stack.map((item) => <li>{item}</li>)}
+    </ul>
+
+    <h2>{c.toolingHeading}</h2>
+    <p set:html={c.toolingHtml} />
+    <p>{c.llm}</p>
+
+    <h2>{c.decorationHeading}</h2>
+    <p set:html={c.decorationHtml} />
+
+    <h2>{c.feedsHeading}</h2>
+    <p set:html={c.feedsHtml} />
+  </div>
+</Base>

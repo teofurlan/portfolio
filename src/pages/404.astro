@@ -1,8 +1,8 @@
 ---
-import Base from '../layouts/Base.astro';
+/* Workers static assets serve one root 404 page for every language, so it carries a Spanish line too. */
+import NotFound from '../components/pages/NotFound.astro';
 ---
 
-<Base title="Page not found">
-  <h1>Page not found</h1>
-  <p>That page does not exist. Go back to the <a href="/">home page</a>.</p>
-</Base>
+<NotFound lang="en">
+  <p lang="es">Perdón, esa página no existe. Volvé al <a href="/es/" hreflang="es">inicio en español</a>.</p>
+</NotFound>

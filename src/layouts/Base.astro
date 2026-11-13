@@ -1,50 +1,105 @@
 ---
 /**
- * Bare structural layout. Visual design is decided in P2; keep this semantic
- * and unstyled until then.
+ * Site shell from artboard 08 (P2): theme tokens, drafting-grid background,
+ * top bar with contact, footer with credits. Pages fill <main>.
  */
+import '@fontsource/ibm-plex-sans/400.css';
+import '@fontsource/ibm-plex-sans/400-italic.css';
+import '@fontsource/ibm-plex-sans/600.css';
+import '@fontsource/ibm-plex-sans/700.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/600.css';
+import '@fontsource/ibm-plex-mono/700.css';
+import plexLatin400 from '@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2?url';
+import '../styles/global.css';
+import ContactList from '../components/ContactList.astro';
 import { nav, site } from '../data/site';
+import { alternate } from '../i18n/routes';
+import { slots, t, ui, type Lang } from '../i18n/ui';
 
 interface Props {
   title: string;
   description?: string;
+  /** Error pages: no canonical URL. */
+  noCanonical?: boolean;
+  lang?: Lang;
 }
 
-const { title, description = 'Teo Furlan: software with AI agents, and hardware.' } = Astro.props;
+const { title, description = 'Teo Furlan: software with AI agents, and hardware.', noCanonical = false, lang = 'en' } = Astro.props;
+const tr = t(lang);
+const other: Lang = lang === 'en' ? 'es' : 'en';
 const pageTitle = title === site.name ? title : `${title} · ${site.name}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const path = Astro.url.pathname;
+const abs = (p: string) => new URL(p, Astro.site).href;
+const hrefEn = alternate(path, 'en');
+const hrefEs = alternate(path, 'es');
+const hrefOther = other === 'es' ? hrefEs : hrefEn;
+const home = alternate('/', lang);
+const links = nav.map((n) => ({ path: alternate(n.href, lang), href: alternate(n.href, lang) + n.hash, label: tr(n.key) }));
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    <meta name="color-scheme" content="dark light" />
+    {!noCanonical && <link rel="canonical" href={canonical} />}
+    {!noCanonical && <>
+      <link rel="alternate" hreflang="en" href={abs(hrefEn)} />
+      <link rel="alternate" hreflang="es" href={abs(hrefEs)} />
+      <link rel="alternate" hreflang="x-default" href={abs(hrefEn)} />
+    </>}
+    <link rel="alternate" type="application/rss+xml" title={`${site.name}: writing`} href="/rss.xml" />
+    <link rel="preload" href={plexLatin400} as="font" type="font/woff2" crossorigin />
+    <script is:inline>
+      /* Apply the stored theme before first paint (no flash). Without JS the OS setting rules. */
+      (function(){try{var t=localStorage.getItem('theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t)}catch(e){}})();
+    </script>
   </head>
   <body>
-    <a href="#main">Skip to content</a>
-    <header>
-      <a href="/">{site.name}</a>
-      <nav aria-label="Main">
-        <ul>
-          {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
-        </ul>
-      </nav>
+    <div class="bgfx" aria-hidden="true"><div class="glow"></div><div class="chx"></div><div class="chy"></div><div class="xy"></div></div>
+    <a class="skip" href="#main">{tr('skip')}</a>
+
+    <header class="top">
+      <div class="in">
+        <a class="brand" href={home}>{site.name}</a>
+        <ContactList label="contact.label" lang={lang} />
+        <button type="button" class="tgl" id="theme" aria-pressed="false" hidden><span class="sw" aria-hidden="true"></span>{tr('theme.toggle')}</button>
+        <a class="langsw" href={hrefOther} hreflang={other} lang={other} data-lang={other}>{ui[other]['lang.name']}</a>
+        <nav aria-label={tr('nav.main')} class="mainnav-wrap">
+          <ul class="mainnav">
+            {links.map((item) => (
+              <li><a href={item.href} aria-current={path === item.path ? 'page' : undefined}>{item.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      </div>
     </header>
-    <main id="main">
-      <slot />
-    </main>
-    <footer>
-      <ul>
-        <li><a href={site.links.github}>GitHub</a></li>
-        <li><a href={site.links.linkedin}>LinkedIn</a></li>
-        <li><a href={site.links.dev}>DEV</a></li>
-        <li><a href={site.links.cv}>CV (PDF)</a></li>
-      </ul>
-      <p><a href="/colophon/">Colophon</a></p>
+
+    <slot name="shell">
+      <main id="main" class="page">
+        <slot />
+      </main>
+    </slot>
+
+    <footer class="foot">
+      <div class="in">
+        <div>
+          <p>{slots(tr('footer.builtWith')).map((s) => 'text' in s ? s.text : s.slot === 'gentle' ? <a href="https://github.com/Gentleman-Programming/gentle-ai">gentle-ai</a> : <a href="https://www.aihero.dev">AI Hero</a>)}</p>
+          <p>{slots(tr('footer.llm')).map((s) => 'text' in s ? s.text : <a href={alternate('/build-session/', lang)}>{tr('footer.llmLink')}</a>)}</p>
+          <p><a href={alternate('/colophon/', lang)}>{tr('footer.colophon')}</a> · <a href="/rss.xml">{tr('footer.rss')}</a></p>
+          <ContactList label="contact.labelFooter" lang={lang} />
+        </div>
+      </div>
     </footer>
+
+    <script>
+      import '../scripts/ui';
+      import '../scripts/fx';
+    </script>
   </body>
 </html>

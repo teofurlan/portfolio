@@ -4,9 +4,10 @@ Resume point for any agent. Read `BRIEF.md` first, then this file. Update it
 after every task (status + commit). Phases stop at their **Gate** until Teo
 decides. Per-phase ODD specs live in `odd/tasks/`.
 
-**Current state:** P2 gate passed: Teo chose `design/portfolio-directions/08-exploded-index.html`
-(polished with impeccable). Next: P3, build the real Astro layout and sections from it
-(self-host a display font then; artboards use system fonts only). No deploy yet.
+**Current state:** P3, P3.5 (Spanish version) and P3.6 (Teo's review round 1) on branch
+`p3-layout` (not merged, no deploy). Featured: Socra, MTDS, Pricor; bloobert listed. Waiting on
+Teo: Spanish review, DRAFT texts,
+certificates, media. P3.7 (review round 2) done; Teo to check the tone sentences in `odd/tasks/p3d-review2.md` L9. Next: P4.
 
 ## Environment notes
 
@@ -36,6 +37,21 @@ decides. Per-phase ODD specs live in `odd/tasks/`.
   - Resume: `content/resume.json` validated by `src/lib/resume.ts` (JSON
     Resume subset; `basics` is strict so a `phone` key fails the build, tested).
 - Site links: `src/data/site.ts` (single source for hero + footer).
+- **i18n** (P3.5, `odd/tasks/p3b-i18n.md`): Astro i18n, English unprefixed, Spanish under
+  `/es/` with Spanish slugs (`src/i18n/routes.ts`). UI strings in `src/i18n/ui.ts`, page copy in
+  `content/i18n/{en,es}/site.json`, Spanish case studies in `content/projects-es/` (translated
+  fields only), Spanish resume overlay `content/resume.es.json` (re-validated, no phone). Shared
+  page markup in `src/components/pages/`. "Resume" at `/resume/` (EN; `/cv/` 301s there), "CV" at
+  `/es/cv/`.
+- **Language redirect:** all pages are prerendered; only `/` runs code (`assets.run_worker_first:
+  ["/"]`, `src/worker/entry.ts`, pure rule in `src/lib/lang.ts`, tested). A `lang` cookie (set by
+  the EN/ES switch) wins; otherwise Spanish wins only if Accept-Language prefers it → 302 to
+  `/es/`. Both responses send `Vary: Accept-Language, Cookie`. Deep links never redirect.
+  The adapter emits an assets-only config for static output, so the `workerEntry` integration in
+  `astro.config.mjs` adds `main` + the `ASSETS` binding to `dist/client/wrangler.json` after each
+  build. **Deploy only right after `pnpm build`** (and delete `dist/client/.wrangler/` if
+  `wrangler dev` ran). Unknown URLs serve the root `404.html` (`not_found_handling`), which has
+  an English and a Spanish line.
 - Pages: `/`, `/work/[slug]/`, `/build-session/`, `/how-i-work/`, `/writing/`,
   `/about/`, `/cv/`, `/colophon/`, `/decoration/`, `404`. All are unstyled
   stubs until P2/P3.
@@ -79,13 +95,46 @@ decides. Per-phase ODD specs live in `odd/tasks/`.
 | Teo picks a direction: **08 Exploded index** | done (gate passed) | |
 | impeccable polish of 08 | done | see git log |
 
-### P3 — Layout + all sections
+### P3 — Layout + all sections ✅ (branch `p3-layout`, spec `odd/tasks/p3-layout.md`)
 
 | Task | Status | Commit |
 |---|---|---|
-| Hero (Teo's line), featured cards, case-study pages, media gallery, Hardware filter (≥ 2 hardware projects) | todo | |
-| How I work with AI essay + diagram; Writing + RSS; About + timeline; CV page; Contact | todo | |
-| Footer/colophon: obfuscated email, self-hosted gentle-ai badge, AI Hero text credit, LLM copy-edit note | todo | |
+| Shell from artboard 08: tokens, themes, drafting grid, header/footer, IBM Plex Sans/Mono self-hosted, `@astrojs/rss` | done | `203d69f` |
+| Hero (DRAFT line until Teo rewrites), featured sheets with FIG 1.1–1.3, case-study pages, media gallery, Hardware filter rule (hidden until ≥ 2 hardware projects; tested) | done | `c88e4d3` |
+| How I work with AI essay (DRAFT) + FIG 3.1; Writing + `/rss.xml`; About + timeline + 2004 photo; CV from `resume.json` + `#contact`; colophon | done | `1b34b63` |
+| Verify (all pages × 390/1280 px × themes × JS on/off/reduced motion) + a11y fixes | done | `147272b` |
+| Lighthouse | moved to P6 | |
+
+### P3.5 — Spanish version ✅ (spec `odd/tasks/p3b-i18n.md`)
+
+| Task | Status | Commit |
+|---|---|---|
+| Rename AI section to "How I build with AI" (`/how-i-build/`); BRIEF §3 made bilingual | done | `396b914`, `adcd290` |
+| i18n foundation, dictionaries, route map, EN/ES switch, Resume (EN) / CV (ES) | done | `5de6005` |
+| Automatic redirect on `/` with cookie override (Workers) | done | `6ff0b92` |
+| Spanish pages and translated content (BORRADOR) | done | `ef7d2b6` |
+| Verify both languages + fixes (404 page served, rail label) | done | `ee46e71` |
+
+### P3.6 — Review round 1 (spec `odd/tasks/p3c-feedback.md`)
+
+| Task | Status | Commit |
+|---|---|---|
+| Hero line + photo, "Projects" naming and URLs (`/projects/`, `/es/proyectos/`, old paths 301), MTDS name, EmprendER wording, hardware leg, same section buttons, agent-neutral Socra | done | `f73dc13` |
+| Pricor research (read-only, `odd/evidence/pricor.md`) | done | `2a9e422` |
+| Pricor featured case study EN+ES + FIG 1.3; bloobert `listed` under "More projects" | done | `0d78f5e` |
+| Footer pinned to the bottom; PDF links hidden until phone-free files exist (`site.links.pdf`) | done | `8100e09` |
+| Phone-free Resume (EN, `/resume.pdf`) and CV (ES, `/es/cv.pdf`) PDFs | done | `0b350a1` |
+| Rail progress line follows sections; Pricor "What I'd change" moved to `odd/notes/` | done | `6166296` |
+| Browser verification of P3.6 | pending: verifier unavailable | |
+
+### P3.7 — Review round 2 (spec `odd/tasks/p3d-review2.md`)
+
+| Task | Status | Commit |
+|---|---|---|
+| Mobile/tablet header rows (no single-button rows), swipeable phone nav | done | `7a27f26` |
+| Footer badge removed; tags/stack as keyword labels; styled case-study tables | done | `ae7ff17` |
+| Personal first-person tone EN+ES; Spanish in voseo | done | `8d94979` |
+| Teo checks the tone sentences listed in the spec log (L9) | waiting on Teo | |
 
 ### P4 — Session replay · **Gate:** Teo reviews redacted transcript
 

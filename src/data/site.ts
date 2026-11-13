@@ -8,15 +8,20 @@ export const site = {
     dev: 'https://dev.to/teo_furlan',
     // Email is rendered lightly obfuscated (P3); never hardcode a mailto: in markup.
     email: { user: 'teofurlan03', domain: 'gmail.com' },
-    cv: '/cv.pdf',
+    /**
+     * Public resume/CV PDFs per language. null = not published yet: every link to it is
+     * hidden. The files must never print the phone number (BRIEF); put them in public/.
+     */
+    pdf: { en: '/resume.pdf' as string | null, es: '/es/cv.pdf' as string | null },
   },
 } as const;
 
+/** English paths; Base maps them to the page language with alternate(). Labels come from src/i18n/ui.ts. */
 export const nav = [
-  { href: '/#work', label: 'Work' },
-  { href: '/build-session/', label: 'How this site was built' },
-  { href: '/how-i-work/', label: 'How I work with AI' },
-  { href: '/writing/', label: 'Writing' },
-  { href: '/about/', label: 'About' },
-  { href: '/cv/', label: 'CV' },
+  { href: '/', hash: '#projects', key: 'nav.work' },
+  { href: '/build-session/', hash: '', key: 'nav.build' },
+  { href: '/how-i-build/', hash: '', key: 'nav.ai' },
+  { href: '/writing/', hash: '', key: 'nav.writing' },
+  { href: '/about/', hash: '', key: 'nav.about' },
+  { href: '/resume/', hash: '', key: 'nav.resume' },
 ] as const;

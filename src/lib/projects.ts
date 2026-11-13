@@ -16,3 +16,7 @@ export function visibleProjects<T extends HasStatus>(entries: readonly T[]): T[]
 export function featuredProjects<T extends HasStatus>(entries: readonly T[]): T[] {
   return entries.filter((e) => e.data.status === 'featured').sort(byOrder);
 }
+
+export function listedProjects<T extends HasStatus>(entries: readonly T[]): T[] {
+  return entries.filter((e) => e.data.status === 'listed').sort(byOrder);
+}

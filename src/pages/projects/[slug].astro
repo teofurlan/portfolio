@@ -1,0 +1,12 @@
+---
+import Work from '../../components/pages/Work.astro';
+import { getVisibleSlugs } from '../../components/pages/data';
+
+export async function getStaticPaths() {
+  return (await getVisibleSlugs('en')).map((slug) => ({ params: { slug }, props: { slug } }));
+}
+
+const { slug } = Astro.props;
+---
+
+<Work lang="en" slug={slug} />

@@ -1,0 +1,22 @@
+---
+/** DEV posts list (artboard .posts), oldest first like the artboard unless `newestFirst`. */
+import { getCollection } from 'astro:content';
+
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  newestFirst?: boolean;
+  lang?: Lang;
+}
+const { newestFirst = false, lang = 'en' } = Astro.props;
+const tr = t(lang);
+const posts = (await getCollection('writing')).sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
+if (newestFirst) posts.reverse();
+const iso = (d: Date) => d.toISOString().slice(0, 10);
+---
+
+<ul class="posts">
+  {posts.map((p) => (
+    <li><time datetime={iso(p.data.date)}>{iso(p.data.date)}</time>{lang === 'en' ? <a href={p.data.url}>{p.data.title}</a> : <span><a href={p.data.url} hreflang="en" lang="en">{p.data.title}</a> <span class="mono sub-ink">{tr('posts.inEnglish')}</span></span>}</li>
+  ))}
+</ul>

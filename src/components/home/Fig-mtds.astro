@@ -1,0 +1,29 @@
+---
+/** FIG for mtds, ported from artboard 08. Strokes .d are drawn by src/scripts/fx.ts; fully drawn without JS. */
+import { getContent } from '../../lib/i18n-content';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const f = getContent(lang).figures.mtds;
+---
+<figure class="fig">
+  <svg viewBox="0 0 280 170" role="img" aria-label={f.aria}>
+    <path class="d" pathLength="1" style="--i:0" d="M30 148H140M40 148l-8 8M60 148l-8 8M80 148l-8 8M100 148l-8 8M120 148l-8 8M140 148l-8 8"/>
+    <path class="d" pathLength="1" style="--i:1" d="M50 148L70 68"/>
+    <path class="d" pathLength="1" style="--i:2" d="M110 148L130 68"/>
+    <path class="d" pathLength="1" style="--i:3" d="M70 68H130"/>
+    <path class="d b" pathLength="1" style="--i:4" d="M100 47L249 152"/>
+    <circle class="d" pathLength="1" style="--i:5" cx="50" cy="148" r="4"/>
+    <circle class="d" pathLength="1" style="--i:5" cx="110" cy="148" r="4"/>
+    <circle class="d" pathLength="1" style="--i:6" cx="70" cy="68" r="4"/>
+    <circle class="d" pathLength="1" style="--i:6" cx="130" cy="68" r="4"/>
+    <path class="st" d="M175 128H255"/>
+    <circle class="d b" pathLength="1" style="--i:7" cx="215" cy="128" r="6"/>
+    <path class="d b" pathLength="1" style="--i:8" d="M205 128H225M215 118V138"/>
+    <text class="fig-t bl" x="196" y="110">{f.rcm}</text>
+  </svg>
+  <figcaption>{f.caption}</figcaption>
+</figure>

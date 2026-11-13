@@ -1,13 +1,13 @@
 ---
 title: Socra
-summary: A local voice layer for Claude Code. The model speaks, you answer out loud.
+summary: A local voice layer for any coding agent or harness. The model speaks, you answer out loud.
 status: featured
 order: 1
 role: Designer and developer
 team: 1
 ownership: >-
   Everything: the Python server (speech-to-text, text-to-speech, MCP over stdio,
-  WebSocket), the Claude Code and Pi backends, and the React page that shows only
+  WebSocket), the agent backends, and the React page that shows only
   code, permission prompts or the reply.
 stack: [Python, asyncio, MCP, WebSocket, faster-whisper, Piper, React, Vite, TypeScript, Vitest, uv]
 tags: [ai]
@@ -29,12 +29,12 @@ Not usable as results: blind voice A/B winner, voice/playback-results.json
 
 ## Problem
 
-A developer who works with Claude Code all day sometimes wants to be examined out loud on a project they built, or to drive a coding session by voice. Socra is a local, private voice layer for that: the model speaks, you answer out loud, and the page shows only code, permission prompts or the reply.
+As a developer who works with coding agents several hours a day, sometimes I want to be examined out loud on a project I built, or to drive a coding session by voice. Socra is a local, private voice layer for that: the model speaks, you answer out loud, and the page shows only code, permission prompts or the reply.
 
 ## Constraints
 
-- Private: the server binds to 127.0.0.1 only, and nothing leaves the machine except what Claude Code itself sends.
-- Windows first. Python 3.12+, Node 22+, a microphone and Edge or Chrome. An NVIDIA GPU is optional; CPU works.
+- Private: the server binds to 127.0.0.1 only, nothing leaves the machine except what the agent itself sends.
+- Windows first. Python 3.12+, Node 22+, a microphone and Edge or Chrome. An NVIDIA GPU is optional; it works well on CPU.
 - A transcription budget of 3.0 s or less.
 - The Piper voice model is about 79 MB.
 
@@ -48,11 +48,11 @@ A developer who works with Claude Code all day sometimes wants to be examined ou
 
 ## What I owned
 
-Solo project, built with coding agents: the whole thing, from the server and the audio pipeline to the React page and the tests.
+As it is a solo project, I built the whole thing with coding agents, from the server and the audio pipeline to the React page and the tests.
 
 ## Result
 
-Socra runs and is used daily by its author. It has no users, testimonials or press, and I'm not claiming any.
+Socra works well for me and helps me understand AI-generated codebases or concepts, and make sure I get it right. Any user or contributor is welcome!
 
 One measurement exists, with a caveat. On an RTX 4060 8 GB, with synthesized **Spanish** audio, measured **before the switch to English**:
 
@@ -70,5 +70,5 @@ TODO(owner): blind voice A/B result. The ratings sit in browser localStorage and
 
 > DRAFT — Teo rewrites this in his own words.
 
-- Measure end-to-end latency, and re-run the Whisper benchmark on English audio, since the current numbers are Spanish.
-- Make Pi questions that need a choice or free text answerable by voice. Today they are cancelled.
+- I'd measure end-to-end latency, and re-run the Whisper benchmark on English audio, since the current numbers are Spanish.
+- I'd make Pi questions that need a choice or free text answerable by voice. Today they are cancelled.

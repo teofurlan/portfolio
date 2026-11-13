@@ -1,0 +1,56 @@
+---
+/**
+ * About: two paragraphs (DRAFT until Teo rewrites them, S15) and the timeline
+ * from content/resume.json meta.timeline. One photo only (2004), through the
+ * image pipeline so metadata is stripped.
+ */
+import { Image } from 'astro:assets';
+import photo2004 from '../../media/photos/2004_first-computer_01.jpg';
+import { getContent } from '../lib/i18n-content';
+import { getResume } from '../lib/resume';
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+  /** Show the DRAFT flag. English: always (default). Spanish pages carry one flag near the top instead (S3). */
+  draft?: boolean;
+  /** Render the photo timeline entry as text only (home: the photo already sits in the hero). */
+  textOnly?: boolean;
+}
+const { lang = 'en', draft = lang === 'en', textOnly = false } = Astro.props;
+const tr = t(lang);
+
+const photos: Record<string, { src: ImageMetadata; alt: string }> = {
+  '2004_first-computer_01.jpg': {
+    src: photo2004,
+    alt: tr('about.photoAlt'),
+  },
+};
+const timeline = getResume(lang).meta.timeline;
+const paragraphs = getContent(lang).about.paragraphs;
+---
+
+<div class="about">
+  <div>
+    {draft && <span class="draft">{tr('draft')}</span>}
+    {paragraphs.map((p) => <p>{p}</p>)}
+  </div>
+  <ol class="tl" aria-label={tr('about.timeline')}>
+    {timeline.map((m) => {
+      const ph = m.photo && !textOnly ? photos[m.photo] : undefined;
+      return (
+        <li>
+          <span class="y">{m.year}</span>
+          {ph ? (
+            <figure class="print">
+              <Image src={ph.src} alt={ph.alt} width={360} densities={[1, 2]} />
+              <figcaption>{m.title}</figcaption>
+            </figure>
+          ) : (
+            <p>{m.title}</p>
+          )}
+        </li>
+      );
+    })}
+  </ol>
+</div>

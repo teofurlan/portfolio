@@ -1,0 +1,42 @@
+---
+/** Exploded-index rail: page map + reading progress (artboard 08). Synced by src/scripts/rail.ts. */
+import { t, type Lang } from '../../i18n/ui';
+
+interface Props {
+  lang?: Lang;
+}
+const { lang = 'en' } = Astro.props;
+const tr = t(lang);
+---
+<nav class="rail" aria-label={tr('rail.label')} data-now={tr('rail.now')} data-now-short={tr('rail.nowShort')}>
+  <p class="rail-h mono">{tr('rail.title')}</p>
+  <ol>
+    <li><a href="#projects" data-sec="projects" data-short={tr('rail.shortWork')}>
+      <svg class="plate" viewBox="0 0 124 76" aria-hidden="true" focusable="false"><g class="lift">
+        <path class="face" d="M58 2 L114 30 L58 58 L2 30 Z"/><path class="edge" d="M2 30 V38 L58 66 L114 38 V30 M58 58 V66"/>
+        <ellipse class="m" cx="58" cy="30" rx="26" ry="13"/><ellipse class="m" cx="58" cy="30" rx="10" ry="5"/></g></svg>
+      <span class="t"><span class="bal" aria-hidden="true">1</span><span class="lbl">{tr('rail.work')}</span></span></a></li>
+    <li><a href="#build" data-sec="build" data-short={tr('rail.shortBuild')}>
+      <svg class="plate" viewBox="0 0 124 76" aria-hidden="true" focusable="false"><g class="lift">
+        <path class="face" d="M58 2 L114 30 L58 58 L2 30 Z"/><path class="edge" d="M2 30 V38 L58 66 L114 38 V30 M58 58 V66"/>
+        <ellipse class="m" cx="58" cy="17" rx="6" ry="3"/><ellipse class="m" cx="58" cy="43" rx="6" ry="3"/><ellipse class="m" cx="32" cy="30" rx="6" ry="3"/><ellipse class="m" cx="84" cy="30" rx="6" ry="3"/></g></svg>
+      <span class="t"><span class="bal" aria-hidden="true">2</span><span class="lbl">{tr('rail.build')}</span></span></a></li>
+    <li><a href="#ai" data-sec="ai" data-short={tr('rail.shortAi')}>
+      <svg class="plate" viewBox="0 0 124 76" aria-hidden="true" focusable="false"><g class="lift">
+        <path class="face" d="M58 2 L114 30 L58 58 L2 30 Z"/><path class="edge" d="M2 30 V38 L58 66 L114 38 V30 M58 58 V66"/>
+        <path class="m" d="M30 16 L86 44 M86 16 L30 44 M30 30 L58 16 L86 30 L58 44 Z"/></g></svg>
+      <span class="t"><span class="bal" aria-hidden="true">3</span><span class="lbl">{tr('rail.ai')}</span></span></a></li>
+    <li><a href="#writing" data-sec="writing" data-short={tr('rail.shortWriting')}>
+      <svg class="plate" viewBox="0 0 124 76" aria-hidden="true" focusable="false"><g class="lift">
+        <path class="face" d="M58 2 L114 30 L58 58 L2 30 Z"/><path class="edge" d="M2 30 V38 L58 66 L114 38 V30 M58 58 V66"/>
+        <path class="m" d="M32 22 L66 39 M42 17 L76 34 M52 12 L86 29"/></g></svg>
+      <span class="t"><span class="bal" aria-hidden="true">4</span><span class="lbl">{tr('rail.writing')}</span></span></a></li>
+    <li><a href="#about" data-sec="about" data-short={tr('rail.shortAbout')}>
+      <svg class="plate" viewBox="0 0 124 76" aria-hidden="true" focusable="false"><g class="lift">
+        <path class="face" d="M58 2 L114 30 L58 58 L2 30 Z"/><path class="edge" d="M2 30 V38 L58 66 L114 38 V30 M58 58 V66"/>
+        <ellipse class="m" cx="58" cy="30" rx="30" ry="15"/><circle class="m" cx="58" cy="30" r="2.5"/></g></svg>
+      <span class="t"><span class="bal" aria-hidden="true">5</span><span class="lbl">{tr('rail.about')}</span></span></a></li>
+  </ol>
+  <p class="now mono" aria-hidden="true"><span class="now-l" id="now-l">{tr('rail.now')}</span><span class="now-s" id="now-s">{tr('rail.nowShort')}</span></p>
+</nav>
+

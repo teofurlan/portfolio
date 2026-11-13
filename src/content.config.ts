@@ -58,6 +58,25 @@ const projects = defineCollection({
     }),
 });
 
+/**
+ * Spanish case studies, one per visible project: content/projects-es/<slug>.md
+ * with the same slug as the English file. Only translated fields live here
+ * (strict: status, order, tags, stack, links, media, team and year are read
+ * from the English entry, never duplicated). The body is the translated case
+ * study. Hidden projects have no Spanish file and no Spanish route.
+ */
+const projectsEs = defineCollection({
+  loader: glob({ pattern: '*.md', base: './content/projects-es' }),
+  schema: z
+    .object({
+      title: z.string(),
+      summary: z.string(),
+      role: z.string(),
+      ownership: z.string(),
+    })
+    .strict(),
+});
+
 /** DEV articles for the Writing section and its RSS feed. */
 const writing = defineCollection({
   loader: file('./content/writing.json'),
@@ -71,4 +90,4 @@ const writing = defineCollection({
   }),
 });
 
-export const collections = { projects, writing };
+export const collections = { projects, projectsEs, writing };

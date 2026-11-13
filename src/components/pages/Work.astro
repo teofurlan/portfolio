@@ -1,0 +1,45 @@
+---
+/** Case-study page, both languages. */
+import { render } from 'astro:content';
+import Gallery from '../Gallery.astro';
+import ProjectMeta from '../ProjectMeta.astro';
+import DraftFlag from '../DraftFlag.astro';
+import { figures, proofFor } from '../home/figures';
+import Base from '../../layouts/Base.astro';
+import { alternate } from '../../i18n/routes';
+import { t, type Lang } from '../../i18n/ui';
+import { getBodyEntry, getProjects } from './data';
+
+interface Props {
+  lang: Lang;
+  slug: string;
+}
+const { lang, slug } = Astro.props;
+const tr = t(lang);
+const project = (await getProjects(lang)).find((p) => p.id === slug);
+if (!project) throw new Error(`Unknown project ${slug}`);
+const { Content } = await render(await getBodyEntry(lang, slug));
+const Fig = figures[project.id];
+const proof = proofFor(project.id, lang);
+---
+
+<Base title={project.data.title} description={project.data.summary} lang={lang}>
+  <p class="mono"><a href={`${alternate('/', lang)}#projects`}>{tr('nav.work')}</a> / {project.data.title}</p>
+  <h1>{project.data.title}</h1>
+  <DraftFlag lang={lang} />
+  <article class="sheet" aria-labelledby="h-case">
+    <h2 id="h-case" class="sr">{tr('work.overview')}</h2>
+    <div class="two">
+      <div>
+        <p class="lead">{project.data.summary}</p>
+        {proof && <div class="proof"><span class="mono">{tr('meta.proof')}</span>{proof}</div>}
+        <ProjectMeta project={project} full lang={lang} />
+      </div>
+      {Fig && <Fig lang={lang} />}
+    </div>
+    <Gallery media={project.data.media} lang={lang} />
+  </article>
+  <div class="prose">
+    <Content />
+  </div>
+</Base>

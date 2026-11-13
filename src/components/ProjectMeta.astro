@@ -1,0 +1,31 @@
+---
+/** Sheet metadata + links for a project (home sheet and case-study page). */
+import type { CollectionEntry } from 'astro:content';
+import { t, type Lang } from '../i18n/ui';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  full?: boolean;
+  lang?: Lang;
+}
+const { project, full = false, lang = 'en' } = Astro.props;
+const tr = t(lang);
+const d = project.data;
+const team = d.team === 1 ? `${tr('meta.solo')}, ${d.year}` : `${tr('meta.teamOf')} ${d.team}, ${d.year}`;
+---
+
+<dl class="meta">
+  {full && <><dt>{tr('meta.role')}</dt><dd>{d.role}</dd></>}
+  <dt>{tr('meta.tags')}</dt><dd><ul class="kw">{d.tags.map((x) => <li>{x}</li>)}</ul></dd>
+  <dt>{tr('meta.stack')}</dt><dd><ul class="kw">{(full ? d.stack : d.stack.slice(0, 5)).map((x) => <li>{x}</li>)}</ul></dd>
+  <dt>{tr('meta.team')}</dt><dd>{team}</dd>
+  {full && <><dt>{tr('meta.owned')}</dt><dd>{d.ownership}</dd></>}
+  {!d.links.repo && <><dt>{tr('meta.repo')}</dt><dd class="private">{tr('meta.private')}</dd></>}
+</dl>
+{(d.links.repo || d.links.post || d.links.demo) && (
+  <div class="links">
+    {d.links.repo && <a class="btn solid" href={d.links.repo}>{tr('link.repo')}</a>}
+    {d.links.demo && <a class="btn" href={d.links.demo}>{tr('link.demo')}</a>}
+    {d.links.post && <a class="btn" href={d.links.post}>{tr('link.post')}</a>}
+  </div>
+)}
