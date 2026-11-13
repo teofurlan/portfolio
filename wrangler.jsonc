@@ -7,6 +7,12 @@
   // config, so astro.config.mjs (workerEntry integration) adds it to dist/client/wrangler.json.
   // not_found_handling: serve the built 404.html (bilingual: Workers assets serve one root 404 page).
   "assets": { "binding": "ASSETS", "run_worker_first": ["/"], "not_found_handling": "404-page" },
-  "observability": { "enabled": true }
+  "observability": { "enabled": true },
+  // Production domains (zone teofurlan.com is on the same Cloudflare account). Wrangler creates
+  // the DNS records and certificates on deploy. Also keeps the workers.dev URL working.
+  "routes": [
+    { "pattern": "teofurlan.com", "custom_domain": true },
+    { "pattern": "www.teofurlan.com", "custom_domain": true }
+  ]
   // P5 adds: Cron Trigger, Workers AI binding and the decoration KV namespace.
 }
