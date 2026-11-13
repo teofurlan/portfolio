@@ -26,7 +26,7 @@ redacted transcript before it is public.
 | T4 | **Gate:** Teo reviews the redacted output and picks the favicon | S2, S7 | Teo | |
 | T5 | Curation: active branch only, harness notices, chapters, highlights, collapsed steps, metadata (`src/lib/replay.ts`, `transcripts/curation.json`) | S3, S5 | inline, test-first | `586df59` |
 | T6 | Two-way translation precompute into `transcripts/public/_translations.json` (L12) | S6 | worker (background) | uncommitted (T4 gate), see L16 |
-| T7 | Player island (autoplay, pause → browsable transcript, reduced motion, no-JS static) | S4, S5, S6, S8 | worker (background, context backstop) | see commit below, L17 |
+| T7 | Player island (autoplay, pause → browsable transcript, reduced motion, no-JS static) | S4, S5, S6, S8 | worker (background, context backstop) | `ce902d9`, L17 |
 | T8 | Ship the chosen favicon (07, T_ prompt) | S7, S8 | inline | see L15 |
 
 ## Log
