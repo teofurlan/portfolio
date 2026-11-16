@@ -10,6 +10,8 @@ export interface RedactContext {
   literals?: string[];
   /** Literal strings replaced by a chosen text (e.g. a legal name by the public name). */
   replacements?: Record<string, string>;
+  /** Home-relative path of this repo with forward slashes, e.g. `Code/portfolio`; its paths become repo-relative. */
+  repo?: string;
 }
 
 interface Rule {
@@ -17,6 +19,24 @@ interface Rule {
   pattern: RegExp;
   replace: string | ((match: string) => string);
 }
+
+// A path after `~`: separators `/`, `\`, `\\`; segments never contain quotes, spaces or `:`, and the
+// match never ends with a backslash, so a JSON escape (`\"`) right after a path survives.
+// Any run of backslashes: a path can be quoted once (`\\`) or twice (`\\\\`, e.g. a test literal in a transcript).
+const SEP = String.raw`(?:\\+|\/)`;
+const SEG = String.raw`[^\s"'\`<>|*?:\\/]+`;
+const PATH = `${SEP}${SEG}(?:${SEP}${SEG})*`;
+// What may sit right before a path: an ANSI colour code (ESC[34m) or a literal backslash escape (`\n` as
+// two characters inside JSON-looking text) counts as a boundary even though its last letter is a word character.
+const AFTER_ESCAPE = String.raw`(?<=\u001b\[[\d;]*m|\\[nrt])`;
+const BEFORE_DRIVE = `(?:${AFTER_ESCAPE}|(?<![A-Za-z0-9]))`;
+const BEFORE_ROOT = `(?:${AFTER_ESCAPE}|(?<![\\w/.~-]))`;
+const BEFORE_TILDE = `(?:${AFTER_ESCAPE}|(?<![A-Za-z0-9~]))`;
+// Environment variables that point into the home folder (a path must follow, a bare `$HOME` is fine).
+const HOME_VAR = String.raw`(?:\$\{(?:env:)?(?:HOME|USERPROFILE|LOCALAPPDATA|APPDATA)\}|\$(?:env:)?(?:HOME|USERPROFILE|LOCALAPPDATA|APPDATA)(?![A-Za-z0-9_])|%(?:HOME|USERPROFILE|LOCALAPPDATA|APPDATA)%)`;
+// URL-encoded separators (%5C, %2F) and segments (an encoded space `%20` stays inside a segment).
+const ESEP = '(?:%5C|%2F)';
+const ESEG = String.raw`(?:[^%\s"'\`&/\\]|%(?!5C|2F)[0-9A-F]{2})+`;
 
 // Order matters: secrets first, then contact data, then paths and hosts.
 const RULES: Rule[] = [
@@ -60,9 +80,23 @@ const RULES: Rule[] = [
     pattern: /[A-Za-z0-9._%+-]+@(?:[A-Za-z][A-Za-z0-9-]*(?:\\*\.[A-Za-z0-9-]*)+|(?:gmail|googlemail|outlook|hotmail|yahoo|icloud|proton|protonmail)\b)/g,
     replace: '[email]',
   },
-  { name: 'home-path', pattern: /\b[A-Za-z]:(?:\\{1,2}|\/)Users(?:\\{1,2}|\/)[^\\/\s"'`:*?<>|]+/g, replace: '~' },
-  { name: 'home-path', pattern: /(?<![\w:/.~-])\/(?:mnt\/)?[a-z]\/Users\/[^/\s"'`]+/g, replace: '~' },
-  { name: 'home-path', pattern: /(?<![\w:/.~-])\/(?:home|Users)\/[^/\s"'`]+/g, replace: '~' },
+  // Pi / Claude session folder names: the cwd with separators turned into dashes (`--C--Users-name-AppData-x--`).
+  { name: 'session-folder', pattern: /-*[A-Za-z]--Users-[\w.-]*/gi, replace: '[local path]' },
+  // URL-encoded home paths (`C%3A%5CUsers%5Cname%5Cx`).
+  {
+    name: 'home-path',
+    pattern: new RegExp(`(?:${BEFORE_DRIVE}[A-Za-z]%3A${ESEP}|%2F)Users${ESEP}${ESEG}(?:${ESEP}${ESEG})*`, 'gi'),
+    replace: '[local path]',
+  },
+  // WSL shares: `\\wsl$\Ubuntu\home\name`, `\\wsl.localhost\...`.
+  { name: 'home-path', pattern: new RegExp(`(?:\\\\{2,}|//)wsl(?:\\$|\\.localhost)${SEP}[^\\\\/\\s"'\`]+${SEP}home${SEP}[^\\\\/\\s"'\`]+`, 'gi'), replace: '~' },
+  { name: 'home-path', pattern: new RegExp(`${BEFORE_DRIVE}[A-Za-z]:(?:\\\\+|/)Users(?:\\\\+|/)[^\\\\/\\s"'\`:*?<>|]+`, 'gi'), replace: '~' },
+  { name: 'home-path', pattern: new RegExp(`${BEFORE_ROOT}/(?:mnt/)?[a-z]/Users/[^/\\s"'\`]+`, 'gi'), replace: '~' },
+  { name: 'home-path', pattern: new RegExp(`${BEFORE_ROOT}/(?:home|Users)/[^/\\s"'\`]+`, 'g'), replace: '~' },
+  // `$HOME/x`, `%USERPROFILE%\x`: the folder becomes `~` too, so repo paths shorten and the rest is hidden.
+  { name: 'home-path', pattern: new RegExp(`${HOME_VAR}(?=${SEP}${SEG})`, 'gi'), replace: '~' },
+  // After the home folder became `~`: any other path on this machine is hidden whole (no file name).
+  { name: 'local-path', pattern: new RegExp(`${BEFORE_TILDE}~${PATH}`, 'g'), replace: '[local path]' },
   { name: 'ipv4', pattern: /\b(?!127\.0\.0\.1\b)(?!0\.0\.0\.0\b)(?:(?:25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(?:25[0-5]|2[0-4]\d|1?\d?\d)\b/g, replace: '[ip]' },
   { name: 'phone', pattern: /\+\d{1,3}(?:[ -]?\(?\d{1,4}\)?){3,6}/g, replace: '[phone]' },
 ];
@@ -84,10 +118,22 @@ function contextRules(ctx: RedactContext): Rule[] {
   return rules;
 }
 
+function repoRules(ctx: RedactContext): Rule[] {
+  const parts = (ctx.repo ?? '').split(/[\\/]+/).filter(Boolean);
+  if (!parts.length) return [];
+  const root = `${BEFORE_TILDE}~${parts.map((p) => `${SEP}${escape(p)}`).join('')}`;
+  return [
+    { name: 'repo-path', pattern: new RegExp(`${root}${SEP}(${SEG}(?:${SEP}${SEG})*)`, 'g'), replace: '$1' },
+    { name: 'repo-path', pattern: new RegExp(`${root}(?![\\w.-])`, 'g'), replace: '[repo]' },
+  ];
+}
+
 function allRules(ctx: RedactContext): Rule[] {
-  // Context rules run after paths (so `~` replaces the home folder first) and before IPs.
+  // Repo paths go before the generic local-path rule; context rules run after paths (so `~`
+  // replaces the home folder first) and before IPs.
+  const local = RULES.findIndex((r) => r.name === 'local-path');
   const at = RULES.findIndex((r) => r.name === 'ipv4');
-  return [...RULES.slice(0, at), ...contextRules(ctx), ...RULES.slice(at)];
+  return [...RULES.slice(0, local), ...repoRules(ctx), ...RULES.slice(local, at), ...contextRules(ctx), ...RULES.slice(at)];
 }
 
 export function redactText(text: string, ctx: RedactContext = {}): string {

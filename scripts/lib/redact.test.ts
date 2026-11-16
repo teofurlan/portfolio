@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { findLeaks, redactText, toPublic, type RedactContext } from './redact.ts';
 
-const ctx: RedactContext = { hostname: 'Nitro', username: 'teofu', literals: ['secret-repo-name'] };
+const ctx: RedactContext = { hostname: 'Nitro', username: 'teofu', literals: ['secret-repo-name'], repo: 'Code/portfolio' };
 
 // Fake values only; built by concatenation so this file itself holds no scannable secret.
 const fake = {
@@ -78,13 +78,38 @@ describe('redactText', () => {
   });
 
   it.each([
-    ['C:\\Users\\teofu\\Code\\portfolio\\src', '~\\Code\\portfolio\\src'],
-    ['C:/Users/teofu/Code/portfolio', '~/Code/portfolio'],
-    ['C:\\\\Users\\\\teofu\\\\Code', '~\\\\Code'],
-    ['/c/Users/teofu/Code/portfolio', '~/Code/portfolio'],
-    ['/home/alice/project', '~/project'],
-  ])('shortens the home path %s', (input, expected) => {
+    ['C:\\Users\\teofu\\Code\\portfolio\\src\\x.ts', 'src\\x.ts'],
+    ['/c/Users/teofu/Code/portfolio/src/x.ts', 'src/x.ts'],
+    ['C:\\\\Users\\\\teofu\\\\Code\\\\portfolio\\\\src', 'src'],
+    ['C:/Users/teofu/Code/portfolio', '[repo]'],
+    ['C:\\Users\\teofu\\Code\\portfolio', '[repo]'],
+    ['~\\OneDrive\\Documentos\\CV\\resume.tex', '[local path]'],
+    ['C:\\Users\\teofu\\OneDrive\\Documentos\\CV\\resume.tex', '[local path]'],
+    ['C:\\\\Users\\\\teofu\\\\Code', '[local path]'],
+    ['/home/alice/project', '[local path]'],
+    ['open /home/alice/project now', 'open [local path] now'],
+    ['{"path":"C:\\Users\\teofu\\Code\\portfolio\\src\\x.ts\\"}', '{"path":"src\\x.ts\\"}'],
+    ['see C:\\Users\\teofu\\.pi\\agent\\"', 'see [local path]\\"'],
+    ['~2k tokens', '~2k tokens'],
+    // A path quoted twice (a test literal shown inside a transcript) has four backslashes per separator.
+    [String.raw`'~\\\\Code\\\\x'`, "'[local path]'"],
+  ])('replaces the local path %s', (input, expected) => {
     expect(redactText(input, ctx)).toBe(expected);
+    expect(findLeaks(expected, ctx)).toEqual([]);
+  });
+
+  it('does not treat a sibling folder of the repo as the repo', () => {
+    expect(redactText('C:/Users/teofu/Code/portfolio-old/src', ctx)).toBe('[local path]');
+  });
+
+  it('hides every local path without repo context too', () => {
+    expect(redactText('C:/Users/teofu/Code/portfolio/src/x.ts', { username: 'teofu' })).toBe('[local path]');
+  });
+
+  it('findLeaks reports a leftover home-relative path as local-path, with or without repo context', () => {
+    expect(findLeaks('see ~/x/y', {})).toEqual(['local-path']);
+    expect(findLeaks('see ~\\x\\y', ctx)).toContain('local-path');
+    expect(findLeaks(redactText('see ~/x/y', {}), {})).toEqual([]);
   });
 
   it('replaces IPv4 addresses but keeps loopback', () => {
@@ -106,6 +131,92 @@ describe('redactText', () => {
   it('leaves ordinary text alone', () => {
     const text = 'pnpm add astro@7.0.0 and run `pnpm test` (73/73).';
     expect(redactText(text, ctx)).toBe(text);
+  });
+});
+
+// Verifier findings (a)-(g) of L8: home paths in forms the first rules missed. Fake user `teofu`.
+describe('local paths in odd forms', () => {
+  const noUser: RedactContext = {}; // CI has neither username nor repo: generic rules must catch these.
+  const leaks = (input: string) => {
+    expect(findLeaks(input, noUser).length).toBeGreaterThan(0);
+  };
+
+  it('(a) redacts home paths right after a colon (PATH lists)', () => {
+    const input = 'x:/c/Users/teofu/AppData/Local/Programs/Ollama:/c/Users/teofu/bin';
+    expect(redactText(input, ctx)).toBe('x:[local path]:[local path]');
+    leaks(input);
+  });
+
+  it('(b) redacts a drive path right after an ANSI colour code', () => {
+    const inRepo = '\u001b[34mC:\\Users\\teofu\\Code\\portfolio\\dist\\';
+    expect(redactText(inRepo, ctx)).toBe('\u001b[34mdist\\');
+    const outside = '\u001b[34mC:\\Users\\teofu\\AppData\\x';
+    expect(redactText(outside, ctx)).toBe('\u001b[34m[local path]');
+    leaks(outside);
+  });
+
+  it.each([
+    ['--C--Users-teofu-AppData-Local-Temp-x--'],
+    ['C--Users-teofu-Code-portfolio'],
+    ['--C--Users-teofu-Code-portfolio--'],
+    ['sessions/--C--Users-teofu-OneDrive--/a.jsonl'],
+  ])('(c) redacts the session folder name %s', (input) => {
+    const out = redactText(input, ctx);
+    expect(out).toContain('[local path]');
+    expect(out).not.toMatch(/Users|teofu/);
+    leaks(input);
+  });
+
+  it.each([
+    ['$HOME/Documents/x', '[local path]'],
+    ['${HOME}/Documents/x', '[local path]'],
+    ['$env:USERPROFILE\\Documents\\x', '[local path]'],
+    ['%USERPROFILE%\\Documents\\x', '[local path]'],
+    ['%LOCALAPPDATA%\\Programs\\x', '[local path]'],
+    ['%APPDATA%\\npm', '[local path]'],
+    ['$HOME/Code/portfolio/src/x.ts', 'src/x.ts'],
+    ['cd $HOME && ls', 'cd $HOME && ls'],
+    ['$HOMEBREW/bin', '$HOMEBREW/bin'],
+  ])('(d) handles the environment variable path %s', (input, expected) => {
+    expect(redactText(input, ctx)).toBe(expected);
+    if (expected !== input) leaks(input);
+  });
+
+  it.each([
+    [String.raw`a\nC:\\Users\\teofu\\x`, String.raw`a\n[local path]`],
+    [String.raw`x\n~/OneDrive/y`, String.raw`x\n[local path]`],
+    [String.raw`x\t/home/alice/y`, String.raw`x\t[local path]`],
+  ])('(e) redacts a path after a literal backslash escape: %s', (input, expected) => {
+    expect(redactText(input, ctx)).toBe(expected);
+    leaks(input);
+  });
+
+  it('(f) accepts any run of backslashes around Users', () => {
+    const input = 'C:\\\\\\\\Users\\\\\\\\teofu\\\\\\\\Code';
+    expect(redactText(input, ctx)).toBe('[local path]');
+    leaks(input);
+    expect(redactText('C:\\\\\\\\Users\\\\\\\\teofu\\\\\\\\Code\\\\\\\\portfolio\\\\\\\\src', ctx)).toBe('src');
+  });
+
+  it.each([
+    ['c:\\users\\teofu\\x', '[local path]'],
+    ['/C/Users/teofu/x', '[local path]'],
+    ['\\\\wsl$\\Ubuntu\\home\\alice\\x', '[local path]'],
+    ['\\\\wsl.localhost\\Ubuntu\\home\\alice\\x', '[local path]'],
+    ['\\\\\\\\wsl$\\\\Ubuntu\\\\home\\\\alice\\\\x', '[local path]'],
+    ['C%3A%5CUsers%5Cteofu%5Cx', '[local path]'],
+    ['C%3A%2FUsers%2Fteofu%2Fx', '[local path]'],
+    ['open?p=c%3a%5cusers%5cteofu%5cMy%20Docs%5cx&q=1', 'open?p=[local path]&q=1'],
+    ['_C:/Users/teofu/x', '_[local path]'],
+  ])('(g) redacts %s', (input, expected) => {
+    expect(redactText(input, ctx)).toBe(expected);
+    leaks(input);
+  });
+
+  it('keeps tokens, scoped packages, URLs and node_modules untouched', () => {
+    const text = 'about ~2k tokens, @astrojs/x, https://teofurlan.com/users/me, node_modules/@astrojs/x, 100% of $5';
+    expect(redactText(text, ctx)).toBe(text);
+    expect(findLeaks(text, noUser)).toEqual([]);
   });
 });
 
@@ -167,7 +278,7 @@ describe('toPublic', () => {
     expect(pub.events.map((e) => e.kind)).toEqual(['user', 'thinking', 'text', 'tool_call', 'tool_result']);
     expect(pub.events[0].text).toBe('Hola, mi mail es [email]');
     expect(pub.events[3]).toMatchObject({ tool: 'read', callId: 't1' });
-    expect(pub.events[3].text).toContain('~\\\\Code');
+    expect(pub.events[3].text).toBe('{"path":"BRIEF.md"}');
     expect(pub.events[4].text).toBe('x'.repeat(20) + '\n[… 30 chars truncated]');
     expect(pub.events[4].diff).toBe('+a');
     expect(findLeaks(JSON.stringify(pub), ctx)).toEqual([]);
@@ -203,9 +314,17 @@ describe('redact CLI --check', () => {
 
   it('the committed config hides the private repos Teo named', () => {
     const literals: string[] = JSON.parse(readFileSync('transcripts/redact.config.json', 'utf8')).literals;
-    expect(literals).toEqual(expect.arrayContaining(['teofurlan/bloobert', 'teofurlan/mtds-brazo-robot']));
+    expect(literals).toEqual(expect.arrayContaining(['teofurlan/bloobert', 'teofurlan/mtds-brazo-robot', 'ideaslab/bloobert', 'mtds-brazo-robot']));
     expect(redactText('git@github.com:teofurlan/bloobert.git and https://github.com/teofurlan/mtds-brazo-robot', { literals }))
       .toBe('[email]:[private].git and https://github.com/[private]');
+  });
+
+  it('also checks object keys, not only values', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'redact-key-'));
+    writeFileSync(join(dir, 'k.json'), JSON.stringify({ events: [{ 'C:\\Users\\x\\y': 1 }] }));
+    const r = run(dir);
+    expect(r.status).toBe(1);
+    expect(r.stderr).toContain('home-path');
   });
 
   it('exits 1 and names the file and rule, never the value, when a secret remains', () => {

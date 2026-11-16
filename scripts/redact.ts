@@ -6,8 +6,8 @@
 // transcripts/redact.config.json (committed, e.g. private repo names) plus the optional
 // transcripts/redact.local.json (git-ignored). Exit 1 if any secret pattern remains; values are never printed.
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
-import { hostname, userInfo } from 'node:os';
-import { basename, join } from 'node:path';
+import { homedir, hostname, userInfo } from 'node:os';
+import { basename, join, relative } from 'node:path';
 import { findLeaks, redactText, toPublic, type RedactContext } from './lib/redact.ts';
 
 const args = process.argv.slice(2);
@@ -25,6 +25,18 @@ const literals = configs.flatMap((c) => c.literals ?? []);
 const replacements = Object.assign({}, ...configs.map((c) => c.replacements ?? {})) as Record<string, string>;
 const hide = configs.flatMap((c) => c.hideEvents ?? []);
 
+// This repo's path under the home folder (e.g. `Code/portfolio`), so its paths become repo-relative.
+const repo = relative(homedir(), process.cwd()).replace(/\\/g, '/');
+
+const stringsOf = (v: unknown): string[] =>
+  typeof v === 'string'
+    ? [v]
+    : Array.isArray(v)
+      ? v.flatMap(stringsOf)
+      : v && typeof v === 'object'
+        ? Object.entries(v).flatMap(([k, x]) => [k, ...stringsOf(x)]) // keys too
+        : [];
+
 function check(ctx: RedactContext): number {
   if (!existsSync(publicDir)) {
     console.log(`redact: ${publicDir} does not exist, nothing to check`);
@@ -33,7 +45,8 @@ function check(ctx: RedactContext): number {
   const files = readdirSync(publicDir).filter((f) => f.endsWith('.json'));
   let failed = 0;
   for (const f of files) {
-    const leaks = findLeaks(readFileSync(join(publicDir, f), 'utf8'), ctx);
+    // Check each string as it will be shown, not the JSON text: JSON escapes (`~` then `\n`) would look like paths.
+    const leaks = [...new Set(stringsOf(JSON.parse(readFileSync(join(publicDir, f), 'utf8'))).flatMap((s) => findLeaks(s, ctx)))];
     if (leaks.length) {
       failed++;
       console.error(`redact: ${join(publicDir, f)} still matches: ${leaks.join(', ')}`);
@@ -47,10 +60,10 @@ function check(ctx: RedactContext): number {
 if (args.includes('--check')) {
   // On CI the hostname and username belong to the runner (e.g. "runner"), so only generic rules and
   // literals apply there; locally the check also looks for this machine's hostname and username.
-  process.exit(check(process.env.CI ? { literals, replacements } : { hostname: hostname(), username: userInfo().username, literals, replacements }));
+  process.exit(check(process.env.CI ? { literals, replacements } : { hostname: hostname(), username: userInfo().username, literals, replacements, repo }));
 }
 
-const ctx: RedactContext = { hostname: hostname(), username: userInfo().username, literals, replacements };
+const ctx: RedactContext = { hostname: hostname(), username: userInfo().username, literals, replacements, repo };
 mkdirSync(publicDir, { recursive: true });
 for (const f of readdirSync(rawDir).filter((n) => n.endsWith('.jsonl')).sort()) {
   const entries = readFileSync(join(rawDir, f), 'utf8')
