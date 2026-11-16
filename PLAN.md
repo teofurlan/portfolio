@@ -146,6 +146,7 @@ certificates, media. P3.7 (review round 2) done, draft flags removed for deploy 
 | Player island (autoplay, pause → browsable transcript, reduced-motion) | done | see `odd/tasks/p4-replay.md` |
 | Favicon (T_ prompt) | done | `77beac6` |
 | **Gate:** Teo approves publishing `transcripts/public/` | done | `0eec329` |
+| Native review of the redaction pipeline | not done: reviewer tooling failed (L26); Teo accepted the independent verification (L27) | |
 
 ### P5 — Daily decoration
 
