@@ -135,7 +135,6 @@ header.top .in{display:flex;align-items:center;flex-wrap:wrap;gap:8px 28px;min-h
 .herotop{display:flex;align-items:flex-start;justify-content:space-between;gap:28px;margin:0 0 14px}
 .herotop .heroline{margin:0}
 .herophoto{margin:0;flex:0 0 auto}
-.herophoto img{width:240px}
 .links .rss{font-size:14px;margin-left:6px;align-self:center}
 .where{margin:0 0 24px;color:var(--ink2);font-size:15px}
 .legs{display:grid;grid-template-columns:1fr 1fr;border-top:2px solid var(--line);border-bottom:1px solid var(--line);margin:0 0 28px;background:var(--bg)}
@@ -216,13 +215,46 @@ svg .fig-t.bl{fill:var(--accent);font-weight:700}
 .print img{display:block;width:300px;max-width:100%;height:auto}
 .print figcaption{font-family:var(--mono);font-size:12px;color:#33363c;padding-top:7px}
 
-/* piece + footer */
-.piece{display:grid;grid-template-columns:200px minmax(0,1fr);gap:28px;align-items:center;border-top:2px solid var(--line);padding:24px 0 48px}
-.piece h2{font-family:var(--mono);font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 6px}
-.piece p{margin:0;color:var(--ink2);font-size:15px;max-width:60ch}
-.piece svg{display:block;width:200px;height:auto;border:1px solid var(--hair);background:var(--sheet)}
-.piece svg path,.piece svg circle{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linecap:round}
-.piece svg circle{fill:var(--sheet)}
+/* wide screens: the photo grows from 300px to 340px and rises 30px (its extra height) into the free space beside the name, so the hero keeps its height */
+@media (min-width:1140px){.print.herophoto img{width:340px}.herotop .flip{margin-top:-20px}}
+/* hero photo card: the decoration piece sits on its back (flip.ts adds .ready, then .anim one frame later so the first paint never animates; without JS only the photo shows) */
+.flip{flex:0 0 auto;margin-top:10px}
+.flip.ready{position:relative;perspective:900px;cursor:pointer}
+.flip.ready .face{margin:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+/* the back is laid over the front and never sets the card size: the photo does */
+.flip.ready .back{position:absolute;inset:0;overflow:hidden}
+.flip .face[inert]{pointer-events:none}
+.flip .back{margin:0;display:flex;flex-direction:column;gap:6px;font-family:var(--mono);font-size:12px;line-height:1.4;color:#33363c}
+.flip .back svg{display:block;flex:1 1 0;min-height:0;width:100%;height:auto;border:1px solid #8a8470}
+.flip .back svg path,.flip .back svg circle{fill:none;stroke:#1a1a1a;stroke-width:1.6;stroke-linecap:round}
+.flip .back svg circle{fill:var(--matte)}
+.flip .back p{margin:0}
+.flip .back .ph{font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#1a1a1a}
+.flip .back a{color:#0a3b78}
+.flip-btn{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;line-height:1;color:#1a1a1a;background:transparent;border:1px solid #1a1a1a;padding:5px 8px 4px;cursor:pointer;white-space:nowrap}
+.flip-btn:hover{background:#1a1a1a;color:var(--matte)}
+@media (prefers-reduced-motion:no-preference){.flip-btn{transition:background-color .15s ease,color .15s ease}}
+.flip .back .flip-btn{align-self:flex-end;margin-top:auto}
+.flip.ready .front{position:relative}
+/* the front button is a paper tab over the photo's top-right corner, so the card is no taller than the photo alone */
+.flip-btn.tab{position:absolute;top:16px;right:16px;background:var(--matte);box-shadow:0 1px 0 rgba(26,26,26,.35)}
+.flip-btn.tab:hover{background:#1a1a1a}
+.flip.ready .back{transform:rotateY(180deg)}
+.flip.ready.on .front{transform:rotateY(-180deg)}
+.flip.ready.on .back{transform:rotateY(0)}
+@media (prefers-reduced-motion:no-preference){
+  .flip.anim .face{transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+  @media (hover:hover) and (pointer:fine){.flip.ready:not(.on):hover .front{transform:rotateY(-14deg)}}
+}
+@media (prefers-reduced-motion:reduce){
+  .flip.ready .face,.flip.ready.on .front{transform:none}
+  .flip.anim .face{transition:opacity .2s ease}
+  .flip.ready .back{opacity:0}
+  .flip.ready.on .back{opacity:1}
+  .flip.ready.on .front{opacity:0}
+}
+
+/* footer */
 footer.foot{margin-top:auto;background:var(--bg2);border-top:2px solid var(--line)}
 footer.foot .in{padding-top:28px;padding-bottom:40px}
 .foot p{margin:0 0 6px;font-size:15px;max-width:62ch}
@@ -296,7 +328,6 @@ footer.foot .in{padding-top:28px;padding-bottom:40px}
   .parts-l{grid-template-columns:1fr}
   .posts li{grid-template-columns:1fr;gap:2px}
   .print{outline-offset:3px}
-  .piece{grid-template-columns:1fr}
 }
 
 /* ===== fx engine: interactive drafting grid + script-driven scroll effects (round 3 fix) ===== */

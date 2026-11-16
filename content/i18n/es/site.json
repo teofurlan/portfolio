@@ -36,7 +36,9 @@
     "pieceAria": "Decoración: una cadena cinemática simple de tres eslabones.",
     "pieceHeading": "La pieza de hoy",
     "pieceText": "Por ahora es un dibujo estático; más adelante voy a sumar una pieza generada a diario · ",
-    "pieceArchive": "archivo"
+    "pieceArchive": "archivo",
+    "pieceFlip": "dar vuelta ↻",
+    "pieceFlipBack": "volver ↺"
   },
   "about": {
     "title": "Sobre mí",

@@ -36,7 +36,9 @@
     "pieceAria": "Decoration: a simple three-link kinematic chain.",
     "pieceHeading": "Today's piece",
     "pieceText": "For now it is a static drawing; I'll add a daily generated piece later · ",
-    "pieceArchive": "archive"
+    "pieceArchive": "archive",
+    "pieceFlip": "flip ↻",
+    "pieceFlipBack": "flip back ↺"
   },
   "about": {
     "title": "About",

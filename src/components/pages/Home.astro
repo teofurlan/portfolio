@@ -53,10 +53,23 @@ const writingHref = alternate('/writing/', lang);
         <h1 id="h-name">Teo Furlan</h1>
         <div class="herotop">
           <p class="heroline">{c.heroLine}</p>
-          <figure class="print herophoto">
-            <Image src={photo2004} alt={tr('about.photoAlt')} width={280} densities={[1, 2]} loading="eager" />
-            <figcaption>{photoCaption}</figcaption>
-          </figure>
+          <div class="flip" data-flip>
+            <figure class="print herophoto face front">
+              <Image src={photo2004} alt={tr('about.photoAlt')} width={340} densities={[1, 2]} loading="eager" />
+              <button type="button" class="flip-btn tab" data-flip-to="back" hidden>{c.pieceFlip}</button>
+              <figcaption>{photoCaption}</figcaption>
+            </figure>
+            <div class="print face back" role="group" aria-label={c.pieceHeading} hidden>
+              <svg viewBox="0 0 200 120" role="img" aria-label={c.pieceAria}>
+                <path d="M20 100H70M30 100l-8 8M45 100l-8 8M60 100l-8 8" />
+                <path d="M45 100L80 55L130 45L165 20" />
+                <circle cx="45" cy="100" r="4" /><circle cx="80" cy="55" r="4" /><circle cx="130" cy="45" r="4" /><circle cx="165" cy="20" r="4" />
+              </svg>
+              <p class="ph">{c.pieceHeading}</p>
+              <p>{c.pieceText}<a href={alternate('/decoration/', lang)}>{c.pieceArchive}</a></p>
+              <button type="button" class="flip-btn" data-flip-to="front">{c.pieceFlipBack}</button>
+            </div>
+          </div>
         </div>
         <p class="where">{c.where}</p>
         <div class="legs">
@@ -135,21 +148,11 @@ const writingHref = alternate('/writing/', lang);
         <AboutBlock lang={lang} textOnly />
       </section>
 
-      <section class="piece" aria-labelledby="h-piece">
-        <svg viewBox="0 0 200 120" role="img" aria-label={c.pieceAria}>
-          <path d="M20 100H70M30 100l-8 8M45 100l-8 8M60 100l-8 8" />
-          <path d="M45 100L80 55L130 45L165 20" />
-          <circle cx="45" cy="100" r="4" /><circle cx="80" cy="55" r="4" /><circle cx="130" cy="45" r="4" /><circle cx="165" cy="20" r="4" />
-        </svg>
-        <div>
-          <h2 id="h-piece">{c.pieceHeading}</h2>
-          <p>{c.pieceText}<a href={alternate('/decoration/', lang)}>{c.pieceArchive}</a></p>
-        </div>
-      </section>
     </main>
   </div>
 </Base>
 
 <script>
   import '../../scripts/rail';
+  import '../../scripts/flip';
 </script>
