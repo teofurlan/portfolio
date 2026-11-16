@@ -20,7 +20,7 @@ year: 2026
 
 <!-- Sources: odd/evidence/socra.md (explorer report of the socra repo: README.md,
 PRODUCT.md, server/README.md, server tests, piper_tts.py; DEV post verified via DEV API).
-Solo confirmed by Teo (2026-11-11). Repo is private: no repo link. Order 1 chosen by Teo.
+Solo confirmed by Teo (2026-11-11). Repo public since 2026-11 (linked). Order 1 chosen by Teo.
 Order 2 is a draft choice (hardware leg MTDS goes first).
 Media candidates, not copied yet: socra-demo-muted.mp4 and cover.png (from the
 2026-11-socra draft folder; copy into media/projects/socra/).

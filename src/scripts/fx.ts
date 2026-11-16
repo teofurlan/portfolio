@@ -21,7 +21,7 @@ if (bg && fine && !reduce) {
     if (e.pointerType !== 'mouse') return;
     mx = e.clientX; my = e.clientY;
     root.classList.add('bg-on');
-    const t = (e.target as Element).closest?.('a,button,input,textarea,select,summary,[role=button],section,article,figure,table,header,footer,.sheet,.cover');
+    const t = (e.target as Element).closest?.('a,button,input,textarea,select,summary,[role=button],section:not(.hero),article,figure,table,header,footer,.sheet,.cover');
     root.classList.toggle('bg-ch', !t);
     queue();
   }, { passive: true });

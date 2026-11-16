@@ -36,7 +36,9 @@
     "pieceAria": "Decoración: una cadena cinemática simple de tres eslabones.",
     "pieceHeading": "La pieza de hoy",
     "pieceText": "Por ahora es un dibujo estático; más adelante voy a sumar una pieza generada a diario · ",
-    "pieceArchive": "archivo"
+    "pieceArchive": "archivo",
+    "pieceFlip": "dar vuelta ↻",
+    "pieceFlipBack": "volver ↺"
   },
   "about": {
     "title": "Sobre mí",
@@ -108,7 +110,41 @@
   },
   "buildSession": {
     "title": "Cómo se construyó este sitio",
-    "text": "Una reproducción de mi conversación de construcción con el agente. Llega en P4."
+    "description": "Una reproducción de las conversaciones reales entre Teo Furlan y un agente de código mientras se construía este sitio, con las llamadas a herramientas colapsadas.",
+    "text": "Una reproducción de mi conversación de construcción con el agente. Llega pronto.",
+    "intro": "Esta es una reproducción de las conversaciones reales que tuve con un agente de código mientras construía este sitio. Se reproduce como un video; hacé clic, desplazate o tocá una tecla y se pausa, y te queda la transcripción completa para leer a tu ritmo.",
+    "languages": "La conversación se muestra en los idiomas en que se escribió. Cada mensaje con traducción tiene un interruptor: esas traducciones son traducciones automáticas, rotuladas como tales, y los originales nunca se editan. Las llamadas a herramientas y sus resultados están colapsados por defecto y se cuentan como \"[n pasos colapsados]\"; los secretos, los emails y las rutas locales están redactados.",
+    "metaLabel": "Metadatos de las sesiones",
+    "meta": {
+      "models": "Modelos",
+      "dates": "Fechas",
+      "sessions": "Sesiones",
+      "turns": "Turnos",
+      "toolCalls": "Llamadas a herramientas",
+      "filesChanged": "Archivos modificados"
+    },
+    "chaptersLabel": "Capítulos",
+    "transcriptLabel": "Transcripción",
+    "who": {
+      "user": "Teo",
+      "agent": "Agente"
+    },
+    "highlight": "Destacado",
+    "stepsCollapsed": "[{n} pasos colapsados]",
+    "stepsCollapsedOne": "[1 paso colapsado]",
+    "machineTranslation": "Traducción automática",
+    "showTranslation": "Mostrar traducción",
+    "player": {
+      "label": "Controles de la reproducción",
+      "play": "Reproducir",
+      "pause": "Pausar",
+      "restart": "Volver a reproducir",
+      "speed": "Velocidad",
+      "progress": "Progreso de la reproducción",
+      "chapter": "Capítulo {n}: {title}",
+      "stage": "Reproducción. Tocá cualquier tecla o hacé clic para pausar y leer la transcripción completa.",
+      "paused": "En pausa. Estás viendo la transcripción completa."
+    }
   },
   "decoration": {
     "title": "Archivo de decoración",
@@ -118,7 +154,7 @@
     "description": "CV de Teo Furlan: experiencia, proyectos, educación y habilidades."
   },
   "proofs": {
-    "mtds": "Cinemática inversa validada contra el modelo CAD hasta 3 micrómetros."
+    "mtds": "Cinemática inversa validada contra el modelo CAD, con pruebas unitarias."
   },
   "figures": {
     "socra": {

@@ -1,0 +1,63 @@
+{
+  "title": "Favicon",
+  "brief": "Favicon options for teofurlan.com, in the paper and blueprint palettes",
+  "feature": "odd/tasks/p4-replay.md",
+  "artboards": [
+    {
+      "file": "01-monogram.html",
+      "title": "Monogram T.",
+      "tradeoff": "Most legible at 16 px; says the least about the work",
+      "width": 1200,
+      "height": 900
+    },
+    {
+      "file": "02-kinematic-link.html",
+      "title": "Kinematic link",
+      "tradeoff": "Tells the robots story; the thin ground line fades at 16 px",
+      "width": 1200,
+      "height": 900
+    },
+    {
+      "file": "03-exploded-plates.html",
+      "title": "Exploded plates",
+      "tradeoff": "Matches the site motif best; busiest at 16 px",
+      "width": 1200,
+      "height": 900
+    },
+    {
+      "file": "04-solid-monogram.html",
+      "title": "Solid T.",
+      "tradeoff": "Strongest presence in a tab bar; loses the drawing-frame character",
+      "width": 1200,
+      "height": 900
+    },
+    {
+      "file": "05-drafting-sheet.html",
+      "title": "T. on a drafting sheet",
+      "tradeoff": "Most on brand with the site; the grid disappears below 32 px",
+      "width": 1200,
+      "height": 900
+    },
+    {
+      "file": "06-joint-stop.html",
+      "title": "T. with a joint",
+      "tradeoff": "Adds a second meaning for free; the pin is only visible from 32 px up",
+      "width": 1200,
+      "height": 900
+    },
+    {
+      "file": "07-prompt-cursor.html",
+      "title": "T_ prompt",
+      "tradeoff": "Says software and agents; less about hardware",
+      "width": 1200,
+      "height": 900
+    },
+    {
+      "file": "08-dimensioned.html",
+      "title": "Dimensioned T.",
+      "tradeoff": "Most literal drawing reference; the two lines blur into noise at 16 px",
+      "width": 1200,
+      "height": 900
+    }
+  ]
+}

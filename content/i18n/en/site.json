@@ -36,7 +36,9 @@
     "pieceAria": "Decoration: a simple three-link kinematic chain.",
     "pieceHeading": "Today's piece",
     "pieceText": "For now it is a static drawing; I'll add a daily generated piece later · ",
-    "pieceArchive": "archive"
+    "pieceArchive": "archive",
+    "pieceFlip": "flip ↻",
+    "pieceFlipBack": "flip back ↺"
   },
   "about": {
     "title": "About",
@@ -108,7 +110,41 @@
   },
   "buildSession": {
     "title": "How this site was built",
-    "text": "A replay of my build conversation with the agent. It arrives in P4."
+    "description": "A replay of the real conversations between Teo Furlan and a coding agent while building this site, with the tool calls collapsed.",
+    "text": "A replay of my build conversation with the agent. It arrives soon.",
+    "intro": "This is a replay of the real conversations I had with a coding agent while building this site. It plays like a video; click, scroll or press a key and it pauses and leaves you the full transcript to read at your own pace.",
+    "languages": "The conversation is shown in the languages it was written in. Each message with a translation has a toggle: those translations are machine translations, labelled as such, and the originals are never edited. Tool calls and results are collapsed by default and counted as \"[n steps collapsed]\"; secrets, emails and local paths are redacted.",
+    "metaLabel": "Session metadata",
+    "meta": {
+      "models": "Models",
+      "dates": "Dates",
+      "sessions": "Sessions",
+      "turns": "Turns",
+      "toolCalls": "Tool calls",
+      "filesChanged": "Files changed"
+    },
+    "chaptersLabel": "Chapters",
+    "transcriptLabel": "Transcript",
+    "who": {
+      "user": "Teo",
+      "agent": "Agent"
+    },
+    "highlight": "Highlight",
+    "stepsCollapsed": "[{n} steps collapsed]",
+    "stepsCollapsedOne": "[1 step collapsed]",
+    "machineTranslation": "Machine translation",
+    "showTranslation": "Show translation",
+    "player": {
+      "label": "Replay controls",
+      "play": "Play",
+      "pause": "Pause",
+      "restart": "Replay",
+      "speed": "Speed",
+      "progress": "Replay progress",
+      "chapter": "Chapter {n}: {title}",
+      "stage": "Replay. Press any key or click to pause and read the full transcript.",
+      "paused": "Paused. Browsing the full transcript."
+    }
   },
   "decoration": {
     "title": "Decoration archive",
@@ -118,7 +154,7 @@
     "description": "Teo Furlan's resume: work, projects, education and skills."
   },
   "proofs": {
-    "mtds": "Inverse kinematics validated against the CAD model to 3 micrometres."
+    "mtds": "Inverse kinematics validated against the CAD model, unit tested."
   },
   "figures": {
     "socra": {

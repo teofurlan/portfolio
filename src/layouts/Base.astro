@@ -54,6 +54,9 @@ const links = nav.map((n) => ({ path: alternate(n.href, lang), href: alternate(n
       <link rel="alternate" hreflang="x-default" href={abs(hrefEn)} />
     </>}
     <link rel="alternate" type="application/rss+xml" title={`${site.name}: writing`} href="/rss.xml" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="preload" href={plexLatin400} as="font" type="font/woff2" crossorigin />
     <script is:inline>
       /* Apply the stored theme before first paint (no flash). Without JS the OS setting rules. */

@@ -1,0 +1,44 @@
+{
+  "$comment": "Chapters and highlights for the build-session replay (odd/tasks/p4-replay.md, T5). Keyed by the first 8 characters of the session id. A chapter starts at an event id; events before the first start form a session chapter. Curation never edits text.",
+  "sessions": {
+    "01a1c6e8": {
+      "chapters": [
+        { "start": "fcebf426", "title": { "en": "The brief: a portfolio that tells a story", "es": "El brief: un portfolio que cuente una historia" } },
+        { "start": "51e86813", "title": { "en": "Domain, Cloudflare and a public repo", "es": "Dominio, Cloudflare y un repo público" } },
+        { "start": "97f4b967", "title": { "en": "Photos, CV and the badge", "es": "Fotos, CV e insignia" } }
+      ],
+      "highlights": ["fcebf426"]
+    },
+    "01a1cb90": {
+      "chapters": [
+        { "start": "5d7fe03d", "title": { "en": "P0: scaffolding from the brief", "es": "P0: el andamiaje a partir del brief" } },
+        { "start": "cb8a6ddd", "title": { "en": "P1: content and the gaps", "es": "P1: contenido y huecos" } },
+        { "start": "c2cbeb27", "title": { "en": "P2: choosing a visual direction", "es": "P2: elegir una dirección visual" } },
+        { "start": "20a4993c", "title": { "en": "Exploded index chosen", "es": "Se elige el índice explotado" } }
+      ],
+      "highlights": ["20a4993c"]
+    },
+    "01a1cf3a": {
+      "chapters": [
+        { "start": "c39990ed", "title": { "en": "P3: building the pages", "es": "P3: construir las páginas" } },
+        { "start": "e18ffe29", "title": { "en": "First review round", "es": "Primera ronda de revisión" } },
+        { "start": "0ad3fe45", "title": { "en": "Scroll, PDFs and the resume", "es": "Scroll, PDFs y el CV" } }
+      ],
+      "highlights": []
+    },
+    "01a1d1ea": {
+      "chapters": [
+        { "start": "21d5af80", "title": { "en": "Mobile header polish", "es": "Ajustes del encabezado en el celular" } },
+        { "start": "a0ffefa7", "title": { "en": "Voseo, tone and tables", "es": "Voseo, tono y tablas" } },
+        { "start": "f40ecbb7", "title": { "en": "Checking claims, then ready to deploy", "es": "Verificar afirmaciones y listo para publicar" } }
+      ],
+      "highlights": ["f40ecbb7"]
+    },
+    "01a1d2b3": {
+      "chapters": [
+        { "start": "3ef1fe58", "title": { "en": "P4: redaction and the favicon", "es": "P4: redacción y el favicon" } }
+      ],
+      "highlights": ["3ef1fe58"]
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$comment": "Hidden from the public transcripts. Committed, so the CI check enforces the literals too. literals -> [private] (private repos, Teo 2026-11-13; both `teofurlan/<name>` and the relative paths `../ideaslab/bloobert`, `../mtds-brazo-robot`); hideEvents: tool results whose output is replaced by [private listing] (folder listings, Teo 2026-11-13). Values that must not be committed (legal name, third-party handles) live in the git-ignored transcripts/redact.local.json.",
+  "literals": [
+    "teofurlan/bloobert",
+    "teofurlan/mtds-brazo-robot",
+    "ideaslab/bloobert",
+    "mtds-brazo-robot"
+  ],
+  "hideEvents": [
+    "42a9100d",
+    "8d28dbfc"
+  ]
+}
