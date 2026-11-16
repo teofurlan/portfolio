@@ -154,7 +154,7 @@
     "description": "CV de Teo Furlan: experiencia, proyectos, educación y habilidades."
   },
   "proofs": {
-    "mtds": "Cinemática inversa validada contra el modelo CAD hasta 3 micrómetros."
+    "mtds": "Cinemática inversa validada contra el modelo CAD, con pruebas unitarias."
   },
   "figures": {
     "socra": {

@@ -154,7 +154,7 @@
     "description": "Teo Furlan's resume: work, projects, education and skills."
   },
   "proofs": {
-    "mtds": "Inverse kinematics validated against the CAD model to 3 micrometres."
+    "mtds": "Inverse kinematics validated against the CAD model, unit tested."
   },
   "figures": {
     "socra": {

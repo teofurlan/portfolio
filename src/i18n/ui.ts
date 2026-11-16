@@ -157,7 +157,7 @@ const es: Record<UiKey, string> = {
   'rail.now': '5 secciones, de arriba hacia abajo',
   'rail.nowShort': 'Mapa de la página',
 
-  'resume.title': 'CV',
+  'resume.title': 'Currículum Vitae',
   'resume.download': 'Descargar PDF',
   'resume.work': 'Experiencia',
   'resume.projects': 'Proyectos',
