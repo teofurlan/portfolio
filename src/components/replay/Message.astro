@@ -1,8 +1,10 @@
 ---
-/** One transcript message. Text is interpolated (escaped) and shown pre-wrapped: never HTML. */
+/** One transcript message. User text is interpolated (escaped) and shown pre-wrapped, verbatim.
+ *  Model text is rendered through the escaping Markdown renderer (all input HTML is escaped first). */
 import type { Lang } from '../../i18n/ui';
 import { formatTime, type BlockView } from '../../lib/replay-data';
 import type { SiteContent } from '../../lib/i18n-content';
+import { renderMarkdown } from '../../lib/markdown';
 
 type Msg = Extract<BlockView, { kind: 'message' }>;
 interface Props {
@@ -12,6 +14,7 @@ interface Props {
 }
 const { m, lang, c } = Astro.props;
 const tr = m.translation;
+const md = m.role === 'agent';
 const origLang = tr ? (tr.to === 'en' ? 'es' : 'en') : undefined;
 ---
 
@@ -22,11 +25,11 @@ const origLang = tr ? (tr.to === 'en' ? 'es' : 'en') : undefined;
     {m.highlight && <span class="hlmark">{c.highlight}</span>}
   </header>
   <div class="cols">
-    <pre class="orig" lang={origLang}>{m.text}</pre>
+    {md ? <div class="orig md" data-md lang={origLang} set:html={renderMarkdown(m.text)} /> : <pre class="orig" lang={origLang}>{m.text}</pre>}
     {tr && (
       <details class="trd">
         <summary>{c.machineTranslation} · {tr.to.toUpperCase()}</summary>
-        <pre class="tr" lang={tr.to}>{tr.text}</pre>
+        {md ? <div class="tr md" lang={tr.to} set:html={renderMarkdown(tr.text)} /> : <pre class="tr" lang={tr.to}>{tr.text}</pre>}
       </details>
     )}
   </div>

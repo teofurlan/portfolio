@@ -6,6 +6,8 @@
  *  - any click, wheel, touch or key inside the stage pauses and switches to the full browsable transcript;
  *  - prefers-reduced-motion: starts as the static transcript (paused); Play reveals items without typing.
  */
+import { truncateHtml } from '../lib/markdown';
+
 const root = document.querySelector<HTMLElement>('[data-replay]');
 if (root) init(root);
 
@@ -28,9 +30,12 @@ function init(root: HTMLElement) {
   const N = items.length;
   if (!N) return;
 
-  // Message text is read once from the (escaped) server markup and restored from here.
+  // Message content is read once from the server markup and restored from here. Model messages
+  // (data-md) are trusted renderer output, kept as HTML; user messages are plain text.
   const pres = items.map((el) => el.querySelector<HTMLElement>('.orig'));
-  const full = pres.map((p) => p?.textContent ?? '');
+  const isMd = pres.map((p) => p?.hasAttribute('data-md') ?? false);
+  const fullHtml = pres.map((p, i) => (isMd[i] ? (p?.innerHTML ?? '') : ''));
+  const full = pres.map((p) => p?.textContent ?? ''); // plain text (typing length, live region)
   const chapters = items.flatMap((el, i) => (el.dataset.chapter ? [{ i, n: el.dataset.chapter, title: el.dataset.title ?? '' }] : []));
   const chapterText = (n: string, title: string) => (L.lChapter ?? '').replace('{n}', n).replace('{title}', title);
 
@@ -66,7 +71,9 @@ function init(root: HTMLElement) {
     if (!pre) return;
     const text = full[i];
     const done = chars >= text.length;
-    pre.textContent = done ? text : text.slice(0, Math.max(0, Math.floor(chars)));
+    const n = Math.max(0, Math.floor(chars));
+    if (isMd[i]) pre.innerHTML = done ? fullHtml[i] : truncateHtml(fullHtml[i], n);
+    else pre.textContent = done ? text : text.slice(0, n);
     if (done) pre.removeAttribute('aria-hidden');
     else pre.setAttribute('aria-hidden', 'true');
     el.classList.toggle('typing', !done);
@@ -171,7 +178,8 @@ function init(root: HTMLElement) {
       const pre = pres[i];
       if (pre) {
         pre.removeAttribute('aria-hidden');
-        pre.textContent = full[i];
+        if (isMd[i]) pre.innerHTML = fullHtml[i];
+        else pre.textContent = full[i];
       }
     });
     live.textContent = L.lPaused ?? '';
