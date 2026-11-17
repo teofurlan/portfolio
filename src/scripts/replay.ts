@@ -172,6 +172,10 @@ function init(root: HTMLElement) {
     if (mode !== 'player') return;
     pause();
     const current = items[Math.min(idx, N - 1)];
+    // Keep the current message where the reader sees it: everything before it is about to
+    // expand above, so measure first and compensate instantly (html has smooth scrolling,
+    // which would otherwise animate through the whole transcript).
+    const before = current.getBoundingClientRect().top;
     setMode('browse');
     items.forEach((el, i) => {
       el.classList.remove('seen', 'typing');
@@ -183,7 +187,7 @@ function init(root: HTMLElement) {
       }
     });
     live.textContent = L.lPaused ?? '';
-    current.scrollIntoView({ block: 'center', behavior: 'auto' });
+    window.scrollBy({ top: current.getBoundingClientRect().top - before, behavior: 'instant' });
   }
 
   function firstInView(): number {
