@@ -64,7 +64,8 @@ describe('validateSvg: rejects rule violations', () => {
     expect(validateSvg(wrap(lines(5) + '<circle cx="500" cy="50" r="5" stroke="#1d2c47"/>')).ok).toBe(false));
   it('path with coordinates far outside', () =>
     expect(validateSvg(wrap(lines(5) + '<path d="M0 0 L900 900" stroke="#1d2c47"/>')).ok).toBe(false));
-  it('over 8 KB', () => expect(validateSvg(wrap(lines(5) + '<!-- ' + 'x'.repeat(9000) + ' -->')).ok).toBe(false));
+  it('over 16 KB (L9: room for the marker double stroke)', () => expect(validateSvg(wrap(lines(5) + '<!-- ' + 'x'.repeat(17000) + ' -->')).ok).toBe(false));
+  it('12 KB is fine', () => expect(validateSvg(wrap(lines(5) + '<!-- ' + 'x'.repeat(12000) + ' -->')).ok).toBe(true));
   it('not an svg at all', () => expect(validateSvg('hello').ok).toBe(false));
   it('unclosed element', () => expect(validateSvg('<svg viewBox="0 0 200 120"><g>').ok).toBe(false));
   it('unknown element', () => expect(validateSvg(wrap(lines(5) + '<marker/>')).ok).toBe(false));

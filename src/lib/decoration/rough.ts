@@ -20,8 +20,8 @@ export interface RoughOptions {
 }
 
 /** Marker weight for ink lines, and for the thin construction lines of the clean drawing. */
-export const MARKER_WIDTH = 2;
-export const MARKER_THIN_WIDTH = 1.3;
+export const MARKER_WIDTH = 1.6; // L9
+export const MARKER_THIN_WIDTH = 1.1;
 
 const TAG = /<(\/?)([a-zA-Z]+)((?:\s+[\w-]+="[^"]*")*)\s*(\/?)>/g;
 const ATTR = /([\w-]+)="([^"]*)"/g;
@@ -134,7 +134,7 @@ function sketch(svg: string, seed: number, roughness: number, tier: Tier): strin
 
 /**
  * Detail tiers, richest first. A sketched stroke is several times heavier than a straight line, and S10
- * caps a piece at 8 KB, so heavy pieces step down: single stroke, then fewer curve segments and fewer
+ * caps a piece at 16 KB, so heavy pieces step down: single stroke, then fewer curve segments and fewer
  * vertices on long polylines/polygons.
  */
 interface Tier {

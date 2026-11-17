@@ -47,7 +47,7 @@ const CONSTRAINTS = [
   `- Optionally ONE group of elements in the accent colour ${ACCENT}; every other colour is forbidden.`,
   '- Allowed elements: svg, g, path, line, polyline, polygon, circle, ellipse, rect. No transform, style, class, id, defs, text, image, use or script.',
   '- no text, letters or numbers anywhere in the drawing.',
-  '- Between 5 and 120 drawable elements, all inside the canvas, under 8 KB in total.',
+  '- Between 5 and 120 drawable elements, all inside the canvas, under 16 KB in total.',
 ].join('\n');
 
 const ENVELOPE =

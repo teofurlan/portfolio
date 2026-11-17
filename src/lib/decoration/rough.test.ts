@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { THEMES } from './themes';
 import { PARAMETER_RENDERERS } from './prompt';
-import { roughen } from './rough';
+import { roughen, roughenDetailed } from './rough';
 import { ACCENT, INK, validateSvg } from './validate';
 
 type Render = (params: unknown, motif?: string) => string;
@@ -13,6 +13,15 @@ const clean = (theme: string, motif: string): string => {
 const colours = (svg: string): Set<string> => new Set(svg.match(/#[0-9a-f]{6}/gi));
 
 describe('roughen (marker stroke)', () => {
+  it('uses a 1.6 marker and keeps the full double stroke for every code-drawn motif (L9)', () => {
+    for (const theme of THEMES) for (const motif of theme.motifs) {
+      const clean = (PARAMETER_RENDERERS[theme.id] as (p: unknown, m?: string) => string)({ seed: 3 }, motif);
+      const r = roughenDetailed(clean, { seed: 3, roughness: 1 });
+      expect(r.svg).toContain('stroke-width="1.6"');
+      expect([theme.id, motif, r.tier]).toEqual([theme.id, motif, 0]);
+    }
+  });
+
   const sample = clean('mechanisms', THEMES[0]!.motifs[0]!);
 
   it('is deterministic for a seed and changes with the seed', () => {
@@ -20,12 +29,12 @@ describe('roughen (marker stroke)', () => {
     expect(roughen(sample, { seed: 7, roughness: 1.2 })).not.toBe(roughen(sample, { seed: 8, roughness: 1.2 }));
   });
 
-  it('uses a thicker marker with round caps, stroke only', () => {
+  it('uses a 1.6 marker (thicker than the 1.4 clean stroke) with round caps, stroke only', () => {
     const out = roughen(sample, { seed: 1, roughness: 1 });
     expect(out).not.toBe(sample);
     expect(out).toContain('stroke-linecap="round"');
     expect(out).not.toMatch(/fill="(?!none)/);
-    expect(out).toMatch(/<svg[^>]*stroke-width="(1\.[89]|2|2\.[012])"/);
+    expect(out).toMatch(/<svg[^>]*stroke-width="1.6"/);
   });
 
   for (const theme of THEMES) {
