@@ -97,7 +97,7 @@ function svgAttempt(call: Call, n: number): { attempt: Attempt; svg: string; tit
   };
 }
 
-function parameterAttempt(call: Call, theme: string): { attempt: Attempt; svg: string; title_en: string; title_es: string } {
+function parameterAttempt(call: Call, theme: string, motif: string): { attempt: Attempt; svg: string; title_en: string; title_es: string } {
   const errors: string[] = [];
   let svg = '';
   let title_en = FALLBACK_TITLES.en;
@@ -120,7 +120,7 @@ function parameterAttempt(call: Call, theme: string): { attempt: Attempt; svg: s
       const ts = validateTitle(params.title_es);
       if (te.ok) title_en = te.title;
       if (ts.ok) title_es = ts.title;
-      const v = validateSvg(render(params as never));
+      const v = validateSvg(render(params as never, motif));
       if (!v.ok) errors.push(...v.errors);
       else svg = v.svg;
     } else if (!errors.length) errors.push('parameter reply is not a JSON object');
@@ -169,7 +169,7 @@ export default {
     if (path === 'failed' && PARAMETER_RENDERERS[theme]) {
       const pm = buildParameterPrompt(selection);
       parameterPrompt = pm.map((m) => `[${m.role}]\n${m.content}`).join('\n\n');
-      const r = parameterAttempt(await callModel(env, model, pm, seed * 10 + 3), theme);
+      const r = parameterAttempt(await callModel(env, model, pm, seed * 10 + 3), theme, selection.motif);
       attempts.push(r.attempt);
       if (r.attempt.ok) {
         path = 'parameters';
