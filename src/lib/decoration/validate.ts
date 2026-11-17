@@ -17,6 +17,10 @@ export const MIN_ELEMENTS = 5;
 export const MAX_ELEMENTS = 120;
 export const TOLERANCE = 5;
 export const MAX_TITLE = 48;
+export const MAX_REPEAT = 8;
+
+export const ERR_CUT_OFF = 'reply was cut off before </svg>';
+export const ERR_NO_SVG = 'no JSON envelope or <svg> found in the reply';
 
 export interface SvgResult {
   ok: boolean;
@@ -272,6 +276,11 @@ export function validateSvg(input: string): SvgResult {
     .replace(/^\s*<\?xml[^>]*\?>/i, '')
     .trim();
 
+  if (/<svg[\s>]/i.test(src) && !/<\/svg\s*>/i.test(src) && !/<svg[^>]*\/>\s*$/i.test(src)) {
+    errors.push(ERR_CUT_OFF);
+    return fail();
+  }
+
   const tags = tokenize(src, errors);
   if (errors.length) return fail();
   if (!tags.length || tags[0]!.name !== 'svg' || tags[0]!.closing) {
@@ -282,6 +291,7 @@ export function validateSvg(input: string): SvgResult {
   const stack: string[] = [];
   const out: string[] = [];
   let drawable = 0;
+  const seenElements = new Map<string, number>();
   let rootDone = false;
   let rootAttrs: Record<string, string> = {};
   const rootIndex = 0;
@@ -360,6 +370,10 @@ export function validateSvg(input: string): SvgResult {
       rootAttrs = Object.fromEntries(emitted);
     } else if (DRAWABLE.has(tag.name)) {
       drawable++;
+      const key = tag.name + JSON.stringify(emitted);
+      const count = (seenElements.get(key) ?? 0) + 1;
+      seenElements.set(key, count);
+      if (count === MAX_REPEAT + 1) errors.push(`repeated element: <${tag.name}> appears more than ${MAX_REPEAT} times identically`);
       // Extent checks for shapes defined by centre/size.
       const n = (k: string) => (attrs[k] !== undefined && NUM.test(attrs[k]!.trim()) ? Number(attrs[k]) : undefined);
       if (tag.name === 'circle' || tag.name === 'ellipse') {
@@ -454,4 +468,10 @@ export function extractEnvelope(raw: string): Envelope | null {
   if (!svg) return null;
   const field = (k: string) => raw.match(new RegExp(`"${k}"\\s*:\\s*"([^"\\n]*)"`))?.[1] ?? '';
   return { title_en: field('title_en'), title_es: field('title_es'), svg };
+}
+
+/** Why no SVG could be extracted from a reply: truncated mid-drawing, or never an SVG at all. */
+export function describeMissingSvg(raw: string): string {
+  if (typeof raw === 'string' && /<svg\b/i.test(raw) && !/<\/svg\s*>/i.test(raw)) return ERR_CUT_OFF;
+  return ERR_NO_SVG;
 }

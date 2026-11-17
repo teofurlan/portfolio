@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { validateSvg, validateTitle, extractEnvelope } from './validate';
+import { validateSvg, validateTitle, extractEnvelope, describeMissingSvg } from './validate';
 
 const wrap = (inner: string, attrs = 'viewBox="0 0 200 120"') =>
   `<svg xmlns="http://www.w3.org/2000/svg" ${attrs}>${inner}</svg>`;
@@ -86,4 +86,29 @@ describe('extractEnvelope', () => {
   it('parses JSON in a code fence with chatter', () => expect(extractEnvelope('Here:\n```json\n' + env + '\n```\n')?.svg).toBe('<svg/>'));
   it('returns null for garbage', () => expect(extractEnvelope('nope')).toBeNull());
   it('falls back to a bare svg block', () => expect(extractEnvelope('x <svg viewBox="0 0 200 120"></svg> y')?.svg).toContain('<svg'));
+});
+
+describe('truncated replies and repetition (trial round 2)', () => {
+  const same = (n: number) => '<line x1="1" y1="1" x2="9" y2="9" stroke="#1d2c47"/>'.repeat(n);
+  it('validateSvg: an <svg> with no closing tag is reported as cut off', () => {
+    const r = validateSvg('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 120">' + lines(6));
+    expect(r.ok).toBe(false);
+    expect(r.errors).toContain('reply was cut off before </svg>');
+  });
+  it('describeMissingSvg: cut off when <svg is open without </svg>', () => {
+    const raw = '{"title_en":"A","title_es":"B","svg":"<svg viewBox=\\"0 0 200 120\\">' + '<line x1=\\"1\\"/>'.repeat(30);
+    expect(extractEnvelope(raw)).toBeNull();
+    expect(describeMissingSvg(raw)).toBe('reply was cut off before </svg>');
+  });
+  it('describeMissingSvg: generic error when there is no <svg at all', () => {
+    expect(describeMissingSvg('sorry, no')).toBe('no JSON envelope or <svg> found in the reply');
+  });
+  it('rejects one identical element repeated more than 8 times', () => {
+    const r = validateSvg(wrap(lines(5) + same(9)));
+    expect(r.ok).toBe(false);
+    expect(r.errors.join(' ')).toContain('repeated element');
+  });
+  it('allows an identical element 8 times', () => {
+    expect(validateSvg(wrap(lines(5) + same(8))).ok).toBe(true);
+  });
 });
