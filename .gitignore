@@ -25,3 +25,6 @@ Thumbs.db
 
 # Inline asset caches for design artboards
 design/**/.*.datauri
+
+# Local decoration trial output
+trials/

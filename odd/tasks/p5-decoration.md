@@ -1,0 +1,40 @@
+# P5 — Daily decoration
+
+A Cron Trigger asks a small Workers AI model for a decorative SVG once a day, validates it, stores it
+in KV and the site shows it on the back of the hero photo, with provenance and an archive. Branch
+`p5-decoration` (from `main` at `47b4089`). Decisions come from the grill of 2026-11-16 (L2–L5).
+
+## Specs
+
+- S1 (BRIEF §5.4): "A Cron Trigger runs once a day, asks a cheap model for a decorative piece in a **constrained format** (ASCII text grid of fixed size, or SVG validated against a strict allowlist of elements/attributes, no scripts, no external refs). Validate, sanitize, store; on any failure keep yesterday's piece." / "Visitors never trigger model calls."
+  With L2: cron at 03:00 Argentina (06:00 UTC); format SVG with an allowlist; the Worker inserts the piece into the served HTML (works without JS); published without review.
+- S2 (L3 Q1, Q2): each piece relates to Teo's work but may lean artistic ("no necesita ser técnico, puede ir un poco orientada a c también digamos, solo tiene que tener algo propio"); ink lines plus at most one accent in the site orange (#a62f08).
+- S3 (L3 Q3, L4 Q3b): themes: mechanisms, sound and voice, circuits, old computers, technical drawing (no Pricor tables, no Bloobert soft shapes, no Dogear books). Rotation: random without repeating until the list is exhausted (L3 Q4).
+- S4 (L3 Q5): hybrid: the model writes the SVG; after two failed validations the model picks parameters and code draws the SVG; if that fails too, yesterday's piece stays.
+- S5 (L4 Q6): visual motifs only; no book quotes, no text from private repos; public project names allowed in the title.
+- S6 (L4 Q7): Teo's prompts: the parent drafts a prompt per theme, Teo corrects it; prompts are public in the archive.
+- S7 (L4 Q8, L5 Q14, Q15): each theme has 4-5 motifs; code picks a motif and an attitude at random and injects them in the prompt. Attitudes: geometric and precise, organic loose lines, minimal, dense and detailed, freehand sketch. Motifs as drafted in L5.
+- S8 (L4 Q9, L5 Q16): each piece has a short model-written title in English and Spanish (about 40 characters each), shown in the page language, formatted "Lámina N · <title>" / "Plate N · <title>" (N = days since the first piece); if the title fails validation, "La pieza de hoy" / "Today's piece".
+- S9 (L4 Q10): canvas 5:3 (`viewBox="0 0 200 120"`).
+- S10 (L4 Q11): validity: allowlist of elements, 5-120 elements, everything inside the canvas, stroke only in ink plus at most the orange accent, at most 8 KB, no text inside the drawing; two SVG attempts, then parameters, then yesterday.
+- S11 (L4 Q12, L5 Q17): keep every piece (archive in KV); provenance says which path made it ("drawn by <model>" or "parameters by <model>, drawn by code"); the prompt shows in the archive.
+- S12 (L5 Q14): "Están bien, igual quiero ver generaciones de prueba ahora y de ahí te voy guiando" — trial generations before building the cron, so Teo can steer prompts and pick the model.
+- S13: P4 rules keep holding (works without JS, reduced motion, tests, check and build pass; ask before any deploy, KV creation or DNS change).
+
+## Tasks
+
+| ID | Task | Specs | Route | Commit |
+|---|---|---|---|---|
+| T1 | Trial harness: themes/motifs/attitudes + prompt builder + SVG validator (tests), a local runner that calls 2-3 Workers AI models and writes a gallery for Teo | S2-S5, S7-S10, S12 | worker, test-first for the validator | |
+| T2 | Teo reviews trials; prompts and model chosen | S6, S12 | Teo | |
+| T3 | Cron Worker: generate, validate, fallback, store in KV (latest + archive) | S1, S4, S10, S11 | later | |
+| T4 | Insert today's piece into the hero back (Worker HTML rewrite), provenance, `/decoration/` archive, static fallback | S1, S8, S11, S13 | later | |
+
+## Log
+
+- L1: "Qué tenemos que definir para poder implementar la generación diaria de la decoración?" then "Quiero que me hagas un /grill-me sobre las cosas que necesitas o crees que podrían servir para definir los temas/prompts para la generación de la decoración diaria."
+- L2: "El cron puede correr a la noche, digamos 03:00" / "Me parecen bien las recomendaciones que me hiciste." (SVG with allowlist, Worker inserts the piece in the HTML, no review, theme rotation, try models).
+- L3: Round 1: "Q1 - b, no necesita ser técnico, puede ir un poco orientada a c también digamos, solo tiene que tener algo propio. Q2 - b Q3 - Tu recomendación Q4 - c está bien Q5 - c claramente."
+- L4: Round 2: "Q6: Sí, quise decir exactamente eso, Q7 - b. Q6 tu recomendación. Q3b: 3 y 4 no entran. Q8: a Q9: a Q10: a Q11: Está bien así. Q12: todas, como recomendas vos. Q13 por ahora está bien simple"
+- L5: Round 3: "Q14: Están bien, igual quiero ver generaciones de prueba ahora y de ahí te voy guiando Q15: Sí, me gustaría que agregues boceto a mano alzada. Q16: a Q17: a". Motifs (Q14): mechanisms: three-link arm, four-bar linkage, closing gripper, a tool pivoting around a fixed point (remote center of motion); sound and voice: waveform of a phrase, banded spectrogram, waves leaving a microphone, two crossing voices; circuits: branching PCB traces, a chip with its pins, a stepper motor seen from the front, a sensor wired up; old computers: keyboard from above, CRT monitor, blinking cursor on a screen, tangled cables behind the desk; technical drawing: meshing gears, compass drawing an arc, set square with dimensions, exploded view of parts.
+- L6: Workers AI (pricing page updated 2026-11-12): 10,000 neurons/day free on Free and Paid plans, reset 00:00 UTC; $0.011 per 1,000 neurons above that. Candidate small models to try: glm-4.7-flash, gemma-4-26b-a4b-it, qwen3-30b-a3b-fp8, llama-3.1-8b-instruct-fp8-fast (exact ids to confirm against the models page).

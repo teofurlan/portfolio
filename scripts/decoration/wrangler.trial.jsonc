@@ -1,0 +1,8 @@
+{
+  // Dev-only trial runner for the P5 decoration prompts (never deployed).
+  // Only the Workers AI binding: no KV, no cron, no routes, no assets.
+  "name": "decoration-trial",
+  "main": "./trial-worker.ts",
+  "compatibility_date": "2026-11-01",
+  "ai": { "binding": "AI" }
+}
