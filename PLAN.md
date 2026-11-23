@@ -157,9 +157,10 @@ Teo: Spanish review, certificates, media. P5 (daily decoration, `odd/tasks/p5-de
 
 | Task | Status | Commit |
 |---|---|---|
-| Lighthouse ≥ 95 mobile, a11y pass, no-JS check | todo | |
-| Public CV PDF (no phone, GitHub added), OG images | todo | |
-| Deploy to workers.dev, then connect teofurlan.com | todo | |
+| Replay contrast/ARIA/focus polish, OG card (`public/og.png`), `robots.txt`, bilingual `sitemap.xml`, Socra DEV post | done (branch `p6-polish`) | `bbc546b`, `4d9f653` |
+| Lighthouse ≥ 95 mobile, a11y pass, no-JS check | in progress / pending formal run | |
+| Public CV PDF (no phone, GitHub added) | done | `0b350a1` |
+| Deploy to workers.dev, then connect teofurlan.com | done (PRs #1–#6) | `093cfaf`, `daf5d00` |
 
 ## Open questions for Teo (P1 gate)
 
