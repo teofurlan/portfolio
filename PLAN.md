@@ -5,7 +5,7 @@ after every task (status + commit). Phases stop at their **Gate** until Teo
 decides. Per-phase ODD specs live in `odd/tasks/`.
 
 **Current state:** P3–P4 merged to `main` (PRs #1–#4) and deployed. Featured: Socra, MTDS, Pricor; bloobert listed. Waiting on
-Teo: Spanish review, certificates, media. P5 (daily decoration, `odd/tasks/p5-decoration.md`) implemented, verified, and committed on branch `p5-decoration` (`14e4558`..`bf99662`); `DECORATION` KV namespace (`9ccad15112a447c9b28252d416077959`) created, ready for PR and deploy via CI on merge to `main`. Next: PR/merge P5 and P6.
+Teo: Spanish review, certificates, media. P5 (daily decoration, `odd/tasks/p5-decoration.md`) merged via PR #5 (`093cfaf`); `DECORATION` KV namespace ID updated to `d4f4503079c3421495c59071f1f547e5` in the `teofurlan.com` Cloudflare account, deploying via CI on `main`. Next: P6.
 
 ## Environment notes
 

@@ -18,6 +18,6 @@
   // P5 daily decoration: Workers AI picks parameters and titles, KV keeps the pieces, and the Cron
   // Trigger runs once a day at 06:00 UTC (03:00 Argentina). Visitors never trigger model calls.
   "ai": { "binding": "AI" },
-  "kv_namespaces": [{ "binding": "DECORATION", "id": "9ccad15112a447c9b28252d416077959" }],
+  "kv_namespaces": [{ "binding": "DECORATION", "id": "d4f4503079c3421495c59071f1f547e5" }],
   "triggers": { "crons": ["0 6 * * *"] }
 }
