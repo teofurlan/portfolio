@@ -2,17 +2,22 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "teofurlan",
   "compatibility_date": "2026-11-01",
-  // Only "/" runs the Worker (language redirect, see src/worker/entry.ts); all else is static.
+  // Only these four pages run the Worker (src/worker/entry.ts): "/" for the language redirect and the
+  // daily piece, "/es/" for the daily piece, and the two archive pages. All else is static.
   // `main` is not set here: for static output the Astro adapter writes an assets-only deploy
   // config, so astro.config.mjs (workerEntry integration) adds it to dist/client/wrangler.json.
   // not_found_handling: serve the built 404.html (bilingual: Workers assets serve one root 404 page).
-  "assets": { "binding": "ASSETS", "run_worker_first": ["/"], "not_found_handling": "404-page" },
+  "assets": { "binding": "ASSETS", "run_worker_first": ["/", "/es/", "/decoration/", "/es/decoracion/"], "not_found_handling": "404-page" },
   "observability": { "enabled": true },
   // Production domains (zone teofurlan.com is on the same Cloudflare account). Wrangler creates
   // the DNS records and certificates on deploy. Also keeps the workers.dev URL working.
   "routes": [
     { "pattern": "teofurlan.com", "custom_domain": true },
     { "pattern": "www.teofurlan.com", "custom_domain": true }
-  ]
-  // P5 adds: Cron Trigger, Workers AI binding and the decoration KV namespace.
+  ],
+  // P5 daily decoration: Workers AI picks parameters and titles, KV keeps the pieces, and the Cron
+  // Trigger runs once a day at 06:00 UTC (03:00 Argentina). Visitors never trigger model calls.
+  "ai": { "binding": "AI" },
+  "kv_namespaces": [{ "binding": "DECORATION", "id": "9ccad15112a447c9b28252d416077959" }],
+  "triggers": { "crons": ["0 6 * * *"] }
 }

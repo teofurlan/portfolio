@@ -31,6 +31,11 @@ export default defineConfig({
   adapter: cloudflare({
     // Optimize images with Sharp at build time; no runtime Images binding.
     imageService: 'compile',
+    // Static build and Astro dev/preview never call Workers AI (only src/worker/entry.ts
+    // does at runtime/cron). Disabling remote bindings keeps `@cloudflare/vite-plugin`
+    // from opening a Cloudflare proxy session during `astro build` (which fails in CI
+    // without CLOUDFLARE_API_TOKEN) while preserving bindings in dist/client/wrangler.json.
+    remoteBindings: false,
   }),
   integrations: [workerEntry()],
   // No sessions: avoids provisioning a SESSION KV namespace.
