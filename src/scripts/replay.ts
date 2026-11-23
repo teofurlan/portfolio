@@ -168,14 +168,15 @@ function init(root: HTMLElement) {
   }
 
   /** Leave player mode: show the whole transcript with the current item in view. */
-  function toBrowse() {
+  function toBrowse(keepPosition = true) {
     if (mode !== 'player') return;
+    const hadFocus = stage.contains(document.activeElement);
     pause();
     const current = items[Math.min(idx, N - 1)];
     // Keep the current message where the reader sees it: everything before it is about to
     // expand above, so measure first and compensate instantly (html has smooth scrolling,
     // which would otherwise animate through the whole transcript).
-    const before = current.getBoundingClientRect().top;
+    const before = keepPosition ? current.getBoundingClientRect().top : 0;
     setMode('browse');
     items.forEach((el, i) => {
       el.classList.remove('seen', 'typing');
@@ -187,7 +188,17 @@ function init(root: HTMLElement) {
       }
     });
     live.textContent = L.lPaused ?? '';
-    window.scrollBy({ top: current.getBoundingClientRect().top - before, behavior: 'instant' });
+    if (keepPosition) window.scrollBy({ top: current.getBoundingClientRect().top - before, behavior: 'instant' });
+    if (hadFocus) playBtn.focus({ preventScroll: true });
+  }
+
+  function goToChapterHash(hash: string): boolean {
+    if (!/^#ch-\d+$/.test(hash)) return false;
+    const target = document.getElementById(hash.slice(1));
+    if (!target || !stage.contains(target)) return false;
+    if (mode === 'player') toBrowse(false);
+    target.scrollIntoView({ behavior: reduced ? 'instant' : 'smooth', block: 'start' });
+    return true;
   }
 
   function firstInView(): number {
@@ -221,6 +232,18 @@ function init(root: HTMLElement) {
   trAll.addEventListener('change', () => {
     root.querySelectorAll<HTMLDetailsElement>('details.trd').forEach((d) => (d.open = trAll.checked));
   });
+  document.querySelectorAll<HTMLAnchorElement>('.bs-toc a[href^="#ch-"]').forEach((a) => {
+    a.addEventListener('click', (ev) => {
+      const href = a.getAttribute('href') ?? '';
+      if (mode === 'player' && goToChapterHash(href)) {
+        ev.preventDefault();
+        history.replaceState(null, '', href);
+      }
+    });
+  });
+  window.addEventListener('hashchange', () => {
+    goToChapterHash(location.hash);
+  });
 
   // Progress bar: chapter markers are buttons; the track itself is a slider (click or arrow keys).
   chapters.forEach((c) => {
@@ -251,15 +274,22 @@ function init(root: HTMLElement) {
     ev.preventDefault();
   });
 
-  // Any interaction inside the stage pauses and opens the full transcript at this point.
-  for (const type of ['click', 'wheel', 'touchstart', 'keydown'] as const) {
-    stage.addEventListener(type, toBrowse, { passive: true });
+  // Any pointer/wheel/key interaction inside the stage pauses and opens the full transcript at this point.
+  for (const type of ['click', 'wheel', 'touchstart'] as const) {
+    stage.addEventListener(type, () => toBrowse(), { passive: true });
   }
+  stage.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Tab' || ev.key === 'Shift' || ev.key === 'Control' || ev.key === 'Alt' || ev.key === 'Meta') return;
+    toBrowse();
+  });
 
   render();
   setPlaying(false);
-  if (reduced) setMode('browse'); // static and paused; Play starts the player on request
-  else {
+  const hasChapterHash = /^#ch-\d+$/.test(location.hash);
+  if (reduced || hasChapterHash) {
+    setMode('browse'); // static and paused; Play starts the player on request
+    if (hasChapterHash) goToChapterHash(location.hash);
+  } else {
     setMode('player');
     play();
   }

@@ -59,9 +59,11 @@ const meta = m
             {[1, 2, 4].map((s) => <button type="button" class="btn sm" data-speed={s} aria-pressed={s === 1 ? 'true' : 'false'}>{s}×</button>)}
           </div>
           <label class="rp-tr" data-tr-switch hidden><input type="checkbox" data-tr-all /> {c.showTranslation}</label>
-          <div class="rp-track" data-track role="slider" tabindex="0" aria-label={c.player.progress} aria-valuemin="0" aria-valuemax="1" aria-valuenow="0">
-            <div class="rp-fill" data-fill></div>
-            <div class="rp-marks" data-marks></div>
+          <div class="rp-progress">
+            <div class="rp-track" data-track role="slider" tabindex="0" aria-label={c.player.progress} aria-valuemin="0" aria-valuemax="1" aria-valuenow="0">
+              <div class="rp-fill" data-fill></div>
+            </div>
+            <div class="rp-marks" data-marks role="group" aria-label={c.chaptersLabel}></div>
           </div>
           <p class="rp-now mono" data-now></p>
         </div>

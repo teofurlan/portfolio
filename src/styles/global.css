@@ -446,10 +446,12 @@ body>main,body>.shell{width:100%}
 .rp-speed .btn[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .rp-tr{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;cursor:pointer}
 .rp-tr input{width:18px;height:18px;accent-color:var(--accent)}
-.rp-track{position:relative;flex:1 1 220px;min-width:160px;height:32px;margin:0 10px;cursor:pointer}
+.rp-progress{position:relative;flex:1 1 220px;min-width:160px;height:32px;margin:0 10px}
+.rp-track{position:absolute;inset:0;cursor:pointer}
 .rp-track::before{content:"";position:absolute;left:0;right:0;top:50%;height:4px;margin-top:-2px;background:var(--hair);opacity:.45}
 .rp-fill{position:absolute;left:0;top:50%;height:4px;margin-top:-2px;width:0;background:var(--accent)}
-.rp-mark{position:absolute;top:50%;transform:translate(-50%,-50%);width:22px;height:22px;padding:0;border-radius:50%;border:2px solid var(--line);background:var(--bg);color:var(--ink);font:700 10px/1 var(--mono);cursor:pointer}
+.rp-marks{position:absolute;inset:0;pointer-events:none}
+.rp-mark{position:absolute;top:50%;transform:translate(-50%,-50%);width:24px;height:24px;padding:0;border-radius:50%;border:2px solid var(--line);background:var(--bg);color:var(--ink);font:700 10px/1 var(--mono);cursor:pointer;pointer-events:auto}
 .rp-mark:hover{background:var(--ink);color:var(--bg)}
 .rp-now{flex-basis:100%;margin:0;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rp-now:empty{display:none}
@@ -458,6 +460,7 @@ body>main,body>.shell{width:100%}
 .replay[data-mode="player"] .rp-stage{max-height:min(68vh,640px);overflow:hidden}
 .replay[data-mode="player"] [data-seq]:not(.seen){display:none}
 .replay[data-mode="player"] .typing .trd{display:none}
+.ch{scroll-margin-top:88px}
 .ch-h{display:flex;align-items:center;flex-wrap:wrap;gap:6px 14px;margin:30px 0 8px;padding:14px 0 10px;border-top:2px solid var(--line);border-bottom:1px solid var(--line)}
 .ch:first-child .ch-h{margin-top:0;border-top:0;padding-top:0}
 .ch-h h3{font-size:24px;font-weight:700}
@@ -479,8 +482,8 @@ body>main,body>.shell{width:100%}
 .md .mdh:first-child{margin-top:0}
 .md ul,.md ol{padding-left:1.5em}
 .md li{margin:.15em 0}
-.md code{padding:1px 5px;border:1px solid var(--hair);background:var(--matte);color:var(--ink);font-family:var(--mono);font-size:.875em}
-.md pre{max-width:100%;margin:0 0 .7em;padding:10px 12px;overflow-x:auto;border:1px solid var(--hair);background:var(--matte);color:var(--ink);white-space:pre}
+.md code{padding:1px 5px;border:1px solid var(--hair);background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:.875em}
+.md pre{max-width:100%;margin:0 0 .7em;padding:10px 12px;overflow-x:auto;border:1px solid var(--hair);background:var(--bg);color:var(--ink);white-space:pre}
 .md pre code{padding:0;border:0;background:none;font-size:13.5px;line-height:1.5}
 .md a{color:var(--link);text-decoration:underline;text-underline-offset:2px;overflow-wrap:anywhere}
 .md a:hover{text-decoration-color:var(--accent);text-decoration-thickness:2px}
@@ -512,7 +515,9 @@ body>main,body>.shell{width:100%}
   .msg{padding-left:10px}
 }
 @media (max-width:640px){
-  .rp-mark{width:14px;height:14px;border-width:2px;font-size:0}
+  .rp-mark{width:24px;height:24px;border:0;background:transparent;font-size:0;display:grid;place-items:center}
+  .rp-mark::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--line);background:var(--bg)}
+  .rp-mark:hover::before{background:var(--ink)}
 }
 
 /* Decoration archive: the Worker fills [data-archive] with this grid (P5) */
