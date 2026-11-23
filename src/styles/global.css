@@ -226,8 +226,10 @@ svg .fig-t.bl{fill:var(--accent);font-weight:700}
 .flip .face[inert]{pointer-events:none}
 .flip .back{margin:0;display:flex;flex-direction:column;gap:6px;font-family:var(--mono);font-size:12px;line-height:1.4;color:#33363c}
 .flip .back svg{display:block;flex:1 1 0;min-height:0;width:100%;height:auto;border:1px solid #8a8470}
-.flip .back svg path,.flip .back svg circle{fill:none;stroke:#1a1a1a;stroke-width:1.6;stroke-linecap:round}
-.flip .back svg circle{fill:var(--matte)}
+.flip .back svg:not([data-live]) path,.flip .back svg:not([data-live]) circle{fill:none;stroke:#1a1a1a;stroke-width:1.6;stroke-linecap:round}
+.flip .back svg:not([data-live]) circle{fill:var(--matte)}
+/* the daily piece keeps its own ink and accent strokes; only the frame comes from the page */
+.flip .back svg[data-live]{background:var(--matte)}
 .flip .back p{margin:0}
 .flip .back .ph{font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#1a1a1a}
 .flip .back a{color:#0a3b78}
@@ -512,3 +514,12 @@ body>main,body>.shell{width:100%}
 @media (max-width:640px){
   .rp-mark{width:14px;height:14px;border-width:2px;font-size:0}
 }
+
+/* Decoration archive: the Worker fills [data-archive] with this grid (P5) */
+.archive-grid{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px}
+.plate-card figure{margin:0}
+.plate-card svg{display:block;width:100%;height:auto;background:var(--matte);border:1px solid #8a8470}
+.plate-card figcaption{margin-top:6px;font-family:var(--mono);font-size:12px;line-height:1.5}
+.plate-card details{margin-top:6px;font-family:var(--mono);font-size:12px}
+.plate-card summary{cursor:pointer}
+.plate-card pre{white-space:pre-wrap;overflow-wrap:anywhere;margin:6px 0 0;font-size:11px;line-height:1.4}

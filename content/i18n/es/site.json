@@ -35,7 +35,7 @@
     "aboutHeading": "Sobre mí",
     "pieceAria": "Decoración: una cadena cinemática simple de tres eslabones.",
     "pieceHeading": "La pieza de hoy",
-    "pieceText": "Por ahora es un dibujo estático; más adelante voy a sumar una pieza generada a diario · ",
+    "pieceText": "Un dibujo chico para el día; todas las mañanas se hace uno nuevo · ",
     "pieceArchive": "archivo",
     "pieceFlip": "dar vuelta ↻",
     "pieceFlipBack": "volver ↺"
@@ -104,7 +104,7 @@
     "toolingHtml": "Hecho con el arnés <a href=\"https://github.com/Gentleman-Programming/gentle-ai\">gentle-ai</a> y las skills de <a href=\"https://www.aihero.dev\">AI Hero</a>. Toda la conversación de construcción con el agente de programación está en <a href=\"/es/como-se-construyo/\">Cómo se construyó este sitio</a>.",
     "llm": "Texto editado y traducido con un LLM, pendiente de revisión. La conversación completa de la construcción está en esa página, en español.",
     "decorationHeading": "Decoración diaria",
-    "decorationHtml": "El dibujo pequeño de la página de inicio es estático por ahora. Más adelante voy a sumar una pieza generada a diario, con el modelo y el prompt a su lado; su archivo estará en <a href=\"/es/decoracion/\">/es/decoracion/</a>.",
+    "decorationHtml": "Todos los días a las 03:00 (hora de Argentina) una tarea programada le pide a un modelo chico (Gemma, en Cloudflare Workers AI) que elija los parámetros y el título de un dibujo nuevo. El código hace el dibujo y le da un trazo de fibrón, y antes de guardarlo revisa el SVG contra una lista estricta de elementos permitidos; si algo falla, queda la pieza de ayer. La pieza se inserta en la página que recibís, así que funciona sin JavaScript, y cada una queda guardada con su prompt en el <a href=\"/es/decoracion/\">archivo</a>.",
     "feedsHeading": "Feeds",
     "feedsHtml": "<a href=\"/rss.xml\">Feed RSS de la sección de escritos</a> (en inglés)."
   },
@@ -148,7 +148,9 @@
   },
   "decoration": {
     "title": "Archivo de decoración",
-    "text": "El archivo de las piezas diarias generadas con IA del pasado. Llega en P5."
+    "text": "Todos los días a las 03:00 (hora de Argentina) un modelo chico elige los parámetros y el título de una lámina nueva, y el código la dibuja. Cada lámina queda acá con cómo se hizo. Nadie las revisa antes de publicarse.",
+    "empty": "Todavía no hay láminas. La primera aparece después de la próxima ejecución diaria.",
+    "promptLabel": "Prompt enviado al modelo"
   },
   "resume": {
     "description": "CV de Teo Furlan: experiencia, proyectos, educación y habilidades."
