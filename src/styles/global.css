@@ -457,7 +457,8 @@ body>main,body>.shell{width:100%}
 .rp-now:empty{display:none}
 
 .rp-stage{margin:16px 0 0}
-.replay[data-mode="player"] .rp-stage{max-height:min(68vh,640px);overflow:hidden}
+.rp-viewport{display:flow-root}
+.replay[data-mode="player"] .rp-viewport{max-height:min(68vh,640px);overflow:hidden;padding:2px 0 8px}
 .replay[data-mode="player"] [data-seq]:not(.seen){display:none}
 .replay[data-mode="player"] .typing .trd{display:none}
 .ch{scroll-margin-top:88px}
@@ -467,7 +468,7 @@ body>main,body>.shell{width:100%}
 .ch-h .mono{margin:0 0 0 auto;color:var(--ink2);max-width:none}
 .msg{margin:16px 0;padding:8px 0 8px 14px;border-left:3px solid var(--hair)}
 .msg.user{border-left-color:var(--accent)}
-.msg.hl{background:var(--plate-on)}
+.msg.hl{background:var(--plate-on);padding-right:14px}
 .mh{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2)}
 .mh .who{font-weight:700;color:var(--ink)}
 .msg.user .who{color:var(--accent)}
