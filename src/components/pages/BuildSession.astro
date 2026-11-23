@@ -70,17 +70,19 @@ const meta = m
         <h2 class="sr">{c.transcriptLabel}</h2>
         <p class="sr" aria-live="polite" data-live></p>
 
-        <div class="rp-stage sheet" data-stage>
-          {replay.chapters.map((ch) => (
-            <section class="ch" id={`ch-${ch.n}`} aria-labelledby={`ch-${ch.n}-h`}>
-              <header class="ch-h" data-seq data-chapter={ch.n} data-title={ch.title[lang]}>
-                <span class="bal fill" aria-hidden="true">{ch.n}</span>
-                <h3 id={`ch-${ch.n}-h`}>{ch.title[lang]}</h3>
-                <p class="mono">{formatRange(ch.from, ch.to, lang)} UTC</p>
-              </header>
-              {ch.blocks.map((b) => (b.kind === 'message' ? <Message m={b} lang={lang} c={c} /> : <Steps g={b} c={c} />))}
-            </section>
-          ))}
+        <div class="rp-stage sheet">
+          <div class="rp-viewport" data-stage>
+            {replay.chapters.map((ch) => (
+              <section class="ch" id={`ch-${ch.n}`} aria-labelledby={`ch-${ch.n}-h`}>
+                <header class="ch-h" data-seq data-chapter={ch.n} data-title={ch.title[lang]}>
+                  <span class="bal fill" aria-hidden="true">{ch.n}</span>
+                  <h3 id={`ch-${ch.n}-h`}>{ch.title[lang]}</h3>
+                  <p class="mono">{formatRange(ch.from, ch.to, lang)} UTC</p>
+                </header>
+                {ch.blocks.map((b) => (b.kind === 'message' ? <Message m={b} lang={lang} c={c} /> : <Steps g={b} c={c} />))}
+              </section>
+            ))}
+          </div>
         </div>
       </section>
       <script>
