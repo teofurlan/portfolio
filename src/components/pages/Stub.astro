@@ -1,12 +1,12 @@
 ---
-/** Placeholder pages (build session P4, decoration archive P5), both languages. */
+/** Placeholder page (build session P4), both languages. */
 import Base from '../../layouts/Base.astro';
 import type { Lang } from '../../i18n/ui';
 import { getContent } from '../../lib/i18n-content';
 
 interface Props {
   lang: Lang;
-  page: 'buildSession' | 'decoration';
+  page: 'buildSession';
 }
 const { lang, page } = Astro.props;
 const c = getContent(lang)[page];

@@ -1,0 +1,23 @@
+---
+/**
+ * Decoration archive (P5). Prerendered with an intro and the empty state; the Worker
+ * (src/worker/entry.ts) fills [data-archive] with the grid of past pieces read from KV.
+ */
+import Base from '../../layouts/Base.astro';
+import type { Lang } from '../../i18n/ui';
+import { getContent } from '../../lib/i18n-content';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const c = getContent(lang).decoration;
+---
+
+<Base title={c.title} lang={lang}>
+  <h1>{c.title}</h1>
+  <p>{c.text}</p>
+  <div data-archive data-prompt-label={c.promptLabel}>
+    <p class="archive-empty">{c.empty}</p>
+  </div>
+</Base>

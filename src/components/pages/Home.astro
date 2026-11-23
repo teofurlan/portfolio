@@ -60,13 +60,13 @@ const writingHref = alternate('/writing/', lang);
               <figcaption>{photoCaption}</figcaption>
             </figure>
             <div class="print face back" role="group" aria-label={c.pieceHeading} hidden>
-              <svg viewBox="0 0 200 120" role="img" aria-label={c.pieceAria}>
+              <svg data-piece-svg viewBox="0 0 200 120" role="img" aria-label={c.pieceAria}>
                 <path d="M20 100H70M30 100l-8 8M45 100l-8 8M60 100l-8 8" />
                 <path d="M45 100L80 55L130 45L165 20" />
                 <circle cx="45" cy="100" r="4" /><circle cx="80" cy="55" r="4" /><circle cx="130" cy="45" r="4" /><circle cx="165" cy="20" r="4" />
               </svg>
-              <p class="ph">{c.pieceHeading}</p>
-              <p>{c.pieceText}<a href={alternate('/decoration/', lang)}>{c.pieceArchive}</a></p>
+              <p class="ph" data-piece-title>{c.pieceHeading}</p>
+              <p><span data-piece-note>{c.pieceText}</span><a href={alternate('/decoration/', lang)}>{c.pieceArchive}</a></p>
               <button type="button" class="flip-btn" data-flip-to="front">{c.pieceFlipBack}</button>
             </div>
           </div>
