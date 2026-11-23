@@ -1,5 +1,12 @@
 [
   {
+    "id": "socra",
+    "title": "I wanted my coding agent to examine me out loud, so I built a local voice layer for it",
+    "url": "https://dev.to/teo_furlan/i-wanted-my-coding-agent-to-examine-me-out-loud-so-i-built-a-local-voice-layer-for-it-2ni4",
+    "date": "2026-11-08",
+    "project": "socra"
+  },
+  {
     "id": "learning-system",
     "title": "How I Built a Learning System Inside My AI Coding Workflow (Using Obsidian)",
     "url": "https://dev.to/teo_furlan/how-i-built-a-learning-system-inside-my-ai-coding-workflow-using-obsidian-fbp",

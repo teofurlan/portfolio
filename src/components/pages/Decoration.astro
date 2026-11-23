@@ -14,7 +14,7 @@ const { lang } = Astro.props;
 const c = getContent(lang).decoration;
 ---
 
-<Base title={c.title} lang={lang}>
+<Base title={c.title} description={c.description} lang={lang}>
   <h1>{c.title}</h1>
   <p>{c.text}</p>
   <div data-archive data-prompt-label={c.promptLabel}>

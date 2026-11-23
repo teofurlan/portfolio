@@ -148,6 +148,7 @@
   },
   "decoration": {
     "title": "Decoration archive",
+    "description": "Daily SVG drawings chosen by a small model and drawn by code, archived with their prompts.",
     "text": "Every day at 03:00 (Argentina) a small model picks the parameters and the title of a new plate, and code draws it. Each plate is kept here with how it was made. Nobody reviews them before they are published.",
     "empty": "No plates yet. The first one appears after the next daily run.",
     "promptLabel": "Prompt sent to the model"
