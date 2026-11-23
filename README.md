@@ -28,7 +28,6 @@ pnpm check     # astro + TypeScript diagnostics
 
 Wrangler is a dev dependency; run it as `pnpm wrangler <command>`. Deploys
 and DNS changes need the owner's approval (see `BRIEF.md` §4).
-D
 
 ### Daily decoration (P5)
 

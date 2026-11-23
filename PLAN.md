@@ -4,10 +4,8 @@ Resume point for any agent. Read `BRIEF.md` first, then this file. Update it
 after every task (status + commit). Phases stop at their **Gate** until Teo
 decides. Per-phase ODD specs live in `odd/tasks/`.
 
-**Current state:** P3, P3.5 (Spanish version) and P3.6 (Teo's review round 1) on branch
-`p3-layout` (not merged, no deploy). Featured: Socra, MTDS, Pricor; bloobert listed. Waiting on
-Teo: Spanish review, DRAFT texts,
-certificates, media. P3.7 (review round 2) done, draft flags removed for deploy (`08483e2`). P4 built on branch `p4-replay` (`odd/tasks/p4-replay.md`); transcripts published in `0eec329` (not pushed). Next: P5.
+**Current state:** P3–P4 merged to `main` (PRs #1–#4) and deployed. Featured: Socra, MTDS, Pricor; bloobert listed. Waiting on
+Teo: Spanish review, certificates, media. P5 (daily decoration, `odd/tasks/p5-decoration.md`) implemented, verified, and committed on branch `p5-decoration` (`14e4558`..`bf99662`); `DECORATION` KV namespace (`9ccad15112a447c9b28252d416077959`) created, ready for PR and deploy via CI on merge to `main`. Next: PR/merge P5 and P6.
 
 ## Environment notes
 
@@ -148,12 +146,12 @@ certificates, media. P3.7 (review round 2) done, draft flags removed for deploy 
 | **Gate:** Teo approves publishing `transcripts/public/` | done | `0eec329` |
 | Native review of the redaction pipeline | not done: reviewer tooling failed (L26); Teo accepted the independent verification (L27) | |
 
-### P5 — Daily decoration
+### P5 — Daily decoration ✅ (branch `p5-decoration`, spec `odd/tasks/p5-decoration.md`)
 
 | Task | Status | Commit |
 |---|---|---|
-| Confirm Workers AI free limits/models; cron + KV; SVG/ASCII validator + tests | todo | |
-| Provenance line + `/decoration/` archive + static fallback | todo | |
+| Confirm Workers AI free limits/models (`gemma-4-26b-a4b-it`); trials, motif renderers + `roughjs` marker stroke; cron + KV + validator + tests | done | `14e4558`, `ffa81e7`, `14af592`, `fb1eb95`, `2c6130a` |
+| Worker `HTMLRewriter` insertion, provenance, `/decoration/` & `/es/decoracion/` archive, static fallback, CI build fix (`remoteBindings: false`) | done | `3eb9bec`, `bf99662` |
 
 ### P6 — Ship · **Gate:** Teo approves publishing
 
